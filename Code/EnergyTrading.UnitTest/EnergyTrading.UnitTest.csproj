@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E0A706ED-5F03-41E5-96C9-D0F2045F1362}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EnergyTrading.UnitTest</RootNamespace>
+    <AssemblyName>EnergyTrading.UnitTest</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Code\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.1.10715.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.Caching.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\ServerAppFabric.Client.1.1.2106\lib\Microsoft.ApplicationServer.Caching.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.Caching.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\ServerAppFabric.Client.1.1.2106\lib\Microsoft.ApplicationServer.Caching.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Logging.5.0.505.1\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Interception.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Interception.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.1.1311.0615\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="EnergyTrading.Contracts">
+      <HintPath>..\EnergyTrading.Contracts\bin\Debug\EnergyTrading.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpTestsEx">
+      <HintPath>..\packages\SharpTestsEx.1.1.1\lib\SharpTestsEx.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpTestsEx.Mvc">
+      <HintPath>..\packages\SharpTestsEx.1.1.1\lib\SharpTestsEx.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data, Version=0.18.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Simple.Data.Core.0.18.3.1\lib\net40\Simple.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Ado">
+      <HintPath>..\packages\Simple.Data.Ado.0.18.3.1\lib\net40\Simple.Data.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Oracle">
+      <HintPath>..\packages\Simple.Data.Oracle.0.18.0.3\lib\net40\Simple.Data.Oracle.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+      <HintPath>..\packages\XMLDiffPatch.1.0.8.28\lib\net\XmlDiffPatch.dll</HintPath>
+    </Reference>
+    <Reference Include="XmlDiffPatch.View">
+      <HintPath>..\packages\XMLDiffPatch.1.0.8.28\lib\net\XmlDiffPatch.View.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="AppFabric\RegionedAppFabricSearchCacheTests.cs" />
+    <Compile Include="AssemblyLoggerProvider.cs" />
+    <Compile Include="Caching\AbsoluteCacheItemPolicyFactoryFixture.cs" />
+    <Compile Include="CheckerFactory.cs" />
+    <Compile Include="Checking\CheckerBuilderFixture.cs" />
+    <Compile Include="Checking\CheckerFixture.cs" />
+    <Compile Include="Checking\Child.cs" />
+    <Compile Include="Checking\ChildChecker.cs" />
+    <Compile Include="Checking\NullPropertyBagChecker.cs" />
+    <Compile Include="Checking\Parent.cs" />
+    <Compile Include="Checking\ParentChecker.cs" />
+    <Compile Include="Checking\Simple.cs" />
+    <Compile Include="Checking\SimpleChecker.cs" />
+    <Compile Include="Concurrency\VectorClockFixture.cs" />
+    <Compile Include="Configuration\ChildCollection.cs" />
+    <Compile Include="Configuration\ChildElement.cs" />
+    <Compile Include="Configuration\ConfigurationConfigurationManagerTests.cs" />
+    <Compile Include="Configuration\ConfigurationManagerExtensionsTests.cs" />
+    <Compile Include="Configuration\ParentCollection.cs" />
+    <Compile Include="Configuration\ParentElement.cs" />
+    <Compile Include="Configuration\SampleSection.cs" />
+    <Compile Include="Configuration\SectionFixture.cs" />
+    <Compile Include="Configuration\WcfServiceConfigurationSectionFixture.cs" />
+    <Compile Include="Console\CommandLineParserFixture.cs" />
+    <Compile Include="Container\Unity\ContainerFixture.cs" />
+    <Compile Include="Container\Unity\ITestFactory.cs" />
+    <Compile Include="Container\Unity\EnergyTradingServiceLocatorAdapterFixture.cs" />
+    <Compile Include="Container\Unity\EnergyTradingServiceLocatorFixture.cs" />
+    <Compile Include="Container\Unity\TestLocatorFactory.cs" />
+    <Compile Include="Container\Unity\AnotherTestClass.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\AutoRegistrationFixture.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\Contract\ILogger.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\Contract\LoggerAttribute.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\Contract\TraceLogger.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\CustomerRepository.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\DomainEvent.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\DomainEventHandlerOne.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\DomainEventHandlerTwo.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\IHandlerFor.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\ICache.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\ICustomerRepository.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\IOrderRepository.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\MyLifetimeManager.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\TestCache.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\TestCustomerRepository.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\TestLogger.cs" />
+    <Compile Include="Container\Unity\ChildContainerFixture.cs" />
+    <Compile Include="Container\Unity\ChildTestClass.cs" />
+    <Compile Include="Container\Unity\ChildTestClassRegistrar.cs" />
+    <Compile Include="Container\Unity\ITest.cs" />
+    <Compile Include="Container\Unity\TestClass.cs" />
+    <Compile Include="Container\Unity\TestClassRegistrar.cs" />
+    <Compile Include="Container\Unity\TestFactoryRegistrar.cs" />
+    <Compile Include="Container\Unity\TypeTrackingExtensionFixture.cs" />
+    <Compile Include="Container\Unity\UnityExtensionsFixture.cs" />
+    <Compile Include="crypto\CryptoStringEtensionTests.cs" />
+    <Compile Include="Data\QueryFactoryTests.cs" />
+    <Compile Include="DateRangeFixture.cs" />
+    <Compile Include="Extensions\CollectionExtensionsFixture.cs" />
+    <Compile Include="Extensions\DateRangeExtensionFixtures.cs" />
+    <Compile Include="Extensions\DateTimeExtensionsFixture.cs" />
+    <Compile Include="Extensions\DictionaryExtensionsFixture.cs" />
+    <Compile Include="Extensions\EnumExtensionsFixture.cs" />
+    <Compile Include="Extensions\ExceptionExtensionsFixture.cs" />
+    <Compile Include="Extensions\MemoizationExtensionsFixture.cs" />
+    <Compile Include="Extensions\ReflectionExtensionsFixture.cs" />
+    <Compile Include="FileProcessing\DefaultFileFilterFixture.cs" />
+    <Compile Include="FileProcessing\FileProcessorEndpointFixture.cs" />
+    <Compile Include="FileProcessing\IgnoreDirectoriesFileFilterFixture.cs" />
+    <Compile Include="FileProcessing\LoopBased\DeleteSuccessfulFileHandlingStrategyFixture.cs" />
+    <Compile Include="FileProcessing\LoopBased\PollingBasedFileProcessorTests.cs" />
+    <Compile Include="FileProcessing\Registrars\FileProcessorHostConfiguratorFixture.cs" />
+    <Compile Include="FileProcessing\Verification\FileInfoExtensionsFixture.cs" />
+    <Compile Include="IO\FileExtensionsTests.cs" />
+    <Compile Include="Logging\Log4NetLoggerFixture.cs" />
+    <Compile Include="Mapping\CachingXmlMapperFactoryFixture.cs" />
+    <Compile Include="Mapping\CompatibleXmlMappingEngineFactoryFixture.cs" />
+    <Compile Include="Mapping\Examples\Animal.cs" />
+    <Compile Include="Mapping\Examples\AnimalAnimalModelMapper.cs" />
+    <Compile Include="Mapping\Examples\AnimalMappingFixture.cs" />
+    <Compile Include="Mapping\Examples\AnimalModel.cs" />
+    <Compile Include="Mapping\Examples\AnimalXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\Cat.cs" />
+    <Compile Include="Mapping\Examples\CatXmlMapperAllDetailsFixture.cs" />
+    <Compile Include="Mapping\Examples\CatXmlMapperFixture.cs" />
+    <Compile Include="Mapping\Examples\CatXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\Child.cs" />
+    <Compile Include="Mapping\Examples\ChildChildModelMapper.cs" />
+    <Compile Include="Mapping\Examples\ChildModel.cs" />
+    <Compile Include="Mapping\Examples\ChildXElementMapper.cs" />
+    <Compile Include="Mapping\Examples\ChildXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\ChildXPathMapper.cs" />
+    <Compile Include="Mapping\Examples\Dog.cs" />
+    <Compile Include="Mapping\Examples\DogXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\Entity.cs" />
+    <Compile Include="Mapping\Examples\EntityXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\EntityXmlMapperAllDetailsFixture.cs" />
+    <Compile Include="Mapping\Examples\Identifier.cs" />
+    <Compile Include="Mapping\Examples\IdentifierXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\IncoTerms.cs" />
+    <Compile Include="Mapping\Examples\Owner.cs" />
+    <Compile Include="Mapping\Examples\OwnerXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\OwneXmlMapper2.cs" />
+    <Compile Include="Mapping\Examples\Parent.cs" />
+    <Compile Include="Mapping\Examples\ParentXElementMapper.cs" />
+    <Compile Include="Mapping\Examples\ParentXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\ParentXmlMapperAllDetailsFixture.cs" />
+    <Compile Include="Mapping\Examples\ParentXmlMapperFixture.cs" />
+    <Compile Include="Mapping\Examples\ParentXPathMapper.cs" />
+    <Compile Include="Mapping\Examples\ScratchEntity.cs" />
+    <Compile Include="Mapping\Examples\ScratchEntityXmlMapper.cs" />
+    <Compile Include="Mapping\Examples\ScratchEntityXmlMapperAllDetailsFixture.cs" />
+    <Compile Include="Mapping\Examples\ScratchEntityXmlMapperAllDetailsSchemaNamedFixture.cs" />
+    <Compile Include="Mapping\Examples\ScratchEntityXmlMapperFixture.cs" />
+    <Compile Include="Mapping\Examples\IdentifierXmlMapperFixture.cs" />
+    <Compile Include="Mapping\LocatorXmlMapperFactoryFixture.cs" />
+    <Compile Include="Mapping\MapperFixture.cs" />
+    <Compile Include="Mapping\MappingFixture.cs" />
+    <Compile Include="Mapping\SchemaVersionExtensionsFixture.cs" />
+    <Compile Include="Mapping\SchemaVersionFixture.cs" />
+    <Compile Include="Mapping\SimpleMappingEngineFixture.cs" />
+    <Compile Include="Mapping\XmlConverterFixture.cs" />
+    <Compile Include="Mapping\XmlEngineResolutionExceptionFixture.cs" />
+    <Compile Include="Mapping\XmlNamespaces.cs" />
+    <Compile Include="Mapping\XmlSchemaRegistryFixture.cs" />
+    <Compile Include="Mapping\XmlVersionDetectorFixture.cs" />
+    <Compile Include="Math\DoubleAlmostEqualsFixture.cs" />
+    <Compile Include="Math\DoubleExtensionsFixture.cs" />
+    <Compile Include="Math\FloatExtensionsFixture.cs" />
+    <Compile Include="Registrars\AnimalMappingEngineRegistrar.cs" />
+    <Compile Include="Registrars\ConfigurationManagerRegistrarFixture.cs" />
+    <Compile Include="Registrars\Maps\Common\EntityEntityMapper.cs" />
+    <Compile Include="Registrars\Maps\Common\EntityXmlMapper.cs" />
+    <Compile Include="Registrars\Maps\Common\V1\AnimalAnimalModelMapper.cs" />
+    <Compile Include="Registrars\Maps\Common\V1\ChildChildModelMapper.cs" />
+    <Compile Include="Registrars\Maps\Common\V2.1\AnimalAnimalModelMapper.cs" />
+    <Compile Include="Registrars\Maps\Common\V2\AnimalAnimalModelMapper.cs" />
+    <Compile Include="Registrars\Maps\OwnerEntityMapper.cs" />
+    <Compile Include="Registrars\Maps\OwnerXmlMapper.cs" />
+    <Compile Include="Registrars\VersionedMappingEngineRegistrarFixture.cs" />
+    <Compile Include="Registrars\WrappersRegistrarFixture.cs" />
+    <Compile Include="Registrars\XmlMappingEngineFactoryRegistrarFixture.cs" />
+    <Compile Include="Registrars\XmlSchemaRegistryRegistrarFixture.cs" />
+    <Compile Include="Registrars\XmlVersionDetectorRegistrarFixture.cs" />
+    <Compile Include="ServiceModel\Channels\CustomTextMessageEncoderFactoryFixture.cs" />
+    <Compile Include="ServiceModel\Channels\RemoveMustUnderstandMessageTransformerFixture.cs" />
+    <Compile Include="ServiceModel\Channels\SoapBodyXsiMessageTransformerFixture.cs" />
+    <Compile Include="ServiceModel\Configuration\CustomTextMessageEncodingElementFixture.cs" />
+    <Compile Include="Threading\TaskExtensionsFixture.cs" />
+    <Compile Include="Validation\AndRuleFixture.cs" />
+    <Compile Include="Validation\BooleanRuleFixture.cs" />
+    <Compile Include="Validation\ChildRuleCheckerFixture.cs" />
+    <Compile Include="Validation\DistinctCollectionValuesRuleFixture.cs" />
+    <Compile Include="Validation\NotRuleFixture.cs" />
+    <Compile Include="Validation\OrRuleFixture.cs" />
+    <Compile Include="Validation\StringLengthRuleFixture.cs" />
+    <Compile Include="Validation\StringNotNullOrEmptyRuleFixture.cs" />
+    <Compile Include="Validation\ValidationExtensionsFixture.cs" />
+    <Compile Include="Validation\ValueExistsRuleFixture.cs" />
+    <Compile Include="Verification\VerificationSpecsBaseFixture.cs" />
+    <Compile Include="Xml\Linq\ParseXmlBoolFixture.cs" />
+    <Compile Include="Extensions\StringExtensionsFixture.cs" />
+    <Compile Include="FileProcessing\Configuration\ConfigurationExtensionsFixture.cs" />
+    <Compile Include="FileProcessing\Configuration\FileProcessorHostSectionFixture.cs" />
+    <Compile Include="FileProcessing\FileHandler.cs" />
+    <Compile Include="FileProcessing\FileProcessorHelper.cs" />
+    <Compile Include="FileProcessing\FileProcessorHostFixture.cs" />
+    <Compile Include="FileProcessing\FileProcessorTests.cs" />
+    <Compile Include="FileProcessing\Registrars\FileProcessorHostRegistrarFixture.cs" />
+    <Compile Include="Fixture.cs" />
+    <Compile Include="Mapping\BaseNamespaceManagerFixture.cs" />
+    <Compile Include="Mapping\LinqXPathManagerFixture.cs" />
+    <Compile Include="Mapping\NamespaceManagerFixture.cs" />
+    <Compile Include="Mapping\NullPropertyBagFixture.cs" />
+    <Compile Include="Mapping\LinqXmlMapperFixture.cs" />
+    <Compile Include="Mapping\LinqXmlMappingEngineFixture.cs" />
+    <Compile Include="Mapping\LinqXPathProcessorFixture.cs" />
+    <Compile Include="Mapping\LocatorXmlMappingEngineFactoryFixture.cs" />
+    <Compile Include="Mapping\XDocumentProcessorFixture.cs" />
+    <Compile Include="Mapping\XmlFixture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mapping\XmlMapperFixture.cs" />
+    <Compile Include="Mapping\XmlMappingEngineFixture.cs" />
+    <Compile Include="Mapping\XPathManagerFixture.cs" />
+    <Compile Include="Mapping\XPathProcessorFixture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registrars\AnimalXmlMappingEngineRegistrar.cs" />
+    <Compile Include="Registrars\Maps\Common\V1\AnimalXmlMapper.cs" />
+    <Compile Include="Registrars\Maps\Common\V1\ChildXmlMapper.cs" />
+    <Compile Include="Registrars\Maps\Common\V2.1\AnimalXmlMapper.cs" />
+    <Compile Include="Registrars\Maps\Common\V2\AnimalXmlMapper.cs" />
+    <Compile Include="Registrars\VersionedXmlMappingEngineRegistrarFixture.cs" />
+    <Compile Include="Rhino\CaptureExpressionFixture.cs" />
+    <Compile Include="Search\SearchCacheFixture.cs" />
+    <Compile Include="Search\SearchBuilderFixture.cs" />
+    <Compile Include="Threading\CancellationTokenOwnerFixture.cs" />
+    <Compile Include="Xml\Linq\XmlLinqExtensionsFixture.cs" />
+    <Compile Include="Xml\Serialization\Animal.cs" />
+    <Compile Include="Xml\Serialization\XmSerializerExtensionsFixture.cs" />
+    <Compile Include="Xml\SimpleSchemaValidatorFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EnergyTrading.Caching.AppFabric\EnergyTrading.Caching.AppFabric.csproj">
+      <Project>{E44BAF17-BB7A-423B-B44A-6C14F3690800}</Project>
+      <Name>EnergyTrading.Caching.AppFabric</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.Core\EnergyTrading.Core.csproj">
+      <Project>{D673760C-F22F-44FF-A4A3-1F697C4997C1}</Project>
+      <Name>EnergyTrading.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.Logging.Log4Net\EnergyTrading.Logging.Log4Net.csproj">
+      <Project>{E33B6994-8CBA-43C6-80D1-95F28FFD78EA}</Project>
+      <Name>EnergyTrading.Logging.Log4Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.Test\EnergyTrading.Test.csproj">
+      <Project>{BE87ACDB-403E-4504-98A8-20942463EABB}</Project>
+      <Name>EnergyTrading.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.Unity\EnergyTrading.Unity.csproj">
+      <Project>{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}</Project>
+      <Name>EnergyTrading.Unity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.configmanagertest.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="App.empty.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="logger.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Xml\TestSchema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bugs\" />
+    <Folder Include="Integration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Mapping\Trade.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\EssentEndurTestFile.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Xml\InvalidXml.xml" />
+    <EmbeddedResource Include="Xml\ValidXml.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Verification\Test.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

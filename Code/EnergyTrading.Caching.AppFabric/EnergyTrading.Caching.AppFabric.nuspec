@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>EnergyTrading.Caching.AppFabric</id>
+        <title>EnergyTrading.Caching.AppFabric</title>        
+        <description>EnergyTrading distributed cache support classes specifically for AppFabric</description>
+        <version>$version$</version>
+        <releaseNotes>none</releaseNotes>
+        <copyright>Copyright RWE 2013</copyright>
+        <authors>RWE</authors>
+        <owners>Integration Architecture</owners>
+        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.Caching.AppFabric</projectUrl>
+        <tags>EnergyTrading AppFabric Cache .net40</tags>
+        <dependencies>
+            <dependency id="ServerAppFabric.Client" version="" />
+            <dependency id="EnergyTrading.Core" version="" />
+        </dependencies>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    </metadata>
+    <files>
+        <file src="Code\EnergyTrading.Caching.AppFabric\bin\Release\EnergyTrading.Caching.AppFabric.*" target="lib\net40" />
+    </files>
+</package>

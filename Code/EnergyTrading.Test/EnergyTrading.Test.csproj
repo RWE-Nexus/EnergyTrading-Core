@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BE87ACDB-403E-4504-98A8-20942463EABB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EnergyTrading.Test</RootNamespace>
+    <AssemblyName>EnergyTrading.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\EnergyTrading.Test.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.4.1.10715.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.1.1311.0615\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="EnergyTrading.Contracts">
+      <HintPath>..\packages\EnergyTrading.Contracts.2.6.7097.247\lib\net35\EnergyTrading.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+      <HintPath>..\packages\XMLDiffPatch.1.0.8.28\lib\net\XmlDiffPatch.dll</HintPath>
+    </Reference>
+    <Reference Include="XmlDiffPatch.View">
+      <HintPath>..\packages\XMLDiffPatch.1.0.8.28\lib\net\XmlDiffPatch.View.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="AutoMockingContainerExtension.cs" />
+    <Compile Include="Checker.cs" />
+    <Compile Include="Checker.Generic.cs" />
+    <Compile Include="CheckerBuilder.cs" />
+    <Compile Include="CheckerExtensions.cs" />
+    <Compile Include="CheckerFactory.cs" />
+    <Compile Include="Checking\CompareTarget.cs" />
+    <Compile Include="Checking\IIdentityChecker.cs" />
+    <Compile Include="Checking\ITypeCompareTargeter.cs" />
+    <Compile Include="Checking\PropertyCheck.cs" />
+    <Compile Include="Checking\PropertyCheckException.cs" />
+    <Compile Include="Checking\PropertyCheckExpression.cs" />
+    <Compile Include="Checking\TypeCompareTargeter.cs" />
+    <Compile Include="Data\EF\GenericRepositoryFixture.cs" />
+    <Compile Include="Data\EF\RepositoryFixture.cs" />
+    <Compile Include="Data\IdentifiableChecker.cs" />
+    <Compile Include="Data\Zapper.cs" />
+    <Compile Include="Fixture.cs" />
+    <Compile Include="IBuilderFactory.cs" />
+    <Compile Include="IChecker.cs" />
+    <Compile Include="IChecker.Generic.cs" />
+    <Compile Include="ICheckerCompare.cs" />
+    <Compile Include="ICheckerFactory.cs" />
+    <Compile Include="ICheckerBuilder.cs" />
+    <Compile Include="Mapping\MappingEngineExtensions.cs" />
+    <Compile Include="Mapping\MappingFixture.cs" />
+    <Compile Include="Mapping\XmlDiffFactory.cs" />
+    <Compile Include="MoqExtensions.cs" />
+    <Compile Include="MoqSpecific\MockCounter.cs" />
+    <Compile Include="MoqSpecific\SynchronizedMockLogger.cs" />
+    <Compile Include="NullCheckerBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rhino\CaptureExpression.cs" />
+    <Compile Include="Rhino\MockExtensions.cs" />
+    <Compile Include="SpecBase.AutoMocking.cs" />
+    <Compile Include="SpecBase.cs" />
+    <Compile Include="SpecBase.Generic.cs" />
+    <Compile Include="SpecBaseFixture.cs" />
+    <Compile Include="TeamCity\ITeamCityBuildLogger.cs" />
+    <Compile Include="TeamCity\TeamCityBuildLogger.cs" />
+    <Compile Include="Validation\FileWatcherVerifier.cs" />
+    <Compile Include="Validation\IVerifier.cs" />
+    <Compile Include="Verification\FileDropService.cs" />
+    <Compile Include="Verification\VerificationXmlExtensions.cs" />
+    <Compile Include="Verification\VerificiationSpecsBase.cs" />
+    <Compile Include="Xml\XmlFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EnergyTrading.Core\EnergyTrading.Core.csproj">
+      <Project>{D673760C-F22F-44FF-A4A3-1F697C4997C1}</Project>
+      <Name>EnergyTrading.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.EntityFramework\EnergyTrading.EntityFramework.csproj">
+      <Project>{7F75E531-8A3D-498B-A672-ABB5D85DC861}</Project>
+      <Name>EnergyTrading.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.Unity\EnergyTrading.Unity.csproj">
+      <Project>{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}</Project>
+      <Name>EnergyTrading.Unity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EnergyTrading.Test.nuspec" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

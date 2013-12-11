@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EnergyTrading.Contracts.Search.Criteria">
+    <Position X="4.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgAg=</HashCode>
+      <FileName>Search\Criteria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnergyTrading.Contracts.Search.Search">
+    <Position X="4.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAQAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Search\Search.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SearchFields" />
+      <Property Name="SearchOptions" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EnergyTrading.Contracts.Search.SearchCriteria">
+    <Position X="4.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Search\SearchCriteria.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Combinator" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Criteria" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EnergyTrading.Contracts.Search.SearchOptions">
+    <Position X="1.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAIAAAAAAAACAAAAAAAAACAAAA=</HashCode>
+      <FileName>Search\SearchOptions.cs</FileName>
+      <NewMemberFileName>Search\SearchFields.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnergyTrading.Contracts.Search.SearchFields">
+    <Position X="4.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Search\SearchFields.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Combinator" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Criterias" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="EnergyTrading.Contracts.Search.SearchCombinator">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Search\SearchCombinator.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

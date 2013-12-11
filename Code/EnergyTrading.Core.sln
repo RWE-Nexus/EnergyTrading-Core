@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Core", "EnergyTrading.Core\EnergyTrading.Core.csproj", "{D673760C-F22F-44FF-A4A3-1F697C4997C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.UnitTest", "EnergyTrading.UnitTest\EnergyTrading.UnitTest.csproj", "{E0A706ED-5F03-41E5-96C9-D0F2045F1362}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Logging.Log4Net", "EnergyTrading.Logging.Log4Net\EnergyTrading.Logging.Log4Net.csproj", "{E33B6994-8CBA-43C6-80D1-95F28FFD78EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Logging.Log4Net.Test", "EnergyTrading.Logging.Log4Net.Test\EnergyTrading.Logging.Log4Net.Test.csproj", "{9400E7B0-8D98-422F-856C-13CA93829D4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Unity", "EnergyTrading.Unity\EnergyTrading.Unity.csproj", "{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BB94DDAF-80FE-4B94-80C7-5AFE1D34520D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Caching.AppFabric", "EnergyTrading.Caching.AppFabric\EnergyTrading.Caching.AppFabric.csproj", "{E44BAF17-BB7A-423B-B44A-6C14F3690800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Contracts", "EnergyTrading.Contracts\EnergyTrading.Contracts.csproj", "{053BF090-4E5C-4A22-B834-7772CCC63CDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Contracts.Tests", "EnergyTrading.Contracts.Tests\EnergyTrading.Contracts.Tests.csproj", "{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Test", "EnergyTrading.Test\EnergyTrading.Test.csproj", "{BE87ACDB-403E-4504-98A8-20942463EABB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D673760C-F22F-44FF-A4A3-1F697C4997C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D673760C-F22F-44FF-A4A3-1F697C4997C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D673760C-F22F-44FF-A4A3-1F697C4997C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D673760C-F22F-44FF-A4A3-1F697C4997C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0A706ED-5F03-41E5-96C9-D0F2045F1362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0A706ED-5F03-41E5-96C9-D0F2045F1362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0A706ED-5F03-41E5-96C9-D0F2045F1362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0A706ED-5F03-41E5-96C9-D0F2045F1362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E33B6994-8CBA-43C6-80D1-95F28FFD78EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E33B6994-8CBA-43C6-80D1-95F28FFD78EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E33B6994-8CBA-43C6-80D1-95F28FFD78EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E33B6994-8CBA-43C6-80D1-95F28FFD78EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9400E7B0-8D98-422F-856C-13CA93829D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9400E7B0-8D98-422F-856C-13CA93829D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9400E7B0-8D98-422F-856C-13CA93829D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9400E7B0-8D98-422F-856C-13CA93829D4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E44BAF17-BB7A-423B-B44A-6C14F3690800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E44BAF17-BB7A-423B-B44A-6C14F3690800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E44BAF17-BB7A-423B-B44A-6C14F3690800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E44BAF17-BB7A-423B-B44A-6C14F3690800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053BF090-4E5C-4A22-B834-7772CCC63CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053BF090-4E5C-4A22-B834-7772CCC63CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053BF090-4E5C-4A22-B834-7772CCC63CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053BF090-4E5C-4A22-B834-7772CCC63CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE87ACDB-403E-4504-98A8-20942463EABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE87ACDB-403E-4504-98A8-20942463EABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE87ACDB-403E-4504-98A8-20942463EABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE87ACDB-403E-4504-98A8-20942463EABB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Logging.5.0.505.1\lib\NET35;packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>EnergyTrading.Test</id>
+        <title>EnergyTrading.Test</title>
+        <description>Contains base test library and helpers</description>
+        <version>$version$</version>
+        <releaseNotes>none</releaseNotes>
+        <copyright>Copyright RWE 2012</copyright>
+        <authors>RWE</authors>
+        <owners>Integration Architecture</owners>
+        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.Test</projectUrl>
+        <tags>EnergyTrading test unittest xml .net40</tags>
+        <dependencies>
+            <dependency id="CommonServiceLocator" version="" />
+            <dependency id="Moq" version="[4.0, 5.0)" />
+            <dependency id="EnergyTrading.Contracts" version="" />
+            <dependency id="EnergyTrading.Core" version="" />
+            <dependency id="EnergyTrading.Unity" version="" />
+            <dependency id="EnergyTrading.EntityFramework" version="" />
+            <dependency id="XmlDiffPatch" version="" />
+        </dependencies>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    </metadata>
+    <files>
+        <file src="Code\EnergyTrading.Test\bin\Release\EnergyTrading.Test.dll" target="lib\net40" />
+        <file src="Code\EnergyTrading.Test\bin\Release\EnergyTrading.Test.pdb" target="lib\net40" />
+        <file src="Code\EnergyTrading.Test\bin\Release\EnergyTrading.Test.xml" target="lib\net40" />
+    </files>
+</package>

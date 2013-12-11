@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2012 rel. 2 (http://www.altova.com) von Rolf Notthoff (RWE IT GmbH) bearbeitet -->
+<xs:schema xmlns="http://rwe.com/schema/simple/test/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://rwe.com/schema/simple/test/1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+  <xs:element name="DataSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Source" type="xs:string"/>
+        <xs:element name="ID" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Nexus.Contracts</id>
+        <title>Nexus.Contracts</title>
+        <description>Genric contract structures for WCF/XML/Atom</description>
+        <version>$version$</version>
+        <releaseNotes>none</releaseNotes>
+        <copyright>Copyright RWE 2012</copyright>
+        <owners>RWEST</owners>
+        <authors>RWEST Architecture Team</authors>
+        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/Nexus.Contracts</projectUrl>
+        <tags>Nexus WCF xml Atom</tags>  
+        <dependencies>
+        </dependencies>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    </metadata>
+    <files>
+        <file src="Code\Nexus.Contracts\bin\Release\Nexus.Contracts.dll" target="lib\net35" />
+        <file src="Code\Nexus.Contracts\bin\Release\Nexus.Contracts.pdb" target="lib\net35" />
+        <file src="Code\Nexus.Contracts\bin\Release\Nexus.Contracts.xml" target="lib\net35" />
+    </files>
+</package>

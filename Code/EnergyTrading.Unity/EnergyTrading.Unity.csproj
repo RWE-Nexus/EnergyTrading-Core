@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EnergyTrading</RootNamespace>
+    <AssemblyName>EnergyTrading.Unity</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Debug\EnergyTrading.Unity.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\EnergyTrading.Unity.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Caching\CacheRegistrarExtensions.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\AutoRegistration.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\AutoRegistrationExtensions.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\IAutoRegistration.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\If.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\IFluentRegistration.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\IRegistrationOptions.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\RegistrationOptions.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\Then.cs" />
+    <Compile Include="Container\Unity\AutoRegistration\WellKnownAppParts.cs" />
+    <Compile Include="Container\Unity\BuildTracking.cs" />
+    <Compile Include="Container\Unity\BuildTrackingPolicy.cs" />
+    <Compile Include="Container\Unity\BuildTrackingStrategy.cs" />
+    <Compile Include="Container\Unity\CallContextLifetimeFactory.cs" />
+    <Compile Include="Container\Unity\CallContextLifetimeManager.cs" />
+    <Compile Include="Container\Unity\InitialisedExtension.cs" />
+    <Compile Include="Container\Unity\IBuildTrackingPolicy.cs" />
+    <Compile Include="Container\Unity\IContainerRegistrar.cs" />
+    <Compile Include="Container\Unity\EnergyTradingUnityServiceLocator.cs" />
+    <Compile Include="Container\Unity\TypeTrackingExtension.cs" />
+    <Compile Include="Container\Unity\UnityClearBuildPlansStrategies.cs" />
+    <Compile Include="Container\Unity\UnityContainerContext.cs" />
+    <Compile Include="Container\Unity\UnityExtensions.cs" />
+    <Compile Include="Container\Unity\UnityInstanceProvider.cs" />
+    <Compile Include="Container\Unity\UnitySafeBehaviorExtension.cs" />
+    <Compile Include="Container\Unity\UnityServiceBehavior.cs" />
+    <Compile Include="Container\Unity\UnityServiceHost.cs" />
+    <Compile Include="Container\Unity\UnityServiceHostFactory.cs" />
+    <Compile Include="Container\Unity\WebCallContextLifetimeManager.cs" />
+    <Compile Include="FileProcessing\Configuration\FileProcessorConfigurator.cs" />
+    <Compile Include="FileProcessing\Registrars\ContainerExtensions.cs" />
+    <Compile Include="FileProcessing\Registrars\EventBasedProcessorDefaultRegistrar.cs" />
+    <Compile Include="FileProcessing\Registrars\FileProcessorHostRegistrar.cs" />
+    <Compile Include="FileProcessing\Registrars\IFileProcessorRegistrar.cs" />
+    <Compile Include="FileProcessing\Registrars\PollingBasedProcessorDefaultRegistrar.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registrars\ConfigurationManagerRegistrar.cs" />
+    <Compile Include="Registrars\MappingEngineRegistrar.cs" />
+    <Compile Include="Registrars\RegistrarExtensions.cs" />
+    <Compile Include="Registrars\VersionedMappingEngineRegistrar.cs" />
+    <Compile Include="Registrars\VersionedXmlMappingEngineRegistrar.cs" />
+    <Compile Include="Registrars\WrappersRegistrar.cs" />
+    <Compile Include="Registrars\XmlMappingEngineFactoryRegistrar.cs" />
+    <Compile Include="Registrars\XmlMappingEngineRegistrar.cs" />
+    <Compile Include="Registrars\XmlSchemaRegistryRegistrar.cs" />
+    <Compile Include="Registrars\XmlVersionDetectorRegistrar.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EnergyTrading.Unity.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EnergyTrading.Core\EnergyTrading.Core.csproj">
+      <Project>{D673760C-F22F-44FF-A4A3-1F697C4997C1}</Project>
+      <Name>EnergyTrading.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

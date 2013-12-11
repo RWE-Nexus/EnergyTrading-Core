@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>EnergyTrading.Unity</id>
+        <title>EnergyTrading.Unity</title>        
+        <description>EnergyTrading extensions for Unity container</description>
+        <version>$version$</version>
+        <releaseNotes>none</releaseNotes>
+        <copyright>Copyright RWE 2012</copyright>
+        <authors>RWE</authors>
+        <owners>Integration Architecture</owners>
+        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.Unity</projectUrl>
+        <tags>EnergyTrading IoC Unity .net40</tags>
+        <dependencies>
+            <dependency id="CommonServiceLocator" version="" />
+            <dependency id="Unity" version="[2.1, 3.0)" />
+            <dependency id="EnergyTrading.Core" version="" />
+        </dependencies>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    </metadata>
+    <files>
+        <file src="Code\EnergyTrading.Unity\bin\Release\EnergyTrading.Unity.*" target="lib\net40" />
+    </files>
+</package>
