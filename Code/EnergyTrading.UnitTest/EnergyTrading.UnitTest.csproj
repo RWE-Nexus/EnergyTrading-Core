@@ -74,9 +74,6 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.1.1311.0615\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="EnergyTrading.Contracts">
-      <HintPath>..\EnergyTrading.Contracts\bin\Debug\EnergyTrading.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
@@ -323,6 +320,10 @@
     <ProjectReference Include="..\EnergyTrading.Caching.AppFabric\EnergyTrading.Caching.AppFabric.csproj">
       <Project>{E44BAF17-BB7A-423B-B44A-6C14F3690800}</Project>
       <Name>EnergyTrading.Caching.AppFabric</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.Contracts\EnergyTrading.Contracts.csproj">
+      <Project>{053bf090-4e5c-4a22-b834-7772ccc63cda}</Project>
+      <Name>EnergyTrading.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\EnergyTrading.Core\EnergyTrading.Core.csproj">
       <Project>{D673760C-F22F-44FF-A4A3-1F697C4997C1}</Project>
