@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Nexus.EntityFramework</id>
+        <title>Nexus.EntityFramework</title>
+        <description>Nexus helpers and extensions for Entity Framework.</description>
+        <version>$version$</version>
+        <releaseNotes>none</releaseNotes>
+        <copyright>Copyright RWE 2012</copyright>
+        <authors>RWE</authors>
+        <owners>Integration Architecture</owners>
+        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/Nexus.EntityFramework</projectUrl>
+        <tags>Nexus EntityFramework .net40</tags>
+        <dependencies>
+            <dependency id="Nexus.Core" version="" />
+            <dependency id="EntityFramework" version="[4.1, 5.0)" />
+        </dependencies>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    </metadata>
+    <files>
+        <file src="Code\Nexus.EntityFramework\bin\Release\Nexus.EntityFramework.*" target="lib\net40" />
+    </files>
+</package>

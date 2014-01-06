@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<settlement_details_message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="SettlementDetailsExport.xsd">
+  <message_id>1454930.1.28036166.20060.20284.57736</message_id>
+  <document_num>1454930</document_num>
+  <document_version>1</document_version>
+  <message_content_seq>
+    <message_content>
+      <counter_party>
+        <sap_code>450012</sap_code>
+        <id>BARCLAYS - BU</id>
+      </counter_party>
+      <settlement_info>
+        <deal_num>854783</deal_num>
+        <deal_type>Gas Physical</deal_type>
+        <price_type>FLOAT</price_type>
+        <volume>750000.0</volume>
+        <volume_type>Confirmed</volume_type>
+        <unit_of_measurement>Therms</unit_of_measurement>
+        <internal_bunit>STRATEGIC UPSTREAM - SA</internal_bunit>
+        <internal_lentity>RWEST SWITZERLAND S.A. - LE</internal_lentity>
+        <portfolio>STRATEGIC UPSTREAM - SA__Ratios - SA</portfolio>
+        <buy_sell>Sell</buy_sell>
+        <int_ext_trade>External</int_ext_trade>
+        <index>vIPE_BRENT.USD</index>
+        <price>
+          <float_price>
+            <value>34.4229</value>
+            <currency>EUR</currency>
+            <base_volume_unit>MWh</base_volume_unit>
+          </float_price>
+        </price>
+        <location_seq>
+          <location>
+            <delivery_location>NBP</delivery_location>
+            <pay_rec>Receive</pay_rec>
+            <location_country>GB</location_country>
+          </location>
+        </location_seq>
+        <payment_terms>
+          <settlement_date>2011-07-20T00:00:00+01:00</settlement_date>
+          <settlement_period>1m</settlement_period>
+          <currency_code>EUR</currency_code>
+          <date_offset>20c&gt;1eom</date_offset>
+          <settlement_type>FINANCIAL</settlement_type>
+        </payment_terms>
+        <product>
+          <commodity>GAS</commodity>
+        </product>
+        <delivery_period>
+          <profile_start_date>2011-06-01T00:00:00+01:00</profile_start_date>
+          <profile_end_date>2011-06-30T00:00:00+01:00</profile_end_date>
+        </delivery_period>
+        <fee>
+          <fee_type></fee_type>
+          <amount>0.0</amount>
+          <currency>EUR</currency>
+          <fee_calc_type></fee_calc_type>
+        </fee>
+        <capacity_detail>
+          <connection_fee></connection_fee>
+          <contract_data_source></contract_data_source>
+          <monthly_factor>-1.000000</monthly_factor>
+        </capacity_detail>
+        <swing_seq></swing_seq>
+      </settlement_info>
+    </message_content>
+  </message_content_seq>
+</settlement_details_message>

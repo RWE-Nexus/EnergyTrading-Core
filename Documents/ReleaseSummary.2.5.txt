@@ -1,0 +1,4 @@
+Nexus.SimpleData altered to allow use of InMemoryAdapter for mocking and UnitTesting
+Nexus.SimpleData package nuspec updated to latest version of Simple.Data.Oracle
+Added MultiPartDataProcess to Nexus.SimpleData which assists when data must be dealt with in chunks
+Split out SimpleData.Oracle dependent code from Nexus.SimpleData into a separate Nexus.SimpleData.Oracle package

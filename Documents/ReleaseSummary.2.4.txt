@@ -1,0 +1,5 @@
+File processor now scavenges correctly if the filter is *.*
+Changed CheckerBuilder to take a CheckerFactory to remove dependency on ServiceLocator.Current
+Brought in Samba compatible polling based FileProcessor code from Nexus.Merlin as alternative to the existing event based one
+Updated to use latest and released version of Simple.Data, Simple.Data.Ado and Simple.Data.Oracle
+Added IFile, IDirectory and IDateTime abstractions along with WrappersRegistrar to allow for mocks when UnitTesting

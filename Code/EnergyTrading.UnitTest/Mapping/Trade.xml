@@ -1,0 +1,567 @@
+<trade:TradePayload xsi:schemaLocation="http://rwe.com/schema/trade/2 ../../../RwestTrade.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:trade="http://rwe.com/schema/trade/2" xmlns:party="http://rwe.com/schema/party/2" xmlns:common="http://rwe.com/schema/common/3" xmlns:product="http://rwe.com/schema/product/2">
+  <SchemaRelease xmlns="http://rwe.com/schema/messaging/2">
+    <Version>2.1</Version>
+    <Notes>TradeSchema XSD Development Version 2.1.599</Notes>
+  </SchemaRelease>
+  <trade:Trade>
+    <common:Id>
+      <common:SystemId>
+        <common:SystemID>Trayport</common:SystemID>
+        <common:Identifier>2118143</common:Identifier>
+        <common:OriginatingSourceIND>true</common:OriginatingSourceIND>
+      </common:SystemId>
+    </common:Id>
+    <trade:TradeData>
+      <trade:TradeTimestamp>2011-11-09T08:10:15Z</trade:TradeTimestamp>
+      <trade:TradeStatus>Executed</trade:TradeStatus>
+      <trade:TradeDirection>Sell</trade:TradeDirection>
+      <trade:InternalParty>
+        <trade:PartyRole>Aggressor</trade:PartyRole>
+        <trade:LegalEntity>
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Nexus</common:SystemID>
+              <common:Identifier>892</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+          <party:Details>
+            <party:ShortName>RWE TRADING</party:ShortName>
+            <party:LongName>RWE TRADING</party:LongName>
+            <party:PartyType>Counterparty</party:PartyType>
+          </party:Details>
+        </trade:LegalEntity>
+        <trade:BusinessUnit>
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Nexus</common:SystemID>
+              <common:Identifier>203</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>Trayport</common:SystemID>
+              <common:Identifier>RWE Supply &amp; Trading GmbH</common:Identifier>
+              <common:OriginatingSourceIND>true</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+          <party:Details>
+            <party:ShortName>RWE TRADING BU</party:ShortName>
+            <party:LongName>RWE TRADING BU</party:LongName>
+            <party:PartyType>Counterparty</party:PartyType>
+          </party:Details>
+        </trade:BusinessUnit>
+        <trade:Trader>
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Trayport</common:SystemID>
+              <common:Identifier>Ben Crawforth</common:Identifier>
+              <common:OriginatingSourceIND>true</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>Nexus</common:SystemID>
+              <common:Identifier>2778</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>ADC</common:SystemID>
+              <common:Identifier>195</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>Common</common:SystemID>
+              <common:Identifier>GROUP\RE51675</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>Endur</common:SystemID>
+              <common:Identifier>RE51675</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>Spreadsheet</common:SystemID>
+              <common:Identifier>133</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>CommercialDesktop:Gas UK</common:SystemID>
+              <common:Identifier>GROUP\RE51675</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>CommercialDesktop:Gas|Gas UK</common:SystemID>
+              <common:Identifier>GROUP\RE51675</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+          <common:Details>
+            <common:Name>Ben Crawforth</common:Name>
+            <common:Forename>Ben</common:Forename>
+            <common:Surname>Crawforth</common:Surname>
+            <common:TelephoneNumber></common:TelephoneNumber>
+            <common:FaxNumber></common:FaxNumber>
+            <common:Role>Trader</common:Role>
+          </common:Details>
+        </trade:Trader>
+      </trade:InternalParty>
+      <trade:ExternalParty>
+        <trade:PartyRole>Initiator</trade:PartyRole>
+        <trade:LegalEntity>
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Nexus</common:SystemID>
+              <common:Identifier>885</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+          <party:Details>
+            <party:ShortName>24/7 TRADING</party:ShortName>
+            <party:LongName>24/7 TRADING</party:LongName>
+            <party:PartyType>Counterparty</party:PartyType>
+          </party:Details>
+        </trade:LegalEntity>
+        <trade:BusinessUnit>
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Nexus</common:SystemID>
+              <common:Identifier>8</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+            <common:SystemId>
+              <common:SystemID>Trayport</common:SystemID>
+              <common:Identifier>24/7 Trading Gmbh</common:Identifier>
+              <common:OriginatingSourceIND>true</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+          <party:Details>
+            <party:ShortName>24/7 TRADING BU</party:ShortName>
+            <party:LongName>24/7 TRADING BU</party:LongName>
+            <party:PartyType>Counterparty</party:PartyType>
+          </party:Details>
+        </trade:BusinessUnit>
+        <trade:Trader>
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Trayport</common:SystemID>
+              <common:Identifier>Amit Gudka</common:Identifier>
+              <common:OriginatingSourceIND>true</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+          <common:Details>
+            <common:Name>Amit Gudka</common:Name>
+          </common:Details>
+        </trade:Trader>
+      </trade:ExternalParty>
+      <trade:AgentParties>
+        <trade:TradeAgentParty>
+          <trade:Role>Broker</trade:Role>
+          <trade:AgentParty>
+            <common:Id>
+              <common:SystemId>
+                <common:SystemID>Trayport</common:SystemID>
+                <common:Identifier>PREBON_RWE1</common:Identifier>
+                <common:OriginatingSourceIND>true</common:OriginatingSourceIND>
+              </common:SystemId>
+            </common:Id>
+            <!-- NOTE: Once provided by MDM, this needs to add the Nexus ID of the broker party -->
+            <party:Details>
+              <party:ShortName>1PREBON BU</party:ShortName>
+              <party:LongName>1PREBON BU</party:LongName>
+              <party:PartyType>Broker</party:PartyType>
+            </party:Details>
+          </trade:AgentParty>
+          <trade:Fee>
+            <common:FeeRate>0.003000</common:FeeRate>
+            <common:OverrideFlag>false</common:OverrideFlag>
+          </trade:Fee>
+        </trade:TradeAgentParty>
+      </trade:AgentParties>
+      <trade:TimePeriod>
+        <common:Start>2012-01-01</common:Start>
+        <common:End>2012-03-31</common:End>
+      </trade:TimePeriod>
+      <trade:AdditionalProperties> 
+        <common:Property> 
+          <common:Name>ADC Commodity</common:Name> 
+          <common:Value>GasPhysical</common:Value> 
+        </common:Property> 
+      </trade:AdditionalProperties>
+    </trade:TradeData>
+    <trade:TradeProductData>
+      <trade:Product>
+        <common:Id>
+          <common:SystemId>
+            <common:SystemID>Trayport</common:SystemID>
+            <common:Identifier>10002071_10000306_NBP_2012 Q1</common:Identifier>
+            <common:OriginatingSourceIND>true</common:OriginatingSourceIND>
+          </common:SystemId>
+          <common:SystemId>
+            <common:SystemID>Nexus</common:SystemID>
+            <common:Identifier>PTI/5217</common:Identifier>
+            <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+          </common:SystemId>
+        </common:Id>
+        <product:Details>
+          <product:HierarchyLevel>ProductTypeInstance</product:HierarchyLevel>
+          <product:Name>NBP 2012 Q1</product:Name>
+          <product:Commodity>
+            <common:Id>
+              <common:SystemId>
+                <common:SystemID>Nexus</common:SystemID>
+                <common:Identifier>15</common:Identifier>
+                <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+              </common:SystemId>
+            </common:Id>
+            <product:Details>
+              <product:Name>Natural Gas Hi Cal</product:Name>
+            </product:Details>
+          </product:Commodity>
+          <product:Location xsi:type="common:PhysicalDeliveryLocationType">
+            <common:Id>
+              <common:SystemId>
+                <common:SystemID>Nexus</common:SystemID>
+                <common:Identifier>65</common:Identifier>
+                <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+              </common:SystemId>
+            </common:Id>
+			<!-- Explicit type reference in following is not necessary, but also not wrong -->
+            <common:Details xsi:type="common:PhysicalDeliveryLocationDetailsType">
+              <common:Name>NBP</common:Name>
+            </common:Details>
+          </product:Location>
+          <product:Market>
+            <common:Id>
+              <common:SystemId>
+                <common:SystemID>Nexus</common:SystemID>
+                <common:Identifier>25</common:Identifier>
+                <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+              </common:SystemId>
+            </common:Id>
+            <product:Details>
+              <product:Name>NBP</product:Name>
+              <product:Commodity>
+                <common:Id>
+                  <common:SystemId>
+                    <common:SystemID>Nexus</common:SystemID>
+                    <common:Identifier>15</common:Identifier>
+                    <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                  </common:SystemId>
+                </common:Id>
+                <product:Details>
+                  <product:Name>Natural Gas Hi Cal</product:Name>
+                </product:Details>
+              </product:Commodity>
+              <product:Calendar>
+                <common:Id>
+                  <common:SystemId>
+                    <common:SystemID>Nexus</common:SystemID>
+                    <common:Identifier>36</common:Identifier>
+                    <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                  </common:SystemId>
+                </common:Id>
+                <product:Details>
+                  <product:Name>UK Calendar</product:Name>
+                </product:Details>
+              </product:Calendar>
+			  <product:Location xsi:type="common:PhysicalDeliveryLocationType">
+				<common:Id>
+				  <common:SystemId>
+					<common:SystemID>Nexus</common:SystemID>
+					<common:Identifier>65</common:Identifier>
+					<common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+				  </common:SystemId>
+				</common:Id>
+				<!-- Explicit type reference in following is not necessary, but also not wrong -->
+				<common:Details xsi:type="common:PhysicalDeliveryLocationDetailsType">
+				  <common:Name>NBP</common:Name>
+				</common:Details>
+			  </product:Location>
+              <product:Currency>GBX</product:Currency>
+              <product:TradeUnitOfMeasure>kth</product:TradeUnitOfMeasure>
+              <product:TradeUnitsRate>Day</product:TradeUnitsRate>
+              <product:NominationUnitOfMeasure>MWh</product:NominationUnitOfMeasure>
+              <product:PriceUnitOfMeasure>th</product:PriceUnitOfMeasure>
+            </product:Details>
+          </product:Market>
+          <product:DeliveryPeriod>2012 Q1</product:DeliveryPeriod>
+          <product:Currency>GBX</product:Currency>
+          <product:UnitOfMeasure>kth/d</product:UnitOfMeasure>
+          <product:MultiplierData>
+            <product:TradedPriceMultiplier>1</product:TradedPriceMultiplier>
+            <product:TradedVolumeMultiplier>1</product:TradedVolumeMultiplier>
+          </product:MultiplierData>
+        </product:Details>
+      </trade:Product>
+      <trade:TradedQuantity>25</trade:TradedQuantity>
+      <trade:TradedPrice>66.8</trade:TradedPrice>
+    </trade:TradeProductData>
+    <trade:InstrumentData>
+      <trade:InstrumentType>Forward</trade:InstrumentType>
+    </trade:InstrumentData>
+    <trade:Legs>
+	  <!-- Explicit namespace reference in following is not necessary, but also not wrong -->
+      <trade:Leg xmlns:trade="http://rwe.com/schema/trade/2" xsi:type="trade:FixedFinancialLegType">
+        <trade:Id>
+          <common:SystemId>
+            <common:SystemID>Nexus</common:SystemID>
+            <common:Identifier>pricing</common:Identifier>
+            <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+          </common:SystemId>
+        </trade:Id>
+        <trade:TimePeriod>
+          <common:Start>2012-01-01</common:Start>
+          <common:End>2012-03-31</common:End>
+        </trade:TimePeriod>
+        <trade:LegDirection>Take</trade:LegDirection>
+        <trade:Currency>GBX</trade:Currency>
+        <trade:PriceUnitOfMeasure>th</trade:PriceUnitOfMeasure>
+        <trade:QuantityRate>
+          <trade:UnitOfMeasure>kth</trade:UnitOfMeasure>
+          <trade:RateInterval>d</trade:RateInterval>
+          <trade:Rate>25</trade:Rate>
+        </trade:QuantityRate>
+        <trade:TotalQuantity>2275</trade:TotalQuantity>
+        <trade:QuantityUnitOfMeasure>kth</trade:QuantityUnitOfMeasure>
+        <trade:TotalAmount>151970000</trade:TotalAmount>
+        <trade:LegPeriods>
+          <trade:LegPeriod>
+            <trade:LegPeriodID>0</trade:LegPeriodID>
+            <trade:TimePeriod>
+              <common:Start>2012-01-01</common:Start>
+              <common:End>2012-03-31</common:End>
+            </trade:TimePeriod>
+            <trade:QuantityRate>25</trade:QuantityRate>
+            <trade:Quantity>2275</trade:Quantity>
+            <trade:UnitPrice>66.8</trade:UnitPrice>
+            <trade:TotalAmount>151970000</trade:TotalAmount>
+          </trade:LegPeriod>
+        </trade:LegPeriods>
+      </trade:Leg>
+	  <!-- Explicit namespace reference in following is not necessary, but also not wrong -->
+      <trade:Leg xmlns:trade="http://rwe.com/schema/trade/2" xsi:type="trade:PhysicalDeliveryLegType">
+        <trade:Id>
+          <common:SystemId>
+            <common:SystemID>Nexus</common:SystemID>
+            <common:Identifier>product</common:Identifier>
+            <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+          </common:SystemId>
+        </trade:Id>
+        <trade:TimePeriod>
+          <common:Start>2012-01-01</common:Start>
+          <common:End>2012-03-31</common:End>
+        </trade:TimePeriod>
+        <trade:LegDirection>Give</trade:LegDirection>
+		<trade:Product>
+		  <common:Id>
+			<common:SystemId>
+			  <common:SystemID>Trayport</common:SystemID>
+			  <common:Identifier>10002071_10000306_NBP_2012 Q1</common:Identifier>
+			  <common:OriginatingSourceIND>true</common:OriginatingSourceIND>
+			</common:SystemId>
+			<common:SystemId>
+			  <common:SystemID>Nexus</common:SystemID>
+			  <common:Identifier>PTI/5217</common:Identifier>
+			  <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+			</common:SystemId>
+		  </common:Id>
+		  <product:Details>
+			<product:HierarchyLevel>ProductTypeInstance</product:HierarchyLevel>
+			<product:Name>NBP 2012 Q1</product:Name>
+            <product:Commodity>
+              <common:Id>
+                <common:SystemId>
+                  <common:SystemID>Nexus</common:SystemID>
+                  <common:Identifier>15</common:Identifier>
+                  <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                </common:SystemId>
+              </common:Id>
+              <product:Details>
+                <product:Name>Natural Gas Hi Cal</product:Name>
+              </product:Details>
+            </product:Commodity>
+            <product:Location xsi:type="common:PhysicalDeliveryLocationType">
+              <common:Id>
+                <common:SystemId>
+                  <common:SystemID>Nexus</common:SystemID>
+                  <common:Identifier>65</common:Identifier>
+                  <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                </common:SystemId>
+              </common:Id>
+              <common:Details xsi:type="common:PhysicalDeliveryLocationDetailsType">
+                <common:Name>NBP</common:Name>
+              </common:Details>
+            </product:Location>
+            <product:Market>
+              <common:Id>
+                <common:SystemId>
+                  <common:SystemID>Nexus</common:SystemID>
+                  <common:Identifier>25</common:Identifier>
+                  <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                </common:SystemId>
+              </common:Id>
+              <product:Details>
+                <product:Name>NBP</product:Name>
+                <product:Commodity>
+                  <common:Id>
+                    <common:SystemId>
+                      <common:SystemID>Nexus</common:SystemID>
+                      <common:Identifier>15</common:Identifier>
+                      <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                    </common:SystemId>
+                  </common:Id>
+                  <product:Details>
+                    <product:Name>Natural Gas Hi Cal</product:Name>
+                  </product:Details>
+                </product:Commodity>
+                <product:Calendar>
+                  <common:Id>
+                    <common:SystemId>
+                      <common:SystemID>Nexus</common:SystemID>
+                      <common:Identifier>36</common:Identifier>
+                      <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                    </common:SystemId>
+                  </common:Id>
+                  <product:Details>
+                    <product:Name>UK Calendar</product:Name>
+                  </product:Details>
+                </product:Calendar>
+				<product:Location xsi:type="common:PhysicalDeliveryLocationType">
+					<common:Id>
+					  <common:SystemId>
+						<common:SystemID>Nexus</common:SystemID>
+						<common:Identifier>65</common:Identifier>
+						<common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+					  </common:SystemId>
+					</common:Id>
+					<!-- Explicit type reference in following is not necessary, but also not wrong -->
+					<common:Details xsi:type="common:PhysicalDeliveryLocationDetailsType">
+					  <common:Name>NBP</common:Name>
+					</common:Details>
+				</product:Location>
+                <product:Currency>GBX</product:Currency>
+                <product:TradeUnitOfMeasure>kth</product:TradeUnitOfMeasure>
+                <product:TradeUnitsRate>Day</product:TradeUnitsRate>
+                <product:NominationUnitOfMeasure>MWh</product:NominationUnitOfMeasure>
+                <product:PriceUnitOfMeasure>th</product:PriceUnitOfMeasure>
+              </product:Details>
+            </product:Market>
+            <product:DeliveryPeriod>2012 Q1</product:DeliveryPeriod>
+            <product:Currency>GBX</product:Currency>
+            <product:UnitOfMeasure>kth/d</product:UnitOfMeasure>
+            <product:MultiplierData>
+              <product:TradedPriceMultiplier>1</product:TradedPriceMultiplier>
+              <product:TradedVolumeMultiplier>1</product:TradedVolumeMultiplier>
+            </product:MultiplierData>
+          </product:Details>
+        </trade:Product>
+        <trade:Market>
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Nexus</common:SystemID>
+              <common:Identifier>25</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+          <product:Details>
+            <product:Name>NBP</product:Name>
+            <product:Commodity>
+              <common:Id>
+                <common:SystemId>
+                  <common:SystemID>Nexus</common:SystemID>
+                  <common:Identifier>15</common:Identifier>
+                  <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                </common:SystemId>
+              </common:Id>
+              <product:Details>
+                <product:Name>Natural Gas Hi Cal</product:Name>
+              </product:Details>
+            </product:Commodity>
+            <product:Calendar>
+              <common:Id>
+                <common:SystemId>
+                  <common:SystemID>Nexus</common:SystemID>
+                  <common:Identifier>36</common:Identifier>
+                  <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                </common:SystemId>
+              </common:Id>
+              <product:Details>
+                <product:Name>UK Calendar</product:Name>
+              </product:Details>
+            </product:Calendar>
+            <product:Location xsi:type="common:PhysicalDeliveryLocationType">
+              <common:Id>
+                <common:SystemId>
+                  <common:SystemID>Nexus</common:SystemID>
+                  <common:Identifier>65</common:Identifier>
+                  <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+                </common:SystemId>
+              </common:Id>
+			  <!-- Explicit type reference in following is not necessary, but also not wrong -->
+              <common:Details xsi:type="common:PhysicalDeliveryLocationDetailsType">
+                <common:Name>NBP</common:Name>
+              </common:Details>
+            </product:Location>
+            <product:Currency>GBX</product:Currency>
+            <product:TradeUnitOfMeasure>kth</product:TradeUnitOfMeasure>
+            <product:TradeUnitsRate>Day</product:TradeUnitsRate>
+            <product:NominationUnitOfMeasure>MWh</product:NominationUnitOfMeasure>
+            <product:PriceUnitOfMeasure>th</product:PriceUnitOfMeasure>
+          </product:Details>
+        </trade:Market>
+        <trade:Commodity>
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Nexus</common:SystemID>
+              <common:Identifier>15</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+          <product:Details>
+            <product:Name>Natural Gas Hi Cal</product:Name>
+          </product:Details>
+        </trade:Commodity>
+        <trade:Location xsi:type="common:PhysicalDeliveryLocationType">
+          <common:Id>
+            <common:SystemId>
+              <common:SystemID>Nexus</common:SystemID>
+              <common:Identifier>65</common:Identifier>
+              <common:OriginatingSourceIND>false</common:OriginatingSourceIND>
+            </common:SystemId>
+          </common:Id>
+			<!-- Explicit type reference in following is not necessary, but also not wrong -->
+            <common:Details xsi:type="common:PhysicalDeliveryLocationDetailsType">
+            <common:Name>NBP</common:Name>
+          </common:Details>
+        </trade:Location>
+        <trade:QuantityRate>
+          <trade:UnitOfMeasure>kth</trade:UnitOfMeasure>
+          <trade:RateInterval>d</trade:RateInterval>
+          <trade:Rate>25</trade:Rate>
+        </trade:QuantityRate>
+        <trade:TotalQuantity>2275</trade:TotalQuantity>
+        <trade:QuantityUnitOfMeasure>kth</trade:QuantityUnitOfMeasure>
+        <trade:LegPeriods>
+          <trade:LegPeriod>
+            <trade:LegPeriodID>0</trade:LegPeriodID>
+            <trade:TimePeriod>
+              <common:Start>2012-01-01</common:Start>
+              <common:End>2012-03-31</common:End>
+            </trade:TimePeriod>
+            <trade:QuantityRate>25</trade:QuantityRate>
+            <trade:Quantities>
+              <trade:Quantity>
+                <trade:Value>2275</trade:Value>
+                <trade:Type>Traded</trade:Type>
+              </trade:Quantity>
+            </trade:Quantities>
+            <!-- NOTE: Once MDM is set up and/or there are other requirements for the exact delivery period, this should be filled
+            <trade:FlatDeliveryData>
+				<common:Start>2012-01-01T06:00:00Z</common:Start>
+				<common:End>2012-04-01T06:00:00Z</common:End>
+			</trade:FlatDeliveryData>
+			-->
+          </trade:LegPeriod>
+        </trade:LegPeriods>
+      </trade:Leg>
+    </trade:Legs>
+  </trade:Trade>
+</trade:TradePayload>

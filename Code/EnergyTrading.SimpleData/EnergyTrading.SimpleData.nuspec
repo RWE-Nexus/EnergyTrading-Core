@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Nexus.SimpleData</id>
+        <title>Nexus.SimpleData</title>
+        <description>Common functionality for use with SimpleData</description>
+        <version>$version$</version>
+        <releaseNotes>none</releaseNotes>
+        <copyright>Copyright RWE 2012</copyright>
+        <owners>RWEST</owners>
+        <authors>RWEST Architecture Team</authors>
+        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/Nexus.SimpleData</projectUrl>
+        <tags>Nexus logging data SimpleData .net40</tags>
+        <dependencies>
+            <group>
+                <dependency id="CommonServiceLocator" version="[1.0, 2.0)" />
+                <dependency id="Nexus.Contracts" />
+                <dependency id="Nexus.Core" />
+                <dependency id="Simple.Data.Core" version="[0.18.3.1]" />
+                <dependency id="Simple.Data.Ado" version="[0.18.3.1]" />
+            </group>
+        </dependencies>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    </metadata>
+    <files>
+        <file src="Code\Nexus.SimpleData\bin\Release\Nexus.SimpleData.dll" target="lib\net40" />
+        <file src="Code\Nexus.SimpleData\bin\Release\Nexus.SimpleData.pdb" target="lib\net40" />
+        <file src="Code\Nexus.SimpleData\bin\Release\Nexus.SimpleData.xml" target="lib\net40" />
+     </files>
+</package>

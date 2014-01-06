@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D673760C-F22F-44FF-A4A3-1F697C4997C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EnergyTrading</RootNamespace>
+    <AssemblyName>EnergyTrading.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\EnergyTrading.Core.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\EnergyTrading.Core.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="EnergyTrading.Contracts">
+      <HintPath>..\EnergyTrading.Contracts\bin\Debug\EnergyTrading.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Attributes\ExcludeFromCoverageAttribute.cs" />
+    <Compile Include="Caching\AbsoluteCacheItemPolicyFactory.cs" />
+    <Compile Include="Caching\CacheItemPolicyFactory.cs" />
+    <Compile Include="Caching\ICacheItemPolicyFactory.cs" />
+    <Compile Include="Concurrency\ConcurrencyComparison.cs" />
+    <Compile Include="Concurrency\VectorClock.cs" />
+    <Compile Include="Concurrency\VectorClock.Generic.cs" />
+    <Compile Include="Configuration\AppConfigConfigurationManager.cs" />
+    <Compile Include="Configuration\ConfigElementCollection.cs" />
+    <Compile Include="Configuration\ConfigurationBootstrapper.cs" />
+    <Compile Include="Configuration\ConfigurationConfigurationManager.cs" />
+    <Compile Include="Configuration\ConfigurationManagerExtensions.cs" />
+    <Compile Include="Configuration\IShutdownTask.cs" />
+    <Compile Include="Configuration\IConfigurationManager.cs" />
+    <Compile Include="Configuration\IConfigurationTask.cs" />
+    <Compile Include="Configuration\IGlobalConfigurationTask.cs" />
+    <Compile Include="Configuration\NamedConfigElement.cs" />
+    <Compile Include="Configuration\NamedConfigElementCollection.cs" />
+    <Compile Include="Console\CommandLineAliasAttribute.cs" />
+    <Compile Include="Console\CommandLineParser.cs" />
+    <Compile Include="Console\CommandLineSwitchAttribute.cs" />
+    <Compile Include="Console\ConsoleUtils.cs" />
+    <Compile Include="Container\IServiceLocatorOwner.cs" />
+    <Compile Include="Container\ServiceLocatorExtensions.cs" />
+    <Compile Include="Crypto\CryptoStringExtensions.cs" />
+    <Compile Include="Data\InvalidColumnException.cs" />
+    <Compile Include="Data\Linq\DynamicLibrary.cs" />
+    <Compile Include="Data\MappingException.cs" />
+    <Compile Include="Data\Sql\SqlExceptionFactory.cs" />
+    <Compile Include="DateDifference.cs" />
+    <Compile Include="Exceptions\ConstraintViolationException.cs" />
+    <Compile Include="Data\DuplicateKeyException.cs" />
+    <Compile Include="Data\NotFoundException.cs" />
+    <Compile Include="Exceptions\ExceptionTranslator.cs" />
+    <Compile Include="Exceptions\ExceptionHandler.cs" />
+    <Compile Include="Exceptions\ExceptionHandler.Generic.cs" />
+    <Compile Include="Exceptions\ExceptionFactory.Generic.cs" />
+    <Compile Include="Exceptions\IExceptionFactory.cs" />
+    <Compile Include="Exceptions\IExceptionHandler.cs" />
+    <Compile Include="Exceptions\IExceptionHandler.Generic.cs" />
+    <Compile Include="Exceptions\SqlTimeoutExceptionHandler.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Extensions\MemoizationExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="ContextInfoProvider.cs" />
+    <Compile Include="FileProcessing\BuiltInFileProcessorTypes.cs" />
+    <Compile Include="FileProcessing\Configuration\ConfigurationExtensions.cs" />
+    <Compile Include="FileProcessing\Configuration\FileProcessorCollection.cs" />
+    <Compile Include="FileProcessing\Configuration\FileProcessorElement.cs" />
+    <Compile Include="FileProcessing\Configuration\FileProcessorHostSection.cs" />
+    <Compile Include="FileProcessing\DefaultFileFilter.cs" />
+    <Compile Include="FileProcessing\FileHandling\DeleteSuccessfulFileHandlingStrategy.cs" />
+    <Compile Include="FileProcessing\FileHandling\FileProcessResult.cs" />
+    <Compile Include="FileProcessing\FileHandling\IFileProcessResultHandler.cs" />
+    <Compile Include="FileProcessing\FileHandling\StrategyFileEventHandler.cs" />
+    <Compile Include="FileProcessing\FileHandling\MoveFileHandlingStrategy.cs" />
+    <Compile Include="FileProcessing\FileProcessors\EventBasedFileProcessor.cs" />
+    <Compile Include="FileProcessing\FileProcessor.cs" />
+    <Compile Include="FileProcessing\FileProcessorEndpoint.cs" />
+    <Compile Include="FileProcessing\FileProcessorHost.cs" />
+    <Compile Include="FileProcessing\FileWatcherFileChangeDetector.cs" />
+    <Compile Include="FileProcessing\IFileChangeDetector.cs" />
+    <Compile Include="FileProcessing\IFileFilter.cs" />
+    <Compile Include="FileProcessing\IFileHandler.cs" />
+    <Compile Include="FileProcessing\IFileHandlerFullPath.cs" />
+    <Compile Include="FileProcessing\IFilePostProcessor.cs" />
+    <Compile Include="FileProcessing\IFileProcessor.cs" />
+    <Compile Include="FileProcessing\IFileProcessorHost.cs" />
+    <Compile Include="FileProcessing\IgnoreDirectoriesFileFilter.cs" />
+    <Compile Include="FileProcessing\NullPostProcessor.cs" />
+    <Compile Include="FileProcessing\FileHandling\CombinedFileHandlingStrategy.cs" />
+    <Compile Include="FileProcessing\FileProcessors\PollingBasedFileProcessor.cs" />
+    <Compile Include="FileProcessing\FileHandling\DeleteSuccessfulFiles.cs" />
+    <Compile Include="FileProcessing\Exceptions\FileDeleteException.cs" />
+    <Compile Include="FileProcessing\FileHandling\FileProducerConsumerQueue.cs" />
+    <Compile Include="FileProcessing\FileHandling\FileThroughPutAlerter.cs" />
+    <Compile Include="FileProcessing\FileHandling\IFileHandlingStrategy.cs" />
+    <Compile Include="FileProcessing\FileHandling\IHandleFiles.cs" />
+    <Compile Include="FileProcessing\FileHandling\IMoveFiles.cs" />
+    <Compile Include="FileProcessing\FileHandling\MoveFileStrategy.cs" />
+    <Compile Include="FileProcessing\FileHandling\ProcessingFile.cs" />
+    <Compile Include="FileProcessing\FileHandling\StrategyFileMover.cs" />
+    <Compile Include="FileProcessing\PollingFileChangeDetector.cs" />
+    <Compile Include="FileProcessing\Verification\FileInfoExtensions.cs" />
+    <Compile Include="Infrastructure\IChain.cs" />
+    <Compile Include="IO\FileExtensions.cs" />
+    <Compile Include="IO\StreamExtensions.cs" />
+    <Compile Include="Mapping\CachingXmlMapperFactory.cs" />
+    <Compile Include="Mapping\CompatibleXmlMappingEngineFactory.cs" />
+    <Compile Include="Mapping\Context.cs" />
+    <Compile Include="Mapping\IXmlMapperFactory.cs" />
+    <Compile Include="Mapping\IXmlSchemaRegistry.cs" />
+    <Compile Include="Mapping\IXmlSchemaValidator.cs" />
+    <Compile Include="Mapping\LinqExtensions.cs" />
+    <Compile Include="Mapping\LocatorXmlMapperFactory.cs" />
+    <Compile Include="Mapping\MappingExtensions.cs" />
+    <Compile Include="Mapping\NullXmlMappingEngine.cs" />
+    <Compile Include="Mapping\SchemaVersion.cs" />
+    <Compile Include="Mapping\SchemaVersionExtensions.cs" />
+    <Compile Include="Mapping\XmlEngineResolutionErrorCode.cs" />
+    <Compile Include="Mapping\XmlEngineResolutionException.cs" />
+    <Compile Include="Mapping\XmlSchemaRegistry.cs" />
+    <Compile Include="Mapping\XmlSchemaValidator.cs" />
+    <Compile Include="Math\DoubleExtensions.cs" />
+    <Compile Include="Math\FloatExtensions.cs" />
+    <Compile Include="ProducerConsumer\Disposable.cs" />
+    <Compile Include="ProducerConsumer\ProducerConsumerQueueBase.cs" />
+    <Compile Include="ProducerConsumer\WorkItem.cs" />
+    <Compile Include="ServiceModel\Channels\ChannelsExtensions.cs" />
+    <Compile Include="ServiceModel\Channels\ConfigurationStrings.cs" />
+    <Compile Include="ServiceModel\Channels\CustomTextMessageEncoder.cs" />
+    <Compile Include="ServiceModel\Channels\CustomTextMessageEncoderFactory.cs" />
+    <Compile Include="ServiceModel\Channels\CustomTextMessageEncodingBindingElement.cs" />
+    <Compile Include="ServiceModel\Channels\SoapBodyXsiMessageTransformer.cs" />
+    <Compile Include="ServiceModel\Configuration\CustomTextMessageEncodingEncodingElement.cs" />
+    <Compile Include="ServiceModel\Channels\IMessageTransformer.cs" />
+    <Compile Include="ServiceModel\Channels\MessageVersionConverter.cs" />
+    <Compile Include="ServiceModel\Channels\RemoveMustUnderstandMessageTransformer.cs" />
+    <Compile Include="Services\IRunningState.cs" />
+    <Compile Include="Services\RunningState.cs" />
+    <Compile Include="Threading\TaskExtensions.cs" />
+    <Compile Include="Validation\AndRule.cs" />
+    <Compile Include="Validation\BooleanRule.cs" />
+    <Compile Include="Validation\ChildRuleChecker.cs" />
+    <Compile Include="Validation\DistinctCollectionValuesRule.cs" />
+    <Compile Include="Validation\NotRule.cs" />
+    <Compile Include="Validation\OrRule.cs" />
+    <Compile Include="Validation\StringLengthRule.cs" />
+    <Compile Include="Validation\StringNotNullOrEmptyRule.cs" />
+    <Compile Include="Validation\ValidationExtensions.cs" />
+    <Compile Include="Validation\ValueExistsRule.cs" />
+    <Compile Include="Wrappers\DateTimeWrapper.cs" />
+    <Compile Include="Wrappers\DirectoryWrapper.cs" />
+    <Compile Include="Wrappers\FileWrapper.cs" />
+    <Compile Include="Wrappers\IDateTime.cs" />
+    <Compile Include="Wrappers\IDirectory.cs" />
+    <Compile Include="Wrappers\IFile.cs" />
+    <Compile Include="Xml\Linq\XmlLinqExtensions.cs" />
+    <Compile Include="Xml\Serialization\XmlSerializerExtensions.cs" />
+    <Compile Include="Logging\ExceptionExtensionsForLogging.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILoggerFactory.cs" />
+    <Compile Include="Logging\LoggerFactory.cs" />
+    <Compile Include="Logging\NullLogger.cs" />
+    <Compile Include="Logging\SimpleLoggerFactory.cs" />
+    <Compile Include="Logging\TextLogger.cs" />
+    <Compile Include="Logging\TraceLogger.cs" />
+    <Compile Include="Logging\TraceLoggerFactory.cs" />
+    <Compile Include="Mapping\BaseNamespaceManager.cs" />
+    <Compile Include="Mapping\IXPathManager.cs" />
+    <Compile Include="Mapping\IMetadataXmlVersionDetector.cs" />
+    <Compile Include="Mapping\INamespaceManager.cs" />
+    <Compile Include="Mapping\INullableProperties.cs" />
+    <Compile Include="Mapping\IXmlConverter.cs" />
+    <Compile Include="Mapping\IXmlMappingEngineFactory.cs" />
+    <Compile Include="Mapping\IXmlVersionDectector.cs" />
+    <Compile Include="Mapping\IXmlMapper.cs" />
+    <Compile Include="Mapping\IXmlMapper2.cs" />
+    <Compile Include="Mapping\IXmlMappingEngine.cs" />
+    <Compile Include="Mapping\LinqXPathManager.cs" />
+    <Compile Include="Mapping\LinqXPathProcessor.cs" />
+    <Compile Include="Mapping\MappingException.cs" />
+    <Compile Include="Mapping\Extensions\MappingExtensions.cs" />
+    <Compile Include="Mapping\NamespaceManager.cs" />
+    <Compile Include="Mapping\NullPropertyBag.cs" />
+    <Compile Include="Mapping\SimpleMapper.cs" />
+    <Compile Include="Mapping\ValueMapper.cs" />
+    <Compile Include="Mapping\XDocumentXPathProcessor.cs" />
+    <Compile Include="Mapping\XElementMapper.cs" />
+    <Compile Include="Mapping\XmlConverter.cs" />
+    <Compile Include="Mapping\LocatorXmlMappingEngineFactory.cs" />
+    <Compile Include="Mapping\XmlPropertyMapExpression.cs" />
+    <Compile Include="Mapping\XmlMapper.cs" />
+    <Compile Include="Mapping\XmlMappingEngine.cs" />
+    <Compile Include="Mapping\XmlMapTarget.cs" />
+    <Compile Include="Mapping\XmlPropertyMap.cs" />
+    <Compile Include="Mapping\XmlVersionDetector.cs" />
+    <Compile Include="Mapping\XPathExtensions.cs" />
+    <Compile Include="Mapping\XPathManager.cs" />
+    <Compile Include="Mapping\XPathMapper.cs" />
+    <Compile Include="Mapping\XPathProcessor.cs" />
+    <Compile Include="Registrars\MapperArea.cs" />
+    <Compile Include="Search\SearchBuilder.cs" />
+    <Compile Include="Search\SearchFactory.cs" />
+    <Compile Include="Search\SearchResult.cs" />
+    <Compile Include="Search\CacheSearchResultPage.cs" />
+    <Compile Include="Search\SearchResultPage.cs" />
+    <Compile Include="ServiceModel\IWcfServiceClientFactory.cs" />
+    <Compile Include="ServiceModel\IWcfConfig.cs" />
+    <Compile Include="ServiceModel\WcfServiceConfig.cs" />
+    <Compile Include="ServiceModel\WcfConfigFactory.cs" />
+    <Compile Include="ServiceModel\WcfServiceClientFactory.cs" />
+    <Compile Include="ServiceModel\WcfConfig.cs" />
+    <Compile Include="Configuration\WcfServiceConfigurationCollection.cs" />
+    <Compile Include="Configuration\WcfServiceConfigurationElement.cs" />
+    <Compile Include="Configuration\WcfServiceConfigurationSection.cs" />
+    <Compile Include="Container\IContainerContext.cs" />
+    <Compile Include="Data\Dao.cs" />
+    <Compile Include="Data\IDao.cs" />
+    <Compile Include="Data\IIdentifiable.cs" />
+    <Compile Include="Data\IQueryFactory.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\IRepository.Generic.cs" />
+    <Compile Include="Data\QueryFactory.cs" />
+    <Compile Include="DateRange.cs" />
+    <Compile Include="DateRangeState.cs" />
+    <Compile Include="DateUtility.cs" />
+    <Compile Include="EventArguments\GenericAsyncCompletedEventArgs.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\DateRangeExtensions.cs" />
+    <Compile Include="Extensions\ReflectionExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Mapping\IMapper.Generic.cs" />
+    <Compile Include="Mapping\IMappingEngine.cs" />
+    <Compile Include="Mapping\Mapper.cs" />
+    <Compile Include="Mapping\SimpleMappingEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\ISearchCache.cs" />
+    <Compile Include="Search\SearchCache.cs" />
+    <Compile Include="ServiceModel\Channels\FeedBodyWriter.cs" />
+    <Compile Include="ServiceModel\TcpBindingUtility.cs" />
+    <Compile Include="ServiceModel\WcfServiceBase.cs" />
+    <Compile Include="ServiceModel\WcfServiceClient.cs" />
+    <Compile Include="ServiceModel\WcfServiceFault.cs" />
+    <Compile Include="ServiceModel\ExceptionExtensions.cs" />
+    <Compile Include="Services\IStartable.cs" />
+    <Compile Include="Services\IStartable.Generic.cs" />
+    <Compile Include="SystemTime.cs" />
+    <Compile Include="Services\ITypeResolver.cs" />
+    <Compile Include="Services\TypeResolver.cs" />
+    <Compile Include="Threading\CancellationTokenOwner.cs" />
+    <Compile Include="Threading\ICancellationTokenOwner.cs" />
+    <Compile Include="UnityDependencyResolver.cs" />
+    <Compile Include="Validation\ChildCollectionRule.cs" />
+    <Compile Include="Validation\ChildRule.cs" />
+    <Compile Include="Validation\IRule.cs" />
+    <Compile Include="Validation\IRule.Generic.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\IValidator.Generic.cs" />
+    <Compile Include="Validation\IValidatorEngine.cs" />
+    <Compile Include="Validation\LocatorValidatorEngine.cs" />
+    <Compile Include="Validation\NamedLocatorValidatorEngine.cs" />
+    <Compile Include="Validation\Rule.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
+    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="Validation\ValidatorRule.cs" />
+    <Compile Include="Web\IWebOperationContextWrapper.cs" />
+    <Compile Include="Web\WebOperationContextWrapper.cs" />
+    <Compile Include="Xml\Serialization\CustomSerializer.cs" />
+    <Compile Include="Xml\SimpleSchemaValidator.cs" />
+    <Compile Include="Xml\XmlExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="EnergyTrading.Core.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

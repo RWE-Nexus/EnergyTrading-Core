@@ -1,0 +1,3 @@
+Breaking change - Moved EntityFramework related code to Nexus.EntityFramework, should affect few clients.
+Remove UnityExtensions.CheckResolve, breaking change but shouldn't affect clients - use TryResolve instead.
+Fixed issue - scavenging files in sub-directories now occurs when monitorSubDirectories is set to true on the file processor
