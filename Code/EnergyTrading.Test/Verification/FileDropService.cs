@@ -11,17 +11,17 @@
 namespace EnergyTrading.Test.Verification
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://NexusVerificationFileDropService", ConfigurationName = "IFileDropService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://EnergyTradingVerificationFileDropService", ConfigurationName = "IFileDropService")]
     public interface IFileDropService
     {
 
-        [System.ServiceModel.OperationContractAttribute(Action = "http://NexusVerificationFileDropService/IFileDropService/PlaceFile", ReplyAction = "http://NexusVerificationFileDropService/IFileDropService/PlaceFileResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://EnergyTradingVerificationFileDropService/IFileDropService/PlaceFile", ReplyAction = "http://EnergyTradingVerificationFileDropService/IFileDropService/PlaceFileResponse")]
         void PlaceFile(string fullPath, string fileContents);
 
-        [System.ServiceModel.OperationContractAttribute(Action = "http://NexusVerificationFileDropService/IFileDropService/PublishMessage", ReplyAction = "http://NexusVerificationFileDropService/IFileDropService/PublishMessageResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://EnergyTradingVerificationFileDropService/IFileDropService/PublishMessage", ReplyAction = "http://EnergyTradingVerificationFileDropService/IFileDropService/PublishMessageResponse")]
         void PublishMessage(string payload, string eventHeaderText, string outputTopicName);
 
-        [System.ServiceModel.OperationContractAttribute(Action = "http://NexusVerificationFileDropService/IFileDropService/WriteFileFromBytes", ReplyAction = "http://NexusVerificationFileDropService/IFileDropService/WriteFileFromBytesRespon" +
+        [System.ServiceModel.OperationContractAttribute(Action = "http://EnergyTradingVerificationFileDropService/IFileDropService/WriteFileFromBytes", ReplyAction = "http://EnergyTradingVerificationFileDropService/IFileDropService/WriteFileFromBytesRespon" +
                                                                                                                                                               "se")]
         void WriteFileFromBytes(string fullPath, byte[] fileContents);
     }

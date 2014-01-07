@@ -4,13 +4,13 @@
     using System.Diagnostics;
 
     /// <summary>
-    /// A logger factory using the Nexus.Logging.<see cref="TraceSwitch" /> to determine logging.
+    /// A logger factory using the EnergyTrading.Logging.<see cref="TraceSwitch" /> to determine logging.
     /// </summary>
     public class TraceLoggerFactory : ILoggerFactory
     {
         private readonly TraceSwitch traceSwitch;
 
-        public TraceLoggerFactory() : this(new TraceSwitch("Nexus.Logging", "Trace switch for Nexus.Logging"))
+        public TraceLoggerFactory() : this(new TraceSwitch("EnergyTrading.Logging", "Trace switch for EnergyTrading.Logging"))
         {
         }
 

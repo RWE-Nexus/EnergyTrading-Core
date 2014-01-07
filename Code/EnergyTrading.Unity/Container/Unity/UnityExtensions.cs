@@ -313,7 +313,7 @@
             container.InstallCoreExtensions();
 
             // Locator self-registers, don't register again as it cause stackoverflow - http://unity.codeplex.com/workitem/10197
-            new NexusUnityServiceLocator(container, useTryResolve);
+            new EnergyTradingUnityServiceLocator(container, useTryResolve);
         }
 
         /// <summary>

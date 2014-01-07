@@ -3,8 +3,8 @@
     using System.Runtime.Serialization;
     using System.Xml.Serialization;
 
-    [DataContract(Namespace = "http://schemas.rwe.com/nexus")]
-    [XmlType(Namespace = "http://schemas.rwe.com/nexus")]
+    [DataContract(Namespace = "http://schemas.rwe.com/EnergyTrading")]
+    [XmlType(Namespace = "http://schemas.rwe.com/EnergyTrading")]
     public class SearchOptions
     {
         public static SearchOptions UnlimitedResults = new SearchOptions { ResultsPerPage = null, MultiPage = false };

@@ -3,7 +3,7 @@
     using System.Xml.Linq;
 
     /// <summary>
-    /// Extensions for classes in Nexus.Mapping
+    /// Extensions for classes in EnergyTrading.Mapping
     /// </summary>
     public static class MappingExtensions
     {

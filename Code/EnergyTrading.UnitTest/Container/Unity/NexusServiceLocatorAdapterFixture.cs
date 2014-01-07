@@ -9,7 +9,7 @@
     /// Summary description for UnityServiceLocatorAdapterFixture
     /// </summary>
     [TestClass]
-    public class NexusServiceLocatorAdapterFixture : NexusServiceLocatorFixture
+    public class EnergyTradingServiceLocatorAdapterFixture : EnergyTradingServiceLocatorFixture
     {
         protected override Microsoft.Practices.ServiceLocation.IServiceLocator CreateServiceLocator()
         {
@@ -18,7 +18,7 @@
                 .RegisterType<ITest, AnotherTestClass>(typeof(AnotherTestClass).FullName)
                 .RegisterType<ITest, TestClass>(typeof(TestClass).FullName);
 
-            return new NexusUnityServiceLocator(container);
+            return new EnergyTradingUnityServiceLocator(container);
         }
 
         [TestInitialize]

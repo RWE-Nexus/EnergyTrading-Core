@@ -20,11 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.EntityFramework", "EnergyTrading.EntityFramework\EnergyTrading.EntityFramework.csproj", "{7F75E531-8A3D-498B-A672-ABB5D85DC861}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNotes", "{4634DA15-43B9-4680-8FDD-DDACC213A308}"
-	ProjectSection(SolutionItems) = preProject
-		..\Documents\ReleaseSummary.2.3.txt = ..\Documents\ReleaseSummary.2.3.txt
-		..\Documents\ReleaseSummary.2.4.txt = ..\Documents\ReleaseSummary.2.4.txt
-		ReleaseSummary.2.5.txt = ReleaseSummary.2.5.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Deployment", "EnergyTrading.Deployment\EnergyTrading.Deployment.csproj", "{D006C38B-E779-46ED-A167-9E00F8B49935}"
 EndProject

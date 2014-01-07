@@ -14,7 +14,7 @@
     /// that held a weak reference which can lead to the ServiceLocator disappearing from the container!
     /// </remarks>
     /// </summary>
-    public class NexusUnityServiceLocator : ServiceLocatorImplBase, IDisposable
+    public class EnergyTradingUnityServiceLocator : ServiceLocatorImplBase, IDisposable
     {
         private readonly bool useTryResolve;
         private IUnityContainer container;
@@ -25,7 +25,7 @@
         /// <param name="container">The <see cref="IUnityContainer"/> to wrap with the <see cref="IServiceLocator"/>
         /// interface implementation.</param>
 
-        public NexusUnityServiceLocator(IUnityContainer container) : this(container, false)
+        public EnergyTradingUnityServiceLocator(IUnityContainer container) : this(container, false)
         {
         }
 
@@ -35,7 +35,7 @@
         /// <param name="container">The <see cref="IUnityContainer"/> to wrap with the <see cref="IServiceLocator"/>
         /// interface implementation.</param>
         /// <param name="useTryResolve">Whether to use TryResolve or Resolve directly</param>
-        public NexusUnityServiceLocator(IUnityContainer container, bool useTryResolve)
+        public EnergyTradingUnityServiceLocator(IUnityContainer container, bool useTryResolve)
         {
             this.container = container;
             this.useTryResolve = useTryResolve;

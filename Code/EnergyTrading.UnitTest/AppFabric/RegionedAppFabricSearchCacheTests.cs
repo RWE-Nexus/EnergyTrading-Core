@@ -17,7 +17,7 @@
     {
         private static DataCache cache;
 
-        private const string CacheName = "NexusCoreTesting";
+        private const string CacheName = "EnergyTradingCoreTesting";
         private const string RegionName = "RegionedAppFabricSearchCacheTestsRegion";
 
         [ClassInitialize]

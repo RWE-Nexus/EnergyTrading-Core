@@ -10,21 +10,21 @@
     [TestClass]
     public class VerificationSpecsBaseFixture
     {
-        private const string TestInputXml = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>Nexus</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
-        private const string TestInputWithWhiteSpace = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId>  <SystemID>Nexus</SystemID>\n<Identifier>1872</Identifier>   \n<OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
-        private const string TestInputWithCommonPrefix = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>Nexus</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><common:SystemId xmlns=\"http://rwe.com/schema/common/3\"><common:SystemID>Moff</common:SystemID><common:Identifier>1872</common:Identifier><common:OriginatingSourceIND>false</common:OriginatingSourceIND></common:SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
+        private const string TestInputXml = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>EnergyTrading</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
+        private const string TestInputWithWhiteSpace = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId>  <SystemID>EnergyTrading</SystemID>\n<Identifier>1872</Identifier>   \n<OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
+        private const string TestInputWithCommonPrefix = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>EnergyTrading</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><common:SystemId xmlns=\"http://rwe.com/schema/common/3\"><common:SystemID>Moff</common:SystemID><common:Identifier>1872</common:Identifier><common:OriginatingSourceIND>false</common:OriginatingSourceIND></common:SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
 
-        private const string XmlNoNexusId = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
+        private const string XmlNoEnergyTradingId = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
 
-        private const string XmlNoMoffId = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>Nexus</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
+        private const string XmlNoMoffId = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>EnergyTrading</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
 
         private const string XmlNoIds = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
 
-        private const string XmlNoPartyType = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>Nexus</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType></PartyType></Details></LegalEntity>";
+        private const string XmlNoPartyType = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>EnergyTrading</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType></PartyType></Details></LegalEntity>";
 
-        private const string XmlNoPartyTypeOrLongName = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>Nexus</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName></LongName><PartyType></PartyType></Details></LegalEntity>";
+        private const string XmlNoPartyTypeOrLongName = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>EnergyTrading</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName></LongName><PartyType></PartyType></Details></LegalEntity>";
 
-        private const string TestWithOriginatingId = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>Nexus</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
+        private const string TestWithOriginatingId = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>EnergyTrading</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
 
         private class VerificationSpecsBaseDerived : VerificiationSpecsBase
         {
@@ -112,15 +112,15 @@
         [TestMethod]
         public void RemoveIdForSingleSystemNoNamespace()
         {
-            var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystem("Nexus", TestInputXml);
-            Assert.AreEqual(XmlNoNexusId, candidate);
+            var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystem("EnergyTrading", TestInputXml);
+            Assert.AreEqual(XmlNoEnergyTradingId, candidate);
         }
 
         [TestMethod]
         public void CanCopeWithWhiteSpaceBetweenElements()
         {
-            var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystem("Nexus", TestInputWithWhiteSpace);
-            Assert.AreEqual(XmlNoNexusId, candidate);
+            var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystem("EnergyTrading", TestInputWithWhiteSpace);
+            Assert.AreEqual(XmlNoEnergyTradingId, candidate);
         }
 
         [TestMethod]
@@ -133,7 +133,7 @@
         [TestMethod]
         public void RemoveMultipleSystemIdEntries()
         {
-            var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystems(new[] { "Nexus", "Moff" }, TestInputXml);
+            var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystems(new[] { "EnergyTrading", "Moff" }, TestInputXml);
             Assert.AreEqual(XmlNoIds, candidate);
         }
 

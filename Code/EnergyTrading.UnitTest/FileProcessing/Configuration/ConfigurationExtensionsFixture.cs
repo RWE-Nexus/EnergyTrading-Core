@@ -37,7 +37,7 @@
                 NumberOfConsumers = 1,
                 ScavengeInterval = new TimeSpan(0, 0, 100),
                 RecoveryInterval = new TimeSpan(0, 0, 100),
-                ProcessorConfigurator = "EnergyTrading.FileProcessing.Registrars.EventBasedProcessorDefaultRegistrar, Nexus.Unity",
+                ProcessorConfigurator = "EnergyTrading.FileProcessing.Registrars.EventBasedProcessorDefaultRegistrar, EnergyTrading.Unity",
                 AdditionalFilter = typeof(DefaultFileFilter),
                 PollingRestartInterval = new TimeSpan(0, 0, 60)
             };
@@ -131,8 +131,8 @@
                 InProgressPath = "e",
                 ScavengeInterval = 100,
                 RecoveryInterval = 100,
-                ProcessorConfiguratorType = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomFileProcessor, Nexus.UnitTest",
-                Handler = "EnergyTrading.UnitTest.FileProcessing.FileHandler, Nexus.UnitTest"
+                ProcessorConfiguratorType = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomFileProcessor, EnergyTrading.UnitTest",
+                Handler = "EnergyTrading.UnitTest.FileProcessing.FileHandler, EnergyTrading.UnitTest"
             };
 
             var expected = new FileProcessorEndpoint
@@ -146,7 +146,7 @@
                 NumberOfConsumers = 1,
                 ScavengeInterval = new TimeSpan(0, 0, 100),
                 RecoveryInterval = new TimeSpan(0, 0, 100),
-                ProcessorConfigurator = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomFileProcessor, Nexus.UnitTest",
+                ProcessorConfigurator = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomFileProcessor, EnergyTrading.UnitTest",
                 Handler = typeof(FileHandler),
                 AdditionalFilter = typeof(DefaultFileFilter),
                 PollingRestartInterval = new TimeSpan(0, 0, 60)
@@ -171,8 +171,8 @@
                 ScavengeInterval = 100,
                 RecoveryInterval = 100,
                 PollingInactivityRestartInterval = 100,
-                Handler = "EnergyTrading.UnitTest.FileProcessing.FileHandler, Nexus.UnitTest",
-                PostProcessor = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomPostProcessor, Nexus.UnitTest"
+                Handler = "EnergyTrading.UnitTest.FileProcessing.FileHandler, EnergyTrading.UnitTest",
+                PostProcessor = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomPostProcessor, EnergyTrading.UnitTest"
             };
 
             var expected = new FileProcessorEndpoint
@@ -212,9 +212,9 @@
                 ScavengeInterval = 100,
                 RecoveryInterval = 100,
                 PollingInactivityRestartInterval = 100,
-                Handler = "EnergyTrading.UnitTest.FileProcessing.FileHandler, Nexus.UnitTest",
-                PostProcessor = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomPostProcessor, Nexus.UnitTest",
-                AdditionalFilter = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomFileFilter, Nexus.UnitTest"
+                Handler = "EnergyTrading.UnitTest.FileProcessing.FileHandler, EnergyTrading.UnitTest",
+                PostProcessor = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomPostProcessor, EnergyTrading.UnitTest",
+                AdditionalFilter = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomFileFilter, EnergyTrading.UnitTest"
             };
 
             var expected = new FileProcessorEndpoint

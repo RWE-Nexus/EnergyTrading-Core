@@ -13,7 +13,7 @@ namespace EnergyTrading.Search
         public SearchCache(ICacheItemPolicyFactory cacheItemPolicyFactory)
         {
             this.cacheItemPolicyFactory = cacheItemPolicyFactory;
-            this.cache = new MemoryCache("Nexus.SearchCache");
+            this.cache = new MemoryCache("EnergyTrading.SearchCache");
         }
 
         public void Add(string cacheKey, SearchResult cacheItem)
@@ -54,7 +54,7 @@ namespace EnergyTrading.Search
 
         public void Clear()
         {
-            this.cache = new MemoryCache("Nexus.SearchCache");
+            this.cache = new MemoryCache("EnergyTrading.SearchCache");
         }
     }
 }

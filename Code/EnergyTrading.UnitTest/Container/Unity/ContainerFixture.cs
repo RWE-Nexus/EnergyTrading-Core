@@ -33,7 +33,7 @@
         {
             var container = new UnityContainer();
             // Deliberately discard result - should still exist in container
-            new NexusUnityServiceLocator(container);
+            new EnergyTradingUnityServiceLocator(container);
 
             var candidate = container.Resolve<IServiceLocator>();
         }

@@ -12,7 +12,7 @@
     /// interface that are independent of the actual container. Subclass this
     /// to provide your actual container implementation to test.
     /// </summary>
-    public abstract class NexusServiceLocatorFixture
+    public abstract class EnergyTradingServiceLocatorFixture
     {
         protected IServiceLocator Locator { get; set; }
 

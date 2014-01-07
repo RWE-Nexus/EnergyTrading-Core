@@ -4,8 +4,8 @@ namespace EnergyTrading.Contracts.Search
     using System.Runtime.Serialization;
     using System.Xml.Serialization;
 
-    [DataContract(Namespace = "http://schemas.rwe.com/nexus")]
-    [XmlType(Namespace = "http://schemas.rwe.com/nexus")]
+    [DataContract(Namespace = "http://schemas.rwe.com/EnergyTrading")]
+    [XmlType(Namespace = "http://schemas.rwe.com/EnergyTrading")]
     public class SearchCriteria
     {
         [DataMember(Order = 1)]

@@ -7,8 +7,8 @@
     /// </summary>
     public class FileProcessorEndpoint
     {
-        public const string PollingBasedConfiguratorType = "EnergyTrading.FileProcessing.Registrars.PollingBasedProcessorDefaultRegistrar, Nexus.Unity";
-        public const string EventBasedConfiguratorType = "EnergyTrading.FileProcessing.Registrars.EventBasedProcessorDefaultRegistrar, Nexus.Unity";
+        public const string PollingBasedConfiguratorType = "EnergyTrading.FileProcessing.Registrars.PollingBasedProcessorDefaultRegistrar, EnergyTrading.Unity";
+        public const string EventBasedConfiguratorType = "EnergyTrading.FileProcessing.Registrars.EventBasedProcessorDefaultRegistrar, EnergyTrading.Unity";
 
         public string Name { get; set; }
 

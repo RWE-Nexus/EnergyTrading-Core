@@ -55,7 +55,7 @@
             Container.InstallCoreExtensions();
 
             // Self-register and set up service location 
-            var locator = new NexusUnityServiceLocator(Container);
+            var locator = new EnergyTradingUnityServiceLocator(Container);
             ServiceLocator.SetLocatorProvider(() => locator);
 
             // Load information from section if present.
