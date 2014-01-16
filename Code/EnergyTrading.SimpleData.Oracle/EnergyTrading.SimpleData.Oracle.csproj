@@ -55,6 +55,10 @@
     <Compile Include="OracleSimpleDataRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EnergyTrading.Core\EnergyTrading.Core.csproj">
+      <Project>{D673760C-F22F-44FF-A4A3-1F697C4997C1}</Project>
+      <Name>EnergyTrading.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EnergyTrading.SimpleData\EnergyTrading.SimpleData.csproj">
       <Project>{F90852F0-2F4E-48CD-AA8F-ED4FF5A49DC4}</Project>
       <Name>EnergyTrading.SimpleData</Name>

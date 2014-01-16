@@ -1,8 +1,10 @@
 ﻿namespace EnergyTrading.Data.SimpleData
 {
     using System;
+    using System.Configuration;
     using System.Data;
 
+    using EnergyTrading.Configuration;
     using EnergyTrading.Logging;
     using EnergyTrading.Threading;
 
@@ -16,24 +18,25 @@
     {
         private static readonly ILogger Logger = LoggerFactory.GetLogger<SimpleDataRepository>();
 
+        private string schema;
+        private Database database;
+        private bool shouldCloseDatabase;
+
         protected SimpleDataRepository(Database database, string schema = "", int maxRetries = 3, SimpleDataMode mode = SimpleDataMode.Live)
         {
-            this.Database = database;
-            // no schema then we try and get the value from the provider (so that we don't have to supply the appSetting unless we want to override it)
-            if (string.IsNullOrWhiteSpace(schema))
-            {
-                var adapter = database.GetAdapter() as AdoAdapter;
-                if (adapter != null)
-                {
-                    this.Schema = adapter.SchemaProvider.GetDefaultSchema();
-                }
-            }
-            else
-            {
-                this.Schema = schema;
-            }
+            this.database = database;
+            this.Schema = schema;
             this.MaxRetries = maxRetries;
             this.Mode = mode;
+        }
+
+        protected SimpleDataRepository(IConfigurationManager configurationManager, string connectionName = SimpleDataDatabaseProvider.DefaultConnectionName, string schema = "", int maxRetries = 3, SimpleDataMode mode = SimpleDataMode.Live)
+        {
+            this.ConnectionStringSettings = configurationManager.GetConnectionSettingsWithPassword(connectionName);
+            this.Schema = schema;
+            this.MaxRetries = maxRetries;
+            this.Mode = mode;
+            this.shouldCloseDatabase = true;
         }
 
         /// <summary>
@@ -44,9 +47,40 @@
             get { throw new NotImplementedException(); }
         }
 
-        private string Schema { get; set; }
+        private ConnectionStringSettings ConnectionStringSettings { get; set; }
 
-        private Database Database { get; set; }
+        private Database Database
+        {
+            get
+            {
+                return this.database
+                       ?? (this.database =
+                           Database.Opener.OpenConnection(
+                               this.ConnectionStringSettings.ConnectionString,
+                               this.ConnectionStringSettings.ProviderName));
+            }
+        }
+
+        private string Schema
+        {
+            get
+            {
+                if (schema == null)
+                {
+                    // no schema passed in to constructor so we try and get the value from the provider (so that we don't have to supply the appSetting unless we want to override it)
+                    var adapter = Database.GetAdapter() as AdoAdapter;
+                    if (adapter != null)
+                    {
+                        schema = adapter.SchemaProvider.GetDefaultSchema();
+                    }
+                }
+                return this.schema;
+            }
+            set
+            {
+                this.schema = value;
+            }
+        }
 
         private int MaxRetries { get; set; }
 
@@ -65,12 +99,12 @@
         protected virtual IDbConnection OpenConnection()
         {
             var adapter = this.GetAdapter();
-            if (adapter == null && this.Mode == SimpleDataMode.Live)
+            if (adapter == null && Mode == SimpleDataMode.Live)
             {
                 throw new RepositoryException("Simple.Data must be using an AdoAdapter");
             }
 
-            if (this.Mode == SimpleDataMode.Test)
+            if (Mode == SimpleDataMode.Test)
             {
                 return null;
             }
@@ -100,28 +134,43 @@
             var ret = default(T);
             Logger.TryDatabaseTask(() =>
             {
-                using (var connection = this.RetryOpenConnection())
+                try
                 {
-                    if (connection != null)
-                    {
-                        this.GetAdapter().UseSharedConnection(connection);
-                    }
-                    try
-                    {
-                        ret = func();
-                    }
-                    finally
+                    using (var connection = RetryOpenConnection())
                     {
                         if (connection != null)
                         {
-                            this.GetAdapter().StopUsingSharedConnection();
-                            connection.Close();
+                            this.GetAdapter().UseSharedConnection(connection);
                         }
+                        try
+                        {
+                            ret = func();
+                        }
+                        finally
+                        {
+                            if (connection != null)
+                            {
+                                this.GetAdapter().StopUsingSharedConnection();
+                                connection.Close();
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    if (shouldCloseDatabase)
+                    {
+                        this.CloseDatabase();
                     }
                 }
             });
 
             return ret;
+        }
+
+        private void CloseDatabase()
+        {
+            this.database = null;
         }
 
         private AdoAdapter GetAdapter()

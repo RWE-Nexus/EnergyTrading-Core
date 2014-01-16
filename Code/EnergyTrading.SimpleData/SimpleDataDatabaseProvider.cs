@@ -12,7 +12,7 @@
     /// </summary>
     public class SimpleDataDatabaseProvider
     {
-        private const string DefaultConnectionName = "Simple.Data.Properties.Settings.DefaultConnectionString";
+        public const string DefaultConnectionName = "Simple.Data.Properties.Settings.DefaultConnectionString";
 
         private static readonly Dictionary<string, Database> DatabaseCache = new Dictionary<string, Database>();
 
