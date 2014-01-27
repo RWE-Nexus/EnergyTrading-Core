@@ -59,7 +59,9 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Confluence\ConfluenceSoapServiceService.cs" />
+    <Compile Include="Confluence\ConfluenceSoapServiceService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Confluence\ConlfuenceClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceControl\SvnChangeLog.cs" />

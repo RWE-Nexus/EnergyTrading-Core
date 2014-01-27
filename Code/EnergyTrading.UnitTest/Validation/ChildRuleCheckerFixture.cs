@@ -59,5 +59,28 @@
             innerRule.Verify(r => r.IsValid("test"), Times.Once());
             Assert.AreEqual(prefix + " " + msg, rule.Message);
         }
+
+        [TestMethod]
+        public void InvalidWhenParentIsNull()
+        {
+            var innerRule = new Mock<IRule<string>>();
+            var msg = "innerRule message";
+            innerRule.Setup(r => r.IsValid(It.IsAny<string>())).Returns(false);
+            innerRule.Setup(r => r.Message).Returns(msg);
+            var count = 0;
+            var prefix = "starts with";
+            var rule = new ChildRuleChecker<Parent, string>(innerRule.Object,
+                                                            p =>
+                                                            {
+                                                                count++;
+                                                                return p.Child;
+                                                            },
+                                                            prefix);
+            var candidate = rule.IsValid(null);
+            Assert.IsFalse(candidate);
+            Assert.AreEqual(0, count);
+            innerRule.Verify(r => r.IsValid(It.IsAny<string>()), Times.Never());
+            Assert.AreEqual(prefix + " Parent is null, so child item rule cannot be valid", rule.Message);
+        }
     }
 }

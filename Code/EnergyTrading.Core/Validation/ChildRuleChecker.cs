@@ -19,6 +19,11 @@
         /// <inheritdoc />
         public override bool IsValid(TParent entity)
         {
+            if (entity == null)
+            {
+                Message = (prefix ?? string.Empty) + " Parent is null, so child item rule cannot be valid";
+                return false;
+            }
             var child = this.accessor.Invoke(entity);
             var valid = this.rule.IsValid(child);
             if (!valid)
