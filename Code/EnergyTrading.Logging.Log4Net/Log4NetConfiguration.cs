@@ -1,6 +1,4 @@
-﻿using System.Collections.Specialized;
-
-namespace EnergyTrading.Logging.Log4Net
+﻿namespace EnergyTrading.Logging.Log4Net
 {
     using System;
     using System.Collections.Generic;
