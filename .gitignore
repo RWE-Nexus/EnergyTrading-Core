@@ -1,0 +1,136 @@
+
+# /Code/
+/Code/_ReSharper.Nexus.Core
+/Code/*.user
+/Code/*.suo
+/Code/Nexus.Core.ncrunchsolution
+
+# /Code/EnergyTrading.Caching.AppFabric/
+/Code/EnergyTrading.Caching.AppFabric/[Bb]in
+/Code/EnergyTrading.Caching.AppFabric/obj
+/Code/EnergyTrading.Caching.AppFabric/[Dd]ebug
+/Code/EnergyTrading.Caching.AppFabric/[Rr]elease
+/Code/EnergyTrading.Caching.AppFabric/*.user
+/Code/EnergyTrading.Caching.AppFabric/*.aps
+/Code/EnergyTrading.Caching.AppFabric/*.eto
+/Code/EnergyTrading.Caching.AppFabric/ClientBin
+/Code/EnergyTrading.Caching.AppFabric/GeneratedArtifacts
+/Code/EnergyTrading.Caching.AppFabric/_Pvt_Extensions
+
+# /Code/EnergyTrading.Contracts/
+/Code/EnergyTrading.Contracts/[Bb]in
+/Code/EnergyTrading.Contracts/obj
+/Code/EnergyTrading.Contracts/[Dd]ebug
+/Code/EnergyTrading.Contracts/[Rr]elease
+/Code/EnergyTrading.Contracts/*.user
+/Code/EnergyTrading.Contracts/*.aps
+/Code/EnergyTrading.Contracts/*.eto
+/Code/EnergyTrading.Contracts/ClientBin
+/Code/EnergyTrading.Contracts/GeneratedArtifacts
+/Code/EnergyTrading.Contracts/_Pvt_Extensions
+
+# /Code/EnergyTrading.Contracts.Tests/
+/Code/EnergyTrading.Contracts.Tests/[Bb]in
+/Code/EnergyTrading.Contracts.Tests/obj
+/Code/EnergyTrading.Contracts.Tests/[Dd]ebug
+/Code/EnergyTrading.Contracts.Tests/[Rr]elease
+/Code/EnergyTrading.Contracts.Tests/*.user
+/Code/EnergyTrading.Contracts.Tests/*.aps
+/Code/EnergyTrading.Contracts.Tests/*.eto
+/Code/EnergyTrading.Contracts.Tests/ClientBin
+/Code/EnergyTrading.Contracts.Tests/GeneratedArtifacts
+/Code/EnergyTrading.Contracts.Tests/_Pvt_Extensions
+
+# /Code/EnergyTrading.Core/
+/Code/EnergyTrading.Core/[Bb]in
+/Code/EnergyTrading.Core/obj
+/Code/EnergyTrading.Core/[Dd]ebug
+/Code/EnergyTrading.Core/[Rr]elease
+/Code/EnergyTrading.Core/*.user
+/Code/EnergyTrading.Core/*.aps
+/Code/EnergyTrading.Core/*.eto
+
+# /Code/EnergyTrading.Deployment/
+/Code/EnergyTrading.Deployment/bin
+/Code/EnergyTrading.Deployment/obj
+/Code/EnergyTrading.Deployment/*.user
+
+# /Code/EnergyTrading.EnterpriseLibrary/
+/Code/EnergyTrading.EnterpriseLibrary/bin
+/Code/EnergyTrading.EnterpriseLibrary/obj
+/Code/EnergyTrading.EnterpriseLibrary/*.user
+
+# /Code/EnergyTrading.EnterpriseLibrary.Test/
+/Code/EnergyTrading.EnterpriseLibrary.Test/bin
+/Code/EnergyTrading.EnterpriseLibrary.Test/obj
+/Code/EnergyTrading.EnterpriseLibrary.Test/*.user
+
+# /Code/EnergyTrading.EntityFramework/
+/Code/EnergyTrading.EntityFramework/bin
+/Code/EnergyTrading.EntityFramework/obj
+/Code/EnergyTrading.EntityFramework/*.user
+
+# /Code/EnergyTrading.Logging.Log4Net/
+/Code/EnergyTrading.Logging.Log4Net/bin
+/Code/EnergyTrading.Logging.Log4Net/obj
+/Code/EnergyTrading.Logging.Log4Net/*.user
+
+# /Code/EnergyTrading.Logging.Log4Net.Test/
+/Code/EnergyTrading.Logging.Log4Net.Test/bin
+/Code/EnergyTrading.Logging.Log4Net.Test/obj
+/Code/EnergyTrading.Logging.Log4Net.Test/*.user
+
+# /Code/EnergyTrading.SimpleData/
+/Code/EnergyTrading.SimpleData/bin
+/Code/EnergyTrading.SimpleData/obj
+/Code/EnergyTrading.SimpleData/*.user
+
+# /Code/EnergyTrading.SimpleData.Oracle/
+/Code/EnergyTrading.SimpleData.Oracle/[Bb]in
+/Code/EnergyTrading.SimpleData.Oracle/obj
+/Code/EnergyTrading.SimpleData.Oracle/[Dd]ebug
+/Code/EnergyTrading.SimpleData.Oracle/[Rr]elease
+/Code/EnergyTrading.SimpleData.Oracle/*.user
+/Code/EnergyTrading.SimpleData.Oracle/*.aps
+/Code/EnergyTrading.SimpleData.Oracle/*.eto
+/Code/EnergyTrading.SimpleData.Oracle/ClientBin
+/Code/EnergyTrading.SimpleData.Oracle/GeneratedArtifacts
+/Code/EnergyTrading.SimpleData.Oracle/_Pvt_Extensions
+
+# /Code/EnergyTrading.Test/
+/Code/EnergyTrading.Test/[Bb]in
+/Code/EnergyTrading.Test/obj
+/Code/EnergyTrading.Test/[Dd]ebug
+/Code/EnergyTrading.Test/[Rr]elease
+/Code/EnergyTrading.Test/*.user
+/Code/EnergyTrading.Test/*.aps
+/Code/EnergyTrading.Test/*.eto
+
+# /Code/EnergyTrading.UnitTest/
+/Code/EnergyTrading.UnitTest/bin
+/Code/EnergyTrading.UnitTest/obj
+/Code/EnergyTrading.UnitTest/Nexus.UnitTest.csproj.user
+
+# /Code/EnergyTrading.Unity/
+/Code/EnergyTrading.Unity/bin
+/Code/EnergyTrading.Unity/obj
+/Code/EnergyTrading.Unity/Nexus.Unity.csproj.user
+
+# /Code/packages/
+/Code/packages/CommonServiceLocator.*
+/Code/packages/EnterpriseLibrary.*
+/Code/packages/Moq.*
+/Code/packages/Nexus.*
+/Code/packages/Unity.*
+/Code/packages/log4net.*
+/Code/packages/RhinoMocks.*
+/Code/packages/EntityFramework.*
+/Code/packages/SharpTestsEx.*
+/Code/packages/XmlDiffPatch.*
+/Code/packages/EasyHttp.*
+/Code/packages/JsonFx.*
+/Code/packages/Rwe.Simple.Data.Oracle.*
+/Code/packages/Simple.Data.Ado.*
+/Code/packages/Simple.Data.Core.*
+/Code/packages/TeamCitySharp.*
+/Code/packages/XMLDiffPatch.*
