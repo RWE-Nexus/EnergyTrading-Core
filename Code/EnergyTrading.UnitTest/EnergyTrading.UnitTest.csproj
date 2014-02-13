@@ -279,6 +279,7 @@
     <Compile Include="Validation\BooleanRuleFixture.cs" />
     <Compile Include="Validation\ChildRuleCheckerFixture.cs" />
     <Compile Include="Validation\DistinctCollectionValuesRuleFixture.cs" />
+    <Compile Include="Validation\IsDefaultRuleFixture.cs" />
     <Compile Include="Validation\NotRuleFixture.cs" />
     <Compile Include="Validation\OrRuleFixture.cs" />
     <Compile Include="Validation\StringLengthRuleFixture.cs" />

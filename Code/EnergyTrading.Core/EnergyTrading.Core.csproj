@@ -190,6 +190,7 @@
     <Compile Include="Validation\BooleanRule.cs" />
     <Compile Include="Validation\ChildRuleChecker.cs" />
     <Compile Include="Validation\DistinctCollectionValuesRule.cs" />
+    <Compile Include="Validation\IsDefaultRule.cs" />
     <Compile Include="Validation\NotRule.cs" />
     <Compile Include="Validation\OrRule.cs" />
     <Compile Include="Validation\StringLengthRule.cs" />
