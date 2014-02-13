@@ -130,7 +130,9 @@
 /Code/packages/EasyHttp.*
 /Code/packages/JsonFx.*
 /Code/packages/Rwe.Simple.Data.Oracle.*
+/Code/packages/ServerAppFabric.*
 /Code/packages/Simple.Data.Ado.*
 /Code/packages/Simple.Data.Core.*
+/Code/packages/Simple.Data.Oracle.*
 /Code/packages/TeamCitySharp.*
 /Code/packages/XMLDiffPatch.*
