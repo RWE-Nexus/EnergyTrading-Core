@@ -68,6 +68,16 @@ namespace EnergyTrading.Web
             WebOperationContext.Current.OutgoingResponse.SetETag(entityTag);
         }
 
+        public void CheckConditionalRetrieve(string entityTag)
+        {
+            WebOperationContext.Current.IncomingRequest.CheckConditionalRetrieve(entityTag);
+        }
+
+        public void SetETag(string entityTag)
+        {
+            WebOperationContext.Current.OutgoingResponse.SetETag(entityTag);
+        }
+
         private OutgoingWebResponseContext OutgoingResponse
         {
             get { return WebOperationContext.Current.OutgoingResponse; }

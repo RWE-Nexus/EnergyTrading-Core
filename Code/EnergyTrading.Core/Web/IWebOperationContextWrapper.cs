@@ -32,5 +32,9 @@
         void CheckConditionalRetrieve(long entityTag);
 
         void SetETag(long entityTag);
+
+        void CheckConditionalRetrieve(string entityTag);
+
+        void SetETag(string entityTag);
     }
 }
