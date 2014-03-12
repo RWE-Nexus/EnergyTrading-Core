@@ -126,6 +126,7 @@
     <Compile Include="Verification\VerificationXmlExtensions.cs" />
     <Compile Include="Verification\VerificiationSpecsBase.cs" />
     <Compile Include="Xml\XmlFixture.cs" />
+    <Compile Include="Xml\XmlTransformFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EnergyTrading.Contracts\EnergyTrading.Contracts.csproj">

@@ -7,8 +7,6 @@
 
     using Microsoft.Practices.Unity;
 
-    using EnergyTrading.Registrars;
-
     /// <summary>
     /// Registers multiple versions of the IXmlMappingEngine for animals
     /// </summary>

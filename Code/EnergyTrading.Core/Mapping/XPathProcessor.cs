@@ -35,11 +35,11 @@
         /// </summary>
         public XPathProcessor()
         {
-            this.nodeStack = new Stack<string>();
-            this.namespaceStack = new Stack<string>();
+            nodeStack = new Stack<string>();
+            namespaceStack = new Stack<string>();
 
-            this.culture = CultureInfo.InvariantCulture;
-            this.currentPath = "/";
+            culture = CultureInfo.InvariantCulture;
+            currentPath = "/";
         }
 
         /// <summary>
@@ -52,7 +52,7 @@
         /// </summary>
         public string CurrentPath
         {
-            get { return this.DetermineCurrentPath(); }
+            get { return DetermineCurrentPath(); }
         }
 
         /// <summary>
@@ -84,7 +84,7 @@
         {
             var stream = new StringReader(xml);
             var document = new XPathDocument(stream);
-            this.Initialize(document);
+            Initialize(document);
         }
 
         /// <summary>
@@ -93,11 +93,11 @@
         /// <param name="document">XPathDocument to use</param>
         public void Initialize(XPathDocument document)
         {
-            this.InitializeManagers(document.CreateNavigator());
+            InitializeManagers(document.CreateNavigator());
            
             foreach (var ns in document.Namespaces())
             {
-                this.RegisterNamespace(ns.Item1, ns.Item2);
+                RegisterNamespace(ns.Item1, ns.Item2);
             }
         }
 
@@ -112,11 +112,11 @@
                 throw new ArgumentNullException("document");
             }
 
-            this.InitializeManagers(document.CreateNavigator());          
+            InitializeManagers(document.CreateNavigator());          
 
             foreach (var ns in document.Namespaces())
             {
-                this.RegisterNamespace(ns.Item1, ns.Item2);
+                RegisterNamespace(ns.Item1, ns.Item2);
             }
         }
 
@@ -131,11 +131,11 @@
                 throw new ArgumentNullException("element");
             }
 
-            this.InitializeManagers(element.CreateNavigator());           
+            InitializeManagers(element.CreateNavigator());           
 
             foreach (var ns in element.Namespaces())
             {
-                this.RegisterNamespace(ns.Item1, ns.Item2);
+                RegisterNamespace(ns.Item1, ns.Item2);
             }
         }
 
@@ -148,10 +148,10 @@
         /// <param name="index">Index if the path is collection element.</param>
         public virtual void Push(string xpath, string xmlNamespace = null, string prefix = "", int index = -1)
         {
-            this.PushNamespace(xmlNamespace, prefix);
+            PushNamespace(xmlNamespace, prefix);
 
-            var qualifiedPath = Normalize(this.QualifyXPath(xpath, prefix, xmlNamespace, index));
-            this.PushPath(qualifiedPath);
+            var qualifiedPath = Normalize(QualifyXPath(xpath, prefix, xmlNamespace, index));
+            PushPath(qualifiedPath);
         }
 
         /// <summary>
@@ -159,14 +159,14 @@
         /// </summary>
         public virtual void Pop()
         {
-            this.PopNamespace();
-            this.PopPath();
+            PopNamespace();
+            PopPath();
         }
 
         [Obsolete("Use ToString and specify isAttribute=true")]
         public virtual string AttributeToString(string xpath, string prefix = "", string defaultValue = null)
         {
-            return this.ToString(xpath, prefix, true, defaultValue);
+            return ToString(xpath, prefix, true, defaultValue);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@
         /// <returns></returns>
         public virtual bool CurrentNode()
         {
-            var node = this.Navigator.Select(this.CurrentPath.Substring(0, this.CurrentPath.Length - 1), this.XmlNamespaceManager);
+            var node = Navigator.Select(CurrentPath.Substring(0, CurrentPath.Length - 1), XmlNamespaceManager);
             return node.MoveNext();
         }
 
@@ -187,8 +187,8 @@
         /// <returns>true if the node is not present or is empty, false otherwise</returns>
         public virtual bool IsNull(string xpath, string prefix = "")
         {
-            var qualifiedPath = this.CurrentPath + this.QualifyXPath(xpath, prefix);
-            var node = this.Navigator.Select(qualifiedPath, this.XmlNamespaceManager);
+            var qualifiedPath = CurrentPath + QualifyXPath(xpath, prefix);
+            var node = Navigator.Select(qualifiedPath, XmlNamespaceManager);
             var exists = node.MoveNext();
             if (exists)
             {
@@ -210,8 +210,8 @@
             string prefix = "",
             int index = -1)
         {
-            var qualifiedPath = this.CurrentPath + this.QualifyXPath(xpath, prefix, isAttribute: false, index: index);
-            var node = this.Navigator.Select(qualifiedPath, this.XmlNamespaceManager);
+            var qualifiedPath = CurrentPath + QualifyXPath(xpath, prefix, isAttribute: false, index: index);
+            var node = Navigator.Select(qualifiedPath, XmlNamespaceManager);
 
             return node.MoveNext();
         }
@@ -226,8 +226,8 @@
             string xpath,
             string prefix = "")
         {
-            var qualifiedPath = this.CurrentPath + this.QualifyXPath(xpath, prefix, isAttribute: true);
-            var node = this.Navigator.Select(qualifiedPath, this.XmlNamespaceManager);
+            var qualifiedPath = CurrentPath + QualifyXPath(xpath, prefix, isAttribute: true);
+            var node = Navigator.Select(qualifiedPath, XmlNamespaceManager);
 
             return node.MoveNext();
         }
@@ -238,7 +238,7 @@
             string prefix = "",
             bool isAttribute = false)
         {
-            return isAttribute ? this.HasElement(xpath, prefix) : this.HasAttribute(xpath, prefix);
+            return isAttribute ? HasElement(xpath, prefix) : HasAttribute(xpath, prefix);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@
         /// <returns></returns>
         public virtual string LookupNamespace(string prefix)
         {
-            return this.NamespaceManager.LookupNamespace(prefix);
+            return NamespaceManager.LookupNamespace(prefix);
         }
 
         /// <summary>
@@ -258,7 +258,7 @@
         /// <returns></returns>
         public virtual string LookupPrefix(string uri)
         {
-            return this.NamespaceManager.LookupPrefix(uri);
+            return NamespaceManager.LookupPrefix(uri);
         }
 
         /// <summary>
@@ -268,20 +268,7 @@
         /// <param name="prefix"></param>
         public virtual void RegisterNamespace(string prefix, string uri)
         {
-            this.NamespaceManager.RegisterNamespace(prefix, uri);
-        }
-
-        /// <summary>
-        /// Evaluate a node as an integer.
-        /// </summary>
-        /// <param name="xpath">XPath relative to CurrentNode</param>
-        /// <param name="prefix">Prefix to use, must provide to evaluate qualified attributes</param>
-        /// <param name="isAttribute">Whether the node is an attribute or an element.</param>
-        /// <param name="defaultValue">Value to return if node not present.</param>
-        /// <returns>Value of the node or defaultValue if not present.</returns>
-        public virtual int ToInt(string xpath, string prefix = "", bool isAttribute = false, int defaultValue = 0)
-        {
-            return this.ToValue(xpath, x => x.Current.ValueAsInt, prefix, isAttribute, defaultValue);
+            NamespaceManager.RegisterNamespace(prefix, uri);
         }
 
         /// <summary>
@@ -294,7 +281,7 @@
         /// <returns>Value of the node or defaultValue if not present.</returns>
         public virtual bool ToBool(string xpath, string prefix = "", bool isAttribute = false, bool defaultValue = false)
         {
-            return this.ToValue(xpath, x => x.Current.Value.ParseXmlBool(), prefix, isAttribute, defaultValue);
+            return ToValue(xpath, x => x.Current.Value.ParseXmlBool(), prefix, isAttribute, defaultValue);
         }
 
         /// <summary>
@@ -307,30 +294,11 @@
         /// <returns>Value of the node or defaultValue if not present.</returns>
         public virtual decimal ToDecimal(string xpath, string prefix = "", bool isAttribute = false, decimal defaultValue = 0)
         {
-            return this.ToValue(xpath,
+            return ToValue(xpath,
                                 x =>
                                 {
                                     Logger.CheckNumericFormat(x, typeof(decimal));
-                                    return decimal.Parse(x.Current.Value, NumberStyles.Number | NumberStyles.AllowExponent, this.culture);
-                                },
-                                prefix, isAttribute, defaultValue);
-        }
-
-        /// <summary>
-        /// Evaluate a node as a float.
-        /// </summary>
-        /// <param name="xpath">XPath relative to CurrentNode</param>
-        /// <param name="prefix">Prefix to use, must provide to evaluate qualified attributes</param>
-        /// <param name="isAttribute">Whether the node is an attribute or an element.</param>        
-        /// <param name="defaultValue">Value to return if node not present.</param>
-        /// <returns>Value of the node or defaultValue if not present.</returns>
-        public virtual float ToFloat(string xpath, string prefix = "", bool isAttribute = false, float defaultValue = 0)
-        {
-            return this.ToValue(xpath,
-                                x =>
-                                {
-                                    Logger.CheckNumericFormat(x, typeof(float));
-                                    return float.Parse(x.Current.Value, this.culture);
+                                    return decimal.Parse(x.Current.Value, NumberStyles.Number | NumberStyles.AllowExponent, culture);
                                 },
                                 prefix, isAttribute, defaultValue);
         }
@@ -345,13 +313,71 @@
         /// <returns>Value of the node or defaultValue if not present.</returns>
         public virtual double ToDouble(string xpath, string prefix = "", bool isAttribute = false, float defaultValue = 0)
         {
-            return this.ToValue(xpath,
+            return ToValue(xpath,
                                 x =>
                                 {
                                     Logger.CheckNumericFormat(x, typeof(double));
-                                    return double.Parse(x.Current.Value, this.culture);
+                                    return double.Parse(x.Current.Value, culture);
                                 },
                                 prefix, isAttribute, defaultValue);
+        }
+
+        /// <summary>
+        /// Evaluate a node as a float.
+        /// </summary>
+        /// <param name="xpath">XPath relative to CurrentNode</param>
+        /// <param name="prefix">Prefix to use, must provide to evaluate qualified attributes</param>
+        /// <param name="isAttribute">Whether the node is an attribute or an element.</param>        
+        /// <param name="defaultValue">Value to return if node not present.</param>
+        /// <returns>Value of the node or defaultValue if not present.</returns>
+        public virtual float ToFloat(string xpath, string prefix = "", bool isAttribute = false, float defaultValue = 0)
+        {
+            return ToSingle(xpath, prefix, isAttribute, defaultValue);
+        }
+
+        /// <summary>
+        /// Evaluate a node as a <see cref="System.Single" />.
+        /// </summary>
+        /// <param name="xpath">XPath relative to CurrentNode</param>
+        /// <param name="prefix">Prefix to use, must provide to evaluate qualified attributes</param>
+        /// <param name="isAttribute">Whether the node is an attribute or an element.</param>        
+        /// <param name="defaultValue">Value to return if node not present.</param>
+        /// <returns>Value of the node or defaultValue if not present.</returns>
+        public virtual float ToSingle(string xpath, string prefix = "", bool isAttribute = false, float defaultValue = 0)
+        {
+            return ToValue(xpath,
+                                x =>
+                                {
+                                    Logger.CheckNumericFormat(x, typeof(float));
+                                    return float.Parse(x.Current.Value, culture);
+                                },
+                                prefix, isAttribute, defaultValue);
+        }
+
+        /// <summary>
+        /// Evaluate a node as an integer.
+        /// </summary>
+        /// <param name="xpath">XPath relative to CurrentNode</param>
+        /// <param name="prefix">Prefix to use, must provide to evaluate qualified attributes</param>
+        /// <param name="isAttribute">Whether the node is an attribute or an element.</param>
+        /// <param name="defaultValue">Value to return if node not present.</param>
+        /// <returns>Value of the node or defaultValue if not present.</returns>
+        public virtual int ToInt(string xpath, string prefix = "", bool isAttribute = false, int defaultValue = 0)
+        {
+            return ToInt32(xpath, prefix, isAttribute, defaultValue);
+        }
+
+        /// <summary>
+        /// Evaluate a node as an <see cref="Int32" />.
+        /// </summary>
+        /// <param name="xpath">XPath relative to CurrentNode</param>
+        /// <param name="prefix">Prefix to use, must provide to evaluate qualified attributes</param>
+        /// <param name="isAttribute">Whether the node is an attribute or an element.</param>
+        /// <param name="defaultValue">Value to return if node not present.</param>
+        /// <returns>Value of the node or defaultValue if not present.</returns>
+        public virtual int ToInt32(string xpath, string prefix = "", bool isAttribute = false, int defaultValue = 0)
+        {
+            return ToValue(xpath, x => x.Current.ValueAsInt, prefix, isAttribute, defaultValue);
         }
 
         /// <summary>
@@ -364,7 +390,20 @@
         /// <returns>Value of the node or defaultValue if not present.</returns>
         public virtual long ToLong(string xpath, string prefix = "", bool isAttribute = false, long defaultValue = 0)
         {
-            return this.ToValue(xpath, x => x.Current.ValueAsLong, prefix, isAttribute, defaultValue);
+            return ToInt64(xpath, prefix, isAttribute, defaultValue);
+        }
+
+        /// <summary>
+        /// Evaluate a node as an <see cref="Int64" />.
+        /// </summary>
+        /// <param name="xpath">XPath relative to CurrentNode</param>
+        /// <param name="prefix">Prefix to use, must provide to evaluate qualified attributes</param>
+        /// <param name="isAttribute">Whether the node is an attribute or an element.</param>
+        /// <param name="defaultValue">Value to return if node not present.</param>
+        /// <returns>Value of the node or defaultValue if not present.</returns>
+        public virtual long ToInt64(string xpath, string prefix = "", bool isAttribute = false, long defaultValue = 0)
+        {
+            return ToValue(xpath, x => x.Current.ValueAsLong, prefix, isAttribute, defaultValue);
         }
 
         /// <summary>
@@ -377,7 +416,7 @@
         /// <returns>Value of the node or defaultValue if not present.</returns>
         public virtual string ToString(string xpath, string prefix = "", bool isAttribute = false, string defaultValue = null)
         {
-            return this.ToValue(xpath, x => x.Current.Value, prefix, isAttribute, defaultValue);
+            return ToValue(xpath, x => x.Current.Value, prefix, isAttribute, defaultValue);
         }
 
         /// <summary>
@@ -390,7 +429,7 @@
         /// <returns>Value of the node.</returns>
         public virtual T ToEnum<T>(string xpath, string prefix = "", bool isAttribute = false)
         {
-            return this.ToValue(xpath, x => (T)Enum.Parse(typeof(T), x.Current.Value), prefix, isAttribute);
+            return ToValue(xpath, x => (T)Enum.Parse(typeof(T), x.Current.Value), prefix, isAttribute);
         }
 
         /// <summary>
@@ -402,7 +441,7 @@
         /// <returns>Value of the node.</returns>
         public virtual DateTime ToDateTime(string xpath, string prefix = "", bool isAttribute = false)
         {
-            return this.ToValue(xpath, x => x.Current.ValueAsDateTime, prefix, isAttribute);
+            return ToValue(xpath, x => x.Current.ValueAsDateTime, prefix, isAttribute);
         }
 
         /// <summary>
@@ -414,7 +453,7 @@
         /// <returns>Value of the node.</returns>
         public virtual DateTimeOffset ToDateTimeOffset(string xpath, string prefix = "", bool isAttribute = false)
         {
-            return this.ToValue(xpath, x => DateTimeOffset.Parse(x.Current.Value), prefix, isAttribute);
+            return ToValue(xpath, x => DateTimeOffset.Parse(x.Current.Value), prefix, isAttribute);
         }
 
         /// <summary>
@@ -426,7 +465,7 @@
         /// <returns>Value of the node.</returns>
         public virtual TimeSpan ToTimeSpan(string xpath, string prefix = "", bool isAttribute = false)
         {
-            return this.ToValue(xpath, x => TimeSpan.Parse(x.Current.Value), prefix, isAttribute); 
+            return ToValue(xpath, x => TimeSpan.Parse(x.Current.Value), prefix, isAttribute); 
         }
 
         /// <summary>
@@ -435,14 +474,14 @@
         /// <param name="navigator"></param>
         protected virtual void InitializeManagers(XPathNavigator navigator)
         {
-            this.Navigator = navigator;
-            this.XmlNamespaceManager = new XmlNamespaceManager(this.Navigator.NameTable);
+            Navigator = navigator;
+            XmlNamespaceManager = new XmlNamespaceManager(Navigator.NameTable);
 
             // TODO: Any easy way of inject this one??
-            this.NamespaceManager = new BaseNamespaceManager(this.XmlNamespaceManager);
-            if (this.XPathManager == null)
+            NamespaceManager = new BaseNamespaceManager(XmlNamespaceManager);
+            if (XPathManager == null)
             {
-                this.XPathManager = new XPathManager(this.NamespaceManager);
+                XPathManager = new XPathManager(NamespaceManager);
             }
         }
 
@@ -454,8 +493,8 @@
         protected void PushNamespace(string xmlNamespace, string prefix)
         {
             // TODO: Make this responsible for registering/resolving prefix -> namespace if xmlNamespace not present?
-            this.namespaceStack.Push(this.CurrentNamespace);
-            this.CurrentNamespace = xmlNamespace ?? this.CurrentNamespace;
+            namespaceStack.Push(CurrentNamespace);
+            CurrentNamespace = xmlNamespace ?? CurrentNamespace;
         }
 
         /// <summary>
@@ -464,8 +503,8 @@
         /// <param name="xpath">XPath to use.</param>
         protected void PushPath(string xpath)
         {
-            this.nodeStack.Push(this.CurrentPath);
-            this.currentPath += xpath;
+            nodeStack.Push(CurrentPath);
+            currentPath += xpath;
         }
 
         /// <summary>
@@ -474,7 +513,7 @@
         /// <returns>The current XPath.</returns>
         protected virtual string DetermineCurrentPath()
         {
-            return this.currentPath;
+            return currentPath;
         }
 
         /// <summary>
@@ -482,7 +521,7 @@
         /// </summary>
         protected void PopNamespace()
         {
-            this.CurrentNamespace = this.namespaceStack.Pop();
+            CurrentNamespace = namespaceStack.Pop();
         }
 
         /// <summary>
@@ -490,7 +529,7 @@
         /// </summary>
         protected void PopPath()
         {
-            this.currentPath = this.nodeStack.Pop();
+            currentPath = nodeStack.Pop();
         }
 
         /// <summary>
@@ -505,7 +544,7 @@
         protected virtual string QualifyXPath(string xpath, string prefix, string xmlNamespace = null, int index = -1, bool isAttribute = false)
         {
             // Determine namespace if not provided.
-            var ns = xmlNamespace ?? this.CurrentNamespace;
+            var ns = xmlNamespace ?? CurrentNamespace;
             if (isAttribute && string.IsNullOrEmpty(prefix))
             {
                 // Don't qualify the default namespace for attributes
@@ -513,7 +552,7 @@
                 ns = string.Empty;
             }
 
-            return this.XPathManager.QualifyXPath(xpath, prefix, ns, index, isAttribute);
+            return XPathManager.QualifyXPath(xpath, prefix, ns, index, isAttribute);
         }
 
         private static string Normalize(string xpath)
@@ -533,9 +572,9 @@
             bool isAttribute = false,
             T defaultValue = default(T))
         {
-            var qualifiedPath = string.IsNullOrEmpty(xpath) ? this.CurrentPath.Substring(0, this.CurrentPath.Length - 1) : this.CurrentPath + this.QualifyXPath(xpath, prefix, isAttribute: isAttribute);
+            var qualifiedPath = string.IsNullOrEmpty(xpath) ? CurrentPath.Substring(0, CurrentPath.Length - 1) : CurrentPath + QualifyXPath(xpath, prefix, isAttribute: isAttribute);
 
-            return this.Navigator.ToValue(this.XmlNamespaceManager, qualifiedPath, valueSelector, defaultValue);
+            return Navigator.ToValue(XmlNamespaceManager, qualifiedPath, valueSelector, defaultValue);
         }
     }
 }

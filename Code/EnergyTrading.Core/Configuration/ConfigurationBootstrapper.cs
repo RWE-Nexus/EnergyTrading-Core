@@ -3,12 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
-    //using log4net;
+    using EnergyTrading.Logging;
 
     public static class ConfigurationBootStrapper
     {
-        //private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Process a list of configuration tasks in order..
@@ -41,7 +42,7 @@
 
         private static IConfigurationTask FindZeroDependencyTask(IDictionary<IConfigurationTask, List<Type>> graph)
         {
-            //logger.Debug("Searching: " + graph.Keys.Count + " remaining");
+            Logger.Debug("Searching: " + graph.Keys.Count + " remaining");
 
             foreach (var key in graph.Keys)
             {
@@ -60,11 +61,11 @@
         private static void Remove(IDictionary<IConfigurationTask, List<Type>> graph, IConfigurationTask config)
         {
             var type = config.GetType();
-            //logger.Debug("Removing: " + type.FullName);
+            Logger.Debug("Removing: " + type.FullName);
 
             foreach (var values in graph.Values)
             {
-                // Remove this type from the depenendencies, no impact if it's not there
+                // Remove this type from the dependencies, no impact if it's not there
                 values.Remove(type);
             }
 

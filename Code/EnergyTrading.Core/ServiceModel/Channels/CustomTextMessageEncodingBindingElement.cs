@@ -40,7 +40,7 @@
         /// <param name="encoding"></param>
         /// <param name="mediaType"></param>
         public CustomTextMessageBindingElement(string encoding, string mediaType)
-            : this(encoding, mediaType, MessageVersion.Soap11WSAddressing10)
+            : this(encoding, mediaType, string.Empty, null, MessageVersion.Soap11WSAddressing10)
         {
         }
 
@@ -49,12 +49,12 @@
         /// </summary>
         /// <param name="binding"></param>
         public CustomTextMessageBindingElement(CustomTextMessageBindingElement binding)
-            : this(binding.Encoding, binding.MediaType, binding.MessageVersion)
+            : this(binding.Encoding, binding.MediaType, binding.AlternateContentType, binding.MessageLogger, binding.MessageVersion)
         {
             // NB Need to copy other elements here - invoked by WCF on Clone
-            this.Transformers.AddRange(binding.Transformers);
-            this.readerQuotas = new XmlDictionaryReaderQuotas();
-            binding.ReaderQuotas.CopyTo(this.readerQuotas);
+            Transformers.AddRange(binding.Transformers);
+            readerQuotas = new XmlDictionaryReaderQuotas();
+            binding.ReaderQuotas.CopyTo(readerQuotas);
         }
 
         /// <summary>
@@ -62,8 +62,10 @@
         /// </summary>
         /// <param name="encoding"></param>
         /// <param name="mediaType"></param>
+        /// <param name="alternateContentType"></param>
+        /// <param name="messageLogger"></param>
         /// <param name="msgVersion"></param>
-        public CustomTextMessageBindingElement(string encoding, string mediaType, MessageVersion msgVersion)
+        public CustomTextMessageBindingElement(string encoding, string mediaType, string alternateContentType, IMessageLogger messageLogger, MessageVersion msgVersion)
         {
             if (encoding == null)
             {
@@ -83,23 +85,29 @@
             this.msgVersion = msgVersion;
             this.mediaType = mediaType;
             this.encoding = encoding;
-            this.readerQuotas = new XmlDictionaryReaderQuotas();
+            AlternateContentType = alternateContentType;
+            MessageLogger = messageLogger;
+            readerQuotas = new XmlDictionaryReaderQuotas();
         }
+
+        /// <summary>
+        /// Gets or sets the alternate content type.
+        /// </summary>
+        public string AlternateContentType { get; set; }
 
         /// <summary>
         /// Gets the message encoding
         /// </summary>
         public string Encoding
         {
-            get { return this.encoding; }
-
+            get { return encoding; }
             set
             {
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
                 }
-                this.encoding = value;
+                encoding = value;
             }
         }
 
@@ -108,30 +116,33 @@
         /// </summary>
         public string MediaType
         {
-            get { return this.mediaType; }
-
+            get { return mediaType; }
             set
             {
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
                 }
-                this.mediaType = value;
+                mediaType = value;
             }
         }
 
+        /// <summary>
+        /// Gets or sets the message logger to use.
+        /// </summary>
+        public IMessageLogger MessageLogger { get; set; }
+        
         /// <inheritdoc />
         public override MessageVersion MessageVersion
         {
-            get { return this.msgVersion; }
-
+            get { return msgVersion; }
             set
             {
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
                 }
-                this.msgVersion = value;
+                msgVersion = value;
             }
         }
 
@@ -142,7 +153,7 @@
         /// </summary>
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get { return this.readerQuotas; }
+            get { return readerQuotas; }
         }
 
         /// <summary>
@@ -150,14 +161,14 @@
         /// </summary>
         public List<IMessageTransformer> Transformers
         {
-            get { return this.transformers ?? (this.transformers = new List<IMessageTransformer>()); }
-            set { this.transformers = value; }
+            get { return transformers ?? (transformers = new List<IMessageTransformer>()); }
+            set { transformers = value; }
         }
 
         /// <inheritdoc />
         public override MessageEncoderFactory CreateMessageEncoderFactory()
         {
-            return new CustomTextMessageEncoderFactory(this.MediaType, this.Encoding, this.MessageVersion, this.Transformers);
+            return new CustomTextMessageEncoderFactory(MediaType, Encoding, AlternateContentType, MessageLogger, MessageVersion, Transformers);
         }
 
         /// <inheritdoc />
@@ -218,7 +229,7 @@
         {
             if (typeof(T) == typeof(XmlDictionaryReaderQuotas))
             {
-                return (T)(object)this.readerQuotas;
+                return (T)(object)readerQuotas;
             }
 
             return base.GetProperty<T>(context);
@@ -232,7 +243,7 @@
         {
             // The MessageEncodingBindingElement is responsible for ensuring that the WSDL has the correct
             // SOAP version. We can delegate to the WCF implementation of TextMessageEncodingBindingElement for this.
-            var mebe = new TextMessageEncodingBindingElement { MessageVersion = this.msgVersion };
+            var mebe = new TextMessageEncodingBindingElement { MessageVersion = msgVersion };
             ((IWsdlExportExtension)mebe).ExportEndpoint(exporter, context);
         }
     }

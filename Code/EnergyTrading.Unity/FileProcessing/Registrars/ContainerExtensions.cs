@@ -1,13 +1,9 @@
-﻿using EnergyTrading.FileProcessing.Configuration;
-
-namespace EnergyTrading.FileProcessing.Registrars
+﻿namespace EnergyTrading.FileProcessing.Registrars
 {
     using EnergyTrading.FileProcessing;
     using EnergyTrading.Services;
 
     using Microsoft.Practices.Unity;
-
-    using EnergyTrading.FileProcessing;
 
     public static class ContainerExtensions
     {

@@ -53,7 +53,7 @@
 
         public static List<TDestination> MapList<TDestination>(this IXmlMappingEngine engine, XPathProcessor xpathProcessor, string collectionNode, string xmlPrefix = "", bool outputDefault = false)
         {
-            return engine.MapList<XPathProcessor, TDestination>(xpathProcessor, collectionNode, string.Empty, collectionNodeNamespacePrefix: xmlPrefix, outputDefault: outputDefault);
+            return engine.MapList<XPathProcessor, TDestination>(xpathProcessor, collectionNode, string.Empty, xmlPrefix, outputDefault: outputDefault);
         }
 
         public static XElement InNamespace(this XElement xelement, string nameSpace)

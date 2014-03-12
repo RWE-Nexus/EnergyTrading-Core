@@ -6,6 +6,7 @@
     using System.Xml.Linq;
     using System.Xml.Schema;
 
+    [Obsolete("Use XmlSchemaValidator")]
     public class SimpleSchemaValidator
     {
         public static bool TryValidate(Stream schema, XElement sourceXml, string defaultNamespace = "")

@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.ServiceModel.Channels;
 
+    using EnergyTrading.ServiceModel.Loggers;
+
     /// <summary>
     /// Factory for the <see cref="CustomTextMessageEncoder" />
     /// </summary>
@@ -12,6 +14,8 @@
         private readonly MessageVersion version;
         private readonly string mediaType;
         private readonly string charSet;
+        private readonly string alternateContentType;
+        private readonly IMessageLogger messageLogger;
         private readonly IList<IMessageTransformer> transformers;
 
         /// <summary>
@@ -19,13 +23,17 @@
         /// </summary>
         /// <param name="mediaType"></param>
         /// <param name="charSet"></param>
+        /// <param name="alternateContentType"></param>
+        /// <param name="messageLogger"></param>
         /// <param name="version"></param>
         /// <param name="transformers"></param>
-        public CustomTextMessageEncoderFactory(string mediaType, string charSet, MessageVersion version, IList<IMessageTransformer> transformers)
+        public CustomTextMessageEncoderFactory(string mediaType, string charSet, string alternateContentType, IMessageLogger messageLogger, MessageVersion version, IList<IMessageTransformer> transformers)
         {
             this.version = version;
             this.mediaType = mediaType;
             this.charSet = charSet;
+            this.alternateContentType = alternateContentType;
+            this.messageLogger = messageLogger ?? new NullMessageLogger();
             this.transformers = transformers;
             this.encoder = new CustomTextMessageEncoder(this);
         }
@@ -43,6 +51,14 @@
         }
 
         /// <summary>
+        /// Gets the alternate content type to use.
+        /// </summary>
+        public string AlternateContentType
+        {
+            get { return alternateContentType; }
+        }
+
+        /// <summary>
         /// Gets the MIME media type to use.
         /// </summary>
         public string MediaType
@@ -56,6 +72,14 @@
         public string CharSet
         {
             get { return this.charSet; }
+        }
+
+        /// <summary>
+        /// Gets the message logger to use
+        /// </summary>
+        public IMessageLogger MessageLogger
+        {
+            get { return messageLogger; }
         }
 
         /// <summary>

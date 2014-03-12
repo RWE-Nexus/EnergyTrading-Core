@@ -11,6 +11,24 @@
     public static class ChannelsExtensions
     {
         /// <summary>
+        /// Convert a message buffer into its string representation.
+        /// </summary>
+        /// <param name="buffer">MessageBuffer to use.</param>
+        /// <returns></returns>
+        public static string MessageContent(this MessageBuffer buffer)
+        {
+            var message = buffer.CreateMessage();
+            var builder = new StringBuilder();
+            using (var writer = XmlWriter.Create(builder))
+            {
+                message.WriteMessage(writer);
+                writer.Close();
+            }
+
+            return builder.ToString();
+        }
+
+        /// <summary>
         /// Write a <see cref="Message" /> to a stream
         /// </summary>
         /// <param name="message"></param>

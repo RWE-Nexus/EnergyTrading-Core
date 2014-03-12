@@ -28,12 +28,12 @@
         /// </summary>
         public LinqXPathProcessor()
         {
-            this.pathStack = new Stack<Tuple<string, int>>();
-            this.elementStack = new Stack<XElement>();
-            this.nodesStack = new List<XElement>[100];  // TODO: Allocation policy if size too small
+            pathStack = new Stack<Tuple<string, int>>();
+            elementStack = new Stack<XElement>();
+            nodesStack = new List<XElement>[100];  // TODO: Allocation policy if size too small
 
             // Pre-allocate culture due to number of times used.
-            this.culture = CultureInfo.InvariantCulture;
+            culture = CultureInfo.InvariantCulture;
         }
 
         /// <summary>
@@ -49,70 +49,51 @@
         /// <inheritdoc />
         public override bool IsNull(string xpath, string prefix = "")
         {
-            var node = this.ToXElement(xpath, prefix);
+            var node = ToXElement(xpath, prefix);
             return node == null || node.IsEmpty;
-        }
-
-        /// <inheritdoc />
-        public override int ToInt(string xpath, string prefix = "", bool isAttribute = false, int defaultValue = 0)
-        {
-            return isAttribute ? this.AttributeToValue(xpath, x => (int) x, prefix, defaultValue)
-                               : this.ToValue(xpath, x => (int) x, prefix, defaultValue);
         }
 
         /// <inheritdoc />
         public override bool ToBool(string xpath, string prefix = "", bool isAttribute = false, bool defaultValue = false)
         {
-            return isAttribute ? this.AttributeToValue(xpath, x => ((string) x).ParseXmlBool(), prefix, defaultValue)
-                               : this.ToValue(xpath, x => ((string) x).ParseXmlBool(), prefix, defaultValue);
+            return isAttribute ? AttributeToValue(xpath, x => ((string)x).ParseXmlBool(), prefix, defaultValue)
+                               : ToValue(xpath, x => ((string)x).ParseXmlBool(), prefix, defaultValue);
+        }
+
+        /// <inheritdoc />
+        public override int ToInt32(string xpath, string prefix = "", bool isAttribute = false, int defaultValue = 0)
+        {
+            return isAttribute ? AttributeToValue(xpath, x => (int) x, prefix, defaultValue)
+                               : ToValue(xpath, x => (int) x, prefix, defaultValue);
+        }
+
+        /// <inheritdoc />
+        public override long ToInt64(string xpath, string prefix = "", bool isAttribute = false, long defaultValue = 0)
+        {
+            return isAttribute ? AttributeToValue(xpath, x => (long)x, prefix, defaultValue)
+                               : ToValue(xpath, x => (long)x, prefix, defaultValue);
         }
 
         /// <inheritdoc />
         public override decimal ToDecimal(string xpath, string prefix = "", bool isAttribute = false, decimal defaultValue = 0)
         {
             return isAttribute
-                       ? this.AttributeToValue(
+                       ? AttributeToValue(
                            xpath,
                            x =>
-                               {
-                                   Logger.CheckNumericFormat(x, typeof(decimal));
-                                   return decimal.Parse(
-                                       (string)x, NumberStyles.Number | NumberStyles.AllowExponent, this.culture);
-                               },
+                                {
+                                    Logger.CheckNumericFormat(x, typeof(decimal));
+                                    return decimal.Parse((string)x, NumberStyles.Number | NumberStyles.AllowExponent, culture);
+                                },
                            prefix,
                            defaultValue)
-                       : this.ToValue(
+                       : ToValue(
                            xpath,
                            x =>
-                               {
-                                   Logger.CheckNumericFormat(x, typeof(decimal));
-                                   return decimal.Parse(
-                                       (string)x, NumberStyles.Number | NumberStyles.AllowExponent, this.culture);
-                               },
-                           prefix,
-                           defaultValue);
-        }
-
-        /// <inheritdoc />
-        public override float ToFloat(string xpath, string prefix = "", bool isAttribute = false, float defaultValue = 0)
-        {
-            return isAttribute
-                       ? this.AttributeToValue(
-                           xpath,
-                           x =>
-                               {
-                                   Logger.CheckNumericFormat(x, typeof(float));
-                                   return float.Parse((string)x, this.culture);
-                               },
-                           prefix,
-                           defaultValue)
-                       : this.ToValue(
-                           xpath,
-                           x =>
-                               {
-                                   Logger.CheckNumericFormat(x, typeof(float));
-                                   return float.Parse((string)x, this.culture);
-                               },
+                                {
+                                    Logger.CheckNumericFormat(x, typeof(decimal));
+                                    return decimal.Parse((string)x, NumberStyles.Number | NumberStyles.AllowExponent, culture);
+                                },
                            prefix,
                            defaultValue);
         }
@@ -121,88 +102,105 @@
         public override double ToDouble(string xpath, string prefix = "", bool isAttribute = false, float defaultValue = 0)
         {
             return isAttribute
-                       ? this.AttributeToValue(
+                       ? AttributeToValue(
                            xpath,
                            x =>
                                {
                                    Logger.CheckNumericFormat(x, typeof(double));
-                                   return double.Parse((string)x, this.culture);
+                                   return double.Parse((string)x, culture);
                                },
                            prefix,
                            defaultValue)
-                       : this.ToValue(
+                       : ToValue(
                            xpath,
                            x =>
                                {
                                    Logger.CheckNumericFormat(x, typeof(double));
-                                   return double.Parse((string)x, this.culture);
+                                   return double.Parse((string)x, culture);
                                },
                            prefix,
                            defaultValue);
         }
 
         /// <inheritdoc />
-        public override long ToLong(string xpath, string prefix = "", bool isAttribute = false, long defaultValue = 0)
+        public override float ToSingle(string xpath, string prefix = "", bool isAttribute = false, float defaultValue = 0)
         {
-            return isAttribute ? this.AttributeToValue(xpath, x => (long) x, prefix, defaultValue)
-                               : this.ToValue(xpath, x => (long) x, prefix, defaultValue);
+            return isAttribute
+                       ? AttributeToValue(
+                           xpath,
+                           x =>
+                           {
+                               Logger.CheckNumericFormat(x, typeof(float));
+                               return float.Parse((string)x, culture);
+                           },
+                           prefix,
+                           defaultValue)
+                       : ToValue(
+                           xpath,
+                           x =>
+                           {
+                               Logger.CheckNumericFormat(x, typeof(float));
+                               return float.Parse((string)x, culture);
+                           },
+                           prefix,
+                           defaultValue);
         }
 
         /// <inheritdoc />
         public override string ToString(string xpath, string prefix = "", bool isAttribute = false, string defaultValue = null)
         {
-            return isAttribute ? this.AttributeToValue(xpath, x => (string) x, prefix, defaultValue)
-                               : this.ToValue(xpath, x => (string) x, prefix, defaultValue);
+            return isAttribute ? AttributeToValue(xpath, x => (string) x, prefix, defaultValue)
+                               : ToValue(xpath, x => (string) x, prefix, defaultValue);
         }
 
         /// <inheritdoc />
         public override T ToEnum<T>(string xpath, string prefix = "", bool isAttribute = false)
         {
-            return isAttribute ? this.AttributeToValue(xpath, x => (T)Enum.Parse(typeof(T), (string) x), prefix)
-                               : this.ToValue(xpath, x => (T)Enum.Parse(typeof(T), (string) x), prefix);
+            return isAttribute ? AttributeToValue(xpath, x => (T)Enum.Parse(typeof(T), (string) x), prefix)
+                               : ToValue(xpath, x => (T)Enum.Parse(typeof(T), (string) x), prefix);
         }
 
         /// <inheritdoc />
         public override DateTime ToDateTime(string xpath, string prefix = "", bool isAttribute = false)
         {
-            return isAttribute ? this.AttributeToValue(xpath, x => (DateTime) x, prefix)
-                               : this.ToValue(xpath, x => (DateTime) x, prefix);
+            return isAttribute ? AttributeToValue(xpath, x => (DateTime) x, prefix)
+                               : ToValue(xpath, x => (DateTime) x, prefix);
         }
 
         /// <inheritdoc />
         public override DateTimeOffset ToDateTimeOffset(string xpath, string prefix = "", bool isAttribute = false)
         {
-            return isAttribute ? this.AttributeToValue(xpath, x => (DateTimeOffset) x, prefix)
-                               : this.ToValue(xpath, x => (DateTimeOffset) x, prefix);
+            return isAttribute ? AttributeToValue(xpath, x => (DateTimeOffset) x, prefix)
+                               : ToValue(xpath, x => (DateTimeOffset) x, prefix);
         }
 
         /// <inheritdoc />
         public override bool CurrentNode()
         {
-            return this.CurrentElement != null;
+            return CurrentElement != null;
         }
 
         /// <inheritdoc />
         public override bool HasElement(string xpath, string prefix = "", int index = -1)
         {
-            return this.ToXElement(xpath, prefix, index) != null;
+            return ToXElement(xpath, prefix, index) != null;
         }
 
         /// <inheritdoc />
         public override bool HasAttribute(string xpath, string prefix = "")
         {
-            return this.ToXAttribute(xpath, prefix) != null;
+            return ToXAttribute(xpath, prefix) != null;
         }
 
         /// <inheritdoc />
         protected override string DetermineCurrentPath()
         {
             var path = string.Empty;
-            foreach (var xp in this.pathStack.ToList())
+            foreach (var xp in pathStack.ToList())
             {
                 var index = xp.Item2;
                 var xn = XName.Get(xp.Item1);
-                var pf = this.LookupPrefix(xn.NamespaceName);
+                var pf = LookupPrefix(xn.NamespaceName);
                 var frag = pf + ":" + xn.LocalName;
                 if (index > 0)
                 {
@@ -217,93 +215,93 @@
         /// <inheritdoc />
         protected override void InitializeManagers(XPathNavigator navigator)
         {
-            if (this.NamespaceManager == null)
+            if (NamespaceManager == null)
             {
-                this.NamespaceManager = new NamespaceManager();
+                NamespaceManager = new NamespaceManager();
             }
 
-            if (this.XPathManager == null)
+            if (XPathManager == null)
             {
-                this.XPathManager = new LinqXPathManager(this.NamespaceManager);
+                XPathManager = new LinqXPathManager(NamespaceManager);
             }
         }
 
         /// <inheritdoc />
         public override void Push(string xpath, string xmlNamespace = null, string prefix = "", int index = -1)
         {
-            this.PushNamespace(xmlNamespace, prefix);
+            PushNamespace(xmlNamespace, prefix);
 
-            xpath = this.QualifyXPath(xpath, prefix, xmlNamespace, index);
+            xpath = QualifyXPath(xpath, prefix, xmlNamespace, index);
 
-            this.pathStack.Push(Tuple.Create(xpath, index));
+            pathStack.Push(Tuple.Create(xpath, index));
 
             XElement q;
             List<XElement> nodes = null;
-            if (this.elementStack.Count == 0)
+            if (elementStack.Count == 0)
             {
-                q = (from x in this.RootElement.Elements(xpath) select x).FirstOrDefault();
+                q = (from x in RootElement.Elements(xpath) select x).FirstOrDefault();
             }
-            else if (this.CurrentElement == null)
+            else if (CurrentElement == null)
             {
                 q = null;
             }
             else if (index == -1)
             {
-                q = (from x in this.CurrentElement.Elements(xpath) select x).FirstOrDefault();
+                q = (from x in CurrentElement.Elements(xpath) select x).FirstOrDefault();
             }
             else
             {
                 // Get the collection and work out which one we want.
-                nodes = this.XElements(xpath);
+                nodes = XElements(xpath);
                 q = index > nodes.Count ? null : nodes[index - 1];
             }
 
-            this.elementStack.Push(this.CurrentElement);
+            elementStack.Push(CurrentElement);
 
-            this.CurrentElement = q;
-            this.CurrentNodes = nodes;
+            CurrentElement = q;
+            CurrentNodes = nodes;
         }
 
         /// <inheritdoc />
         public override void Pop()
         {
-            this.PopNamespace();
+            PopNamespace();
 
-            this.pathStack.Pop();
-            this.CurrentElement = this.elementStack.Pop();
-            this.CurrentNodes = this.nodesStack[this.elementStack.Count];
+            pathStack.Pop();
+            CurrentElement = elementStack.Pop();
+            CurrentNodes = nodesStack[elementStack.Count];
 
             // Wipe down children's node collection
-            this.nodesStack[this.elementStack.Count + 1] = null;
+            nodesStack[elementStack.Count + 1] = null;
         }
 
         /// <inheritdoc />
         protected override string QualifyXPath(string xpath, string prefix, string uri = null, int index = -1, bool isAttribute = false)
         {
             // Determine namespace if not provided.
-            var ns = uri ?? this.CurrentNamespace;
+            var ns = uri ?? CurrentNamespace;
             if (isAttribute && string.IsNullOrEmpty(prefix))
             {
                 // Don't qualify the default namespace for attributes
                 ns = string.Empty;
             }
 
-            return this.XPathManager.QualifyXPath(xpath, prefix, ns, index, isAttribute);
+            return XPathManager.QualifyXPath(xpath, prefix, ns, index, isAttribute);
         }
 
         private List<XElement> XElements(string xpath)
         {
             List<XElement> nodes;
-            var ns = this.nodesStack[this.elementStack.Count];
+            var ns = nodesStack[elementStack.Count];
 
             // Need to query
             if (ns == null)
             {
-                nodes = (from x in this.CurrentElement.Elements(xpath) select x).ToList();
+                nodes = (from x in CurrentElement.Elements(xpath) select x).ToList();
 
                 // Locally cache nodes until the next pop^2, i.e. acquire on Jim[1] and don't 
                 // remove until pop Jim's parent.
-                this.nodesStack[this.elementStack.Count] = nodes;
+                nodesStack[elementStack.Count] = nodes;
             }
             else
             {
@@ -319,7 +317,7 @@
             string prefix = "",
             T defaultValue = default(T))
         {
-            var q = this.ToXAttribute(xpath, prefix);
+            var q = ToXAttribute(xpath, prefix);
 
             return q == null ? defaultValue : valueSelector(q);
         }
@@ -330,35 +328,35 @@
             string prefix = "",
             T defaultValue = default(T))
         {
-            var q = this.ToXElement(xpath, prefix);
+            var q = ToXElement(xpath, prefix);
             return q == null || q.IsEmpty ? defaultValue : valueSelector(q);
         }
 
         private XAttribute ToXAttribute(string xpath, string prefix = "")
         {
-            xpath = this.QualifyXPath(xpath, prefix, isAttribute: true);
+            xpath = QualifyXPath(xpath, prefix, isAttribute: true);
 
-            var target = this.CurrentElement != null
-                             ? (from x in this.CurrentElement.Attributes(xpath) select x).FirstOrDefault()
+            var target = CurrentElement != null
+                             ? (from x in CurrentElement.Attributes(xpath) select x).FirstOrDefault()
                              : null;
             return target;
         }
 
         private XElement ToXElement(string xpath, string prefix = "", int index = -1)
         {
-            if (string.IsNullOrEmpty(xpath) || this.CurrentElement == null)
+            if (string.IsNullOrEmpty(xpath) || CurrentElement == null)
             {
-                return this.CurrentElement;
+                return CurrentElement;
             }
 
-            xpath = this.QualifyXPath(xpath, prefix);
+            xpath = QualifyXPath(xpath, prefix);
 
             if (index == -1)
             {
-                return this.CurrentElement.Elements(xpath).FirstOrDefault();
+                return CurrentElement.Elements(xpath).FirstOrDefault();
             }
 
-            var nodes = this.CurrentElement.Elements(xpath).ToList();
+            var nodes = CurrentElement.Elements(xpath).ToList();
             return nodes.Count >= index ? nodes[index - 1] : null;
         }
     }

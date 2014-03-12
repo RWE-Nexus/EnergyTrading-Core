@@ -12,8 +12,8 @@
         public ChildRuleChecker(IRule<TChild> ruleToCheck, Func<TParent, TChild> accessor, string messagePrefix = "")
         {
             this.accessor = accessor;
-            this.rule = ruleToCheck;
-            this.prefix = messagePrefix;
+            rule = ruleToCheck;
+            prefix = messagePrefix;
         }
 
         /// <inheritdoc />
@@ -24,11 +24,11 @@
                 Message = (prefix ?? string.Empty) + " Parent is null, so child item rule cannot be valid";
                 return false;
             }
-            var child = this.accessor.Invoke(entity);
-            var valid = this.rule.IsValid(child);
+            var child = accessor.Invoke(entity);
+            var valid = rule.IsValid(child);
             if (!valid)
             {
-                this.Message = ((this.prefix ?? string.Empty) + " " + this.rule.Message).TrimStart();
+                Message = ((prefix ?? string.Empty) + " " + rule.Message).TrimStart();
             }
 
             return valid;

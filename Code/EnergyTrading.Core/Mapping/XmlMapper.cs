@@ -133,17 +133,29 @@
         }
 
         /// <summary>
-        /// Emit a <see cref="System.Xml.Linq.XElement" /> if it has contents
+        /// Emit a <see cref="System.Xml.Linq.XElement" /> if it has contents.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="elements"></param>
-        /// <param name="xmlNamespace"></param>
-        /// <param name="outputDefault"></param>
-        /// <returns></returns>
+        /// <param name="name">Name to use</param>
+        /// <param name="elements">Elements to use</param>
+        /// <param name="xmlNamespace">Namespace to use</param>
+        /// <param name="outputDefault">Whether to output the XElement if the value is the default value of the type.</param>
+        /// <returns>A new XElement or null depending on value/outputDefault.</returns>
         protected XElement OptionalXElement(string name, XElement[] elements, string xmlNamespace = "", bool outputDefault = false)
         {
-            var values = elements.Where(v => v != null).ToList();
+            return OptionalXElement(name, elements.ToList(), xmlNamespace, outputDefault);
+        }
 
+        /// <summary>
+        /// Emit a <see cref="System.Xml.Linq.XElement" /> if it has contents.
+        /// </summary>
+        /// <param name="name">Name to use</param>
+        /// <param name="elements">Elements to use</param>
+        /// <param name="xmlNamespace">Namespace to use</param>
+        /// <param name="outputDefault">Whether to output the XElement if the value is the default value of the type.</param>
+        /// <returns>A new XElement or null depending on value/outputDefault.</returns>
+        protected XElement OptionalXElement(string name, IList<XElement> elements, string xmlNamespace = "", bool outputDefault = false)
+        {
+            var values = elements.Where(v => v != null).ToList();
             var content = values.Count == 0 ? null : values;
 
             return this.XElement(name, content, xmlNamespace, outputDefault);

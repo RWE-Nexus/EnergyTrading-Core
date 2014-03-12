@@ -14,13 +14,13 @@
         public CachingXmlMapperFactory(IXmlMapperFactory factory)
         {
             this.factory = factory;
-            this.mappers = new ConcurrentDictionary<string, object>();
+            mappers = new ConcurrentDictionary<string, object>();
         }
 
         /// <contentfrom cref="IXmlMapperFactory.Mapper{T, U}" />
         public IXmlMapper<TSource, TDestination> Mapper<TSource, TDestination>(string name = null)
         {
-            return (IXmlMapper<TSource, TDestination>)this.Mapper(typeof(TSource), typeof(TDestination), name);
+            return (IXmlMapper<TSource, TDestination>)Mapper(typeof(TSource), typeof(TDestination), name);
         }
 
         /// <contentfrom cref="IXmlMapperFactory.Mapper" />
@@ -28,7 +28,7 @@
         {
             var key = Key(source, destination, name);
 
-            return this.mappers.GetOrAdd(key, s => this.factory.Mapper(source, destination, name));
+            return mappers.GetOrAdd(key, s => factory.Mapper(source, destination, name));
         }
 
         /// <contentfrom cref="IXmlMapperFactory.Register{T, U}" />
@@ -38,7 +38,7 @@
 
             var key = Key(typeof(TSource), typeof(TDestination), name);
 
-            this.mappers[key] = mapper;
+            mappers[key] = mapper;
         }
 
         private static string Key(Type source, Type destination, string name = null)

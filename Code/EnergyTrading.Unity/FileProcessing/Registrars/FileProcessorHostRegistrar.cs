@@ -6,12 +6,9 @@
 
     using EnergyTrading.FileProcessing;
     using EnergyTrading.FileProcessing.Configuration;
+    using EnergyTrading.Container.Unity;
 
     using Microsoft.Practices.Unity;
-
-    using EnergyTrading.Container.Unity;
-    using EnergyTrading.FileProcessing;
-    using EnergyTrading.FileProcessing.Configuration;
 
     /// <summary>
     /// Registers the file processor host and associated file processors
@@ -20,7 +17,7 @@
     {
         public FileProcessorHostRegistrar()
         {
-            this.SectionName = "fileProcessorHost";
+            SectionName = "fileProcessorHost";
         }
 
         public string SectionName { get; set; }
@@ -28,10 +25,10 @@
         public void Register(IUnityContainer container)
         {
             // Load configuration section
-            var section = ConfigurationManager.GetSection(this.SectionName) as FileProcessorHostSection;
+            var section = ConfigurationManager.GetSection(SectionName) as FileProcessorHostSection;
             if (section == null)
             {
-                throw new NotSupportedException(string.Format("Must define fileProcessorHost section named '{0}'", this.SectionName));
+                throw new NotSupportedException(string.Format("Must define fileProcessorHost section named '{0}'", SectionName));
             }
 
             // Register the processors

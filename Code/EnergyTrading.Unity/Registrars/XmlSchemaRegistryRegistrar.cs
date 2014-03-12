@@ -1,10 +1,10 @@
 ﻿namespace EnergyTrading.Registrars
 {
+    using EnergyTrading.Container.Unity;
     using EnergyTrading.Mapping;
+    using EnergyTrading.Xml;
 
     using Microsoft.Practices.Unity;
-
-    using EnergyTrading.Container.Unity;
 
     /// <summary>
     /// Register the implementation for <see cref="IXmlSchemaRegistry"/>.

@@ -8,8 +8,6 @@
 
     using Microsoft.Practices.Unity;
 
-    using EnergyTrading.Registrars;
-
     public class AnimalMappingEngineRegistrar : VersionedMappingEngineRegistrar
     {
         protected override Type MapperType

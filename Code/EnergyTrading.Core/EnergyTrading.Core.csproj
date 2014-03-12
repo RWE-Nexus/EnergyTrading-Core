@@ -157,7 +157,6 @@
     <Compile Include="Mapping\Context.cs" />
     <Compile Include="Mapping\IXmlMapperFactory.cs" />
     <Compile Include="Mapping\IXmlSchemaRegistry.cs" />
-    <Compile Include="Mapping\IXmlSchemaValidator.cs" />
     <Compile Include="Mapping\LinqExtensions.cs" />
     <Compile Include="Mapping\LocatorXmlMapperFactory.cs" />
     <Compile Include="Mapping\MappingExtensions.cs" />
@@ -167,22 +166,31 @@
     <Compile Include="Mapping\XmlEngineResolutionErrorCode.cs" />
     <Compile Include="Mapping\XmlEngineResolutionException.cs" />
     <Compile Include="Mapping\XmlSchemaRegistry.cs" />
-    <Compile Include="Mapping\XmlSchemaValidator.cs" />
     <Compile Include="Math\DoubleExtensions.cs" />
     <Compile Include="Math\FloatExtensions.cs" />
     <Compile Include="ProducerConsumer\Disposable.cs" />
     <Compile Include="ProducerConsumer\ProducerConsumerQueueBase.cs" />
     <Compile Include="ProducerConsumer\WorkItem.cs" />
     <Compile Include="ServiceModel\Channels\ChannelsExtensions.cs" />
+    <Compile Include="ServiceModel\Channels\ClientMessageLogger.cs" />
+    <Compile Include="ServiceModel\Channels\ClientMessageLoggerBehavior.cs" />
     <Compile Include="ServiceModel\Channels\ConfigurationStrings.cs" />
     <Compile Include="ServiceModel\Channels\CustomTextMessageEncoder.cs" />
     <Compile Include="ServiceModel\Channels\CustomTextMessageEncoderFactory.cs" />
     <Compile Include="ServiceModel\Channels\CustomTextMessageEncodingBindingElement.cs" />
     <Compile Include="ServiceModel\Channels\SoapBodyXsiMessageTransformer.cs" />
+    <Compile Include="ServiceModel\Configuration\ClientMessageLoggerBehaviorElement.cs" />
     <Compile Include="ServiceModel\Configuration\CustomTextMessageEncodingEncodingElement.cs" />
     <Compile Include="ServiceModel\Channels\IMessageTransformer.cs" />
     <Compile Include="ServiceModel\Channels\MessageVersionConverter.cs" />
     <Compile Include="ServiceModel\Channels\RemoveMustUnderstandMessageTransformer.cs" />
+    <Compile Include="ServiceModel\IMessageLogger.cs" />
+    <Compile Include="ServiceModel\Loggers\ConsoleMessageLogger.cs" />
+    <Compile Include="ServiceModel\Loggers\DebugMessageLogger.cs" />
+    <Compile Include="ServiceModel\Loggers\FileMessageLogger.cs" />
+    <Compile Include="ServiceModel\Loggers\LoggingMessageLogger.cs" />
+    <Compile Include="ServiceModel\Loggers\NullMessageLogger.cs" />
+    <Compile Include="ServiceModel\MessageLoggerFactory.cs" />
     <Compile Include="Services\IRunningState.cs" />
     <Compile Include="Services\RunningState.cs" />
     <Compile Include="Threading\TaskExtensions.cs" />
@@ -203,6 +211,8 @@
     <Compile Include="Wrappers\IDateTime.cs" />
     <Compile Include="Wrappers\IDirectory.cs" />
     <Compile Include="Wrappers\IFile.cs" />
+    <Compile Include="Xml\IXmlSchemaValidator.cs" />
+    <Compile Include="Xml\IXPathValidator.cs" />
     <Compile Include="Xml\Linq\XmlLinqExtensions.cs" />
     <Compile Include="Xml\Serialization\XmlSerializerExtensions.cs" />
     <Compile Include="Logging\ExceptionExtensionsForLogging.cs" />
@@ -317,6 +327,10 @@
     <Compile Include="Xml\Serialization\CustomSerializer.cs" />
     <Compile Include="Xml\SimpleSchemaValidator.cs" />
     <Compile Include="Xml\XmlExtensions.cs" />
+    <Compile Include="Xml\XmlSchemaValidator.cs" />
+    <Compile Include="Xml\XmlSchemaValidatorExtensions.cs" />
+    <Compile Include="Xml\XPathValidator.cs" />
+    <Compile Include="Xml\XPathValidatorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EnergyTrading.Contracts\EnergyTrading.Contracts.csproj">

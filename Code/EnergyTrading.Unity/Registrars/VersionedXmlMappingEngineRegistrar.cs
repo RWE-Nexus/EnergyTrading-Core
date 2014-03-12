@@ -3,21 +3,22 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Xml.Schema;
 
+    using EnergyTrading.Logging;
     using EnergyTrading.Mapping;
-    using EnergyTrading.Registrars;
 
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
-
-    using EnergyTrading.Container.Unity;
 
     /// <summary>
     /// Base implementation of a mapper registrar for creating versioned <see cref="IXmlMappingEngine" />s.
     /// </summary>
     public abstract class VersionedXmlMappingEngineRegistrar : MappingEngineRegistrar<IXmlMappingEngine>
     {
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Gets or set the schema name for the versions.
         /// </summary>
@@ -49,6 +50,19 @@
             return engine;
         }
 
+        /// <summary>
+        /// Gets the names of the schemas that are in the schema version.
+        /// </summary>
+        /// <param name="schemaVersion">Schema version to use</param>
+        /// <returns>Enumeration of resource names with the specified schema version</returns>
+        /// <remarks>We added a trailing '.' to ensure an exact match otherwise {Schema}.V2 would match against {Schema}.V2_2 schemas</remarks>
+        protected virtual IEnumerable<string> GetSchemaNames(string schemaVersion)
+        {
+            return SchemaResourceAssembly.GetManifestResourceNames()
+                                         .Where(resourceName => resourceName.Contains(schemaVersion + ".")
+                                                             && resourceName.EndsWith(".xsd"));
+        }
+
         /// <inheritdoc />
         protected override IUnityContainer RegisterVersionedEngine(IUnityContainer container, Version version, IEnumerable<MapperArea> areas)
         {
@@ -71,9 +85,9 @@
             var found = false;
             var schemaVersion = ToVersionString(version);
 
-            // NOTE: Need the trailing dot so we only match exact version
-            foreach (var schemaResource in GetSchemaNames(schemaVersion + "."))
+            foreach (var schemaResource in GetSchemaNames(schemaVersion))
             {
+                Logger.Debug(schemaVersion + ": Loading " + schemaResource);
                 using (var stream = SchemaResourceAssembly.GetManifestResourceStream(schemaResource))
                 {
                     var schema = XmlSchema.Read(stream, (sender, args) => { });
@@ -90,10 +104,17 @@
             }
 
             // Compile it first, checks we have a coherent set of schemas
-            schemaSet.Compile();
+            try
+            {
+                schemaSet.Compile();
 
-            // And register it
-            container.RegisterInstance(schemaVersion, schemaSet);
+                // And register it
+                container.RegisterInstance(schemaVersion, schemaSet);
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn(schemaVersion + ": Schema error", ex);
+            }
         }
 
         /// <inheritdoc />
@@ -108,24 +129,6 @@
             }
         }
 
-        /// <inheritdoc />
-        protected override string ToVersionString(Version version)
-        {
-            return version.ToAsmVersion(SchemaName);
-        }
-
-        /// <summary>
-        /// Gets the names of the schemas that are in the schema version.
-        /// </summary>
-        /// <param name="schemaVersion">Schema version to use</param>
-        /// <returns>Enumeration of resource names with the specified schema version</returns>
-        /// <remarks>We added a trailing '.' to ensure an exact match otherwise {Schema}.V2 would match against {Schema}.V2_2 schemas</remarks>
-        protected IEnumerable<string> GetSchemaNames(string schemaVersion)
-        {
-            return SchemaResourceAssembly.GetManifestResourceNames()
-                  .Where(resourceName => resourceName.Contains(schemaVersion + ".") && resourceName.EndsWith(".xsd"));
-        }
-
         private static IXmlSchemaRegistry SchemaRegistry(IUnityContainer container)
         {
             try
@@ -134,8 +137,14 @@
             }
             catch (Exception)
             {
-                throw new MappingException("Should have registered IXmlSchemaRegistry");
+                throw new MappingException("Must register IXmlSchemaRegistry");
             }
+        }
+
+        /// <inheritdoc />
+        protected override string ToVersionString(Version version)
+        {
+            return version.ToAsmVersion(SchemaName);
         }
     }
 }

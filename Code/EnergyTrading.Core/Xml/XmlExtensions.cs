@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Extensions to System.Xml
+    /// Extensions for XML.
     /// </summary>
     public static class XmlExtensions
     {
@@ -41,5 +41,57 @@
         {
             return value.Millisecond != 0 ? UtcDateTimeMillisecondFormat : UtcDateTimeSecondFormat;
         }
+
+        /// <summary>
+        /// Qualify elements of an XPath with a prefix.
+        /// </summary>
+        /// <param name="xpath">XPath to use</param>
+        /// <param name="prefix">Prefix to use</param>
+        /// <param name="qualifyAttributes">Whether to qualify attributes</param>
+        /// <returns>Returns the qualified string</returns>
+        public static string QualifyXPath(this string xpath, string prefix, bool qualifyAttributes = false)
+        {
+            if (string.IsNullOrEmpty(prefix))
+            {
+                return xpath;
+            }
+
+            var sp = xpath.Split('/');
+            var nsxpath = string.Empty;
+            foreach (var item in sp)
+            {
+                if (string.IsNullOrEmpty(item))
+                {
+                    nsxpath += "/";
+                }
+                else if (item.Contains(":"))
+                {
+                    nsxpath += item + "/";
+                }
+                else if (item.StartsWith("@"))
+                {
+                    nsxpath += qualifyAttributes ? "@" + prefix + ":" + item.Substring(1) : item;
+                }
+                else
+                {
+                    nsxpath += prefix + ":" + item + "/";
+                }
+            }
+
+            while (nsxpath.EndsWith("/"))
+            {
+                nsxpath = nsxpath.Substring(0, nsxpath.Length - 1);
+            }
+
+            // Axis fixup
+            nsxpath = nsxpath.Replace("preceding-sibling::", "preceding-sibling::" + prefix + ":");
+
+            if (string.IsNullOrEmpty(nsxpath))
+            {
+                nsxpath = "/";
+            }
+
+            return nsxpath;
+        }        
     }
 }

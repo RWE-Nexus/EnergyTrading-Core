@@ -18,7 +18,7 @@
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
         {
-            this.formatter.WriteTo(writer);
+            formatter.WriteTo(writer);
         }
     }
 }

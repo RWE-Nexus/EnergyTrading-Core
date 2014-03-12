@@ -4,7 +4,7 @@
     using System.Xml.Linq;
 
     /// <summary>
-    /// Removes the xsi declaration from a soap:Envelope
+    /// Removes the xsi declaration from a SOAP envelope.
     /// </summary>
     public class SoapBodyXsiMessageTransformer : IMessageTransformer
     {

@@ -4,7 +4,7 @@
     using System.Xml.Linq;
 
     /// <summary>
-    /// Remove the SOAP mustUnderstand attribute from the security header.
+    /// Remove the SOAP mustUnderstand attribute from the SOAP security header.
     /// </summary>
     public class RemoveMustUnderstandMessageTransformer : IMessageTransformer
     {

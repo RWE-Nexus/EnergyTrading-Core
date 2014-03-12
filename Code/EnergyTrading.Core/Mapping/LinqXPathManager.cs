@@ -28,16 +28,16 @@
         /// <param name="memoize">Whether to memoize (cache) the results.</param>
         public LinqXPathManager(INamespaceManager namespaceManager, bool memoize)
         {
-            this.NamespaceManager = namespaceManager;
+            NamespaceManager = namespaceManager;
 
-            Func<string, string, string> f = this.DetermineNamespace;
-            this.calculateNamespace = memoize ? f.Memoize() : f;
+            Func<string, string, string> f = DetermineNamespace;
+            calculateNamespace = memoize ? f.Memoize() : f;
 
-            Func<string, string, string> g = this.DetermineXPath;
-            this.calculateXPath = memoize ? g.Memoize() : g;
+            Func<string, string, string> g = DetermineXPath;
+            calculateXPath = memoize ? g.Memoize() : g;
 
             Func<string, string> h = QualifyNamespace;
-            this.nsQualFunc = memoize ? h.Memoize() : h;
+            nsQualFunc = memoize ? h.Memoize() : h;
         }
 
         private INamespaceManager NamespaceManager { get; set; }
@@ -45,8 +45,8 @@
         /// <copydocfrom cref="IXPathManager.QualifyXPath" />
         public string QualifyXPath(string xpath, string prefix, string uri = null, int index = -1, bool isAttribute = false)
         {
-            var ns = this.calculateNamespace(prefix, uri);
-            var qxp = this.calculateXPath(ns, xpath);
+            var ns = calculateNamespace(prefix, uri);
+            var qxp = calculateXPath(ns, xpath);
 
             return qxp;
         }
@@ -61,7 +61,7 @@
             var ns = string.Empty;
             if (!string.IsNullOrEmpty(prefix))
             {
-                ns = this.NamespaceManager.LookupNamespace(prefix, true);
+                ns = NamespaceManager.LookupNamespace(prefix, true);
                 if (ns == null)
                 {
                     throw new MappingException("No namespace for prefix: " + prefix);
@@ -69,7 +69,7 @@
             }
             else if (!string.IsNullOrEmpty(uri))
             {
-                ns = this.nsQualFunc(uri);
+                ns = nsQualFunc(uri);
             }
             return ns;
         }
