@@ -16,11 +16,17 @@
 
         protected string Xml { get; set; }
 
+        [TestFixtureSetUp]
+        public void TestFixtureSetup()
+        {
+            AssemblyLoggerProvider.InitializeLogger();
+        }
+
         protected override void OnSetup()
         {
             warnCount = 0;
             AssemblyLoggerProvider.MockLogger.Setup(x => x.Warn(It.IsAny<string>())).Callback(() => ++warnCount);
-            this.Xml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
+            Xml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob>b</Bob>
                                      </Fred>";
@@ -34,7 +40,7 @@
         [Test]
         public void PushSingleNameSpaceReportsCorrectly()
         {
-            var processor = this.XPathProcessor(this.Xml);
+            var processor = XPathProcessor(Xml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -50,7 +56,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>a</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://test.com", "sample");
@@ -63,7 +69,7 @@
         [Test]
         public void PushPopGetsCorrectNamespaceAndPath()
         {
-            var processor = this.XPathProcessor(this.Xml);
+            var processor = XPathProcessor(Xml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -86,7 +92,7 @@
                                             <Dave>30</Dave>
                                         </Jim>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -122,7 +128,7 @@
                                             </Dave>
                                         </Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -159,7 +165,7 @@
                                         <Bob></Bob>
                                         <Dave />
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -182,7 +188,7 @@
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob></Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("testabc", "http://testabc.com");
 
@@ -215,7 +221,7 @@
                                             </Dave>
                                         </Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -235,7 +241,7 @@
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob></Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -253,7 +259,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Dave />
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -270,7 +276,7 @@
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob></Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("testabc", "http://testabc.com");
 
@@ -287,7 +293,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("testabc", "http://testabc.com");
 
@@ -303,7 +309,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Bob />
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("testabc", "http://testabc.com");
 
@@ -319,7 +325,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>a</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -333,7 +339,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>a</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -346,7 +352,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='a'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -359,7 +365,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:test='http://sample.com/test' test:Bob='a'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://sample.com/test");
@@ -374,7 +380,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>10</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -387,7 +393,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='10'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -408,7 +414,7 @@
                                             </Jim>
                                         </Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -430,7 +436,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>10000</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -443,7 +449,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='10000'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -457,7 +463,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>CIF</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -470,7 +476,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='CIF'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -484,7 +490,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>true</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -497,7 +503,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='true'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -512,7 +518,7 @@
                                         <Bob>2,000</Bob>
                                      </Fred>"; 
             var startwarncount = warnCount;
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -528,7 +534,7 @@
                                         <Bob>2.0E4</Bob>
                                      </Fred>"; 
             var startwarncount = warnCount;
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -544,7 +550,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.00,0</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -557,7 +563,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.0E4</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -571,7 +577,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>22700.33</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -584,7 +590,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='22700.33'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -600,7 +606,7 @@
                                      </Fred>";
             var startwarncount = warnCount;
 
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -616,7 +622,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.00,0</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -629,7 +635,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>22700.33</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -642,7 +648,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='22700.33'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -656,7 +662,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.0E3</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             var startwarncount = warnCount;
             processor.RegisterNamespace("sample", "http://sample.com");
@@ -674,7 +680,7 @@
                                         <Bob>2,000</Bob>
                                      </Fred>";
 
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
             var candidate = processor.ToDouble("Bob");
@@ -689,7 +695,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.00,0</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -702,7 +708,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>22700.33</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -715,7 +721,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='22700.33'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -729,7 +735,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.0E3</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             var startwarncount = warnCount;
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -744,7 +750,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2012-07-15T05:12:34Z</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -757,7 +763,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='2012-07-15T05:12:34Z'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -771,7 +777,7 @@
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2012-07-15T05:12:34Z</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -784,7 +790,7 @@
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='2012-07-15T05:12:34Z'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
