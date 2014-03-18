@@ -49,16 +49,6 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Atom\Link.cs" />
-    <Compile Include="Legacy\Atom\Link.cs" />
-    <Compile Include="Legacy\Atom\LinkExtensions.cs" />
-    <Compile Include="Legacy\Search\Criteria.cs" />
-    <Compile Include="Legacy\Search\Search.cs" />
-    <Compile Include="Legacy\Search\SearchCombinator.cs" />
-    <Compile Include="Legacy\Search\SearchCondition.cs" />
-    <Compile Include="Legacy\Search\SearchCriteria.cs" />
-    <Compile Include="Legacy\Search\SearchExtensions.cs" />
-    <Compile Include="Legacy\Search\SearchFields.cs" />
-    <Compile Include="Legacy\Search\SearchOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\Criteria.cs" />
     <Compile Include="Search\Search.cs" />
