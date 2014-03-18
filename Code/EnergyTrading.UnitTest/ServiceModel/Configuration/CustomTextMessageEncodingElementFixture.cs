@@ -1,8 +1,8 @@
 ﻿namespace EnergyTrading.UnitTest.ServiceModel.Configuration
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class CustomTextMessageEncodingElementFixture
     {
         public void TestSomething()

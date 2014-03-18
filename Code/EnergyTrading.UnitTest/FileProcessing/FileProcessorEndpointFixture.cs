@@ -4,9 +4,9 @@
 
     using EnergyTrading.FileProcessing;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class FileProcessorEndpointFixture
     {
         public void TestValidate(string name, string processConfigurator, string inProgressPath, bool expectException)
@@ -31,7 +31,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void PerformValidateTests()
         {
             this.TestValidate(null, null, null, true);

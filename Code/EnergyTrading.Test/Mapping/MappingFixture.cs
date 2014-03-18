@@ -7,7 +7,7 @@
     using EnergyTrading.Mapping;
 
     using Microsoft.Practices.ServiceLocation;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
@@ -50,7 +50,7 @@
         /// </summary>
         protected XPathProcessor XPathProcessor { get; set; }
 
-        [TestInitialize]
+        [SetUp]
         public virtual void Initialize()
         {
             ExpectedXml = CreateExpectedXml();

@@ -4,14 +4,14 @@
 
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class CompatibleXmlMappingEngineFactoryFixture
     {
-        [TestMethod]
+        [Test]
         public void TryFindReturnsEngineIfPresent()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -27,7 +27,7 @@
             Assert.AreEqual(engine.Object, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void TryFindReturnsNullIfNotPresent()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -39,7 +39,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FindThrowsUnexpectedSchema()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -58,7 +58,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FindThrowsVersionTooHigh()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -83,7 +83,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FindThrowsVersionTooLow()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -108,7 +108,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FindThrowsIfAsmStringInvalid()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -129,7 +129,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FindReturnsExactEngineIfPresent()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -144,7 +144,7 @@
             Assert.AreEqual(engine.Object, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FindHandlesNonSchemaVersioning()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -159,7 +159,7 @@
             Assert.AreEqual(engine.Object, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FindReturnsLowerMinorVersion()
         {
             var f = new Mock<IXmlMappingEngineFactory>();
@@ -174,7 +174,7 @@
             Assert.AreEqual(engine.Object, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FindReturnsHighestLowerMinorVersion()
         {
             var f = new Mock<IXmlMappingEngineFactory>();

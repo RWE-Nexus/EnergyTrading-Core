@@ -1,11 +1,11 @@
 namespace EnergyTrading.Test
 {
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public abstract class SpecBaseAutoMocking<T>
     {
         protected T Sut { get; set; }
@@ -32,7 +32,7 @@ namespace EnergyTrading.Test
             return this.container.RegisterMock<TInterface>();
         }
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             this.container = new UnityContainer().AddNewExtension<AutoMockingContainerExtension>();

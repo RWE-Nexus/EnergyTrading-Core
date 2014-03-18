@@ -4,22 +4,22 @@
 
     using EnergyTrading.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class MemoizationExtensionsFixture
     {
         private int doubleCounter;
         private int tripleCounter;
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             this.doubleCounter = 0;
             this.tripleCounter = 0;
         }
 
-        [TestMethod]
+        [Test]
         public void MemoizeSingleArgFunction()
         {
             Func<int, int> d = this.Double;
@@ -32,7 +32,7 @@
             Assert.AreEqual(1, this.doubleCounter, "Double counter incorrect");
         }
 
-        [TestMethod]
+        [Test]
         public void MemoizeDifferentFunctions()
         {
             Func<int, int> d = this.Double;
@@ -54,7 +54,7 @@
             Assert.AreEqual(1, this.tripleCounter, "Triple counter incorrect");
         }
 
-        [TestMethod]
+        [Test]
         public void MemoizeSameFunction()
         {
             Func<int, int> d = this.Double;

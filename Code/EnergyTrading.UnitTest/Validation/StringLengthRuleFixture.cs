@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class StringLengthRuleFixture
     {
-        [TestMethod]
+        [Test]
         public void ShortStringReturnsTrue()
         {
             var rule = new StringLengthRule(20);
@@ -15,7 +15,7 @@
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void LongStringReturnsFalse()
         {
             var rule = new StringLengthRule(2);

@@ -2,14 +2,14 @@
 {
     using EnergyTrading.FileProcessing;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class FileProcessorHostFixture
     {
-        [TestMethod]
+        [Test]
         public void StopInvokesProcessorsStop()
         {
             var processor = new Mock<IFileProcessor>();
@@ -20,7 +20,7 @@
             processor.Verify(x => x.Stop());
         }
 
-        [TestMethod]
+        [Test]
         public void StartInvokesProcessorsStopAndStart()
         {
             var processor = new Mock<IFileProcessor>();

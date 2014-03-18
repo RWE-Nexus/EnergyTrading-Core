@@ -2,15 +2,15 @@
 {
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
     using EnergyTrading.Registrars;
 
-    [TestClass]
+    [TestFixture]
     public class XmlSchemaRegistryRegistrarFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void CanResolve()
         {
             new XmlSchemaRegistryRegistrar().Register(this.Container);

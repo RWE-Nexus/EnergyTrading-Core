@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Math;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DoubleExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void UlpNan()
         {
             var candidate = double.NaN.Ulp();
@@ -15,7 +15,7 @@
             Assert.IsTrue(double.IsNaN(candidate));
         }
 
-        [TestMethod]
+        [Test]
         public void UlpPositiveInfinity()
         {
             var candidate = double.PositiveInfinity.Ulp();
@@ -23,7 +23,7 @@
             Assert.AreEqual(double.PositiveInfinity, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void UlpNegativeInfinity()
         {
             var candidate = double.NegativeInfinity.Ulp();
@@ -31,7 +31,7 @@
             Assert.AreEqual(double.PositiveInfinity, candidate);            
         }
 
-        [TestMethod]
+        [Test]
         public void UlpPositiveZero()
         {
             var value = 0d;
@@ -40,7 +40,7 @@
             Assert.AreEqual(double.MinValue, candidate);     
         }
 
-        [TestMethod]
+        [Test]
         public void UlpNegativeZero()
         {
             var value = -0d;

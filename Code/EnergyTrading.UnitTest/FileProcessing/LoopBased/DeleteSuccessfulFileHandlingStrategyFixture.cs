@@ -4,19 +4,19 @@ namespace EnergyTrading.UnitTest.FileProcessing.LoopBased
 
     using EnergyTrading.FileProcessing.FileHandling;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DeleteSuccessfulFileHandlingStrategyFixture
     {
-        [ClassInitialize]
+        [TestFixtureSetUp]
         public static void CreateTestDirectory(TestContext context)
         {
             RemoveDirectory();
             testDirectory = Directory.CreateDirectory(TestDirectoryName).FullName;
         }
 
-        [TestCleanup]
+        [TearDown]
         public void EmptyTestDirectory()
         {
             foreach (var filePath in Directory.GetFiles(testDirectory))
@@ -25,7 +25,7 @@ namespace EnergyTrading.UnitTest.FileProcessing.LoopBased
             }
         }
 
-        [ClassCleanup]
+        [TestFixtureTearDown]
         public static void RemoveDirectory()
         {
             if (Directory.Exists(testDirectory))
@@ -37,7 +37,7 @@ namespace EnergyTrading.UnitTest.FileProcessing.LoopBased
         private static string testDirectory;
         private const string TestDirectoryName = "Config";
 
-        [TestMethod]
+        [Test]
         public void HandleFileDoesNotExistDoNothing()
         {
             var handler = new DeleteSuccessfulFileHandlingStrategy();
@@ -48,7 +48,7 @@ namespace EnergyTrading.UnitTest.FileProcessing.LoopBased
             Assert.IsTrue(true);
         }
 
-        [TestMethod]
+        [Test]
         public void HandleFileExistsDeleteFile()
         {
             var file = new FileInfo(Path.Combine(testDirectory, "test.file"));

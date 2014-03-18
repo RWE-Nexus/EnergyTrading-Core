@@ -4,12 +4,12 @@
 
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class IsDefaultRuleFixture
     {
-        [TestMethod]
+        [Test]
         public void IsDefaultValueType()
         {
             var r = new IsDefaultRule<DateTime>();
@@ -17,7 +17,7 @@
             Assert.IsTrue(r.IsValid(DateTime.MinValue));
         }
 
-        [TestMethod]
+        [Test]
         public void IsNotDefaultValueType()
         {
             var r = new IsDefaultRule<DateTime>();
@@ -25,7 +25,7 @@
             Assert.IsFalse(r.IsValid(DateTime.Now));
         }
 
-        [TestMethod]
+        [Test]
         public void IsDefaultReferenceType()
         {
             var r = new IsDefaultRule<string>();
@@ -33,7 +33,7 @@
             Assert.IsTrue(r.IsValid(null));
         }
 
-        [TestMethod]
+        [Test]
         public void IsNotDefaultReferenceType()
         {
             var r = new IsDefaultRule<string>();

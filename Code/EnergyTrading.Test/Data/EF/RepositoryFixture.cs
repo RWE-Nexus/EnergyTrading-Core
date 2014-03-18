@@ -5,16 +5,16 @@
 
     using EnergyTrading.Data;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     [Ignore]
     public abstract class RepositoryFixture<T> : Fixture
         where T : class, IIdentifiable, new()
     {
         protected abstract IRepository Repository { get; set; }
 
-        [TestMethod]
+        [Test]
         public void Save()
         {
             var expected = this.Default();
@@ -34,7 +34,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RepositoryQuery()
         {
             var entities = from x in this.Repository.Queryable<T>() select x;
@@ -42,13 +42,13 @@
             var count = entities.Count();
         }
 
-        //[TestInitialize]
+        //[SetUp]
         protected override void OnSetup()
         {
             this.Zap();
         }
 
-        //[TestCleanup]
+        //[TearDown]
         protected override void OnTearDown()
         {
             this.Zap();

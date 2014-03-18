@@ -2,9 +2,9 @@
 {
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class EntityXmlMapperAllDetailsFixture : MappingFixture<Entity>
     {
         protected override string CreateExpectedXml()

@@ -4,12 +4,12 @@
 
     using EnergyTrading.Crypto;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class CryptoStringEtensionTests
     {
-        [TestMethod]
+        [Test]
         public void CanDecryptConnectionString()
         {
             var password = "Test";
@@ -19,7 +19,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void StringIsReversedProperly()
         {
             const string Start = "testdata";
@@ -27,7 +27,7 @@
             Assert.AreEqual(Start, end);
         }
 
-        [TestMethod]
+        [Test]
         public void SubsequentEncodingsAreDifferent()
         {
             const string Data = "testdata";
@@ -38,14 +38,14 @@
             Assert.AreEqual(Data, second.DecryptString());
         }
 
-        [TestMethod]
+        [Test]
         public void CanEncryptEmptyStrings()
         {
             var end = string.Empty.EncryptString().DecryptString();
             Assert.AreEqual(end, string.Empty);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CannotDecryptEmptyStrings()
         {

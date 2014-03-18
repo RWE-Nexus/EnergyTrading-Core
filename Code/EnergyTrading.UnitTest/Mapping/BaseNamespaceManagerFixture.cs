@@ -6,12 +6,12 @@
 
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class BaseNamespaceManagerFixture
     {
-        [TestMethod]
+        [Test]
         public void LookupPrefix()
         {
             var uri = "http://www.test.org";
@@ -23,7 +23,7 @@
             Assert.AreEqual("a", candidate, "Prefix differs");
         }
 
-        //[TestMethod]
+        //[Test]
         //public void RegisterInvalidPrefix()
         //{
         //    var uri = "http://www.test.org";
@@ -41,7 +41,7 @@
         //    }
         //}
 
-        [TestMethod]
+        [Test]
         public void LookupNamespace()
         {
             var uri = "http://www.test.org";
@@ -53,7 +53,7 @@
             Assert.AreEqual(uri, candidate, "Namespace differs");
         }
 
-        [TestMethod]
+        [Test]
         public void LookupNamespaceQualified()
         {
             var uri = "http://www.test.org";
@@ -65,7 +65,7 @@
             Assert.AreEqual("{" + uri + "}", candidate, "Namespace differs");
         }
 
-        [TestMethod]
+        [Test]
         public void IsPrefixDefined()
         {
             var uri = "http://www.test.org";
@@ -76,7 +76,7 @@
             Assert.IsFalse(manager.PrefixExists("b"), "Prefix b exists");
         }
 
-        [TestMethod]
+        [Test]
         public void IsNamespaceDefined()
         {
             var uri = "http://www.test.org";
@@ -87,7 +87,7 @@
             Assert.IsFalse(manager.PrefixExists(uri + "/a"), "Namespace test/a exists");
         }
 
-        [TestMethod]
+        [Test]
         public void Performance()
         {
             var manager = this.CreateManager();

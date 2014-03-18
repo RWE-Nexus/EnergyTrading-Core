@@ -6,18 +6,18 @@
 
     using Microsoft.Practices.EnterpriseLibrary.Logging;
     using Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Logging.EnterpriseLibrary;
 
-    [TestClass]
+    [TestFixture]
     public class CachedEmailTraceListenerFixture
     {
         // As we can't test the base class behavour, because it's part of EntLib Framework, 
         //So the way we test, is, if we pass address paratmete as string.Empty, then If any test case hit the base TradeData method, then it will 
         // always raise a first exception as "System.ArgumentException: The parameter 'address' cannot be an empty string", considered as Success
         //TODO: NOT great tests.. but something is better than nothing
-        [TestMethod]
+        [Test]
         public void ShouldReportFirstMessage()
         {
             var listener = new CachedEmailTraceListener(
@@ -49,7 +49,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldCacheTheMessagesBasedOnCacheInterval()
         {
             var listener = new CachedEmailTraceListener(
@@ -86,7 +86,7 @@
             listener.TraceData(null, string.Empty, TraceEventType.Error, 1, logEntry);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldSendEmailIfCacheIsExpiredAfterSpecifiedIntervel()
         {
             var listener = new CachedEmailTraceListener(

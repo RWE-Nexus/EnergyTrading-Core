@@ -5,9 +5,9 @@
     using EnergyTrading.Mapping;
     using EnergyTrading.UnitTest.Mapping.Examples;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class ListXmlMapperFixture : MappingFixture<Order>
     {
         protected override string CreateExpectedXml()

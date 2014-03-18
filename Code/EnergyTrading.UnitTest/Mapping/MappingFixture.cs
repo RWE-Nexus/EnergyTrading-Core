@@ -2,20 +2,20 @@
 {
     using EnergyTrading.Test;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using CheckerFactory = EnergyTrading.UnitTest.CheckerFactory;
 
     public abstract class MappingFixture<T> : EnergyTrading.Test.Mapping.MappingFixture<T>
         where T : class, new()
     {
-        [TestMethod]
+        [Test]
         public override void ShouldMapToDto()
         {
             base.ShouldMapToDto();
         }
 
-        [TestMethod]
+        [Test]
         public override void ShouldMapToXml()
         {
             base.ShouldMapToXml();

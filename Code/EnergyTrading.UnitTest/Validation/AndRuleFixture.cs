@@ -5,14 +5,14 @@
 
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class AndRuleFixture
     {
-        [TestMethod]
+        [Test]
         public void IsValidIfAllRulesAreValid()
         {
             var r1 = new Mock<IRule<int>>();
@@ -26,7 +26,7 @@
             r2.Verify(r => r.IsValid(It.IsAny<int>()), Times.Once());
         }
 
-        [TestMethod]
+        [Test]
         public void NotValidIfARuleFails()
         {
             var msg = "r2 message";

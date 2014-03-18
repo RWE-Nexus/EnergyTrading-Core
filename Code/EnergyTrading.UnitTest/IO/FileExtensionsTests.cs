@@ -4,39 +4,38 @@
 
     using EnergyTrading.IO;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     /// <summary>
     /// Summary description for FileExtensionsTests
     /// </summary>
-    [DeploymentItem("TestFiles\\EssentEndurTestFile.xml", "TestFiles")]
-    [TestClass]
+    [TestFixture]
     public class FileExtensionsTests
     {
         private const string TestFilePath = ".\\TestFiles\\EssentEndurTestFile.xml";
         private FileInfo fileInfo;
         private FileStream fileStream;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
-            this.fileInfo = new FileInfo(TestFilePath);
+            fileInfo = new FileInfo(TestFilePath);
         }
 
         /// <summary>
         /// This is a successful test case with a test file. This test might file if the test file is locked by any other process.
         /// </summary>
-        [TestMethod]
+        [Test]
         public void ReturnReaderOnSuccessfulRetryFileOpenTextIfLocked()
         {
-            this.fileInfo.RetryFileActionIfLocked(fi =>
+            fileInfo.RetryFileActionIfLocked(fi =>
             {
-                var reader = this.fileInfo.OpenText();
+                var reader = fileInfo.OpenText();
                 Assert.IsNotNull(reader);
             });
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(IOException))]
         public void RetryFileActionThrowIOExceptionWhenFileLocked()
         {
@@ -45,7 +44,7 @@
             fileInfoAnother.RetryFileActionIfLocked(fi => fileInfoAnother.OpenText());
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(FileNotFoundException))]
         public void RetryFileActionThrowFileNotFoundException()
         {
@@ -55,7 +54,7 @@
             fileInfo2.RetryFileActionIfLocked(fi =>{ var reader = fileInfo2.OpenText(); });
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(IOException))]
         public void RetryFileActionThrowIOException()
         {
@@ -65,7 +64,7 @@
             fileInfo2.RetryFileActionIfLocked(fi =>{ throw new IOException(); });
         }      
 
-        [TestCleanup]
+        [TearDown]
         public void TearDown()
         {
             this.fileInfo = null;

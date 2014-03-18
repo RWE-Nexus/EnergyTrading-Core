@@ -1,8 +1,8 @@
 ﻿namespace EnergyTrading.UnitTest.Mapping
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class PrefixListXmlMapperFixture : ListXmlMapperFixture
     {
         protected override string CreateExpectedXml()

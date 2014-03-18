@@ -5,14 +5,14 @@
 
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class ValueExistsRuleFixture
     {
         private readonly List<string> data = new List<string> { "a", "b" };
 
-        [TestMethod]
+        [Test]
         public void TestFalseIfNotInSet()
         {
             var rule = new ValueExistsRule<string>(this.data);
@@ -20,7 +20,7 @@
             Assert.IsFalse(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void TestTrueIfInSet()
         {
             var rule = new ValueExistsRule<string>(this.data);
@@ -28,7 +28,7 @@
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void UsesSuppliedComparer()
         {
             var rule = new ValueExistsRule<string>(this.data, StringComparer.InvariantCultureIgnoreCase);

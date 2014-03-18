@@ -2,9 +2,9 @@
 {
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class LinqXmlMappingEngineFixture : XmlMappingEngineFixture
     {
         protected override XPathProcessor CreateProcessor()

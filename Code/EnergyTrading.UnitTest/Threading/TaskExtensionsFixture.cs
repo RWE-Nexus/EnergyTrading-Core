@@ -4,12 +4,12 @@
 
     using EnergyTrading.Threading;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class TaskExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void RunsFuncAtLeastOnce()
         {
             var count = 0;
@@ -21,7 +21,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RunsActionAtLeastOnce()
         {
             var count = 0;
@@ -32,7 +32,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RunsFuncAtLeastOnceIfRetriesIsZero()
         {
             var count = 0;
@@ -44,7 +44,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RunsActionAtLeastOnceIfRetriesIsZero()
         {
             var count = 0;
@@ -55,7 +55,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RetryFuncThrowsImmediatelyIfRetriesIsZero()
         {
             var count = 0;
@@ -75,7 +75,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RetryActionThrowsImmediatelyIfRetriesIsZero()
         {
             var count = 0;
@@ -95,7 +95,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RetryFuncThrowsAfterCorrectNumberOfAttempts()
         {
             var count = 0;
@@ -115,7 +115,7 @@
             Assert.AreEqual(4, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RetryActionThrowsAfterCorrectNumberOfAttempts()
         {
             var count = 0;
@@ -135,7 +135,7 @@
             Assert.AreEqual(4, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RetryFuncDoesNotThrowIfSubsequentAttemptSucceeds()
         {
             var count = 0;
@@ -151,7 +151,7 @@
             Assert.AreEqual(2, count);
         }
 
-        [TestMethod]
+        [Test]
         public void RetryActionDoesNotThrowIfSubsequentAttemptSucceeds()
         {
             var count = 0;

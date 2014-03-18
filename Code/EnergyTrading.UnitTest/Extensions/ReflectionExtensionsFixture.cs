@@ -2,9 +2,9 @@
 {
     using EnergyTrading.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class ReflectionExtensionsFixture
     {
         public class GrandChild
@@ -23,28 +23,28 @@
             public Child Child { get; set; }
         }
 
-        [TestMethod]
+        [Test]
         public void IfNullCreateReturnsNullIfSourceIsNull()
         {
             var candidate = ReflectionExtension.IfNullCreate<Parent, Child>(null, t => t.Child, () => new Child());
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IfNullCreateReturnsNullIfFuncIsNull()
         {
             var candidate = new Parent().IfNullCreate(null, () => new Child());
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IfNullCreateReturnsNullIfCreateFunctionIsNull()
         {
             var candidate = new Parent().IfNullCreate(t => t.Child, null);
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IfNullCreateReturnsChildIfExists()
         {
             var parent = new Parent { Child = new Child() };
@@ -52,7 +52,7 @@
             Assert.AreSame(candidate, parent.Child);
         }
 
-        [TestMethod]
+        [Test]
         public void IfNullCreateSetsPropertyAndReturnsCorrectValueIfChildIsNull()
         {
             var parent = new Parent();
@@ -61,7 +61,7 @@
             Assert.AreSame(candidate, parent.Child);
         }
 
-        [TestMethod]
+        [Test]
         public void ChainingIfNullCreate()
         {
             var parent = new Parent();
@@ -72,7 +72,7 @@
             Assert.AreSame(grandChild, parent.Child.GrandChild);
         }
 
-        [TestMethod]
+        [Test]
         public void ChainingWithDefaultConstructorVersion()
         {
             var parent = new Parent();

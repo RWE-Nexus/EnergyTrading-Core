@@ -4,30 +4,30 @@
 
     using EnergyTrading.Data.SimpleData;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class NullExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void IsDbNullReturnsTrueIfIsDbNullValue()
         {
             Assert.IsTrue(DBNull.Value.IsDbNull());
         }
 
-        [TestMethod]
+        [Test]
         public void IsDbNullReturnsTrueForOtherValues()
         {
             Assert.IsFalse(1.IsDbNull());
         }
 
-        [TestMethod]
+        [Test]
         public void DefaultIfDbNullReturnsValueIfNotNull()
         {
             Assert.AreEqual(1, 1.DefaultIfDbNull(3));
         }
 
-        [TestMethod]
+        [Test]
         public void DefaultIfDbNullReturnsDefaultIfDbNull()
         {
             Assert.AreEqual(null, DBNull.Value.DefaultIfDbNull((string)null));

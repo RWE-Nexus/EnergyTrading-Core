@@ -4,26 +4,26 @@
 
     using EnergyTrading.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class CollectionExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void IsNullOrEmptyReturnsTrueForNull()
         {
             var candidate = CollectionExtensions.IsNullOrEmpty<int>(null);
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IsNullOrEmptyReturnsTrueForEmptyList()
         {
             var candidate = new List<int>().IsNullOrEmpty();
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IsNullOrEmptyReturnsFalseForNonEmptyList()
         {
             var candidate = new List<int> { 1 }.IsNullOrEmpty();

@@ -4,12 +4,12 @@
 
     using EnergyTrading.FileProcessing;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class FileProcessorTests
     {
-        [TestMethod]
+        [Test]
         public void TestSuccessFileNameRetainsDirectoryStructure()
         {
             var helper = new FileProcessorHelper(new FileProcessorEndpoint { DropPath = @"c:\a", FailurePath = @"c:\b", ScavengeInterval= new TimeSpan(0, 0, 2), SuccessPath = @"c:\d" }, new FileHandler(), new NullPostProcessor());
@@ -17,7 +17,7 @@
             Assert.IsTrue(result.StartsWith(@"c:\d\e\f\g.txt"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestErrorFileNameRetainsDirectoryStructure()
         {
             var helper = new FileProcessorHelper(new FileProcessorEndpoint { DropPath = @"c:\a", FailurePath = @"c:\b", ScavengeInterval = new TimeSpan(0, 0, 2), SuccessPath = @"c:\d" }, new FileHandler(), new NullPostProcessor());
@@ -25,7 +25,7 @@
             Assert.IsTrue(result.StartsWith(@"c:\b\e\f\g.txt"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestFilePathVariableInSuccessPath()
         {
             var helper = new FileProcessorHelper(new FileProcessorEndpoint { DropPath = @"c:\a", FailurePath = @"c:\b", ScavengeInterval = new TimeSpan(0, 0, 2), SuccessPath = @"%filepath%\d" }, new FileHandler(), new NullPostProcessor());
@@ -33,7 +33,7 @@
             Assert.IsTrue(result.StartsWith(@"c:\a\e\f\d\g.txt"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestFilePathVariableInFailurePath()
         {
             var helper = new FileProcessorHelper(new FileProcessorEndpoint { DropPath = @"c:\a", FailurePath = @"%filepath%\b", ScavengeInterval = new TimeSpan(0, 0, 2), SuccessPath = @"C:\d" }, new FileHandler(), new NullPostProcessor());

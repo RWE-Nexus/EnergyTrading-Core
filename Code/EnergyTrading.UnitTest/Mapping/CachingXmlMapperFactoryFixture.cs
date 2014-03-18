@@ -6,14 +6,14 @@
     using EnergyTrading.UnitTest.Mapping.Examples;
 
     using Microsoft.Practices.ServiceLocation;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class CachingXmlMapperFactoryFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void FindMapperViaGeneric()
         {
             var locator = new Mock<IServiceLocator>();
@@ -35,7 +35,7 @@
             innerFactory.Verify(x => x.Mapper(typeof(Parent), typeof(XElement), null), Times.Once());
         }
 
-        [TestMethod]
+        [Test]
         public void FindMapperViaTypes()
         {
             var locator = new Mock<IServiceLocator>();

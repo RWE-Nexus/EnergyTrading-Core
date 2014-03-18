@@ -2,14 +2,14 @@
 {
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class LinqXPathProcessorFixture : XPathProcessorFixture
     {
         private LinqXPathProcessor xp;
 
-        [TestMethod]
+        [Test]
         public void PushSingleNameSpaceReportsCurrentElementCorrectly()
         {
             var processor = this.XPathProcessor(this.Xml);
@@ -21,7 +21,7 @@
             Assert.AreEqual(@"Fred", this.xp.CurrentElement.Name.LocalName);
         }
 
-        [TestMethod]
+        [Test]
         public void PushPopGetsCorrectCurrentElement()
         {
             var processor = this.XPathProcessor(this.Xml);

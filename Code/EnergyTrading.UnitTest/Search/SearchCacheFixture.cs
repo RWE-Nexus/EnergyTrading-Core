@@ -13,11 +13,11 @@ namespace EnergyTrading.UnitTest.Search
     using EnergyTrading.Search;
     using EnergyTrading.Test;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class WhenChachingAndRetrievingSinglePage : SinglePageContext
     {
         protected override void Because_of()
@@ -25,38 +25,38 @@ namespace EnergyTrading.UnitTest.Search
             this.SearchResultPage = this.Sut.Get("key", 1);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldNotBeNull()
         {
             Assert.IsNotNull(this.SearchResultPage);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainTheSameEntityIds()
         {
             Assert.AreSame(this.SearchResult.EntityIds, this.SearchResultPage.EntityIds);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainSearchKey()
         {
             Assert.AreEqual("key", this.SearchResultPage.SearchResultsKey);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainAsofDate()
         {
             Assert.AreEqual(this.SearchResult.AsOf, this.SearchResultPage.AsOf);
         }
 
-        [TestMethod]
+        [Test]
         public void NextPageShouldBeNull()
         {
             Assert.IsNull(this.SearchResultPage.NextPage);
         }       
     }
 
-    [TestClass]
+    [TestFixture]
     public class ClearShouldEmptyCache : SinglePageContext
     {
         protected override void Because_of()
@@ -65,14 +65,14 @@ namespace EnergyTrading.UnitTest.Search
             this.SearchResultPage = this.Sut.Get("key", 1);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldBeNull()
         {
             Assert.IsNull(this.SearchResultPage);
         }
     }
 
-    [TestClass]
+    [TestFixture]
     public class WhenCachingSinglePageAndRetrievingPageNumberOutOfRange : SinglePageContext
     {
         protected override void Because_of()
@@ -80,14 +80,14 @@ namespace EnergyTrading.UnitTest.Search
             this.SearchResultPage = this.Sut.Get("key", 2);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldBeNull()
         {
             Assert.IsNull(this.SearchResultPage);
         }
     }
 
-    [TestClass]
+    [TestFixture]
     public class WhenCachingMultiplePagesAndRetrievingFirst : MultiplePagesContext
     {
         protected override void Because_of()
@@ -95,44 +95,44 @@ namespace EnergyTrading.UnitTest.Search
             this.SearchResultPage = this.Sut.Get("key", 1);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldNotBeNull()
         {
             Assert.IsNotNull(this.SearchResultPage);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainCorrectNumberOfIds()
         {
             Assert.AreEqual(4, this.SearchResultPage.EntityIds.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainCorrectIds()
         {
             Assert.AreEqual("1234", AggregateIds(this.SearchResultPage));
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainSearchKey()
         {
             Assert.AreEqual("key", this.SearchResultPage.SearchResultsKey);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainAsofDate()
         {
             Assert.AreEqual(this.SearchResult.AsOf, this.SearchResultPage.AsOf);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainNextPage()
         {
             Assert.AreEqual(2, this.SearchResultPage.NextPage);
         }       
     }
 
-    [TestClass]
+    [TestFixture]
     public class WhenCachingMultiplePagesAndRetrievingSecond : MultiplePagesContext
     {
         protected override void Because_of()
@@ -140,44 +140,44 @@ namespace EnergyTrading.UnitTest.Search
             this.SearchResultPage = this.Sut.Get("key", 2);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldNotBeNull()
         {
             Assert.IsNotNull(this.SearchResultPage);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainCorrectNumberOfIds()
         {
             Assert.AreEqual(4, this.SearchResultPage.EntityIds.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainCorrectIds()
         {
             Assert.AreEqual("5678", AggregateIds(this.SearchResultPage));
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainSearchKey()
         {
             Assert.AreEqual("key", this.SearchResultPage.SearchResultsKey);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainAsofDate()
         {
             Assert.AreEqual(this.SearchResult.AsOf, this.SearchResultPage.AsOf);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainNextPage()
         {
             Assert.AreEqual(3, this.SearchResultPage.NextPage);
         }
     }
 
-    [TestClass]
+    [TestFixture]
     public class WhenCachingMultiplePagesAndRetrievingThird : MultiplePagesContext
     {
         protected override void Because_of()
@@ -185,44 +185,44 @@ namespace EnergyTrading.UnitTest.Search
             this.SearchResultPage = this.Sut.Get("key", 3);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldNotBeNull()
         {
             Assert.IsNotNull(this.SearchResultPage);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainCorrectNumberOfIds()
         {
             Assert.AreEqual(2, this.SearchResultPage.EntityIds.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainCorrectIds()
         {
             Assert.AreEqual("910", AggregateIds(this.SearchResultPage));
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainSearchKey()
         {
             Assert.AreEqual("key", this.SearchResultPage.SearchResultsKey);
         }
 
-        [TestMethod]
+        [Test]
         public void PageShouldContainAsofDate()
         {
             Assert.AreEqual(this.SearchResult.AsOf, this.SearchResultPage.AsOf);
         }
 
-        [TestMethod]
+        [Test]
         public void NextPageShouldBeNull()
         {
             Assert.IsNull(this.SearchResultPage.NextPage);
         }
     }
 
-    [TestClass]
+    [TestFixture]
     public class WhenACachedPageHasExpired : SpecBase<SearchCache>
     {
         private Mock<ICacheItemPolicyFactory> cacheItemPolicyFactory;
@@ -249,14 +249,14 @@ namespace EnergyTrading.UnitTest.Search
             this.searchResultPage = this.Sut.Get("key", 1);
         }
 
-        [TestMethod]
+        [Test]
         public void ResultPageShouldBeNull()
         {
             Assert.IsNull(this.searchResultPage);
         }
     }
 
-    [TestClass]
+    [TestFixture]
     public class WhenRequestedPageNumberOutOfRange : MultiplePagesContext
     {
         protected override void Because_of()
@@ -264,14 +264,14 @@ namespace EnergyTrading.UnitTest.Search
             this.SearchResultPage = this.Sut.Get("key", 4);
         }
 
-        [TestMethod]
+        [Test]
         public void ResultPageShouldBeNull()
         {
             Assert.IsNull(this.SearchResultPage);
         }
     }
 
-    [TestClass]
+    [TestFixture]
     public class WhenKeyNotInCache : MultiplePagesContext
     {
         protected override void Because_of()
@@ -279,7 +279,7 @@ namespace EnergyTrading.UnitTest.Search
             this.SearchResultPage = this.Sut.Get("notakey", 1);
         }
 
-        [TestMethod]
+        [Test]
         public void ResultPageShouldBeNull()
         {
             Assert.IsNull(this.SearchResultPage);

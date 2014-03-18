@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class StringNotNullOrEmptyRuleFixture
     {
-        [TestMethod]
+        [Test]
         public void ValidStringReturnsTrue()
         {
             var rule = new StringNotNullOrEmptyRule();
@@ -16,7 +16,7 @@
             Assert.IsTrue(string.IsNullOrEmpty(rule.Message));
         }
 
-        [TestMethod]
+        [Test]
         public void NullStringReturnsFalse()
         {
             var rule = new StringNotNullOrEmptyRule();
@@ -25,7 +25,7 @@
             Assert.AreEqual("value is null or whitespace", rule.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void EmptyStringReturnsFalse()
         {
             var rule = new StringNotNullOrEmptyRule();
@@ -34,7 +34,7 @@
             Assert.AreEqual("value is null or whitespace", rule.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void ByDefaultWhiteSpaceIsNotAllowed()
         {
             var rule = new StringNotNullOrEmptyRule();
@@ -43,7 +43,7 @@
             Assert.AreEqual("value is null or whitespace", rule.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void AllowWhiteSpaceWithNullIsStillFalse()
         {
             var rule = new StringNotNullOrEmptyRule { AllowWhiteSpace = true };
@@ -52,7 +52,7 @@
             Assert.AreEqual("value is null or empty", rule.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void AllowWhiteSpaceWithEmptyIsStillFalse()
         {
             var rule = new StringNotNullOrEmptyRule { AllowWhiteSpace = true };
@@ -61,7 +61,7 @@
             Assert.AreEqual("value is null or empty", rule.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidIsStillValidWithWhiteSpace()
         {
             var rule = new StringNotNullOrEmptyRule { AllowWhiteSpace = true };
@@ -69,7 +69,7 @@
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void WhiteSpaceIsAllowedCorrectly()
         {
             var rule = new StringNotNullOrEmptyRule { AllowWhiteSpace = true };

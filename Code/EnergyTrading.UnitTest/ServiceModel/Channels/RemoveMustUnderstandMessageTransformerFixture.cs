@@ -5,12 +5,12 @@
     using EnergyTrading.ServiceModel.Channels;
     using EnergyTrading.Test.Xml;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class RemoveMustUnderstandMessageTransformerFixture : XmlFixture
     {
-        [TestMethod]
+        [Test]
         public void JustRemoveMustUnderstand()
         {
             var value = @"<s:Envelope xmlns:s='http://schemas.xmlsoap.org/soap/envelope/'>

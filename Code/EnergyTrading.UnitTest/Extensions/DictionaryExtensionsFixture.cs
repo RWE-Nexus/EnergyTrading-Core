@@ -4,19 +4,19 @@
 
     using EnergyTrading.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DictionaryExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void MergeReturnsNullIfSourceIsNull()
         {
             var candidate = DictionaryExtensions.Merge(null, new Dictionary<string, string> { { "key", "value" } });
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void MergeReturnsSourceIfDictToMergeIsNull()
         {
             var source = new Dictionary<string, string> { { "key", "value" } };
@@ -25,7 +25,7 @@
             Assert.AreSame(source, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DictionariesAreMerged()
         {
             var source = new Dictionary<string, string> { { "key", "value" } };
@@ -36,7 +36,7 @@
             Assert.AreEqual("value2", candidate["key2"]);
         }
 
-        [TestMethod]
+        [Test]
         public void DuplicatesAreNotOverwrittenByDefault()
         {
             var source = new Dictionary<string, string> { { "key", "value" } };
@@ -46,7 +46,7 @@
             Assert.AreEqual("value", candidate["key"]);
         }
 
-        [TestMethod]
+        [Test]
         public void DuplicatesOverwriteIfSpecified()
         {
             var source = new Dictionary<string, string> { { "key", "value" } };
@@ -56,7 +56,7 @@
             Assert.AreEqual("value2", candidate["key"]);
         }
 
-        [TestMethod]
+        [Test]
         public void MergeLeftWithoutOverwrites()
         {
             var source = new Dictionary<string, string> { { "key", "value" } };
@@ -67,7 +67,7 @@
             Assert.AreEqual("newValue", candidate["newKey"]);
         }
 
-        [TestMethod]
+        [Test]
         public void MergeLeftWithOverwrites()
         {
             var source = new Dictionary<string, string> { { "key", "value" } };

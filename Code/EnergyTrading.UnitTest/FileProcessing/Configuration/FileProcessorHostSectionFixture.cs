@@ -4,12 +4,12 @@
 
     using EnergyTrading.FileProcessing.Configuration;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class FileProcessorHostSectionFixture
     {
-        [TestMethod]
+        [Test]
         public void CanLoadEmptySection()
         {
             var section = ConfigurationManager.GetSection("fphEmpty") as FileProcessorHostSection;
@@ -17,7 +17,7 @@
             Assert.AreEqual(0, section.Processors.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void CanLoadProcessorWithEmptyName()
         {
             var section = ConfigurationManager.GetSection("fphEmptyName") as FileProcessorHostSection;
@@ -26,7 +26,7 @@
             Assert.IsTrue(string.IsNullOrEmpty(section.Processors[0].Name));
         }
 
-        [TestMethod]
+        [Test]
         public void CanLoadMultipleProcessors()
         {
             var section = ConfigurationManager.GetSection("fphMulti") as FileProcessorHostSection;

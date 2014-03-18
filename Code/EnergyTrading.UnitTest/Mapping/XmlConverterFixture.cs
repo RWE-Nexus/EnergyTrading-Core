@@ -6,14 +6,14 @@
     using EnergyTrading.Mapping;
     using EnergyTrading.Xml.Serialization;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class XmlConverterFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void MustProvideVersionDetector()
         {
             var factory = new Mock<IXmlMappingEngineFactory>();
@@ -30,7 +30,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void MustProvideMappingEngineFactory()
         {
             var detector = new Mock<IXmlVersionDetector>();
@@ -47,7 +47,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FromXmlNullOnNullXml()
         {
             // Arrange
@@ -65,7 +65,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromXmlErrorOnInvalidXml()
         {
             // Arrange
@@ -87,7 +87,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FromXmlNullOnNullXElement()
         {
             // Arrange
@@ -105,7 +105,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromXmlErrorOnVersionDetectionFailure()
         {
             // Arrange
@@ -132,7 +132,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FromXmlWrapsInternalExceptions()
         {
             // Arrange
@@ -153,11 +153,11 @@
             catch (MappingException ex)
             {
                 // Don't bother checking actual error message - too fragile
-                Assert.IsInstanceOfType(ex.InnerException, typeof(ArgumentNullException));
+                Assert.IsInstanceOf<ArgumentNullException>(ex.InnerException);
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FromXmlConvertXmlBasedOnVersion()
         {
             // Arrange
@@ -180,7 +180,7 @@
             Assert.AreSame(expected, candidate, "Not same");
         }
 
-        [TestMethod]
+        [Test]
         public void FromXmlConvertXElementBasedOnVersion()
         {
             // Arrange
@@ -203,7 +203,7 @@
             Assert.AreSame(expected, candidate, "Not same");
         }
 
-        [TestMethod]
+        [Test]
         public void FromXmlFailOnUnregisteredEngineVersion()
         {
             // Arrange
@@ -231,7 +231,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToXmlGeneratesXml()
         {
             // Arrange
@@ -254,7 +254,7 @@
             Assert.AreEqual(expected, candidate, "XML differs");
         }
 
-        [TestMethod]
+        [Test]
         public void ToXmlNullOnNullEntity()
         {
             // Arrange
@@ -271,7 +271,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXmlFailOnUnregisteredEngineVersion()
         {
             // Arrange
@@ -301,7 +301,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToXmlWrapsEngineFactoryException()
         {
             // Arrange
@@ -322,11 +322,11 @@
             catch (MappingException ex)
             {
                 Assert.AreEqual("IXmlMappingEngine not found: V1", ex.Message);
-                Assert.IsInstanceOfType(ex.InnerException, typeof(ArgumentNullException));
+                Assert.IsInstanceOf<ArgumentNullException>(ex.InnerException);
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToXmlPreservesEngineFactoryMappingException()
         {
             // Arrange
@@ -350,7 +350,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToXmlWrapsEngineException()
         {
             // Arrange
@@ -373,11 +373,11 @@
             catch (MappingException ex)
             {
                 Assert.AreEqual("Could not convert entity to XML, version V1: Content", ex.Message);
-                Assert.IsInstanceOfType(ex.InnerException, typeof(ArgumentNullException));
+                Assert.IsInstanceOf(typeof(ArgumentNullException), ex.InnerException);
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToXmlPreservesEngineMappingException()
         {
             // Arrange

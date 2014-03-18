@@ -3,14 +3,14 @@
     using EnergyTrading.Mapping;
     using EnergyTrading.UnitTest.Mapping.Examples;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class MapperFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void NoMappingEngineReturnsNullMappingEngine()
         {
             var mapper = new AnimalAnimalModelMapper();
@@ -20,7 +20,7 @@
             Assert.IsTrue(candidate is NullXmlMappingEngine);
         }
 
-        [TestMethod]
+        [Test]
         public void MappingEngineReturned()
         {
             var engine = new Mock<IMappingEngine>();
@@ -30,7 +30,7 @@
             Assert.AreSame(engine.Object, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void MappingNullReturnsDefault()
         {
             var mapper = new AnimalAnimalModelMapper();
@@ -40,7 +40,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void MappingValue()
         {
             var mapper = new AnimalAnimalModelMapper();

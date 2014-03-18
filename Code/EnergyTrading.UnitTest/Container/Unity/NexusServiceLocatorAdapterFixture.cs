@@ -1,14 +1,14 @@
 ﻿namespace EnergyTrading.UnitTest.Container.Unity
 {
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
 
     /// <summary>
     /// Summary description for UnityServiceLocatorAdapterFixture
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class EnergyTradingServiceLocatorAdapterFixture : EnergyTradingServiceLocatorFixture
     {
         protected override Microsoft.Practices.ServiceLocation.IServiceLocator CreateServiceLocator()
@@ -21,79 +21,79 @@
             return new EnergyTradingUnityServiceLocator(container);
         }
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             this.Locator = this.CreateServiceLocator();
         }
 
-        [TestMethod]
+        [Test]
         public new void GetInstance()
         {
             base.GetInstance();
         }
 
-        [TestMethod]
+        [Test]
         public new void AskingForInvalidComponentShouldRaiseActivationException()
         {
             base.AskingForInvalidComponentShouldRaiseActivationException();
         }
 
-        [TestMethod]
+        [Test]
         public new void GetNamedInstance()
         {
             base.GetNamedInstance();
         }
 
-        [TestMethod]
+        [Test]
         public new void GetNamedInstance2()
         {
             base.GetNamedInstance2();
         }
 
-        [TestMethod]
+        [Test]
         public new void GetUnknownInstance2()
         {
             base.GetUnknownInstance2();
         }
 
-        [TestMethod]
+        [Test]
         public new void GetAllInstances()
         {
             base.GetAllInstances();
         }
 
-        [TestMethod]
+        [Test]
         public new void GetAllInstance_ForUnknownType_ReturnEmptyEnumerable()
         {
             base.GetAllInstance_ForUnknownType_ReturnEmptyEnumerable();
         }
 
-        [TestMethod]
+        [Test]
         public new void GenericOverload_GetInstance()
         {
             base.GenericOverload_GetInstance();
         }
 
-        [TestMethod]
+        [Test]
         public new void GenericOverload_GetInstance_WithName()
         {
             base.GenericOverload_GetInstance_WithName();
         }
 
-        [TestMethod]
+        [Test]
         public new void Overload_GetInstance_NoName_And_NullName()
         {
             base.Overload_GetInstance_NoName_And_NullName();
         }
 
-        [TestMethod]
+        [Test]
         public new void GenericOverload_GetAllInstances()
         {
             base.GenericOverload_GetAllInstances();
         }
 
-        [TestMethod]
+        [Test]
         public void Get_WithZeroLenName_ReturnsDefaultInstance()
         {
             Assert.AreSame(

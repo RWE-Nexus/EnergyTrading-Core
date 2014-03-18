@@ -8,7 +8,7 @@
 
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
 
@@ -97,7 +97,7 @@
         /// <summary>
         /// Pre-test set up.
         /// </summary>
-        [TestInitialize]
+        [SetUp]
         public virtual void Setup()
         {
             this.TidyUp();
@@ -107,7 +107,7 @@
         /// <summary>
         /// Post-test tidy up
         /// </summary>
-        [TestCleanup]
+        [TearDown]
         public virtual void TearDown()
         {
             this.OnTearDown();

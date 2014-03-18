@@ -4,12 +4,12 @@
 
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class SchemaVersionFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void FromNullToSchemaVersion()
         {
             string value = null;
@@ -17,7 +17,7 @@
             Assert.IsNull(candidate, "Candidate not null");
         }
 
-        [TestMethod]
+        [Test]
         public void FromSchemaMajorToSchemaVersion()
         {
             string value = "Cts.V2";
@@ -26,7 +26,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromSchemaMajorMinorToSchemaVersion()
         {
             string value = "Cts.V2_1";
@@ -35,7 +35,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromMajorToSchemaVersion()
         {
             string value = "V2";
@@ -44,7 +44,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromSchemaVersionToNull()
         {
             SchemaVersion value = null;
@@ -52,7 +52,7 @@
             Assert.IsNull(candidate, "Candidate not null");
         }
 
-        [TestMethod]
+        [Test]
         public void FromSSchemaVersionTochemaMajor()
         {
             string expected = "Cts.V2";
@@ -61,7 +61,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromSchemaVersionToSchemaMajorMinor()
         {
             string expected = "Cts.V2_1";
@@ -70,7 +70,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromSchemaVersionToMajor()
         {
             string expected = "V2";

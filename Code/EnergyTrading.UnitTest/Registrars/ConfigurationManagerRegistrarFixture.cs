@@ -3,21 +3,21 @@
     using EnergyTrading.Configuration;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Registrars;
 
-    [TestClass]
+    [TestFixture]
     public class ConfigurationManagerRegistrarFixture
     {
-        [TestMethod]
+        [Test]
         public void CanResolveIConfigurationManager()
         {
             var container = new UnityContainer();
             new ConfigurationManagerRegistrar().Register(container);
             var candidate = container.Resolve<IConfigurationManager>();
             Assert.IsNotNull(candidate);
-            Assert.IsInstanceOfType(candidate, typeof(AppConfigConfigurationManager));
+            Assert.IsInstanceOf<AppConfigConfigurationManager>(candidate);
         }
     }
 }

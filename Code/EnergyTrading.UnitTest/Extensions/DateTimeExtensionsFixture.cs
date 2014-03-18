@@ -4,36 +4,36 @@
 
     using EnergyTrading.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DateTimeExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void ShouldReturnTrueAsEndOfMonthIfMonthHasOnly28Days()
         {
             Assert.IsTrue(new DateTime(2011, 02, 28).IsEndOfMonth());
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnTrueAsEndOfMonthIfMonthHasOnly29Days()
         {
             Assert.IsTrue(new DateTime(2012, 02, 29).IsEndOfMonth());
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnTrueAsEndOfMonthIfMonthHasOnly30Days()
         {
             Assert.IsTrue(new DateTime(2012, 04, 30).IsEndOfMonth());
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnTrueAsEndOfMonthIfMonthHasOnly31Days()
         {
             Assert.IsTrue(new DateTime(2012, 01, 31).IsEndOfMonth());
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnTrueAsBeginningOfMonthOnlyForFirstDayOfMonth()
         {
             Assert.IsTrue(new DateTime(2012, 01, 01).IsBeginningOfMonth());
@@ -41,7 +41,7 @@
             Assert.IsTrue(new DateTime(2012, 12, 01).IsBeginningOfMonth());
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnFalseAsBeginningOfMonthForAnyDayOfMonthOtherThanFirstDay()
         {
             Assert.IsFalse(new DateTime(2012, 01, 02).IsBeginningOfMonth());
@@ -50,7 +50,7 @@
             Assert.IsFalse(new DateTime(2012, 04, 15).IsBeginningOfMonth());
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnFalseAsEndOfMonthForAnyDayOfMonthOtherThanLastDay()
         {
             Assert.IsFalse(new DateTime(2012, 01, 02).IsEndOfMonth());
