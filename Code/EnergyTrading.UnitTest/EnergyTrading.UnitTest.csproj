@@ -328,7 +328,6 @@
     <Compile Include="Xml\Linq\XmlLinqExtensionsFixture.cs" />
     <Compile Include="Xml\Serialization\Animal.cs" />
     <Compile Include="Xml\Serialization\XmSerializerExtensionsFixture.cs" />
-    <Compile Include="Xml\SimpleSchemaValidatorFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EnergyTrading.Caching.AppFabric\EnergyTrading.Caching.AppFabric.csproj">

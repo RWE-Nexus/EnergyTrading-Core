@@ -53,20 +53,20 @@
         [TestInitialize]
         public virtual void Initialize()
         {
-            this.ExpectedXml = this.CreateExpectedXml();
-            this.ExpectedDto = this.CreateExpectedDto();
+            ExpectedXml = CreateExpectedXml();
+            ExpectedDto = CreateExpectedDto();
 
             var locator = new Mock<IServiceLocator>();
             var factory = new LocatorXmlMapperFactory(locator.Object);
             var cache = new CachingXmlMapperFactory(factory);
-            this.MappingEngine = new XmlMappingEngine(cache);
-            this.RegisterChildMappers(this.MappingEngine);
+            MappingEngine = new XmlMappingEngine(cache);
+            RegisterChildMappers(MappingEngine);
 
-            this.XPathProcessor = new XPathProcessor();
-            this.XPathProcessor.Initialize(this.ExpectedXml);
+            XPathProcessor = new XPathProcessor();
+            XPathProcessor.Initialize(ExpectedXml);
 
-            this.Mapper = this.CreateMapper(this.MappingEngine);
-            this.MappingEngine.RegisterMapper(this.Mapper);
+            Mapper = CreateMapper(MappingEngine);
+            MappingEngine.RegisterMapper(Mapper);
         }
 
         /// <summary>
@@ -74,8 +74,8 @@
         /// </summary>
         public virtual void ShouldMapToDto()
         {
-            var candidate = this.Mapper.Map(this.XPathProcessor);
-            this.Check(this.ExpectedDto, candidate);
+            var candidate = Mapper.Map(XPathProcessor);
+            Check(ExpectedDto, candidate);
         }
 
         /// <summary>
@@ -84,8 +84,8 @@
         public virtual void ShouldMapToXml()
         {
             // Must go via the engine to get all the namespaces registered
-            var candidate = this.MappingEngine.CreateDocument(this.ExpectedDto);
-            this.CheckXml(this.ExpectedXml, candidate);
+            var candidate = MappingEngine.CreateDocument(ExpectedDto);
+            CheckXml(ExpectedXml, candidate);
         }
 
         /// <summary>
@@ -137,7 +137,7 @@
         protected void MockMappersFor<TDto>(bool outputDefault = false)
         {
             // DTO -> XML
-            this.MappingEngine.RegisterMap(new Mock<IXmlMapper<TDto, XElement>>().Object);
+            MappingEngine.RegisterMap(new Mock<IXmlMapper<TDto, XElement>>().Object);
 
             // XML -> DTO
             var mock = new Mock<IXmlMapper<XPathProcessor, TDto>>();
@@ -146,7 +146,7 @@
             mock.Setup(x => x.MapList(It.IsAny<XPathProcessor>(), It.IsAny<string>(), It.IsAny<string>(), outputDefault)).Returns(new List<TDto>());
             mock.Setup(x => x.MapList(It.IsAny<XPathProcessor>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), outputDefault)).Returns(new List<TDto>());
 
-            this.MappingEngine.RegisterMap(mock.Object);
+            MappingEngine.RegisterMap(mock.Object);
         }
 
         /// <summary>
@@ -156,8 +156,8 @@
         /// <typeparam name="T2"></typeparam>
         protected void MockMappersFor<T1, T2>()
         {
-            this.MockMappersFor<T1>();
-            this.MockMappersFor<T2>();
+            MockMappersFor<T1>();
+            MockMappersFor<T2>();
         }
 
         /// <summary>
@@ -165,9 +165,9 @@
         /// </summary>
         protected void MockMappersFor<T1, T2, T3>()
         {
-            this.MockMappersFor<T1>();
-            this.MockMappersFor<T2>();
-            this.MockMappersFor<T3>();
+            MockMappersFor<T1>();
+            MockMappersFor<T2>();
+            MockMappersFor<T3>();
         }
 
         /// <summary>
@@ -175,10 +175,10 @@
         /// </summary>
         protected void MockMappersFor<T1, T2, T3, T4>()
         {
-            this.MockMappersFor<T1>();
-            this.MockMappersFor<T2>();
-            this.MockMappersFor<T3>();
-            this.MockMappersFor<T4>();
+            MockMappersFor<T1>();
+            MockMappersFor<T2>();
+            MockMappersFor<T3>();
+            MockMappersFor<T4>();
         }
 
         /// <summary>
@@ -186,11 +186,11 @@
         /// </summary>
         protected void MockMappersFor<T1, T2, T3, T4, T5>()
         {
-            this.MockMappersFor<T1>();
-            this.MockMappersFor<T2>();
-            this.MockMappersFor<T3>();
-            this.MockMappersFor<T4>();
-            this.MockMappersFor<T5>();
+            MockMappersFor<T1>();
+            MockMappersFor<T2>();
+            MockMappersFor<T3>();
+            MockMappersFor<T4>();
+            MockMappersFor<T5>();
         }
 
         /// <summary>
@@ -203,20 +203,7 @@
             where TEntity : class, new()
             where TMapper : XPathMapper<TEntity>, IXmlMapper<TEntity, XElement>
         {
-            this.Container.RegisterXmlMapper<TEntity, TMapper>(name);
-        }
-
-        /// <summary>
-        /// Register a mapper for an entity against the mapping engine.
-        /// </summary>
-        /// <typeparam name="TEntity">Entity that the mapper is responsible for.</typeparam>
-        /// <param name="engine">Engine to register against</param>
-        /// <param name="mapper">Mapper to register.</param>
-        [Obsolete("Use engine.RegisterMapper(mapper);")]
-        protected void RegisterMapper<TEntity>(IXmlMappingEngine engine, XmlMapper<TEntity> mapper)
-            where TEntity : class, new()
-        {
-            engine.RegisterMapper(mapper);
+            Container.RegisterXmlMapper<TEntity, TMapper>(name);
         }
     }
 }

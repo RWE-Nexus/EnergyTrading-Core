@@ -75,12 +75,6 @@
             }
         }
 
-        [Obsolete("Use XmlDeserializer<T>")]
-        public static T XmlDeserilizer<T>(this string xml)
-        {
-            return LoadXmlDocument<T>(() => new StringReader(xml));
-        }
-
         /// <summary>
         /// Deserialize an entity from XML.
         /// </summary>

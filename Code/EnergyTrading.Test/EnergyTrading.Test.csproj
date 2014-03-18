@@ -91,9 +91,7 @@
     <Compile Include="Checking\PropertyCheckException.cs" />
     <Compile Include="Checking\PropertyCheckExpression.cs" />
     <Compile Include="Checking\TypeCompareTargeter.cs" />
-    <Compile Include="Data\EF\DbSetGenericRepositoryFixture.cs" />
     <Compile Include="Data\EF\DbSetRepositoryFixture.cs" />
-    <Compile Include="Data\EF\GenericRepositoryFixture.cs" />
     <Compile Include="Data\EF\RepositoryFixture.cs" />
     <Compile Include="Data\IdentifiableChecker.cs" />
     <Compile Include="Data\Zapper.cs" />

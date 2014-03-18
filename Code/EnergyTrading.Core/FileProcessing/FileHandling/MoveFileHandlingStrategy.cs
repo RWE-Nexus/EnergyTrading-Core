@@ -32,10 +32,10 @@
         /// <param name="processingFile">File to move</param>
         public void Handle(ProcessingFile processingFile)
         {
-            var destinationDir = this.targetDirectory;
-            if (this.targetDirectory.Contains("%filepath%"))
+            var destinationDir = targetDirectory;
+            if (targetDirectory.Contains("%filepath%"))
             {
-                destinationDir = this.targetDirectory.Replace("%filepath%", Path.GetDirectoryName(processingFile.FullPathOfOriginalFile));
+                destinationDir = targetDirectory.Replace("%filepath%", Path.GetDirectoryName(processingFile.FullPathOfOriginalFile));
             }
             Logger.DebugFormat("Moving {0} to {1}", processingFile.OriginalFilePath, destinationDir);
             string newFilePath = Path.Combine(destinationDir, processingFile.OriginalFilePath);
