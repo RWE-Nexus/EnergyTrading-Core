@@ -16,16 +16,12 @@
 
         protected string Xml { get; set; }
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
-        {
-            AssemblyLoggerProvider.InitializeLogger();
-        }
-
         protected override void OnSetup()
         {
-            warnCount = 0;
+            // NB See ConfigLoggerFactory for how the mock logger is created.
             AssemblyLoggerProvider.MockLogger.Setup(x => x.Warn(It.IsAny<string>())).Callback(() => ++warnCount);
+            warnCount = 0;
+ 
             Xml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob>b</Bob>

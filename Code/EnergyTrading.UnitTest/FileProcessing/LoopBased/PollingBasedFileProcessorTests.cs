@@ -1,7 +1,6 @@
 ﻿namespace EnergyTrading.UnitTest.FileProcessing.LoopBased
 {
     using System;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Threading;
@@ -36,10 +35,10 @@
             tempLocation = Directory.CreateDirectory(TempDirectoryName).FullName;
 
             endpoint = new FileProcessorEndpoint
-                           {
-                               DropPath = dropLocation,
-                               InProgressPath = acknowledgedLocation,
-                           };
+            {
+                DropPath = dropLocation,
+                InProgressPath = acknowledgedLocation,
+            };
         }
 
         [TearDown]
@@ -122,7 +121,7 @@
                 resetEvent.WaitOne(1000);
             }
 
-            mockHandler.Verify(x => x.Notify(It.IsAny<ProcessingFile>()));
+            mockHandler.Verify(x => x.Notify(It.IsAny<ProcessingFile>()), Times.Never);
 
             var filePaths = Directory.GetFiles(dropLocation);
             Assert.AreEqual(filePaths.Length, 1);

@@ -17,6 +17,11 @@
             provider = factory;
         }
 
+        public static Func<ILoggerFactory> GetProvider()
+        {
+            return provider;
+        }
+
         public static void Initialize()
         {
             provider().Initialize();

@@ -43,7 +43,7 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
         [Test]
@@ -79,7 +79,7 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
         [Test]
@@ -115,7 +115,7 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
         [Test]
@@ -153,7 +153,7 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
         [Test]
@@ -194,7 +194,7 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
         [Test]
@@ -236,7 +236,7 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
         public class CustomFileFilter : IFileFilter

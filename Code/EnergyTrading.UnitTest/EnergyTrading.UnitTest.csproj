@@ -189,6 +189,7 @@
     <Compile Include="Logging\Log4NetLoggerFixture.cs" />
     <Compile Include="Mapping\CachingXmlMapperFactoryFixture.cs" />
     <Compile Include="Mapping\CompatibleXmlMappingEngineFactoryFixture.cs" />
+    <Compile Include="Mapping\ConfigLoggerFactory.cs" />
     <Compile Include="Mapping\Examples\Order.cs" />
     <Compile Include="Mapping\Examples\OrderXmlMapper.cs" />
     <Compile Include="Mapping\Examples\Animal.cs" />

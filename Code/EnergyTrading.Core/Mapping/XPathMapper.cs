@@ -43,15 +43,14 @@
         /// <param name="engine">Mapping engine to use.</param>        
         protected XPathMapper(string nodeName, IXmlMappingEngine engine)
         {
-            this.namespaces = new List<Tuple<string, string>>();
+            NodeName = nodeName;
+            Engine = engine;
 
-            this.Engine = engine;
-
-            this.NodeName = nodeName;
-            this.Namespace = string.Empty;
-            this.NamespacePrefix = string.Empty;
-            this.XmlType = string.Empty;
-            this.Mappings = new List<XmlPropertyMap>();
+            Namespace = string.Empty;
+            NamespacePrefix = string.Empty;
+            XmlType = string.Empty;
+            Mappings = new List<XmlPropertyMap>();
+            namespaces = new List<Tuple<string, string>>();
         }
 
         /// <summary>
@@ -74,8 +73,8 @@
         /// </summary>
         protected new IXmlMappingEngine Engine
         {
-            get { return this.engine ?? (this.engine = new NullXmlMappingEngine()); }
-            private set { this.engine = value; }
+            get { return engine ?? (engine = new NullXmlMappingEngine()); }
+            private set { engine = value; }
         }
 
         /// <summary>
@@ -98,16 +97,16 @@
         /// <inheritdoc />
         public override TDestination Map(XPathProcessor source)
         {
-            return this.Map(source, this.NodeName);
+            return Map(source, NodeName);
         }
 
         /// <copydocfrom cref="IXmlMapper{T, D}.Map(T, string, string, bool)" />
         public TDestination Map(XPathProcessor source, string nodeName, string xmlNamespace = "", bool outputDefault = false)
         {
-            this.RegisterNamespace(source, this.NamespacePrefix, this.Namespace);
+            RegisterNamespace(source, NamespacePrefix, Namespace);
 
             // Push both the node and the namespace - presumption that the namespace applies to the node
-            source.Push(nodeName, this.Namespace);
+            source.Push(nodeName, Namespace);
             try
             {
                 if (!source.CurrentNode())
@@ -115,22 +114,22 @@
                     return null;
                 }
 
-                this.RegisterNamespace(source, XsiPrefix, XsiNamespace);
+                RegisterNamespace(source, XsiPrefix, XsiNamespace);
                 var xmlType = source.ToString("type", XsiPrefix, isAttribute: true);
 
                 TDestination destination;
 
                 // This mapper can handle it if there's no type specified or it's our type
-                if (string.IsNullOrEmpty(xmlType) || string.IsNullOrEmpty(this.XmlType))
+                if (string.IsNullOrEmpty(xmlType) || string.IsNullOrEmpty(XmlType))
                 {
-                    destination = this.CreateAndMap(source);
+                    destination = CreateAndMap(source);
                 }
                 else
                 {
-                    var t = this.XmlTypeInfo(source, xmlType);
-                    if (this.XmlTypeNamespace == t.Item1 && this.XmlType == t.Item2)
+                    var t = XmlTypeInfo(source, xmlType);
+                    if (XmlTypeNamespace == t.Item1 && XmlType == t.Item2)
                     {
-                        destination = this.CreateAndMap(source);
+                        destination = CreateAndMap(source);
                     }
                     else
                     {
@@ -138,10 +137,10 @@
                         // NB Use the current namespace for the node name, not the target mapper's
                         if (!nodeName.Contains(":"))
                         {
-                            nodeName = string.Format("{0}:{1}", this.NamespacePrefix, nodeName);
+                            nodeName = string.Format("{0}:{1}", NamespacePrefix, nodeName);
                         }
 
-                        destination = this.Engine.Map<XPathProcessor, TDestination>(source, nodeName, t.Item1, t.Item2);
+                        destination = Engine.Map<XPathProcessor, TDestination>(source, nodeName, t.Item1, t.Item2);
                     }
                 }
 
@@ -157,23 +156,23 @@
         /// NOTE: No defaults as we can't enforce implementation - caller determines passed values - C# standard
         object IXmlMapper<XPathProcessor>.Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index)
         {
-            return this.Map(source, nodeName, xmlNamespace, xmlPrefix, index);
+            return Map(source, nodeName, xmlNamespace, xmlPrefix, index);
         }
 
         public List<TDestination> MapList(XPathProcessor source, string collectionNode, bool outputDefault = false)
         {
-            return this.MapList(source, collectionNode, this.NodeName, outputDefault);
+            return MapList(source, collectionNode, NodeName, outputDefault);
         }
 
         public virtual List<TDestination> MapList(XPathProcessor source, string collectionNode, string nodeName, bool outputDefault = false)
         {
-            return this.MapList(source, collectionNode, nodeName, this.NamespacePrefix, outputDefault: outputDefault);
+            return MapList(source, collectionNode, nodeName, NamespacePrefix, outputDefault: outputDefault);
         }
 
         public virtual List<TDestination> MapList(XPathProcessor source, string collectionNode, string nodeName, string collectionNodeNamespacePrefix = "", string collectionItemNodeNamespacePrefix = "", bool outputDefault = false)
         {
             // Default namespace
-            this.RegisterNamespace(source, this.NamespacePrefix, this.Namespace);
+            RegisterNamespace(source, NamespacePrefix, Namespace);
 
             string collNamespace;
             var list = new List<TDestination>();
@@ -181,8 +180,8 @@
             if (string.IsNullOrWhiteSpace(collectionNodeNamespacePrefix))
             {
                 // It's the same as normal
-                collectionNodeNamespacePrefix = this.NamespacePrefix;
-                collNamespace = this.Namespace;
+                collectionNodeNamespacePrefix = NamespacePrefix;
+                collNamespace = Namespace;
             }
             else
             {
@@ -201,14 +200,14 @@
 
             if (string.IsNullOrEmpty(nodeName))
             {
-                nodeName = this.NodeName;
+                nodeName = NodeName;
             }
 
             var index = 1;
             TDestination item;
             do
             {
-                item = this.Map(source, nodeName, string.Empty, collectionItemNodeNamespacePrefix, index++);
+                item = Map(source, nodeName, string.Empty, collectionItemNodeNamespacePrefix, index++);
                 if (item != null)
                 {
                     list.Add(item);
@@ -241,12 +240,12 @@
 
         protected virtual void InitializeXmlType(string xmlPrefix, string xmlNamespace, string xmlType)
         {
-            this.XmlType = xmlType;
-            this.XmlTypeNamespace = xmlNamespace;
-            this.XmlTypeNamespacePrefix = xmlPrefix;
+            XmlType = xmlType;
+            XmlTypeNamespace = xmlNamespace;
+            XmlTypeNamespacePrefix = xmlPrefix;
 
-            this.Engine.RegisterNamespace(xmlPrefix, xmlNamespace);
-            this.Engine.RegisterXmlType(xmlNamespace, xmlType, typeof(TDestination));
+            Engine.RegisterNamespace(xmlPrefix, xmlNamespace);
+            Engine.RegisterXmlType(xmlNamespace, xmlType, typeof(TDestination));
         }
 
         /// <summary>
@@ -258,12 +257,12 @@
         /// <returns></returns>
         protected XmlPropertyMapExpression InitializeMap(Expression<Func<TDestination, object>> propertyExpression, string xpath = "", string xmlNamespace = "")
         {
-            return this.InitializeMap(ReflectionExtension.GetPropertyInfo(propertyExpression), xpath);
+            return InitializeMap(ReflectionExtension.GetPropertyInfo(propertyExpression), xpath);
         }
 
         protected XmlPropertyMapExpression InitializeMap(PropertyInfo propertyInfo, string xpath = "")
         {
-            return this.InitializeMap(propertyInfo, this.DeterminMapTarget(propertyInfo.PropertyType), xpath);
+            return InitializeMap(propertyInfo, DeterminMapTarget(propertyInfo.PropertyType), xpath);
         }
 
         protected XmlPropertyMapExpression InitializeMap(PropertyInfo propertyInfo, XmlMapTarget target, string xpath = "")
@@ -278,17 +277,17 @@
 
             map.XPath = xpath;
 
-            this.Mappings.Add(map);
+            Mappings.Add(map);
 
             return new XmlPropertyMapExpression(map);
         }
 
         protected TDestination Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index)
         {
-            this.RegisterNamespace(source, this.NamespacePrefix, this.Namespace);
+            RegisterNamespace(source, NamespacePrefix, Namespace);
 
             // Namespace and node provide context, however the prefix if present overrides the node's actual namespace
-            source.Push(nodeName, this.Namespace, xmlPrefix, index);
+            source.Push(nodeName, Namespace, xmlPrefix, index);
             try
             {
                 if (!source.CurrentNode())
@@ -296,28 +295,28 @@
                     return null;
                 }
 
-                this.RegisterNamespace(source, XsiPrefix, XsiNamespace);
+                RegisterNamespace(source, XsiPrefix, XsiNamespace);
                 var xmlType = source.ToString("type", XsiPrefix, isAttribute: true);
 
                 TDestination destination;
 
                 // This mapper can handle it if there's no type specified or it's our type
-                if (string.IsNullOrEmpty(xmlType) || string.IsNullOrEmpty(this.XmlType))
+                if (string.IsNullOrEmpty(xmlType) || string.IsNullOrEmpty(XmlType))
                 {
-                    destination = this.CreateAndMap(source);
+                    destination = CreateAndMap(source);
                 }
                 else
                 {
-                    var t = this.XmlTypeInfo(source, xmlType);
-                    if (t.Item1 == this.XmlTypeNamespace && t.Item2 == this.XmlType)
+                    var t = XmlTypeInfo(source, xmlType);
+                    if (t.Item1 == XmlTypeNamespace && t.Item2 == XmlType)
                     {
                         // We're responsible
-                        destination = this.CreateAndMap(source);
+                        destination = CreateAndMap(source);
                     }
                     else
                     {
                         // Need a mapper for this xsi:type
-                        destination = this.XsiMapper(source, nodeName, t.Item1, t.Item2, index);
+                        destination = XsiMapper(source, nodeName, t.Item1, t.Item2, index);
                     }
                 }
 
@@ -337,7 +336,7 @@
         /// <param name="xmlNamespace">XML namespace to register</param>
         protected void RegisterNamespace(string xmlPrefix, string xmlNamespace)
         {
-            this.namespaces.Add(new Tuple<string, string>(xmlPrefix, xmlNamespace));
+            namespaces.Add(new Tuple<string, string>(xmlPrefix, xmlNamespace));
         }
         
         /// <summary>
@@ -347,9 +346,9 @@
         /// <returns>Empty string if no namespace, existing prefix if already defined, namespacePrefix otherwise</returns>
         protected void RegisterNamespaces(XPathProcessor source)
         {
-            foreach (var nst in this.namespaces)
+            foreach (var nst in namespaces)
             {
-                this.RegisterNamespace(source, nst.Item1, nst.Item2);
+                RegisterNamespace(source, nst.Item1, nst.Item2);
             }
         }
 
@@ -382,15 +381,15 @@
             try
             {
                 // NB Use the current namespace for the node name, not the target mapper's
-                var destination = this.Engine.Map<XPathProcessor, TDestination>(
-                    source, nodeName, xmlNamespace, xmlType, this.NamespacePrefix, index);
+                var destination = Engine.Map<XPathProcessor, TDestination>(
+                    source, nodeName, xmlNamespace, xmlType, NamespacePrefix, index);
 
                 return destination;
             }
             finally
             {
                 // Put it back where it was
-                source.Push(nodeName, xmlNamespace, this.NamespacePrefix, index);
+                source.Push(nodeName, xmlNamespace, NamespacePrefix, index);
             }
         }
 
@@ -457,14 +456,14 @@
 
         private TDestination CreateAndMap(XPathProcessor source)
         {
-            var destination = this.CreateDestination();
+            var destination = CreateDestination();
             var pb = destination as INullableProperties;
             if (pb != null)
             {
                 pb.NullProperties.Loading = true;
             }
 
-            this.Map(source, destination);
+            Map(source, destination);
 
             if (pb != null)
             {
