@@ -14,6 +14,7 @@
     using NUnit.Framework;
 
     [TestFixture]
+    [Ignore]
     public class RegionedAppFabricSearchCacheTests
     {
         private static DataCache cache;
@@ -22,7 +23,7 @@
         private const string RegionName = "RegionedAppFabricSearchCacheTestsRegion";
 
         [TestFixtureSetUp]
-        public static void TestSetUp(TestContext context)
+        public static void TestSetUp()
         {
             var config = new DataCacheFactoryConfiguration
             {
@@ -43,7 +44,6 @@
         }
 
         [Test]
-        [Ignore]
         public void ShouldCreateRegionIfNotAlreadyThere()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(10), RegionName);
@@ -54,7 +54,6 @@
         }
 
         [Test]
-        [Ignore]
         public void ShouldExpireAsPerPolicy()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(5), RegionName);
@@ -71,7 +70,6 @@
         }
 
         [Test]
-        [Ignore]
         public void ShouldNotExpireIfPolicySaysInfinite()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(ObjectCache.InfiniteAbsoluteExpiration.Second), RegionName);
@@ -88,7 +86,6 @@
         }
 
         [Test]
-        [Ignore]
         public void ShouldReturnCachedValue()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(15), RegionName);
@@ -105,7 +102,6 @@
         }
 
         [Test]
-        [Ignore]
         public void ShouldSwallowKeyAlreadyExists()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(15), RegionName);
@@ -120,7 +116,6 @@
         }
 
         [Test]
-        [Ignore]
         public void ShouldClearRegionOnCallingClear()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(150), RegionName);
