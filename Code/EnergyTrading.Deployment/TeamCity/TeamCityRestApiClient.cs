@@ -41,8 +41,8 @@
 
             try
             {
-                var fromBuild = this.client.BuildConfigsByConfigIdAndTag(buildConfigId, fromTag);
-                var untilBuild = this.client.BuildConfigsByConfigIdAndTag(buildConfigId, untilTag);
+                var fromBuild = this.client.Builds.ByConfigIdAndTag(buildConfigId, fromTag);
+                var untilBuild = this.client.Builds.ByConfigIdAndTag(buildConfigId, untilTag);
                 return this.AllChangeLogsForBuildBetweenDates(buildConfigId,
                     fromBuild.OrderByDescending(b => b.StartDate).First().StartDate,
                     untilBuild.OrderByDescending(b => b.FinishDate).First().StartDate,
@@ -60,7 +60,7 @@
             this.Start();
             try
             {
-                var builds = this.client.BuildConfigsByConfigIdAndTag(buildConfigId, tag);
+                var builds = this.client.Builds.ByConfigIdAndTag(buildConfigId, tag);
                 return builds.OrderByDescending(b => b.FinishDate).First().Number;
             }
             catch (Exception e)
@@ -71,11 +71,11 @@
 
         private List<SvnChangeLog> AllChangeLogsForBuildBetweenDates(string buildConfigId, DateTime from, DateTime until, int maxCount, string[] unwantedUsernames = null)
         {
-            var changes = this.client.ChangeDetailsByBuildConfigId(buildConfigId, maxCount);
+            var changes = this.client.Changes.ByBuildConfigId(buildConfigId).Take(maxCount);
             var result = new List<SvnChangeLog>();
             foreach (var change in changes)
             {
-                var details = this.client.ChangeDetailsByChangeId(change.Id);
+                var details = this.client.Changes.ByChangeId(change.Id);
                 if ((details.Date > from && details.Date <= until) && (unwantedUsernames == null || !unwantedUsernames.Contains(details.Username)))
                 {
                     var changeLog = new SvnChangeLog

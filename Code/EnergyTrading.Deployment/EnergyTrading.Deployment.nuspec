@@ -6,16 +6,16 @@
         <description>Deployment utilities integrates with source control, TeamCity and Confluence</description>
         <version>$version$</version>
         <releaseNotes>none</releaseNotes>
-        <copyright>Copyright RWE 2012</copyright>
+        <copyright></copyright>
         <authors>RWE</authors>
         <owners>Integration Architecture</owners>
         <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.Deployment</projectUrl>        
         <tags>EnergyTrading Deployment .net40</tags>
         <dependencies>
             <group targetFramework="net40">
-                <dependency id="EasyHttp" version="[1.4.7.0]"  />
-                <dependency id="JsonFx" version="[2.0.1106.2610]" />
-                <dependency id="TeamCitySharp" version="[0.3.2.999]" />                
+                <dependency id="EasyHttp" version=""  />
+                <dependency id="JsonFx" version="" />
+                <dependency id="TeamCitySharp" version="" />                
             </group>
         </dependencies>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
