@@ -163,12 +163,6 @@
             PopPath();
         }
 
-        [Obsolete("Use ToString and specify isAttribute=true")]
-        public virtual string AttributeToString(string xpath, string prefix = "", string defaultValue = null)
-        {
-            return ToString(xpath, prefix, true, defaultValue);
-        }
-
         /// <summary>
         /// Gets whether there is a current node.
         /// </summary>
@@ -230,15 +224,6 @@
             var node = Navigator.Select(qualifiedPath, XmlNamespaceManager);
 
             return node.MoveNext();
-        }
-
-        [Obsolete("Use HasElement or HasAttribute")]
-        public virtual bool HasElementOrAttribute(
-            string xpath,
-            string prefix = "",
-            bool isAttribute = false)
-        {
-            return isAttribute ? HasElement(xpath, prefix) : HasAttribute(xpath, prefix);
         }
 
         /// <summary>

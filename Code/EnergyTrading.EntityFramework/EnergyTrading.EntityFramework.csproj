@@ -55,7 +55,6 @@
     <Compile Include="Data\EntityFramework\DbContextProvider.cs" />
     <Compile Include="Data\EntityFramework\DbSetExtensions.cs" />
     <Compile Include="Data\EntityFramework\DbSetRepository.cs" />
-    <Compile Include="Data\EntityFramework\DbSetRepository.Generic.cs" />
     <Compile Include="Data\EntityFramework\EntityFrameworkExceptionFactory.cs" />
     <Compile Include="Data\EntityFramework\IDbContextProvider.cs" />
     <Compile Include="Data\EntityFramework\IDbSetRepository.cs" />

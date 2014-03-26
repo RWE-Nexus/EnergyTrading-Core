@@ -1,11 +1,11 @@
 namespace EnergyTrading.Test
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public abstract class SpecBase
     {
-        [TestInitialize]
+        [SetUp]
         public virtual void MainSetup()
         {
             this.Initialize();
@@ -13,7 +13,7 @@ namespace EnergyTrading.Test
             this.Because_of();
         }
 
-        [TestCleanup]
+        [TearDown]
         public virtual void MainTeardown()
         {
             this.Cleanup();

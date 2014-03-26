@@ -5,12 +5,12 @@
     using EnergyTrading.Concurrency;
     using EnergyTrading.Test;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class VectorClockFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void IsBeforeDifferentElements()
         {
             var p = new VectorClock();
@@ -23,7 +23,7 @@
             Assert.AreEqual(ConcurrencyComparison.Before, p.Compare(q));
         }
 
-        [TestMethod]
+        [Test]
         public void IsBeforeSameElements()
         {
             var p = new VectorClock();
@@ -36,7 +36,7 @@
             Assert.AreEqual(ConcurrencyComparison.Before, p.Compare(q));
         }
 
-        [TestMethod]
+        [Test]
         public void IsAfterDifferent()
         {
             var p = new VectorClock();
@@ -49,7 +49,7 @@
             Assert.AreEqual(ConcurrencyComparison.After, q.Compare(p));
         }
 
-        [TestMethod]
+        [Test]
         public void IsAfterSameElements()
         {
             var p = new VectorClock();
@@ -62,7 +62,7 @@
             Assert.AreEqual(ConcurrencyComparison.After, q.Compare(p));
         }
 
-        [TestMethod]
+        [Test]
         public void IsEqual()
         {
             var p = new VectorClock();
@@ -76,7 +76,7 @@
             Assert.AreEqual(ConcurrencyComparison.Equal, p.Compare(q));
         }
 
-        [TestMethod]
+        [Test]
         public void IsConcurrent()
         {
             var p = new VectorClock();
@@ -92,7 +92,7 @@
             Assert.AreEqual(ConcurrencyComparison.Concurrent, p.Compare(q));   
         }
 
-        [TestMethod]
+        [Test]
         public void IsConcurrentAgainstNull()
         {
             var p = new VectorClock();
@@ -103,7 +103,7 @@
             Assert.AreEqual(ConcurrencyComparison.Concurrent, p.Compare(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Max()
         {
             var d1 = new Dictionary<int, int> { { 1, 1 }, {2, 1}, {3, 3}, {4, 4} };
@@ -117,7 +117,7 @@
             Assert.IsTrue(expected.Equals(candidate));
         }
 
-        [TestMethod]
+        [Test]
         public void MaxNull()
         {
             var d1 = new Dictionary<int, int> { { 1, 1 }, { 2, 1 }, { 3, 3 }, { 4, 4 } };
@@ -129,7 +129,7 @@
             Assert.IsTrue(expected.Equals(candidate));
         }
 
-        [TestMethod]
+        [Test]
         public void CheckToString()
         {
             var d1 = new Dictionary<int, int> { { 1, 1 }, { 2, 2 } };
@@ -139,7 +139,7 @@
             Assert.AreEqual(expected, p.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void ObjectEquals()
         {
             var p = new VectorClock();
@@ -153,7 +153,7 @@
             Assert.IsTrue(p.Equals(c));
         }
 
-        [TestMethod]
+        [Test]
         public void NullObjectEquals()
         {
             var p = new VectorClock();
@@ -164,7 +164,7 @@
             Assert.IsFalse(p.Equals(c));
         }
 
-        [TestMethod]
+        [Test]
         public void TypedEquals()
         {
             var p = new VectorClock();
@@ -176,7 +176,7 @@
             Assert.IsTrue(p.Equals(q));
         }
 
-        [TestMethod]
+        [Test]
         public void NullTypedEquals()
         {
             var p = new VectorClock();

@@ -8,14 +8,14 @@
     using EnergyTrading.Caching;
     using EnergyTrading.Configuration;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class AbsoluteCacheItemPolicyFactoryFixture
     {
-        [TestMethod]
+        [Test]
         public void ShouldCreateAbsoluteCacheItemPolicyBasedOnTheConfiguration()
         {
             const string PolicyKey = "MDM.Market";
@@ -44,7 +44,7 @@
             Assert.IsNull(cache[marketKey]);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldExpireCacheAfterConfigurableTime()
         {
             const string PolicyKey = "MDM.Market";

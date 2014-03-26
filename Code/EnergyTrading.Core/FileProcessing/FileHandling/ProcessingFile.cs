@@ -1,7 +1,5 @@
 namespace EnergyTrading.FileProcessing.FileHandling
 {
-    using System;
-
     /// <summary>
     /// Metadata about a file we are processing.
     /// </summary>
@@ -15,21 +13,9 @@ namespace EnergyTrading.FileProcessing.FileHandling
         /// <param name="originalFullPathToFile">Original location of the file FileInfo.FullName</param>
         public ProcessingFile(string currentFilePath, string originalFilePath, string originalFullPathToFile)
         {
-            this.CurrentFilePath = currentFilePath;
-            this.OriginalFilePath = originalFilePath;
-            this.FullPathOfOriginalFile = originalFullPathToFile;
-        }
-
-        [Obsolete("Use CurrentFilePath")]
-        public string CurrentLocation
-        {
-            get { return this.CurrentFilePath; }
-        }
-
-        [Obsolete("Use OriginalFilePath")]
-        public string OriginalFilename
-        {
-            get { return this.OriginalFilePath; }
+            CurrentFilePath = currentFilePath;
+            OriginalFilePath = originalFilePath;
+            FullPathOfOriginalFile = originalFullPathToFile;
         }
 
         /// <summary>

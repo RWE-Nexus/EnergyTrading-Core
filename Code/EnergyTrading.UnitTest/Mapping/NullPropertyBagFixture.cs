@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class NullPropertyBagFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void NotPresentPropertyReturnsFalse()
         {
             var bag = new NullPropertyBag();
@@ -15,7 +15,7 @@
             Assert.IsFalse(bag["Profit"]);
         }
 
-        [TestMethod]
+        [Test]
         public void AssignedPropertyReportsAsTrue()
         {
             var bag = new NullPropertyBag();
@@ -24,7 +24,7 @@
             Assert.IsTrue(bag["Profit"]);            
         }
 
-        [TestMethod]
+        [Test]
         public void AssignedPropertyClearedReportsAsFalse()
         {
             var bag = new NullPropertyBag();
@@ -34,7 +34,7 @@
             Assert.IsFalse(bag["Profit"]);
         }
 
-        [TestMethod]
+        [Test]
         public void WhenLoadingAssignedIsIgnored()
         {
             var bag = new NullPropertyBag();
@@ -46,7 +46,7 @@
             Assert.IsTrue(bag["Profit"]); 
         }
 
-        [TestMethod]
+        [Test]
         public void WhenNotLoadingAssignedClears()
         {
             var bag = new NullPropertyBag();

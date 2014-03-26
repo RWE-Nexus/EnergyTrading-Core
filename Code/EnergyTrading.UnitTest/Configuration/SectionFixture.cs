@@ -5,12 +5,12 @@
 
     using EnergyTrading.Test;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class SectionFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void SimpleSection()
         {
             var section = (SampleSection)ConfigurationManager.GetSection("simpleSample");

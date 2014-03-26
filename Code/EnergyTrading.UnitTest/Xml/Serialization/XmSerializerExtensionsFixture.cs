@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Xml.Serialization;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class XmSerializerExtensionsFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void RoundTripFileXmlSerialization()
         {
             var animal = new Animal { Id = 1, Name = "Fido", Tricks = "Bark" };
@@ -20,7 +20,7 @@
             this.Check(animal, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RoundTripStringXmlSerialization()
         {
             var animal = new Animal { Id = 1, Name = "Fido", Tricks = "Bark" };
@@ -32,7 +32,7 @@
             this.Check(animal, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RoundTripFileDataContractSerialization()
         {
             var animal = new Animal { Id = 1, Name = "Fido", Tricks = "Bark" };
@@ -45,7 +45,7 @@
             this.Check(animal, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RoundTripStringDataContractSerialization()
         {
             var animal = new Animal { Id = 1, Name = "Fido", Tricks = "Bark" };
@@ -57,7 +57,7 @@
             this.Check(animal, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RoundTripDataContractSerializationWithoutGeneric()
         {
             var animal = new Animal { Id = 1, Name = "Fido", Tricks = "Bark" };

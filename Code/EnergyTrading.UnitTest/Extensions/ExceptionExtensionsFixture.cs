@@ -5,12 +5,12 @@
 
     using EnergyTrading.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class ExceptionExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void AddThrownNullListFuncReturns()
         {
             var count = 0;
@@ -18,14 +18,14 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ExceptionsAreThrownIfListIsNull()
         {
             ExceptionExtensions.AddThrown(null, () => { throw new ArgumentOutOfRangeException(); });
         }
 
-        [TestMethod]
+        [Test]
         public void ThrownExceptionsAreAddedToListByDefault()
         {
             var ex = new ArgumentOutOfRangeException();
@@ -35,7 +35,7 @@
             Assert.AreSame(ex, list[0]);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void HandledExceptionTypesCanBeRestricted()
         {

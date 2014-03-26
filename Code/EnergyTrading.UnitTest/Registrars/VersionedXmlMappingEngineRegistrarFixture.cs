@@ -5,7 +5,7 @@
     using EnergyTrading.UnitTest.Mapping.Examples;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
     using EnergyTrading.Registrars;
@@ -15,10 +15,10 @@
     using EntityXmlMapper = EnergyTrading.UnitTest.Registrars.Maps.Common.EntityXmlMapper;
     using OwnerXmlMapper = EnergyTrading.UnitTest.Registrars.Maps.OwnerXmlMapper;
 
-    [TestClass]
+    [TestFixture]
     public class VersionedXmlMappingEngineRegistrarFixture
     {
-        [TestMethod]
+        [Test]
         public void ResolveV1EngineAndMappers()
         {
             var container = new UnityContainer();
@@ -39,7 +39,7 @@
             engine.ResolveMapper<XPathProcessor, Child, ChildXmlMapper>();
         }
 
-        [TestMethod]
+        [Test]
         public void ResolveV2EngineAndMappers()
         {
             var container = new UnityContainer();
@@ -60,7 +60,7 @@
             engine.ResolveMapper<XPathProcessor, Child, ChildXmlMapper>();
         }
 
-        [TestMethod]
+        [Test]
         public void ResolveV2R1EngineAndMappers()
         {
             var container = new UnityContainer();
@@ -81,7 +81,7 @@
             engine.ResolveMapper<XPathProcessor, Child, ChildXmlMapper>();
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveV2R2EngineAndMappers()
         {
             var container = new UnityContainer();

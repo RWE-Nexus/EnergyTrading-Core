@@ -4,12 +4,12 @@
 
     using EnergyTrading.Contracts.Search;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class SearchBuilderFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void CreateAndSearch()
         {
             var expected = new Search
@@ -23,7 +23,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void CreateOrMappingSearch()
         {
             var expected = new Search
@@ -37,7 +37,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void AssignPageSize()
         {
             var search = new Search();
@@ -46,7 +46,7 @@
             Assert.AreEqual(10, search.SearchOptions.ResultsPerPage, "ResultsPerPage differs");
         }
 
-        [TestMethod]
+        [Test]
         public void AssignNoPageSize()
         {
             var search = new Search();
@@ -55,7 +55,7 @@
             Assert.IsNull(search.SearchOptions.ResultsPerPage, "ResultsPerPage differs");
         }
 
-        [TestMethod]
+        [Test]
         public void AssignMultiPage()
         {
             var search = new Search();
@@ -64,7 +64,7 @@
             Assert.AreEqual(true, search.SearchOptions.MultiPage, "MultiPage differs");
         }
 
-        [TestMethod]
+        [Test]
         public void AssignNotMultiPage()
         {
             var search = new Search();

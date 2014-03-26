@@ -6,14 +6,14 @@
 
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class LocatorXmlMappingEngineFactoryFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void FindSuccessful()
         {
             var expected = new Mock<IXmlMappingEngine>();
@@ -25,7 +25,7 @@
             Assert.AreSame(expected.Object, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FindUnsuccessful()
         {
             var factory = new LocatorXmlMappingEngineFactory(this.Container.Resolve<IServiceLocator>());
@@ -41,7 +41,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryFindSuccessful()
         {
             var expected = new Mock<IXmlMappingEngine>();
@@ -55,7 +55,7 @@
             Assert.AreSame(expected.Object, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void TryFindUnsuccessful()
         {
             var factory = new LocatorXmlMappingEngineFactory(this.Container.Resolve<IServiceLocator>());

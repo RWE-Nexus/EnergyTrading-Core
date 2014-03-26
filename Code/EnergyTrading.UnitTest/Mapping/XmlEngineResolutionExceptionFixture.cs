@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class XmlEngineResolutionExceptionFixture
     {
-        [TestMethod]
+        [Test]
         public void TestProperties()
         {
             var exception = new XmlEngineResolutionException(XmlEngineResolutionErrorCode.UnexpectedSchema, "asmVersion");
@@ -15,7 +15,7 @@
             Assert.AreEqual(XmlEngineResolutionErrorCode.UnexpectedSchema, exception.Code);
         }
 
-        [TestMethod]
+        [Test]
         public void TestUndeterminedErrorMessage()
         {
             var exception = new XmlEngineResolutionException(XmlEngineResolutionErrorCode.Undetermined, "asmVersion");
@@ -23,7 +23,7 @@
             Assert.IsTrue(exception.Message.Contains("Undetermined"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestUnexpectedSchemaErrorMessage()
         {
             var exception = new XmlEngineResolutionException(XmlEngineResolutionErrorCode.UnexpectedSchema, "asmVersion");
@@ -32,7 +32,7 @@
             Assert.IsFalse(exception.Message.Contains("Undetermined"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestHigherErrorMessage()
         {
             var exception = new XmlEngineResolutionException(XmlEngineResolutionErrorCode.MessageVersionTooHigh, "admVersion");
@@ -41,7 +41,7 @@
             Assert.IsFalse(exception.Message.Contains("lower"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestLowerErrorMessage()
         {
             var exception = new XmlEngineResolutionException(XmlEngineResolutionErrorCode.MessageVersionTooLow, "admVersion");
@@ -50,7 +50,7 @@
             Assert.IsFalse(exception.Message.Contains("higher"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestHigherAndLowerErrorMessage()
         {
             var exception = new XmlEngineResolutionException(XmlEngineResolutionErrorCode.MessageVersionTooHigh | XmlEngineResolutionErrorCode.MessageVersionTooLow, "admVersion");

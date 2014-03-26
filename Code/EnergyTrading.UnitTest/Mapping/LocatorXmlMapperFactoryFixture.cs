@@ -7,14 +7,14 @@
     using EnergyTrading.UnitTest.Mapping.Examples;
 
     using Microsoft.Practices.ServiceLocation;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class LocatorXmlMapperFactoryFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void FindMapperViaGeneric()
         {
             var locator = new Mock<IServiceLocator>();
@@ -29,7 +29,7 @@
             Assert.IsTrue(candidate is ParentXmlMapper);
         }
 
-        [TestMethod]
+        [Test]
         public void FindMapperViaTypes()
         {
             var locator = new Mock<IServiceLocator>();
@@ -44,7 +44,7 @@
             Assert.IsTrue(candidate is ParentXmlMapper);
         }
 
-        [TestMethod]
+        [Test]
         public void LocatorFailureThrowsMappingException()
         {
             var locator = new Mock<IServiceLocator>();
@@ -65,7 +65,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void RegistrationNotSupported()
         {
             var locator = new Mock<IServiceLocator>();

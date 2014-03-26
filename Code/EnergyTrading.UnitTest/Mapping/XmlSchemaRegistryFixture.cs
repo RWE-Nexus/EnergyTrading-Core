@@ -4,12 +4,12 @@
 
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class XmlSchemaRegistryFixture
     {
-        [TestMethod]
+        [Test]
         public void ExistsReportsMissingSchema()
         {
             // Arrange
@@ -22,7 +22,7 @@
             Assert.IsFalse(candidate, "Test schema present");
         }
 
-        [TestMethod]
+        [Test]
         public void ExistsReportsSchema()
         {
             // Arrange
@@ -36,7 +36,7 @@
             Assert.IsTrue(candidate, "Test schema not present");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchemasReportsAllSchemas()
         {
             // Arrange

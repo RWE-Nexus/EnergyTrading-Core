@@ -2,9 +2,9 @@
 {
     using System;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class ScratchEntityXmlMapperAllDetailsFixture : ScratchEntityXmlMapperFixture
     {
         protected override string CreateExpectedXml()

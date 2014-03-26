@@ -8,7 +8,7 @@
 
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
 
@@ -30,18 +30,18 @@
         {
             get
             {
-                if (this.checkerFactory == null)
+                if (checkerFactory == null)
                 {
-                    this.checkerFactory = this.CreateCheckerFactory();
-                    if (this.checkerFactory == null)
+                    checkerFactory = CreateCheckerFactory();
+                    if (checkerFactory == null)
                     {
                         throw new NotSupportedException("No CheckerFactory assigned to fixture");
                     }
 
-                    this.ContainerContext.RegisterInstance(this.checkerFactory);
+                    ContainerContext.RegisterInstance(checkerFactory);
                 }
 
-                return this.checkerFactory;
+                return checkerFactory;
             }
         }
 
@@ -53,18 +53,18 @@
         {
             get
             {
-                if (this.entityFactory == null)
+                if (entityFactory == null)
                 {
-                    this.entityFactory = this.CreateEntityFactory();
-                    if (this.entityFactory == null)
+                    entityFactory = CreateEntityFactory();
+                    if (entityFactory == null)
                     {
                         throw new NotSupportedException("No EntityFactory assigned to fixture");
                     }
 
-                    this.ContainerContext.RegisterInstance(this.entityFactory);
+                    ContainerContext.RegisterInstance(entityFactory);
                 }
 
-                return this.entityFactory;
+                return entityFactory;
             }
         }
 
@@ -73,8 +73,8 @@
         /// </summary>
         protected IUnityContainer Container
         {
-            get { return this.container ?? (this.container = this.CreateContainer()); }
-            set { this.container = value; }
+            get { return container ?? (container = CreateContainer()); }
+            set { container = value; }
         }
 
         /// <summary>
@@ -82,7 +82,7 @@
         /// </summary>
         protected IServiceLocator ServiceLocator
         {
-            get { return this.Container.Resolve<IServiceLocator>(); }
+            get { return Container.Resolve<IServiceLocator>(); }
         }
 
         /// <summary>
@@ -90,28 +90,28 @@
         /// </summary>
         protected IContainerContext ContainerContext
         {
-            get { return this.containerContext ?? (this.containerContext = this.CreateContainerContext()); }
-            set { this.containerContext = value; }
+            get { return containerContext ?? (containerContext = CreateContainerContext()); }
+            set { containerContext = value; }
         }
 
         /// <summary>
         /// Pre-test set up.
         /// </summary>
-        [TestInitialize]
+        [SetUp]
         public virtual void Setup()
         {
-            this.TidyUp();
-            this.OnSetup();
+            TidyUp();
+            OnSetup();
         }
 
         /// <summary>
         /// Post-test tidy up
         /// </summary>
-        [TestCleanup]
+        [TearDown]
         public virtual void TearDown()
         {
-            this.OnTearDown();
-            this.TidyUp();
+            OnTearDown();
+            TidyUp();
         }
 
         /// <summary>
@@ -155,8 +155,8 @@
         /// </summary>
         protected IContainerContext CreateContainerContext()
         {
-            var context = new UnityContainerContext(this.Container);
-            this.Container.RegisterInstance<IContainerContext>(context);
+            var context = new UnityContainerContext(Container);
+            Container.RegisterInstance<IContainerContext>(context);
 
             return context;
         }
@@ -169,7 +169,7 @@
         /// <param name="candidate"></param>
         protected void Check<TEntity>(TEntity expected, TEntity candidate)
         {
-            this.Check(expected, candidate, typeof(TEntity).Name);
+            Check(expected, candidate, typeof(TEntity).Name);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@
         /// <param name="objectName"></param>
         protected void Check<TEntity>(TEntity expected, TEntity candidate, string objectName)
         {
-            this.CheckerFactory.Check(expected, candidate, objectName);
+            CheckerFactory.Check(expected, candidate, objectName);
         }
 
         /// <summary>
@@ -192,7 +192,7 @@
         /// <param name="candidateList"></param>
         protected void Check<T>(IList<T> expectedList, IList<T> candidateList)
         {
-            this.Check(expectedList, candidateList, string.Empty);
+            Check(expectedList, candidateList, string.Empty);
         }
 
         /// <summary>
@@ -204,7 +204,7 @@
         /// <param name="objectName"></param>
         protected void Check<T>(IList<T> expectedList, IList<T> candidateList, string objectName)
         {
-            this.CheckerFactory.Check(expectedList as IEnumerable<T>, candidateList, objectName);
+            CheckerFactory.Check(expectedList as IEnumerable<T>, candidateList, objectName);
         }
 
         /// <summary>
@@ -215,7 +215,7 @@
         /// <param name="candidateList"></param>
         protected void Check<T>(ICollection<T> expectedList, ICollection<T> candidateList)
         {
-            this.Check(expectedList, candidateList, string.Empty);
+            Check(expectedList, candidateList, string.Empty);
         }
 
         /// <summary>
@@ -227,7 +227,7 @@
         /// <param name="objectName"></param>
         protected void Check<T>(ICollection<T> expectedList, ICollection<T> candidateList, string objectName)
         {
-            this.CheckerFactory.Check(expectedList as IEnumerable<T>, candidateList, objectName);
+            CheckerFactory.Check(expectedList as IEnumerable<T>, candidateList, objectName);
         }
 
         /// <summary>
@@ -238,7 +238,7 @@
         /// <param name="candidateList"></param>
         protected void Check<T>(IEnumerable<T> expectedList, IEnumerable<T> candidateList)
         {
-            this.Check(expectedList, candidateList, string.Empty);
+            Check(expectedList, candidateList, string.Empty);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@
         /// <param name="objectName"></param>
         protected void Check<T>(IEnumerable<T> expectedList, IEnumerable<T> candidateList, string objectName)
         {
-            this.CheckerFactory.Check(expectedList, candidateList, objectName);
+            CheckerFactory.Check(expectedList, candidateList, objectName);
         }
 
         /// <summary>
@@ -260,7 +260,7 @@
         /// <returns>The default instance of TEntity created by the factory.</returns>
         protected TEntity Default<TEntity>()
         {
-            return this.EntityFactory.Default<TEntity>();
+            return EntityFactory.Default<TEntity>();
         }
 
         /// <summary>
@@ -271,7 +271,7 @@
         /// <returns>The instance of TEntity with the specified id created by the factory.</returns>
         protected TEntity Default<TEntity>(object id)
         {
-            return this.EntityFactory.Default<TEntity>(id);
+            return EntityFactory.Default<TEntity>(id);
         }
 
         /// <summary>
@@ -282,7 +282,7 @@
         /// <returns></returns>
         protected TEntity Default<TEntity>(bool persist)
         {
-            return this.EntityFactory.Default<TEntity>(persist);
+            return EntityFactory.Default<TEntity>(persist);
         }
 
         /// <summary>
@@ -295,7 +295,7 @@
         /// <remarks>The parameter order is to keep </remarks>
         protected TEntity Default<TEntity>(object id, bool persist)
         {
-            return this.EntityFactory.Default<TEntity>(persist, id);
+            return EntityFactory.Default<TEntity>(persist, id);
         }
 
         /// <summary>
@@ -307,7 +307,7 @@
         /// <returns></returns>
         protected TEntity Default<TEntity>(params object[] values)
         {
-            return this.EntityFactory.Default<TEntity>(values);
+            return EntityFactory.Default<TEntity>(values);
         }
 
         /// <summary>
@@ -317,7 +317,7 @@
         /// <param name="entity">The entity to change</param>
         protected void Change<TEntity>(TEntity entity)
         {
-            this.EntityFactory.Change(entity);
+            EntityFactory.Change(entity);
         }
 
         /// <summary>
@@ -340,10 +340,10 @@
         protected virtual void TidyUp()
         {
             // Ensure that we wipe down the core objects - NUnit re-uses the instance for all tests
-            this.entityFactory = null;
-            this.checkerFactory = null;
-            this.container = null;
-            this.containerContext = null;
+            entityFactory = null;
+            checkerFactory = null;
+            container = null;
+            containerContext = null;
         }
 
         /// <summary>

@@ -1,13 +1,20 @@
 ﻿namespace EnergyTrading.UnitTest.Mapping.Examples
 {
+    using NUnit.Framework;
+
+    [TestFixture]
+    [Ignore("Need example XML")]
     public class CatXmlMapperAllDetailsFixture : CatXmlMapperFixture
     {
         protected override string CreateExpectedXml()
         {
-            return @"<monitoring:Metric monitoring:Channel=""Topic: DEV.MonitoredEvent.Unenriched.New"" xmlns:monitoring=""http://rwe.com/schema/monitoring/1"">
-                       <monitoring:MessagesPublished xmlns:monitoring=""http://rwe.com/schema/monitoring/1"">5</monitoring:MessagesPublished>
-                       <monitoring:MessagesReceived xmlns:monitoring=""http://rwe.com/schema/monitoring/1"">3</monitoring:MessagesReceived>
-                     </monitoring:Metric>";
+            return @"<Entity>
+                        <Id>1</Id>
+                        <Id2>A</Id2>
+                        <Name>Test</Name>
+                        <Name2>Bob</Name2>
+                        <Total>3</Total>
+                     </Entity>";
         }
 
         protected override Cat CreateExpectedDto()

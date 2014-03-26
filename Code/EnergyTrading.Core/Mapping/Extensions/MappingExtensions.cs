@@ -9,20 +9,6 @@
     /// </summary>
     public static class MappingExtensions
     {
-        /// <summary>
-        /// Append some content to a node.
-        /// </summary>
-        /// <param name="element"></param>
-        /// <param name="elements"></param>
-        [Obsolete("Use LinqExtensions.Add")]
-        public static void Append(this XElement element, IEnumerable<object> elements)
-        {
-            foreach (var x in elements)
-            {
-                element.Add(x);
-            }
-        }
-
         public static XElement Map<TSource>(this IXmlMappingEngine engine, TSource source)
         {
             return engine.Map<TSource, XElement>(source);

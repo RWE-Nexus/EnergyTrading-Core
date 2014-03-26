@@ -5,12 +5,12 @@
     using EnergyTrading.Configuration;
     using EnergyTrading.Test;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class WcfServiceConfigurationSectionFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void Load()
         {
             var section = (WcfServiceConfigurationSection)ConfigurationManager.GetSection("wcfServices");

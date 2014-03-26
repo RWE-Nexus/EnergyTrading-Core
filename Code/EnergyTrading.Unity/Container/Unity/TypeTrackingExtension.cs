@@ -99,19 +99,6 @@
         /// <param name="name">The name associated with the type.</param>
         /// <param name="defaultValue">The default value to return if type not found.</param>
         /// <returns>An object of type <see typeparamref="T"/> if found, or the <see paramref="defaultValue"/> if not.</returns>
-        [Obsolete("Use TryResolve<T>(T, string)")] 
-        public T TryResolve<T>(string name, T defaultValue)
-        {
-            return !CanResolve<T>(name) ? defaultValue : Container.Resolve<T>(name);
-        }
-
-        /// <summary>
-        /// Tries to resolve the type with the specified of name, returning the passed in defaultValue if not found.
-        /// </summary>
-        /// <typeparam name="T">The type to try and resolve.</typeparam>
-        /// <param name="name">The name associated with the type.</param>
-        /// <param name="defaultValue">The default value to return if type not found.</param>
-        /// <returns>An object of type <see typeparamref="T"/> if found, or the <see paramref="defaultValue"/> if not.</returns>
         public T TryResolve<T>(T defaultValue, string name = null)
         {
             return !CanResolve<T>(name) ? defaultValue : Container.Resolve<T>(name);

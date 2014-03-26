@@ -10,9 +10,11 @@
     using EnergyTrading.Search;
 
     using Microsoft.ApplicationServer.Caching;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [TestClass]
+    using NUnit.Framework;
+
+    [TestFixture]
+    [Ignore]
     public class RegionedAppFabricSearchCacheTests
     {
         private static DataCache cache;
@@ -20,29 +22,28 @@
         private const string CacheName = "EnergyTradingCoreTesting";
         private const string RegionName = "RegionedAppFabricSearchCacheTestsRegion";
 
-        [ClassInitialize]
-        public static void TestSetUp(TestContext context)
+        [TestFixtureSetUp]
+        public static void TestSetUp()
         {
             var config = new DataCacheFactoryConfiguration
             {
-                Servers =
-                    new List<DataCacheServerEndpoint>
-                                         {
-                                             new DataCacheServerEndpoint("C012A4700", 22233)
-                                         }
+                Servers = new List<DataCacheServerEndpoint>
+                {
+                    new DataCacheServerEndpoint("C012A4700", 22233)
+                }
             };
             var factory = new DataCacheFactory(config);
 
             cache = factory.GetCache(CacheName);
         }
 
-        [TestCleanup]
+        [TestFixtureTearDown]
         public void TestCleanUp()
         {
             cache.RemoveRegion(RegionName);
         }
 
-        [TestMethod, Ignore]
+        [Test]
         public void ShouldCreateRegionIfNotAlreadyThere()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(10), RegionName);
@@ -52,7 +53,7 @@
             Assert.IsFalse(created); // because the constructor should have already created the region
         }
 
-        [TestMethod, Ignore]
+        [Test]
         public void ShouldExpireAsPerPolicy()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(5), RegionName);
@@ -68,7 +69,7 @@
             Assert.IsNull(cached);
         }
 
-        [TestMethod, Ignore]
+        [Test]
         public void ShouldNotExpireIfPolicySaysInfinite()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(ObjectCache.InfiniteAbsoluteExpiration.Second), RegionName);
@@ -84,7 +85,7 @@
             Assert.IsNotNull(cached);
         }
 
-        [TestMethod, Ignore]
+        [Test]
         public void ShouldReturnCachedValue()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(15), RegionName);
@@ -100,7 +101,7 @@
             Assert.IsNotNull(cached);
         }
 
-        [TestMethod, Ignore]
+        [Test]
         public void ShouldSwallowKeyAlreadyExists()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(15), RegionName);
@@ -114,7 +115,7 @@
             Assert.IsTrue(true);
         }
 
-        [TestMethod, Ignore]
+        [Test]
         public void ShouldClearRegionOnCallingClear()
         {
             var sut = new RegionedAppFabricSearchCache(cache, new AbsoluteCacheItemPolicyFactory(150), RegionName);

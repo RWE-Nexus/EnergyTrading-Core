@@ -8,13 +8,13 @@
     using EnergyTrading.UnitTest.Container.Unity.AutoRegistration.Contract;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
     using EnergyTrading.Container.Unity.AutoRegistration;
 
-    [TestClass]
+    [TestFixture]
     public class AutoRegistrationFixture
     {
         private Mock<IUnityContainer> containerMock;
@@ -23,7 +23,7 @@
         private delegate void RegistrationCallback(Type from, Type to, string name, LifetimeManager lifetime, InjectionMember[] ims);
         private IUnityContainer realContainer;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             this.realContainer = new UnityContainer();
@@ -47,7 +47,7 @@
             this.container = this.containerMock.Object;
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void WhenContainerIsNull_ThrowsException()
         {
@@ -56,7 +56,7 @@
                 .ConfigureAutoRegistration();
         }
 
-        [TestMethod]
+        [Test]
         public void WhenApplingAutoRegistrationWithoutAnyRules_NothingIsRegistered()
         {
             this.container
@@ -65,7 +65,7 @@
             Assert.IsFalse(this.registered.Any());
         }
 
-        [TestMethod]
+        [Test]
         public void WhenApplingAutoRegistrationWithOnlyAssemblyRules_NothingIsRegistered()
         {
             this.container
@@ -74,7 +74,7 @@
             Assert.IsFalse(this.registered.Any());
         }
 
-        [TestMethod]
+        [Test]
         public void WhenApplyMethodIsNotCalled_AutoRegistrationDoesNotHappen()
         {
             this.container
@@ -84,7 +84,7 @@
             Assert.IsFalse(this.registered.Any());
         }
 
-        [TestMethod]
+        [Test]
         public void WhenAssemblyIsExcluded_AutoRegistrationDoesNotHappenForItsTypes()
         {
             this.container
@@ -96,7 +96,7 @@
             Assert.IsFalse(this.registered.Any());
         }
 
-        //[TestMethod]
+        //[Test]
         //public void WhenExternalAssemblyIsLoaded_AutoRegistrationHappensForItsTypes()
         //{
         //    _container
@@ -109,7 +109,7 @@
         //    Assert.IsTrue(_registered.Any());
         //}
 
-        [TestMethod]
+        [Test]
         public void WhenTypeIsExcluded_AutoRegistrationDoesNotHappenForIt()
         {
             this.container.ConfigureAutoRegistration().Exclude(If.Is<TestCache>).Include(
@@ -118,7 +118,7 @@
             Assert.IsFalse(this.registered.Any());
         }
 
-        [TestMethod]
+        [Test]
         public void WhenRegisterWithDefaultOptions_TypeMustBeRegisteredAsAllInterfacesItImplementsUsingPerCallLifetimeWithEmptyName()
         {
             this.container
@@ -141,7 +141,7 @@
             Assert.AreEqual(string.Empty, iDisposableRegisterEvent.Name);
         }
 
-        [TestMethod]
+        [Test]
         public void WhenRegistrationObjectIsPassed_RequestedTypeRegisteredAsExpected()
         {
             const string RegistrationName = "TestName";
@@ -163,7 +163,7 @@
             Assert.AreEqual(RegistrationName, registerEvent.Name);
         }
 
-        //[TestMethod]
+        //[Test]
         //public void WhenHaveMoreThanOneRegistrationRules_TypesRegisteredAsExpected()
         //{
         //    _container
@@ -180,14 +180,14 @@
         //    Assert.AreEqual(4, _registered.Count);
         //}
 
-        [TestMethod]
+        [Test]
         public void WhenImplementsITypeNameMethodCalled_ItWorksAsExpected()
         {
             Assert.IsTrue(typeof(CustomerRepository).ImplementsITypeName());
             Assert.IsTrue(typeof(Introduction).ImplementsITypeName());
         }
 
-        [TestMethod]
+        [Test]
         public void WhenImplementsOpenGenericTypes_RegisteredAsExpected()
         {
             this.container
@@ -204,7 +204,7 @@
             Assert.AreEqual(2, this.realContainer.ResolveAll(typeof(IHandlerFor<DomainEvent>)).Count());
         }
 
-        [TestMethod]
+        [Test]
         public void WhenWithPartNameMehtodCalled_ItWorksAsExpected()
         {
             Assert.AreEqual(

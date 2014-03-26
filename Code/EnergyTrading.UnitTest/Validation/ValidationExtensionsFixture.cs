@@ -4,14 +4,14 @@
 
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class ValidationExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ValidationException))]
         public void ValidateExtensionThrowsIfInvalid()
         {
@@ -21,7 +21,7 @@
             mockValidator.Object.Validate("some value");
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateExtensionReturnsIfValid()
         {
             var mockValidator = new Mock<IValidator<string>>();

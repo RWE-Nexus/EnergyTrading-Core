@@ -12,10 +12,10 @@
 
         protected override void RegisterChildMappers(IXmlMappingEngine engine)
         {
-            this.RegisterContainerMapper<Child, ChildXmlMapper>();
-            this.RegisterContainerMapper<Animal, AnimalXmlMapper>();
-            this.RegisterContainerMapper<Dog, DogXmlMapper>();
-            this.RegisterContainerMapper<Cat, CatXmlMapper>();
+            engine.RegisterMapper(new OwnerXmlMapper(engine));
+            engine.RegisterMapper(new AnimalXmlMapper(engine));
+            engine.RegisterMapper(new DogXmlMapper(engine));
+            engine.RegisterMapper(new CatXmlMapper(engine));
         }
     }
 }

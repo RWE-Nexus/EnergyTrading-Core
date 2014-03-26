@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Logging.Log4Net;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class Log4NetLoggerFixture
     {
-        [TestMethod]
+        [Test]
         public void ResolveTheLog4NetConfig()
         {
             var log4NetConfiguration = new Log4NetConfiguration();

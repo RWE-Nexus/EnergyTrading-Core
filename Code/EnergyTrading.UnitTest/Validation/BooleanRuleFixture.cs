@@ -2,19 +2,19 @@
 {
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class BooleanRuleFixture
     {
-        [TestMethod]
+        [Test]
         public void ValidIfSuppliedValueIsTrue()
         {
             var r = new BooleanRule();
             Assert.IsTrue(r.IsValid(true));
         }
 
-        [TestMethod]
+        [Test]
         public void InvalidIfSuppliedValueIsFalse()
         {
             var r = new BooleanRule();

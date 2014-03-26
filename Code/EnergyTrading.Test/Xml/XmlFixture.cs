@@ -8,7 +8,7 @@
 
     using EnergyTrading.Test.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     /// <summary>
     /// Base class for XML comparison tests

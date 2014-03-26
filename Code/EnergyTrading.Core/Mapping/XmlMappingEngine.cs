@@ -26,20 +26,20 @@
         public XmlMappingEngine(IXmlMapperFactory factory)
         {
             this.factory = factory;
-            this.xmlTypes = new ConcurrentDictionary<Tuple<string, string>, Type>();
+            xmlTypes = new ConcurrentDictionary<Tuple<string, string>, Type>();
 
-            this.XmlNamespaceManager = new XmlNamespaceManager(new NameTable());
-            this.NamespaceManager = new BaseNamespaceManager(this.XmlNamespaceManager);
+            XmlNamespaceManager = new XmlNamespaceManager(new NameTable());
+            NamespaceManager = new BaseNamespaceManager(XmlNamespaceManager);
 
             // Always register value that allows us to declare XML types.
-            this.RegisterNamespace(XsiPrefix, XsiNamespace);
+            RegisterNamespace(XsiPrefix, XsiNamespace);
         }
 
         /// <copydocfrom cref="IMappingEngine.Context" />
         public Context Context
         {
-            get { return this.context ?? (this.context = new Context()); }
-            set { this.context = value; }
+            get { return context ?? (context = new Context()); }
+            set { context = value; }
         }
       
         /// <summary>
@@ -55,11 +55,11 @@
         /// <copydocfrom cref="IXmlMappingEngine.CreateDocument{T}" />
         public XElement CreateDocument<TSource>(TSource source)
         {
-            var result = this.Map<TSource, XElement>(source);
+            var result = Map<TSource, XElement>(source);
 
             // Ok, now emit XML namespace attributes for all registered namespaces
             var dictionary = new Dictionary<string, string>();
-            foreach (var ns in this.XmlNamespaceManager.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml))
+            foreach (var ns in XmlNamespaceManager.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml))
             {
                 dictionary.Add(ns.Key, ns.Value);
             }
@@ -82,19 +82,19 @@
         /// <copydocfrom cref="IXmlMappingEngine.LookupPrefix" />
         public string LookupPrefix(string xmlNamespace)
         {
-            return this.NamespaceManager.LookupPrefix(xmlNamespace);
+            return NamespaceManager.LookupPrefix(xmlNamespace);
         }
 
         /// <copydocfrom cref="IMappingEngine.Map{T,S}(T)" />
         public TDestination Map<TSource, TDestination>(TSource source)
         {
-            return this.Mapper<TSource, TDestination>().Map(source);
+            return Mapper<TSource, TDestination>().Map(source);
         }
 
         /// <copydocfrom cref="IMappingEngine.Map{T,S}(IEnumerable{T})" />
         public IEnumerable<TDestination> Map<TSource, TDestination>(IEnumerable<TSource> source)
         {
-            return source.Select(this.Map<TSource, TDestination>);
+            return source.Select(Map<TSource, TDestination>);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.Map{T}(T, string, string, bool, bool)" />
@@ -106,7 +106,7 @@
                 || source == null
                 || typeOfTypeParameter == source.GetType())
             {
-                return this.Mapper<TSource, XElement>().Map(source, nodeName, xmlNamespace, outputDefault);
+                return Mapper<TSource, XElement>().Map(source, nodeName, xmlNamespace, outputDefault);
             }
 
             return Map((dynamic)source, nodeName, xmlNamespace, outputDefault, false);
@@ -115,49 +115,49 @@
         /// <copydocfrom cref="IXmlMappingEngine.Map{T, D}(T, D)" />
         public void Map<TSource, TDestination>(TSource source, TDestination destination)
         {
-            this.Mapper<TSource, TDestination>().Map(source, destination);
+            Mapper<TSource, TDestination>().Map(source, destination);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.Map{T, D}(T, string, string, string, string, int)" />
         public TDestination Map<TSource, TDestination>(TSource source, string nodeName, string xmlNamespace = null, string xmlType = "", string xmlPrefix = "", int index = -1)
         {
-            return (TDestination) this.Mapper<TSource, TDestination>(xmlNamespace, xmlType).Map(source, nodeName, xmlNamespace, xmlPrefix, index);
+            return (TDestination) Mapper<TSource, TDestination>(xmlNamespace, xmlType).Map(source, nodeName, xmlNamespace, xmlPrefix, index);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.MapList{T, D}(T, string, string, bool)" />
         public List<TDestination> MapList<TSource, TDestination>(TSource source, string collectionNode, bool outputDefault = false)
         {
-            return this.Mapper<TSource, TDestination>().MapList(source, collectionNode, outputDefault);
+            return Mapper<TSource, TDestination>().MapList(source, collectionNode, outputDefault);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.MapList{T, D}(T, string, string, bool)" />
         public List<TDestination> MapList<TSource, TDestination>(TSource source, string collectionNode, string nodeName, bool outputDefault = false)
         {
-            return this.Mapper<TSource, TDestination>().MapList(source, collectionNode, nodeName, outputDefault);
+            return Mapper<TSource, TDestination>().MapList(source, collectionNode, nodeName, outputDefault);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.MapList{T, D}(T, string, string, string, string, bool)" />
         public List<TDestination> MapList<TSource, TDestination>(TSource source, string collectionNode, string nodeName, string collectionNodeNamespacePrefix = "", string collectionItemNodeNamespacePrefix = "", bool outputDefault = false)
         {
-            return this.Mapper<TSource, TDestination>().MapList(source, collectionNode, nodeName, collectionNodeNamespacePrefix, collectionItemNodeNamespacePrefix, outputDefault);
+            return Mapper<TSource, TDestination>().MapList(source, collectionNode, nodeName, collectionNodeNamespacePrefix, collectionItemNodeNamespacePrefix, outputDefault);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.MapList{T, D}(IList{T}, string, string, string, string, bool)" />
         public TDestination MapList<TSource, TDestination>(IList<TSource> source, string collectionNode, bool outputDefault = false)
         {
-            return this.Mapper<TSource, TDestination>().MapList(source, collectionNode, outputDefault);
+            return Mapper<TSource, TDestination>().MapList(source, collectionNode, outputDefault);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.MapList{T, D}(IList{T}, string, string, bool)" />
         public TDestination MapList<TSource, TDestination>(IList<TSource> source, string collectionNode, string nodeName, bool outputDefault = false)
         {
-            return this.Mapper<TSource, TDestination>().MapList(source, collectionNode, nodeName, outputDefault);
+            return Mapper<TSource, TDestination>().MapList(source, collectionNode, nodeName, outputDefault);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.MapList{T, D}(IList{T}, string, string, string, string, bool)" />
         public TDestination MapList<TSource, TDestination>(IList<TSource> source, string collectionNode, string collectionItemNodeName, string collectionNodeNamespace = "", string collectionItemNodeNamespace = "", bool outputDefault = false)
         {
-            return this.Mapper<TSource, TDestination>().MapList(source, collectionNode, collectionItemNodeName, collectionNodeNamespace, collectionItemNodeNamespace, outputDefault);
+            return Mapper<TSource, TDestination>().MapList(source, collectionNode, collectionItemNodeName, collectionNodeNamespace, collectionItemNodeNamespace, outputDefault);
         }
 
         /// <summary>
@@ -175,20 +175,20 @@
                 throw new ArgumentException("Mapper is not an IXmlMapper", "mapper");
             }
 
-            this.factory.Register(xmlMapper, name);
+            factory.Register(xmlMapper, name);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.RegisterNamespace" />
         public void RegisterNamespace(string xmlPrefix, string xmlNamespace)
         {
-            this.NamespaceManager.RegisterNamespace(xmlPrefix, xmlNamespace);
+            NamespaceManager.RegisterNamespace(xmlPrefix, xmlNamespace);
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.RegisterXmlType" />        
         public void RegisterXmlType(string xmlNamespace, string xmlType, Type type)
         {
             var key = new Tuple<string, string>(xmlNamespace, xmlType);
-            this.xmlTypes[key] = type;
+            xmlTypes[key] = type;
         }
 
         /// <summary>
@@ -200,7 +200,7 @@
         /// <returns>A <see cref="IXmlMapper{T, D}" /></returns>
         public IXmlMapper<TSource, TDestination> Mapper<TSource, TDestination>(string name = null)
         {
-            var mapper = this.Mapper(typeof(TSource), typeof(TDestination), name);
+            var mapper = Mapper(typeof(TSource), typeof(TDestination), name);
             return (IXmlMapper<TSource, TDestination>)mapper;
         }
 
@@ -216,15 +216,15 @@
         {
             if (string.IsNullOrEmpty(xmlType))
             {
-                var mapper = this.Mapper<TSource, TDestination>();
+                var mapper = Mapper<TSource, TDestination>();
                 return (IXmlMapper<TSource>)mapper;
             }
 
             var key = new Tuple<string, string>(xmlNamespace, xmlType);
             Type type;
-            if (this.xmlTypes.TryGetValue(key, out type))
+            if (xmlTypes.TryGetValue(key, out type))
             {
-                return (IXmlMapper<TSource>)this.Mapper(typeof(TSource), type);
+                return (IXmlMapper<TSource>)Mapper(typeof(TSource), type);
             }
 
             throw new MappingException(string.Format("Cannot handle xml type: '{0}/{1}'", xmlNamespace, xmlType));
@@ -239,7 +239,7 @@
         /// <returns>A <see cref="IXmlMapper{T, D}" /></returns>
         protected object Mapper(Type source, Type destination, string name = null)
         {
-            return this.factory.Mapper(source, destination, name);
+            return factory.Mapper(source, destination, name);
         }
     }
 }

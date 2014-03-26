@@ -6,16 +6,16 @@
     using EnergyTrading.Mapping;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
     using EnergyTrading.Registrars;
 
-    [TestClass]
+    [TestFixture]
     public class XmlVersionDetectorRegistrarFixture
     {
-        [TestMethod]
+        [Test]
         public void TestThatItemsAreResolvedFromContainer()
         {
             Func<XElement, string> func1 = (x) => x.Value == "1" ? "1.0" : "Unknown";

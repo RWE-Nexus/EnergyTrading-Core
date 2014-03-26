@@ -2,11 +2,11 @@
 {
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class ChildRuleCheckerFixture
     {
         private class Parent
@@ -14,7 +14,7 @@
             public string Child { get; set; }
         }
 
-        [TestMethod]
+        [Test]
         public void ValidWhenRuleIsValid()
         {
             var innerRule = new Mock<IRule<string>>();
@@ -36,7 +36,7 @@
             Assert.IsTrue(string.IsNullOrEmpty(rule.Message));
         }
 
-        [TestMethod]
+        [Test]
         public void InvalidWhenRuleIsInvalid()
         {
             var innerRule = new Mock<IRule<string>>();
@@ -60,7 +60,7 @@
             Assert.AreEqual(prefix + " " + msg, rule.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void InvalidWhenParentIsNull()
         {
             var innerRule = new Mock<IRule<string>>();

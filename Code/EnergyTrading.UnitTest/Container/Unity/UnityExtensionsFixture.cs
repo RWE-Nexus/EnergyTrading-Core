@@ -2,11 +2,11 @@
 {
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
 
-    [TestClass]
+    [TestFixture]
     public class UnityExtensionsFixture 
     {
         private IUnityContainer container;
@@ -14,7 +14,7 @@
         /// <summary>
         /// Initializes each test by creating a new container and registering the <see cref="TypeTrackingExtension"/>.
         /// </summary>
-        [TestInitialize]
+        [SetUp]
         public void Init()
         {
             this.container = new UnityContainer();
@@ -23,7 +23,7 @@
             this.container.InstallCoreExtensions();
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnNewInstanceEvenIfNotRegisteredWhenUsingNormalResolve()
         {
             // when
@@ -33,21 +33,21 @@
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveOfUnknownType()
         {
             var obj = this.container.TryResolve<ITest>();
             Assert.IsNull(obj);
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveOfUnknownTypeByName()
         {
             var obj = this.container.TryResolve<ITest>("name");
             Assert.IsNull(obj);
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveOfRegisteredType()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -56,7 +56,7 @@
             Assert.IsNotNull(obj);
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveOfRegisteredTypeByName()
         {
             this.container.RegisterType<ITest, TestClass>("name");
@@ -64,7 +64,7 @@
             Assert.IsNotNull(obj);
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveOfRegisteredInstance()
         {
             var expected = new TestClass { Data = "Test" };
@@ -74,7 +74,7 @@
             Assert.AreSame(expected, obj);
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveOfRegisteredInstanceByName()
         {
             var expected = new TestClass { Data = "Test" };
@@ -84,7 +84,7 @@
             Assert.AreSame(expected, obj);
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveOfUnknownTypeWithDefault()
         {
             var src = new TestClass { Data = "hello world" };
@@ -93,7 +93,7 @@
             Assert.AreSame(src, obj);
         }
 
-        [TestMethod]
+        [Test]
         public void TryResolveOfUnknownTypeWithDefaultByName()
         {
             var src = new TestClass { Data = "hello world" };
@@ -102,7 +102,7 @@
             Assert.AreSame(src, obj);
         }
 
-        [TestMethod]
+        [Test]
         public void CanResolveType()
         {
             Assert.IsFalse(this.container.CanResolve<ITest>());
@@ -110,7 +110,7 @@
             Assert.IsTrue(this.container.CanResolve<ITest>());
         }
 
-        [TestMethod]
+        [Test]
         public void CanResolveByName()
         {
             Assert.IsFalse(this.container.CanResolve<ITest>("name"));
@@ -118,7 +118,7 @@
             Assert.IsTrue(this.container.CanResolve<ITest>("name"));
         }
 
-        [TestMethod]
+        [Test]
         public void ImplicitDefaultResolveAllToEnumerableDefaultWithDefaultTypeOnly()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -131,7 +131,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ImplicitDefaultResolveAllToEnumerableDefaultWithNamedTypeOnly()
         {
             this.container.RegisterType<ITest, TestClass>("name");
@@ -144,7 +144,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ImplicitDefaultResolveAllToEnumerableDefaultWithTwoTypes()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -158,7 +158,7 @@
             Assert.AreEqual(2, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ImplicitDefaultResolveAllToEnumerableDefaultWithNoTypes()
         {
             int count = 0;
@@ -170,7 +170,7 @@
             Assert.AreEqual(0, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ExplicitDefaultResolveAllToEnumerableDefaultWithDefaultTypeOnly()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -194,7 +194,7 @@
             Assert.AreEqual(0, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ExplicitDefaultResolveAllToEnumerableDefaultWithNamedTypeOnly()
         {
             this.container.RegisterType<ITest, TestClass>("name");
@@ -217,7 +217,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ExplicitDefaultResolveAllToEnumerableDefaultWithTwoTypes()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -241,7 +241,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ExplicitDefaultResolveAllToEnumerableDefaultWithNoTypes()
         { //  test with default
             int count = 0;
@@ -262,7 +262,7 @@
             Assert.AreEqual(0, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ImplicitDefaultResolveAllToArrayDefaultWithDefaultTypeOnly()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -275,7 +275,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ImplicitDefaultResolveAllToArrayDefaultWithNamedTypeOnly()
         {
             this.container.RegisterType<ITest, TestClass>("name");
@@ -288,7 +288,7 @@
             Assert.AreEqual(1, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ImplicitDefaultResolveAllToArrayDefaultWithTwoTypes()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -302,7 +302,7 @@
             Assert.AreEqual(2, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ImplicitDefaultResolveAllToArrayDefaultWithNoTypes()
         {
             var count = 0;
@@ -314,7 +314,7 @@
             Assert.AreEqual(0, count);
         }
 
-        [TestMethod]
+        [Test]
         public void ExplicitDefaultResolveAllToArrayDefaultWithDefaultTypeOnly()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -330,7 +330,7 @@
             Assert.AreEqual(0, objs.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void ExplicitDefaultResolveAllToArrayDefaultWithNamedTypeOnly()
         {
             this.container.RegisterType<ITest, TestClass>("name");
@@ -346,7 +346,7 @@
             Assert.AreEqual(1, objs.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void ExplicitDefaultResolveAllToArrayDefaultWithTwoTypes()
         {
             this.container.RegisterType<ITest, TestClass>();
@@ -363,7 +363,7 @@
             Assert.AreEqual(1, objs.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void ExplicitDefaultResolveAllToArrayDefaultWithNoTypes()
         {
             //  test with default
@@ -377,14 +377,14 @@
             Assert.AreEqual(0, objs.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void ServiceLocatorIsCorrectlyRegisteredWithContainer()
         {
             this.container.StandardConfiguration();
             Assert.IsNotNull(this.container.Resolve<IServiceLocator>());
         }
 
-        [TestMethod]
+        [Test]
         public void ServiceLocatorIsCorrectlyRegisteredWithChildContainer()
         {
             this.container.StandardConfiguration();

@@ -6,22 +6,22 @@
 
     using EnergyTrading.Configuration;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class ConfigurationManagerExtensionsTests
     {
         private Mock<IConfigurationManager> mockConfigManager;
 
-        [TestInitialize]
+        [SetUp]
         public void TestInitialize()
         {
             this.mockConfigManager = new Mock<IConfigurationManager>();
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestGetConnectionSettingsWithPasswordThrowsIfNamedConnectionIsNotPresent()
         {
@@ -29,7 +29,7 @@
             this.mockConfigManager.Object.GetConnectionSettingsWithPassword("testName");
         }
 
-        [TestMethod]
+        [Test]
         public void TestReturnedSettingsMatchOriginalSectionIfNoEncryptedPasswordIsPresent()
         {
             var settings = new ConnectionStringSettings("testName", "testconnectionString", "testProviderName");
@@ -41,7 +41,7 @@
             Assert.AreEqual(settings.ProviderName, result.ProviderName);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSettingsIncludesAdditionalInformationIfEncryptedPasswordIsFound()
         {
             var settings = new ConnectionStringSettings("testName", "testconnectionString", "testProviderName");
@@ -53,14 +53,14 @@
             Assert.AreEqual(settings.ProviderName, result.ProviderName);
         }
 
-        [TestMethod]
+        [Test]
         public void GetVerificationPrefixReturnsDefaultIfConfigurationManagerIsNull()
         {
             var candidate = ConfigurationManagerExtensions.GetVerificationPrefix(null);
             Assert.AreEqual(ConfigurationManagerExtensions.DefaultVerificationPrefix, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetVerificationPrefixReturnsDefaultIfNoAppSetting()
         {
             this.mockConfigManager.Setup(x => x.AppSettings).Returns(new NameValueCollection());
@@ -68,7 +68,7 @@
             Assert.AreEqual(ConfigurationManagerExtensions.DefaultVerificationPrefix, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetVerificationPrefixReturnsDefaultIfAppSettingIsWhiteSpace()
         {
             this.mockConfigManager.Setup(x => x.AppSettings).Returns(new NameValueCollection { { ConfigurationManagerExtensions.VerificationPrefixAppSetting, "  " } });
@@ -76,7 +76,7 @@
             Assert.AreEqual(ConfigurationManagerExtensions.DefaultVerificationPrefix, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetVerificationPrefixReturnsAppSettingIfSupplied()
         {
             this.mockConfigManager.Setup(x => x.AppSettings).Returns(new NameValueCollection { { ConfigurationManagerExtensions.VerificationPrefixAppSetting, "newPrefix" } });
@@ -84,14 +84,14 @@
             Assert.AreEqual("newPrefix", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetVerificationEnvironmentReturnsNullIfConfigurationManagerIsNull()
         {
             var candidate = ConfigurationManagerExtensions.GetVerificationEnvironment(null);
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetVerificationEnvironmentReturnsNullIfNoAppSetting()
         {
             this.mockConfigManager.Setup(x => x.AppSettings).Returns(new NameValueCollection());
@@ -99,7 +99,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetVerificationEnvironmentReturnsNullIfAppSettingIsWhiteSpace()
         {
             this.mockConfigManager.Setup(x => x.AppSettings).Returns(new NameValueCollection { { ConfigurationManagerExtensions.VerificationEnvironmentPrefixAppSetting, "  " } });
@@ -107,7 +107,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetVerificationEnvironmentReturnsAppSettingIfSupplied()
         {
             this.mockConfigManager.Setup(x => x.AppSettings).Returns(new NameValueCollection { { ConfigurationManagerExtensions.VerificationEnvironmentPrefixAppSetting, "newPrefix" } });

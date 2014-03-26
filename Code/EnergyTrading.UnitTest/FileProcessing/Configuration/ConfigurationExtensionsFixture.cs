@@ -6,12 +6,12 @@
     using EnergyTrading.FileProcessing;
     using EnergyTrading.FileProcessing.Configuration;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class ConfigurationExtensionsFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void ConvertProcessorElementToEndpointWithEmptyProcessorConfigurator()
         {
             var element = new FileProcessorElement
@@ -43,10 +43,10 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertProcessorElementToEndpointWithNtfsBasedProcessorConfigurator()
         {
             var element = new FileProcessorElement
@@ -79,10 +79,10 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertProcessorElementToEndpointWithSambaBasedProcessor()
         {
             var element = new FileProcessorElement
@@ -115,10 +115,10 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertProcessorElementWithCustomProcessor()
         {
             var element = new FileProcessorElement
@@ -153,10 +153,10 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertProcessorElementWithCustomPostProcessor()
         {
             var element = new FileProcessorElement
@@ -194,10 +194,10 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertProcessorElementWithCustomFileFilter()
         {
             var element = new FileProcessorElement
@@ -236,7 +236,7 @@
             };
 
             var candidate = element.ToEndpoint();
-            this.Check(expected, candidate);
+            Check(expected, candidate);
         }
 
         public class CustomFileFilter : IFileFilter

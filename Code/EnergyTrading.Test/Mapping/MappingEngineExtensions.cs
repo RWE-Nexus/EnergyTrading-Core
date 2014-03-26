@@ -4,7 +4,7 @@
 
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     /// <summary>
     /// Helper methods for testing mapping engines.

@@ -5,9 +5,9 @@
 
     using EnergyTrading.Test.Verification;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class VerificationSpecsBaseFixture
     {
         private const string TestInputXml = "<LegalEntity><Id xmlns=\"http://rwe.com/schema/common/3\"><SystemId><SystemID>EnergyTrading</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>true</OriginatingSourceIND></SystemId><SystemId xmlns=\"http://rwe.com/schema/common/3\"><SystemID>Moff</SystemID><Identifier>1872</Identifier><OriginatingSourceIND>false</OriginatingSourceIND></SystemId></Id><Details xmlns=\"http://rwe.com/schema/party/2\"><ShortName>RWE TRADING</ShortName><LongName>RWE TRADING</LongName><PartyType>Counterparty</PartyType></Details></LegalEntity>";
@@ -74,98 +74,98 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void HasIdReturnsFalseForNonExistingSystem()
         {
             var candidate = new VerificationSpecsBaseDerived().CallHasIdForSystem("testsystem", TestInputXml);
             Assert.IsFalse(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void HasIdReturnsTrueForExistingSystem()
         {
             var candidate = new VerificationSpecsBaseDerived().CallHasIdForSystem("Moff", TestInputXml);
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveAllNonOriginatingIds()
         {
             var candidate = new VerificationSpecsBaseDerived().RemoveAllNonOriginatingIds(TestInputXml);
             Assert.AreEqual(TestWithOriginatingId, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveAllNonOriginatingIdsWithCommonPrefix()
         {
             var candidate = new VerificationSpecsBaseDerived().RemoveAllNonOriginatingIds(TestInputWithCommonPrefix);
             Assert.AreEqual(TestWithOriginatingId, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveIdEntriesForNonExistingSystem()
         {
             var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystem("notExisting", TestInputXml);
             Assert.AreEqual(TestInputXml, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveIdForSingleSystemNoNamespace()
         {
             var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystem("EnergyTrading", TestInputXml);
             Assert.AreEqual(XmlNoEnergyTradingId, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void CanCopeWithWhiteSpaceBetweenElements()
         {
             var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystem("EnergyTrading", TestInputWithWhiteSpace);
             Assert.AreEqual(XmlNoEnergyTradingId, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveIdForSingleSystemWithNamespace()
         {
             var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystem("Moff", TestInputXml);
             Assert.AreEqual(XmlNoMoffId, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveMultipleSystemIdEntries()
         {
             var candidate = new VerificationSpecsBaseDerived().CallRemoveIdEntriesForSystems(new[] { "EnergyTrading", "Moff" }, TestInputXml);
             Assert.AreEqual(XmlNoIds, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveElementValueforNonExistingElement()
         {
             var candidate = new VerificationSpecsBaseDerived().CallRemoveElementValue("noElementHere", TestInputXml);
             Assert.AreEqual(TestInputXml, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveElementValueNoNamespace()
         {
             var candidate = new VerificationSpecsBaseDerived().CallRemoveElementValue("PartyType", TestInputXml);
             Assert.AreEqual(XmlNoPartyType, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RemoveMultipleElementValues()
         {
             var candidate = new VerificationSpecsBaseDerived().CallRemoveElementValues(new[] { "PartyType", "LongName" }, TestInputXml);
             Assert.AreEqual(XmlNoPartyTypeOrLongName, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void CanLoadAnEmbeddedResource()
         {
             var candidate = new VerificationSpecsBaseDerived().CallLoadEmbeddedResource("EnergyTrading.UnitTest.Verification.Test.txt");
             Assert.AreEqual("hello world", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void CanLoadAnEmbeddedResourceInBytes()
         {
             var candidate = new VerificationSpecsBaseDerived().CallLoadEmbeddedResourceInBytes("EnergyTrading.UnitTest.Verification.Test.txt");

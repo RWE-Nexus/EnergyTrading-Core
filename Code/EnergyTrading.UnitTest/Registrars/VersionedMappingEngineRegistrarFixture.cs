@@ -7,7 +7,7 @@
     using EnergyTrading.UnitTest.Registrars.Maps.Common;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
     using EnergyTrading.Registrars;
@@ -15,10 +15,10 @@
     using AnimalAnimalModelMapper = EnergyTrading.UnitTest.Registrars.Maps.Common.V1.AnimalAnimalModelMapper;
     using ChildChildModelMapper = EnergyTrading.UnitTest.Registrars.Maps.Common.V1.ChildChildModelMapper;
 
-    [TestClass]
+    [TestFixture]
     public class VersionedMappingEngineRegistrarFixture
     {
-        [TestMethod]
+        [Test]
         public void ResolveV1EngineAndMappers()
         {
             var container = new UnityContainer();
@@ -35,7 +35,7 @@
             engine.ResolveMapper<Child, ChildModel, ChildChildModelMapper>();
         }
 
-        [TestMethod]
+        [Test]
         public void ResolveV2EngineAndMappers()
         {
             var container = new UnityContainer();
@@ -55,7 +55,7 @@
             engine.ResolveMapper<Child, ChildModel, ChildChildModelMapper>();
         }
 
-        [TestMethod]
+        [Test]
         public void ResolveV2R1EngineAndMappers()
         {
             var container = new UnityContainer();

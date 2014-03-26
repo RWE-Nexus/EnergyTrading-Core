@@ -5,14 +5,14 @@
 
     using EnergyTrading.Data.SimpleData;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class MultiPartDataProcessFixture
     {
         private static readonly string TestData = "here is my test data, hopefully it will all get stored";
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructWithoutProcessor()
         {
@@ -21,7 +21,7 @@
 // ReSharper restore ObjectCreationAsStatement
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ConstructWithZeroPartSize()
         {
@@ -30,7 +30,7 @@
 // ReSharper restore ObjectCreationAsStatement
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ConstructWithNegativePartSize()
         {
@@ -39,7 +39,7 @@
             // ReSharper restore ObjectCreationAsStatement
         }
 
-        [TestMethod]
+        [Test]
         public void TestSingleChunkIsProcessed()
         {
             var sb = new StringBuilder();
@@ -55,7 +55,7 @@
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void MultiplePartsAreProcessed()
         {
             var sb = new StringBuilder();
@@ -71,7 +71,7 @@
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void PartsAreNotProcessedIfStartProcessFails()
         {
             var processor = new MultiPartDataProcess((x, y, z) =>
@@ -84,7 +84,7 @@
             Assert.IsFalse(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void PartsAreProcessedIfStartProcessSucceeds()
         {
             var sb = new StringBuilder();
@@ -99,7 +99,7 @@
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void StopsWithFalseIfPartFailsToProcess()
         {
             var sb = new StringBuilder();
@@ -115,7 +115,7 @@
             Assert.IsFalse(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ReturnsFalseIfEndProcessFails()
         {
             var sb = new StringBuilder();
@@ -131,7 +131,7 @@
             Assert.IsFalse(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ReturnsTrueIfEndProcessSucceeds()
         {
             var sb = new StringBuilder();

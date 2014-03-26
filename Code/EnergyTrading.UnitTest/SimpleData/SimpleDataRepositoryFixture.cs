@@ -4,11 +4,11 @@
 
     using EnergyTrading.Data.SimpleData;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Simple.Data;
 
-    [TestClass]
+    [TestFixture]
     public class SimpleDataRepositoryFixture
     {
         public class SimpleDataRepositoryHelper : SimpleDataRepository
@@ -24,7 +24,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void CanUseSimpleDataMockingFunctionalityInTestMode()
         {
             var mockAdapter = new InMemoryAdapter();

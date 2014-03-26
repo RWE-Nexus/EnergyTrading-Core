@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class StringExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void SourceIsUnaffectedIfNotNullOrEmpty()
         {
             var src = "input";
@@ -15,7 +15,7 @@
             Assert.AreEqual("input", src);
         }
 
-        [TestMethod]
+        [Test]
         public void ValueIsAssignedIfSourceIsNull()
         {
             string src = null;
@@ -23,7 +23,7 @@
             Assert.AreEqual("value", src);
         }
 
-        [TestMethod]
+        [Test]
         public void ValueIsAssignedIfSourceIsEmpty()
         {
             var src = string.Empty;
@@ -31,7 +31,7 @@
             Assert.AreEqual("value", src);
         }
 
-        [TestMethod]
+        [Test]
         public void ValueIsNotAssignedIfSourceOnlyContainsWhiteSpace()
         {
             var src = " ";
@@ -39,7 +39,7 @@
             Assert.AreEqual(" ", src);
         }
 
-        [TestMethod]
+        [Test]
         public void AppendToEndIfTailNotPresent()
         {
             var tail = "\\";
@@ -50,7 +50,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DontAppendToEndIfTailPresent()
         {
             var tail = "\\";
@@ -61,7 +61,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DontAppendToEndIfEmpty()
         {
             var tail = "\\";
@@ -72,7 +72,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DontAppendToEndIfNull()
         {
             var tail = "\\";
@@ -83,7 +83,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DontAppendToEndIfWhitespace()
         {
             var tail = "\\";

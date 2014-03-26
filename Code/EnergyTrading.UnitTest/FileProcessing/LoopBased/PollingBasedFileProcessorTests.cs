@@ -9,11 +9,11 @@
     using EnergyTrading.FileProcessing.FileHandling;
     using EnergyTrading.FileProcessing.FileProcessors;
 
-    using global::Rhino.Mocks;
+    using Moq;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class PollingBasedFileProcessorTests
     {
         private const string DropDirectoryName = "drop";
@@ -25,23 +25,23 @@
         private string acknowledgedLocation;
         private string tempLocation;
 
-        [TestInitialize]
+        [SetUp]
         public void CreateDirectories()
         {
-            this.DeleteDirectories();
+            DeleteDirectories();
 
-            this.dropLocation = Directory.CreateDirectory(DropDirectoryName).FullName;
-            this.acknowledgedLocation = Directory.CreateDirectory(AcknowledgedDirectoryName).FullName;
-            this.tempLocation = Directory.CreateDirectory(TempDirectoryName).FullName;
+            dropLocation = Directory.CreateDirectory(DropDirectoryName).FullName;
+            acknowledgedLocation = Directory.CreateDirectory(AcknowledgedDirectoryName).FullName;
+            tempLocation = Directory.CreateDirectory(TempDirectoryName).FullName;
 
-            this.endpoint = new FileProcessorEndpoint
-                           {
-                               DropPath = this.dropLocation,
-                               InProgressPath = this.acknowledgedLocation,
-                           };
+            endpoint = new FileProcessorEndpoint
+            {
+                DropPath = dropLocation,
+                InProgressPath = acknowledgedLocation,
+            };
         }
 
-        [TestCleanup]
+        [TearDown]
         public void DeleteDirectories()
         {
             RemoveDirectory(DropDirectoryName);
@@ -49,81 +49,81 @@
             RemoveDirectory(TempDirectoryName);
         }
 
-        [TestMethod]
+        [Test]
         public void StartExistingFileInDropLocationProcessesFile()
         {
-            var fileData = this.CreateTestFileIn(this.dropLocation);
-            this.TestFilePickup(fileData.Filename, fileData.Content);
+            var fileData = CreateTestFileIn(dropLocation);
+            TestFilePickup(fileData.Filename, fileData.Content);
         }
 
         private void TestFilePickup(string originalFilename, string originalContent)
         {
             var resetEvent = new AutoResetEvent(false);
-            var mockHandler = MockRepository.GenerateMock<IHandleFiles>();
+            var mockHandler = new Mock<IHandleFiles>();
 
-            using (var listener = new PollingBasedFileProcessor(this.endpoint, mockHandler, new DefaultFileFilter()))
+            using (var listener = new PollingBasedFileProcessor(endpoint, mockHandler.Object, new DefaultFileFilter()))
             {
                 listener.Start();
                 resetEvent.WaitOne(1000);
             }
 
-            mockHandler.AssertWasCalled(x => x.Notify(Arg<ProcessingFile>.Is.NotNull));
-            this.AssertDirectoryIsEmpty(this.dropLocation);
+            mockHandler.Verify(x => x.Notify(It.IsAny<ProcessingFile>()));
+            AssertDirectoryIsEmpty(dropLocation);
 
-            var filePaths = Directory.GetFiles(this.acknowledgedLocation);
+            var filePaths = Directory.GetFiles(acknowledgedLocation);
             Assert.AreEqual(filePaths.Length, 1);
 
             var actualFile = new FileInfo(filePaths[0]);
             AssertFileMatches(originalContent, originalFilename, actualFile);
         }
 
-        [TestMethod]
+        [Test]
         public void StartDropNewFileProcessFile()
         {
-            var fileData = this.CreateTestFileIn(this.tempLocation);
+            var fileData = CreateTestFileIn(tempLocation);
 
             var resetEvent = new AutoResetEvent(false);
-            var mockHandler = MockRepository.GenerateMock<IHandleFiles>();
+            var mockHandler = new Mock<IHandleFiles>();
 
-            using (var listener = new PollingBasedFileProcessor(this.endpoint, mockHandler, new DefaultFileFilter()))
+            using (var listener = new PollingBasedFileProcessor(endpoint, mockHandler.Object, new DefaultFileFilter()))
             {
                 listener.Start();
 
-                new FileInfo(Path.Combine(this.tempLocation, fileData.Filename)).MoveTo(Path.Combine(this.dropLocation, fileData.Filename));
+                new FileInfo(Path.Combine(tempLocation, fileData.Filename)).MoveTo(Path.Combine(dropLocation, fileData.Filename));
 
                 resetEvent.WaitOne(1000);
             }
 
-            mockHandler.AssertWasCalled(x => x.Notify(Arg<ProcessingFile>.Is.NotNull));
-            this.AssertDirectoryIsEmpty(this.dropLocation);
+            mockHandler.Verify(x => x.Notify(It.IsAny<ProcessingFile>()));
+            AssertDirectoryIsEmpty(dropLocation);
 
-            var filePaths = Directory.GetFiles(this.acknowledgedLocation);
+            var filePaths = Directory.GetFiles(acknowledgedLocation);
             Assert.AreEqual(filePaths.Length, 1);
 
             var actualFile = new FileInfo(filePaths[0]);
             AssertFileMatches(fileData.Content, fileData.Filename, actualFile);
         }
 
-        [TestMethod]
+        [Test]
         public void FilterPreventsProcessing()
         {
-            var fileData = this.CreateTestFileIn(this.tempLocation);
+            var fileData = CreateTestFileIn(tempLocation);
 
             var resetEvent = new AutoResetEvent(false);
-            var mockHandler = MockRepository.GenerateMock<IHandleFiles>();
+            var mockHandler = new Mock<IHandleFiles>();
 
-            using (var listener = new PollingBasedFileProcessor(this.endpoint, mockHandler, new FalseFileFilter()))
+            using (var listener = new PollingBasedFileProcessor(endpoint, mockHandler.Object, new FalseFileFilter()))
             {
                 listener.Start();
 
-                new FileInfo(Path.Combine(this.tempLocation, fileData.Filename)).MoveTo(Path.Combine(this.dropLocation, fileData.Filename));
+                new FileInfo(Path.Combine(tempLocation, fileData.Filename)).MoveTo(Path.Combine(dropLocation, fileData.Filename));
 
                 resetEvent.WaitOne(1000);
             }
 
-            mockHandler.AssertWasNotCalled(x => x.Notify(Arg<ProcessingFile>.Is.NotNull));
+            mockHandler.Verify(x => x.Notify(It.IsAny<ProcessingFile>()), Times.Never);
 
-            var filePaths = Directory.GetFiles(this.dropLocation);
+            var filePaths = Directory.GetFiles(dropLocation);
             Assert.AreEqual(filePaths.Length, 1);
 
             var actualFile = new FileInfo(filePaths[0]);

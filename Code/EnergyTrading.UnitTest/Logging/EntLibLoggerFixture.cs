@@ -3,7 +3,7 @@
     using System.Diagnostics;
 
     using Microsoft.Practices.EnterpriseLibrary.Logging;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
@@ -11,10 +11,10 @@
 
     using SharpTestsEx;
 
-    [TestClass]
+    [TestFixture]
     public class EntLibLoggerFixture
     {
-        [TestMethod]
+        [Test]
         public void ShouldAlwaysIncludeContextUserNameInLogEntry()
         {
             // Given
@@ -32,7 +32,7 @@
             logEntry.ExtendedProperties.ContainsKey("Authenticated User").Should().Be.True();
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldAlwaysIncludeClientMachineNameInLogEntry()
         {
             // Given
@@ -50,7 +50,7 @@
             logEntry.ExtendedProperties.ContainsKey("Client Machine Name").Should().Be.True();
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldAlwaysAddMessageToLogEntry()
         {
             // Given
@@ -69,7 +69,7 @@
             logEntry.Message.Should().Be(TestMessage);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldLogDebugMessagesWithSeverityAsVerbose()
         {
             // Given
@@ -89,7 +89,7 @@
             logEntry.Severity.Should().Be(TraceEventType.Verbose);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldLogInformationMessagesWithSeverityAsInformation()
         {
             // Given
@@ -109,7 +109,7 @@
             logEntry.Severity.Should().Be(TraceEventType.Information);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldLogExceptionMessagesWithSeverityAsError()
         {
             // Given
@@ -129,7 +129,7 @@
             logEntry.Severity.Should().Be(TraceEventType.Error);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldLogWarningMessagesWithSeverityAsWarning()
         {
             // Given

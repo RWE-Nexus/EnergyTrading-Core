@@ -4,14 +4,14 @@
 
     using EnergyTrading.Data.SimpleData;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Simple.Data;
 
-    [TestClass]
+    [TestFixture]
     public class InMemoryAdapterWithProceduresFixture
     {
-        [TestMethod]
+        [Test]
         public void CanCallProcedureAndSimulateOutputParameters()
         {
             var mock = new InMemoryAdapterWithProcedures();
@@ -22,7 +22,7 @@
             Assert.AreEqual("test", candidate.OutputValues["output"]);
         }
 
-        [TestMethod]
+        [Test]
         public void CanStillCallFunctions()
         {
             var mock = new InMemoryAdapterWithProcedures();

@@ -4,12 +4,12 @@
 
     using EnergyTrading.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class EnumExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void ParseEnumValue()
         {
             var value = "Fred";
@@ -19,7 +19,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseNullReturnsDefaultValue()
         {
             string value = null;
@@ -29,7 +29,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseUnknownValueReturnsDefaultValue()
         {
             var value = "Jim";
@@ -39,7 +39,7 @@
             Assert.AreEqual(expected, candidate); 
         }
 
-        [TestMethod]
+        [Test]
         public void ParseExplicitDefaultValue()
         {
             var value = "Jim";
@@ -49,7 +49,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseFlagsEnum()
         {
             var expected = FlagsEnum.A | FlagsEnum.B | FlagsEnum.C;
@@ -57,7 +57,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseFlagsEnumNoFlagsAttribute()
         {
             try

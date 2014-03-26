@@ -4,12 +4,12 @@
 
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class SchemaVersionExtensionsFixture : Fixture
     {        
-        [TestMethod]
+        [Test]
         public void FromNumberToVersionString()
         {
             var value = "10";
@@ -17,7 +17,7 @@
             Assert.AreEqual("10.0", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromNumberToVersionStringWithMinorValue()
         {
             var value = "10.4";
@@ -25,7 +25,7 @@
             Assert.AreEqual("10.4", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromAsmToVersionString()
         {
             var value = "V10";
@@ -33,7 +33,7 @@
             Assert.AreEqual("10.0", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromAsmToVersionStringWithMinorValue()
         {
             var value = "V10_4";
@@ -41,7 +41,7 @@
             Assert.AreEqual("10.4", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromAsmToVersion()
         {
             var value = "V10";
@@ -51,7 +51,7 @@
             Assert.AreEqual(candidate.Minor, 0);
         }
 
-        [TestMethod]
+        [Test]
         public void FromAsmToVersionWithMinorValue()
         {
             var value = "V10_4";
@@ -61,7 +61,7 @@
             Assert.AreEqual(candidate.Minor, 4);
         }
 
-        [TestMethod]
+        [Test]
         public void FromNumberToAsmVersionString()
         {
             var value = "10";
@@ -69,7 +69,7 @@
             Assert.AreEqual("Cts.V10", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromNumberWithMinorValueToAsmVersionString()
         {
             var value = "10.2";
@@ -77,7 +77,7 @@
             Assert.AreEqual("Cts.V10_2", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromNumberToAsmVersionStringNoSchema()
         {
             var value = "10";
@@ -85,7 +85,7 @@
             Assert.AreEqual("V10", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FromNumberWithMinorValueToAsmVersionStringNoSchema()
         {
             var value = "10.2";
@@ -93,7 +93,7 @@
             Assert.AreEqual("V10_2", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RoundTripAsmVersion()
         {
             var value = "Cts.V10_2";
@@ -101,7 +101,7 @@
             Assert.AreEqual("Cts.V10_2", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void NullAsmVersion()
         {
             string value = null;
@@ -109,7 +109,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void NullAsmVersionFromEmptyString()
         {
             string value = string.Empty;
@@ -117,7 +117,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetCorrectVersionStringFromAsmVersion()
         {
             var asm = "V10_4";
@@ -129,7 +129,7 @@
             Assert.AreEqual("10.0", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void NullVersionStringFromEmptyString()
         {
             var asm = string.Empty;
@@ -137,7 +137,7 @@
             Assert.AreEqual(null, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void CorrectVersionObjectFromAsmVersion()
         {
             var asm = "V10_4";
@@ -151,7 +151,7 @@
             Assert.AreEqual(candidate.Minor, 0);
         }
 
-        [TestMethod]
+        [Test]
         public void CorrectAsmVersionFromVersionObject()
         {
             var candidate = new Version(10, 4).ToAsmVersion();
@@ -161,7 +161,7 @@
             Assert.AreEqual("V10", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToAsmSchemaWithNull()
         {
             string source = null;
@@ -169,7 +169,7 @@
             Assert.AreEqual(null, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToAsmSchemaWithEmptyString()
         {
             string source = string.Empty;
@@ -177,7 +177,7 @@
             Assert.AreEqual(null, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToAsmSchemaNoSchema()
         {
             var source = "V1_1";
@@ -185,7 +185,7 @@
             Assert.AreEqual(null, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToAsmSchemaWithMinorVersion()
         {
             var source = "Cts.V1_1";
@@ -193,7 +193,7 @@
             Assert.AreEqual("Cts", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToAsmSchemaNoMinorVersion()
         {
             var source = "Cts.V1";

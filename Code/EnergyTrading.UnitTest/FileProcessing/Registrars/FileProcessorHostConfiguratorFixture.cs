@@ -3,16 +3,16 @@ namespace EnergyTrading.UnitTest.FileProcessing.Registrars
     using EnergyTrading.Services;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
     using EnergyTrading.FileProcessing.Configuration;
     using EnergyTrading.FileProcessing.Registrars;
 
-    [TestClass]
+    [TestFixture]
     public class FileProcessorHostConfiguratorFixture
     {
-        [TestMethod]
+        [Test]
         public void ShouldStartFileProcessorHostThatIsPollingBased()
         {
             var configurator = new FileProcessorConfigurator()

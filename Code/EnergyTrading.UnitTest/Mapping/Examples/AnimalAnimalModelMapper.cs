@@ -20,7 +20,7 @@
 
         public IMappingEngine GetEngine()
         {
-            return this.Engine;
+            return Engine;
         }
     }
 }

@@ -5,16 +5,16 @@ namespace EnergyTrading.UnitTest.Data
     using System;
     using System.Data.Entity;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
     using EnergyTrading.Data.EntityFramework;
 
-    [TestClass]
+    [TestFixture]
     public class DbSetExtensionsFixture
     {
-        [TestMethod]
+        [Test]
         public void ShouldReturnSameEntityIfNoExceptionRaisedOnFindOneRequest()
         {
             //Given
@@ -30,7 +30,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual(entity, result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnNullIfEFThrowsMaterializedCastInvalidOperationExceptionOnFindOneRequest()
         {
             //Given
@@ -45,7 +45,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.IsNull(result);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(Exception))]
         public void ShouldNotSupressAnyExceptionOtherThanMaterializedCastInvalidOperationExceptionOnFindOneRequest()
         {

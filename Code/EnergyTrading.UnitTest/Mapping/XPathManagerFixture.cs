@@ -4,14 +4,14 @@
 
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class XPathManagerFixture
     {
         protected INamespaceManager NamespaceManager { get; set; }
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             this.NamespaceManager = this.CreateNamespaceManager();
@@ -19,7 +19,7 @@
             this.NamespaceManager.RegisterNamespace("b", "http://www.b.com");
         }
         
-        [TestMethod]
+        [Test]
         public void EmptyPrefixNamespace()
         {
             var manager = this.CreateXPathManager();
@@ -30,7 +30,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void PrefixQualified()
         {
             var manager = this.CreateXPathManager();
@@ -41,7 +41,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void PrefixPreferenceQualified()
         {
             var manager = this.CreateXPathManager();
@@ -52,7 +52,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void NamespaceQualified()
         {
             var manager = this.CreateXPathManager();
@@ -63,7 +63,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void AttributeXPath()
         {
             var manager = this.CreateXPathManager();
@@ -74,7 +74,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IndexedXPath()
         {
             var manager = this.CreateXPathManager();
@@ -85,7 +85,7 @@
             Assert.AreEqual(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(MappingException))]
         public void UnregisteredNamespace()
         {

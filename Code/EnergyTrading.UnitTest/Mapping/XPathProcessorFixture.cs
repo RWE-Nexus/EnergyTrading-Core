@@ -5,11 +5,11 @@
     using EnergyTrading.Mapping;
     using EnergyTrading.UnitTest.Mapping.Examples;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class XPathProcessorFixture : Fixture
     {
         private static int warnCount;
@@ -18,9 +18,11 @@
 
         protected override void OnSetup()
         {
-            warnCount = 0;
+            // NB See ConfigLoggerFactory for how the mock logger is created.
             AssemblyLoggerProvider.MockLogger.Setup(x => x.Warn(It.IsAny<string>())).Callback(() => ++warnCount);
-            this.Xml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
+            warnCount = 0;
+ 
+            Xml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob>b</Bob>
                                      </Fred>";
@@ -31,10 +33,10 @@
             AssemblyLoggerProvider.MockLogger.Setup(x => x.Warn(It.IsAny<string>())).Callback(() => { });
         }
 
-        [TestMethod]
+        [Test]
         public void PushSingleNameSpaceReportsCorrectly()
         {
-            var processor = this.XPathProcessor(this.Xml);
+            var processor = XPathProcessor(Xml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -44,13 +46,13 @@
             Assert.AreEqual(@"/sample:Fred/", processor.CurrentPath);
         }
 
-        [TestMethod]
+        [Test]
         public void PushPrefixTakesPriorityOverNamespace()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>a</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://test.com", "sample");
@@ -60,10 +62,10 @@
             Assert.IsNotNull(processor.CurrentNode());
         }
 
-        [TestMethod]
+        [Test]
         public void PushPopGetsCorrectNamespaceAndPath()
         {
-            var processor = this.XPathProcessor(this.Xml);
+            var processor = XPathProcessor(Xml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -75,7 +77,7 @@
             Assert.AreEqual(@"/sample:Fred/", processor.CurrentPath);
         }
 
-        [TestMethod]
+        [Test]
         public void ProcessNodesStackSameParentSameChild()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
@@ -86,7 +88,7 @@
                                             <Dave>30</Dave>
                                         </Jim>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -101,7 +103,7 @@
             Assert.AreEqual(10, candidate, "First Dave differs");
         }
 
-        [TestMethod]
+        [Test]
         public void ProcessNodesStackDifferentParentSameChild()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
@@ -122,7 +124,7 @@
                                             </Dave>
                                         </Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -151,7 +153,7 @@
             processor.Pop();
         }
 
-        [TestMethod]
+        [Test]
         public void HasElementOrAttributeShouldReturnTrueIfElementExistsOnCurrentNode()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:a='http://sample.com/a'>
@@ -159,7 +161,7 @@
                                         <Bob></Bob>
                                         <Dave />
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -175,14 +177,14 @@
             Assert.IsTrue(daveExist, "Dave doesn't exist");
         }
 
-        [TestMethod]
+        [Test]
         public void HasElementOrAttributeShouldReturnFalseIfElementNotExistsOnCurrentNode()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob></Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("testabc", "http://testabc.com");
 
@@ -194,7 +196,7 @@
             Assert.IsFalse(bobABCExist, "Bob exists");
         }
 
-        [TestMethod]
+        [Test]
         public void HasElementOrAttributeHandlesIndex()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
@@ -215,7 +217,7 @@
                                             </Dave>
                                         </Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -228,14 +230,14 @@
             processor.Pop();
         }
 
-        [TestMethod]
+        [Test]
         public void IsNullShouldReturnFalseIfElementExistsOnCurrentNode()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob></Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -247,13 +249,13 @@
             Assert.IsFalse(bobExist, "Bob IsNull");
         }
 
-        [TestMethod]
+        [Test]
         public void IsNullShouldReturnTrueForEmptyNode()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Dave />
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://test.com");
 
@@ -263,14 +265,14 @@
             Assert.IsTrue(daveExist, "Dave not IsNull");
         }
 
-        [TestMethod]
+        [Test]
         public void IsNullShouldReturnTrueIfElementNotExistsOnCurrentNode()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Jim xmlns='http://test.com'>a</Jim>
                                         <Bob></Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("testabc", "http://testabc.com");
 
@@ -282,12 +284,12 @@
             Assert.IsTrue(bobABCExist);
         }
 
-        [TestMethod]
+        [Test]
         public void ToValueReturnsCustomDefaultWhenNoNodePresent()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("testabc", "http://testabc.com");
 
@@ -297,13 +299,13 @@
             Assert.AreEqual(-1, candidate, "Values differ");
         }
 
-        [TestMethod]
+        [Test]
         public void ToValueReturnsCustomDefaultWhenNodeEmpty()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:a='http://sample.com/a'>
                                         <Bob />
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("testabc", "http://testabc.com");
 
@@ -313,13 +315,13 @@
             Assert.AreEqual(-1, candidate, "Values differ");
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringReturnsValue()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>a</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -327,13 +329,13 @@
             Assert.AreEqual("a", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringWithPrefixReturnsValue()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>a</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -341,12 +343,12 @@
             Assert.AreEqual("a", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringAttributeReturnsValue()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='a'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -354,12 +356,12 @@
             Assert.AreEqual("a", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringPrefixedAttributeReturnsValue()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' xmlns:test='http://sample.com/test' test:Bob='a'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.RegisterNamespace("test", "http://sample.com/test");
@@ -368,13 +370,13 @@
             Assert.AreEqual("a", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToIntParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>10</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -382,12 +384,12 @@
             Assert.AreEqual(10, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToIntAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='10'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -395,7 +397,7 @@
             Assert.AreEqual(10, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToIntParsesChildArrayCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
@@ -408,7 +410,7 @@
                                             </Jim>
                                         </Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -424,13 +426,13 @@
             Assert.AreEqual(20, c2, "Second Dave differs");            
         }
 
-        [TestMethod]
+        [Test]
         public void ToLongParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>10000</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -438,12 +440,12 @@
             Assert.AreEqual(10000, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToLongAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='10000'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -451,13 +453,13 @@
             Assert.AreEqual(10000, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToEnumParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>CIF</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -465,12 +467,12 @@
             Assert.AreEqual(IncoTerms.CIF, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToEnumAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='CIF'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -478,13 +480,13 @@
             Assert.AreEqual(IncoTerms.CIF, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToBoolParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>true</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -492,12 +494,12 @@
             Assert.AreEqual(true, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToBoolAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='true'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -505,14 +507,14 @@
             Assert.AreEqual(true, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDecimalLogsWarningIfValueContainsAComma()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2,000</Bob>
                                      </Fred>"; 
             var startwarncount = warnCount;
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -521,14 +523,14 @@
             Assert.AreEqual(startwarncount + 1, warnCount);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDecimalLogsWarningIfValueContainsAnExponent()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.0E4</Bob>
                                      </Fred>"; 
             var startwarncount = warnCount;
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -537,27 +539,27 @@
             Assert.AreEqual(startwarncount + 1, warnCount);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(FormatException))]
         public void ToDecimalFailsForWrongFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.00,0</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
             processor.ToDecimal("Bob");
         }
 
-        [TestMethod]
+        [Test]
         public void ToDecimalPassesForScientificNotation()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.0E4</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -565,13 +567,13 @@
             Assert.AreEqual(20000.0m, canditate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDecimalParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>22700.33</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -579,12 +581,12 @@
             Assert.AreEqual(22700.33m, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDecimalAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='22700.33'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -592,7 +594,7 @@
             Assert.AreEqual(22700.33m, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToFloatLogsWarningIfValueContainsAComma()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
@@ -600,7 +602,7 @@
                                      </Fred>";
             var startwarncount = warnCount;
 
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -609,27 +611,27 @@
             Assert.AreEqual(startwarncount + 1, warnCount);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(FormatException))]
         public void ToFloatFailsForWrongFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.00,0</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
             processor.ToFloat("Bob");
         }
 
-        [TestMethod]
+        [Test]
         public void ToFloatParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>22700.33</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -637,12 +639,12 @@
             Assert.AreEqual(22700.33f, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToFloatAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='22700.33'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -650,13 +652,13 @@
             Assert.AreEqual(22700.33f, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToFloatParsesScientificNotation()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.0E3</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             var startwarncount = warnCount;
             processor.RegisterNamespace("sample", "http://sample.com");
@@ -666,7 +668,7 @@
             Assert.AreEqual(startwarncount, warnCount);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDoubleLogsWarningIfValueContainsAComma()
         {
             var startwarncount = warnCount;
@@ -674,7 +676,7 @@
                                         <Bob>2,000</Bob>
                                      </Fred>";
 
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
             var candidate = processor.ToDouble("Bob");
@@ -682,27 +684,27 @@
             Assert.AreEqual(startwarncount + 1, warnCount);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(FormatException))]
         public void ToDoubleFailsForWrongFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.00,0</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
             processor.ToDouble("Bob");
         }
 
-        [TestMethod]
+        [Test]
         public void ToDoubleParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>22700.33</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -710,12 +712,12 @@
             Assert.AreEqual(22700.33, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDoubleAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='22700.33'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -723,13 +725,13 @@
             Assert.AreEqual(22700.33, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDoubleParsesScientificNotation()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2.0E3</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
             var startwarncount = warnCount;
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -738,13 +740,13 @@
             Assert.AreEqual(startwarncount, warnCount);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDateTimeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2012-07-15T05:12:34Z</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -752,12 +754,12 @@
             Assert.AreEqual(new DateTime(2012, 7, 15, 5, 12, 34), candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDateTimeAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='2012-07-15T05:12:34Z'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -765,13 +767,13 @@
             Assert.AreEqual(new DateTime(2012, 7, 15, 5, 12, 34), candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDateTimeOffsetParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com'>
                                         <Bob>2012-07-15T05:12:34Z</Bob>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");
@@ -779,12 +781,12 @@
             Assert.AreEqual(new DateTimeOffset(2012, 7, 15, 5, 12, 34, new TimeSpan()), candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDateTimeOffsetAttributeParsesCorrectFormat()
         {
             const string TestXml = @"<Fred xmlns='http://sample.com' Bob='2012-07-15T05:12:34Z'>
                                      </Fred>";
-            var processor = this.XPathProcessor(TestXml);
+            var processor = XPathProcessor(TestXml);
 
             processor.RegisterNamespace("sample", "http://sample.com");
             processor.Push("Fred", "http://sample.com");

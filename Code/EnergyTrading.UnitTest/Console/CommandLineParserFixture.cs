@@ -6,12 +6,12 @@
     using EnergyTrading.Console;
     using EnergyTrading.Test;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class CommandLineParserFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void IllegalSwitch()
         {
@@ -19,7 +19,7 @@
             CommandLineParser parser = new CommandLineParser(string.Empty, config);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void IllegalAlias()
         {
@@ -27,7 +27,7 @@
             CommandLineParser parser = new CommandLineParser(string.Empty, config);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void EmptySwitch()
         {
@@ -35,7 +35,7 @@
             CommandLineParser parser = new CommandLineParser(string.Empty, config);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void EmptyAlias()
         {
@@ -43,61 +43,61 @@
             CommandLineParser parser = new CommandLineParser(string.Empty, config);
         }
 
-        [TestMethod]
+        [Test]
         public void NullCommandLine()
         {
             Check(string.Empty, "My Name", "XXXX", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void StringSwitch()
         {
             Check("/Name:Fred", "Fred", "XXXX", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void SecondStringSwitch()
         {
             Check("/Test:Fred", "My Name", "Fred", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void IntSwitch()
         {
             Check("/Age:10", "My Name", "XXXX", false, 10, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void NegativeIntSwitch()
         {
             Check("/Age:-10", "My Name", "XXXX", false, -10, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void PositiveIntSwitch()
         {
             Check("/Age:+10", "My Name", "XXXX", false, 10, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void BoolSwitch()
         {
             Check("/Wibble+", "My Name", "XXXX", true, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void NakedBoolSwitch()
         {
             Check("/Wibble", "My Name", "XXXX", true, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void NakedBoolSwitchAlias()
         {
             Check("/w", "My Name", "XXXX", true, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void NegativeBoolSwitch()
         {
             Application app = new Application();
@@ -106,74 +106,74 @@
             Check(app, "/Wibble-", "My Name", "XXXX", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void EnumSwitch()
         {
             Check("/day:Fri", "My Name", "XXXX", false, 999, Application.DaysOfWeek.Fri);
         }
 
-        [TestMethod]
+        [Test]
         public void UseSwitchAlias()
         {
             Check("/User:Fred", "Fred", "XXXX", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void ColonQuotedString()
         {
             Check("/Name:\"Fred Jones\"", "Fred Jones", "XXXX", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void SpaceQuotedString()
         {
             Check("/Name \"Fred Jones\"", "Fred Jones", "XXXX", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void StringWithSlash()
         {
             Check(@"/Test:C:\Test\", "My Name", @"C:\Test\", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void StringWithEmbeddedSwitch()
         {
             Check(@"/Test:""C:\Test\ /b:Fred""", "My Name", @"C:\Test\ /b:Fred", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void TwoStringWithEmbeddedSwitch()
         {
             Check(@"/Test:""/Name foo"" /Name:""bar""", "bar", @"/Name foo", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void QuotedStringWithSlash()
         {
             Check(@"/Test ""C:\Test Lab\""", "My Name", @"C:\Test Lab\", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void AliasedColonQuotedString()
         {
             Check("/User:\"Fred Jones\"", "Fred Jones", "XXXX", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void AliasedSpaceQuotedString()
         {
             Check("/User \"Fred Jones\"", "Fred Jones", "XXXX", false, 999, Application.DaysOfWeek.Sun);
         }
 
-        [TestMethod]
+        [Test]
         public void DisplayUsageNotNull()
         {
             CommandLineParser p = Check(string.Empty, "My Name", "XXXX", false, 999, Application.DaysOfWeek.Sun);
             Assert.IsNotNull(p.DisplayUsage());
         }
 
-        [TestMethod]
+        [Test]
         public void ExtraParams()
         {
             CommandLineParser p = Check("/Name:Fred /Jim:Test /Bob:10", "Fred", "XXXX", false, 999, Application.DaysOfWeek.Sun);
@@ -182,7 +182,7 @@
             Assert.AreEqual(2, p.Parameters.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void ExtraParamsNeedColons()
         {
             CommandLineParser p = Check("/Name:Fred /Jim Test /Bob 10", "Fred", "XXXX", false, 999, Application.DaysOfWeek.Sun);

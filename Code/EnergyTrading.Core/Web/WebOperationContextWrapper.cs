@@ -11,21 +11,21 @@ namespace EnergyTrading.Web
     {
         public string ContentType
         {
-            get { return this.OutgoingResponse.ContentType; }
-            set { this.OutgoingResponse.ContentType = value; }
+            get { return OutgoingResponse.ContentType; }
+            set { OutgoingResponse.ContentType = value; }
         }
 
         public string Location
         {
-            get { return this.OutgoingResponse.Location; }
-            set { this.OutgoingResponse.Location = value; }
+            get { return OutgoingResponse.Location; }
+            set { OutgoingResponse.Location = value; }
         }
 
         public string InboundAbsoloutePath 
         {
             get
             {
-                return this.AppPath();
+                return AppPath();
             }
         }
 
@@ -44,8 +44,8 @@ namespace EnergyTrading.Web
 
         public HttpStatusCode StatusCode
         {
-            get { return this.OutgoingResponse.StatusCode; }
-            set { this.OutgoingResponse.StatusCode = value; }
+            get { return OutgoingResponse.StatusCode; }
+            set { OutgoingResponse.StatusCode = value; }
         }
 
         public WebHeaderCollection Headers
@@ -86,7 +86,7 @@ namespace EnergyTrading.Web
         protected T QueryParameter<T>(string name, T defaultValue = default(T))
         {
             bool found;
-            return this.QueryParameter<T>(name, out found, defaultValue);
+            return QueryParameter<T>(name, out found, defaultValue);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace EnergyTrading.Web
         /// <returns></returns>
         protected T QueryParameter<T>(string name, out bool found, T defaultValue = default(T))
         {
-            var value = this.QueryParameters[name];
+            var value = QueryParameters[name];
             if (string.IsNullOrEmpty(value))
             {
                 found = false;
@@ -122,7 +122,7 @@ namespace EnergyTrading.Web
         /// <returns></returns>
         protected bool TryGetQueryParameter<T>(string name, out T value, T defaultValue = default(T))
         {
-            var fred = this.QueryParameters[name];
+            var fred = QueryParameters[name];
 
             if (fred == null)
             {
@@ -132,22 +132,6 @@ namespace EnergyTrading.Web
 
             // Does this do a cast or a parse?
             value = (T)Convert.ChangeType(fred, typeof(T));
-            return true;
-        }
-
-        [Obsolete("Use TryGetQueryParameter")]
-        protected bool aTryGetQueryParameter<T>(string name, out T value, T defaultValue = default(T))
-        {
-            var fred = this.QueryParameters[name];
-
-            if (fred == null)
-            {
-                value = defaultValue;
-                return false;
-            }
-
-            // Does this do a cast or a parse?
-            value = this.Factory<T>(fred);
             return true;
         }
 

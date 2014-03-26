@@ -2,14 +2,14 @@
 {
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
 
-    [TestClass]
+    [TestFixture]
     public class ChildContainerFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void ChildContainerResolvesSelf()
         {
             var container = new UnityContainer();
@@ -21,7 +21,7 @@
             Assert.AreSame(child, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ChildContainerResolvesInParentDefault()
         {
             var container = new UnityContainer();
@@ -35,7 +35,7 @@
             Assert.AreSame(child, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ChildContainerResolvesInParent()
         {
             var container = new UnityContainer();
@@ -50,7 +50,7 @@
             Assert.AreSame(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ChildResolveParentServiceDirectly()
         {
             var container = new UnityContainer();
@@ -66,7 +66,7 @@
             Assert.AreSame(expected, candidate.GetType());
         }
 
-        [TestMethod]
+        [Test]
         public void ChildResolveChildServiceDirectly()
         {
             var container = new UnityContainer();
@@ -82,7 +82,7 @@
             Assert.AreSame(expected, candidate.GetType());  
         }
 
-        [TestMethod]
+        [Test]
         public void ChildResolveChildServiceViaRegistrar()
         {
             var container = new UnityContainer();
@@ -98,7 +98,7 @@
             Assert.AreSame(expected, candidate.GetType());
         }
 
-        [TestMethod]
+        [Test]
         public void FactoryCalllInParent()
         {
             var container = new UnityContainer();
@@ -114,7 +114,7 @@
             Assert.AreSame(expected, candidate.GetType());
         }
 
-        [TestMethod]
+        [Test]
         public void FactoryCallInChild()
         {
             var container = new UnityContainer();

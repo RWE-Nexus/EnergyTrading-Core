@@ -1,8 +1,8 @@
 ﻿namespace EnergyTrading.UnitTest.Extensions
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DateRangeExtensionFixtures
     {
     }

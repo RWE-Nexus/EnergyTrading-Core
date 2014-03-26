@@ -6,38 +6,38 @@
     using EnergyTrading.Configuration;
     using EnergyTrading.FileProcessing.Verification;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class FileInfoExtensionsFixture
     {
         private readonly string prefix = "testPrefix";
         private Mock<IConfigurationManager> mockConfigManager;
 
-        [TestInitialize]
+        [SetUp]
         public void TestInitialize()
         {
             this.mockConfigManager = new Mock<IConfigurationManager>();
             this.mockConfigManager.Setup(x => x.AppSettings).Returns(new NameValueCollection { { ConfigurationManagerExtensions.VerificationPrefixAppSetting, this.prefix }});
         }
 
-        [TestMethod]
+        [Test]
         public void IsTestFileReturnsFalseIfFileInfoIsNull()
         {
             var candidate = FileInfoExtensions.IsTestFile(null, this.mockConfigManager.Object);
             Assert.IsFalse(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IsTestFileReturnsFalseIfFileNameDoesNotStartWithPrefix()
         {
             var candidate = new FileInfo("someOtherFileName.txt").IsTestFile(this.mockConfigManager.Object);
             Assert.IsFalse(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IsTestFileReturnsTrueIfFileNameStartsWithPrefix()
         {
             var candidate = new FileInfo(this.prefix + "someOtherFileName.txt").IsTestFile(this.mockConfigManager.Object);

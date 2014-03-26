@@ -2,9 +2,9 @@
 {
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class NamespaceManagerFixture : BaseNamespaceManagerFixture
     {
         protected override INamespaceManager CreateManager()

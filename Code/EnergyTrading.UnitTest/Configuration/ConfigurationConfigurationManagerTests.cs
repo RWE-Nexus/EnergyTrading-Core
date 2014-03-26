@@ -7,28 +7,26 @@
 
     using EnergyTrading.Configuration;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
-    [DeploymentItem("App.configmanagertest.config")]
-    [DeploymentItem("App.empty.config")]
+    [TestFixture]
     public class ConfigurationConfigurationManagerTests
     {
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestCannotConstructWithNullConfig()
         {
             new ConfigurationConfigurationManager(null);
         }
 
-        [TestMethod]
+        [Test]
         public void CanGetDefaultAppSettings()
         {
             var config = new ConfigurationConfigurationManager(ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App.empty.config") }, ConfigurationUserLevel.None));
             Assert.IsFalse(config.AppSettings.AllKeys.Contains("key"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestAppSettingsHasCorrectValues()
         {
             var config = new ConfigurationConfigurationManager(ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App.configmanagertest.config") }, ConfigurationUserLevel.None));
@@ -36,7 +34,7 @@
             Assert.AreEqual("another value", config.AppSettings["another key"]);
         }
 
-        [TestMethod]
+        [Test]
         public void TestConnectionStringsHasCorrectValues()
         {
             var config = new ConfigurationConfigurationManager(ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App.configmanagertest.config") }, ConfigurationUserLevel.None));

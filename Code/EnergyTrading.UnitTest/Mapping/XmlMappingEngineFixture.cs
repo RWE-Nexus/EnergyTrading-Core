@@ -13,14 +13,14 @@
 
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Registrars;
 
-    [TestClass]
+    [TestFixture]
     public class XmlMappingEngineFixture : XmlFixture
     {
-        [TestMethod]
+        [Test]
         public void CreateDocument()
         {
             this.Container.RegisterType<IXmlMapper<XPathProcessor, Parent>, ParentXPathMapper>();
@@ -40,7 +40,7 @@
             var xml = engine.CreateDocument(entity);
         }
 
-        [TestMethod]
+        [Test]
         public void RoundTripWithOneWayMappers()
         {
             var locator = this.Container.Resolve<IServiceLocator>();
@@ -59,7 +59,7 @@
             this.RoundTripMapping(engine);
         }
 
-        [TestMethod]
+        [Test]
         public void RoundTripWithTwoWayMappers()
         {
             var locator = this.Container.Resolve<IServiceLocator>();

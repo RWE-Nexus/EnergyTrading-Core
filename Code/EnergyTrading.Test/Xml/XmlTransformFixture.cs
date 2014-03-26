@@ -10,7 +10,7 @@
     using EnergyTrading.Test;
     using EnergyTrading.Xml;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     /// <summary>
     /// Test class for proving XML transformations/mapping.
@@ -19,10 +19,10 @@
     /// Derive from this class settings the parameters in the overridden <see cref="Fixture.OnSetup" /> method
     /// and adding individual files as test methods.   
     /// <code>
-    /// [TestClass]
+    /// [TestFixture]
     /// public class CtsRoundTripFixture : SamplesTransformFixture{TradePayload}
     /// {
-    ///     [TestMethod]
+    ///     [Test]
     ///     [TestCategory("BioFuels"), TestCategory("Swap")]
     ///     public virtual void BioFuelsSwapFixedFloat_10121947()
     ///     {
@@ -409,7 +409,7 @@
                     Assert.Fail(errors);
                 }
             }
-            catch (AssertFailedException)
+            catch (AssertionException)
             {
                 throw;
             }

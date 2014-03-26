@@ -7,11 +7,11 @@
     using EnergyTrading.Configuration;
     using EnergyTrading.FileProcessing;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class IgnoreDirectoriesFileFilterFixture
     {
         private const string TestUncPath = @"\\server\share\dev\filedrop\test\file.txt";
@@ -19,7 +19,7 @@
 
         private Mock<IConfigurationManager> mockConfig;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             this.mockConfig = new Mock<IConfigurationManager>();
@@ -38,7 +38,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void GetDirectoriesWithRootedPath()
         {
             this.mockConfig.Setup(x => x.AppSettings).Returns(new NameValueCollection { { "IgnoreDirectoriesFilterList", string.Empty }, { "IgnoreDirectoriesFilterMatchCase", "true" } });
@@ -49,7 +49,7 @@
             Assert.AreEqual(candidate[2], "dev");
         }
 
-        [TestMethod]
+        [Test]
         public void GetDirectoriesWithUncPath()
         {
             this.mockConfig.Setup(x => x.AppSettings).Returns(new NameValueCollection { { "IgnoreDirectoriesFilterList", string.Empty }, { "IgnoreDirectoriesFilterMatchCase", "true" } });
@@ -74,7 +74,7 @@
             Assert.AreEqual(candidate, includeFile, "Unc Path :" + message);
         }
 
-        [TestMethod]
+        [Test]
         public void AllIncludedIfNoConfigurationValuesAreSet()
         {
             this.mockConfig.Setup(x => x.AppSettings).Returns(new NameValueCollection());
@@ -84,7 +84,7 @@
             Assert.IsTrue(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void RunIncludeFileTestCases()
         {
             const bool ShouldIncludeFile = true;
@@ -106,7 +106,7 @@
             this.TestIncludeFile(new List<string> { "Dev", "Filedrop", "multiple", "all", "incorrect", "case" }, CaseSensitive, ShouldIncludeFile);
         }
 
-        [TestMethod]
+        [Test]
         public void DefaultIsCaseInsensitive()
         {
             this.mockConfig.Setup(x => x.AppSettings).Returns(new NameValueCollection { { "IgnoreDirectoriesFilterList", "Dev,Filedrop,multiple,all,incorrect,case" } });

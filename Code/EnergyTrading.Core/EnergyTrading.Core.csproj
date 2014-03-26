@@ -137,16 +137,12 @@
     <Compile Include="FileProcessing\NullPostProcessor.cs" />
     <Compile Include="FileProcessing\FileHandling\CombinedFileHandlingStrategy.cs" />
     <Compile Include="FileProcessing\FileProcessors\PollingBasedFileProcessor.cs" />
-    <Compile Include="FileProcessing\FileHandling\DeleteSuccessfulFiles.cs" />
     <Compile Include="FileProcessing\Exceptions\FileDeleteException.cs" />
     <Compile Include="FileProcessing\FileHandling\FileProducerConsumerQueue.cs" />
     <Compile Include="FileProcessing\FileHandling\FileThroughPutAlerter.cs" />
     <Compile Include="FileProcessing\FileHandling\IFileHandlingStrategy.cs" />
     <Compile Include="FileProcessing\FileHandling\IHandleFiles.cs" />
-    <Compile Include="FileProcessing\FileHandling\IMoveFiles.cs" />
-    <Compile Include="FileProcessing\FileHandling\MoveFileStrategy.cs" />
     <Compile Include="FileProcessing\FileHandling\ProcessingFile.cs" />
-    <Compile Include="FileProcessing\FileHandling\StrategyFileMover.cs" />
     <Compile Include="FileProcessing\PollingFileChangeDetector.cs" />
     <Compile Include="FileProcessing\Verification\FileInfoExtensions.cs" />
     <Compile Include="Infrastructure\IChain.cs" />
@@ -278,7 +274,6 @@
     <Compile Include="Data\IIdentifiable.cs" />
     <Compile Include="Data\IQueryFactory.cs" />
     <Compile Include="Data\IRepository.cs" />
-    <Compile Include="Data\IRepository.Generic.cs" />
     <Compile Include="Data\QueryFactory.cs" />
     <Compile Include="DateRange.cs" />
     <Compile Include="DateRangeState.cs" />
@@ -325,7 +320,6 @@
     <Compile Include="Web\IWebOperationContextWrapper.cs" />
     <Compile Include="Web\WebOperationContextWrapper.cs" />
     <Compile Include="Xml\Serialization\CustomSerializer.cs" />
-    <Compile Include="Xml\SimpleSchemaValidator.cs" />
     <Compile Include="Xml\XmlExtensions.cs" />
     <Compile Include="Xml\XmlSchemaValidator.cs" />
     <Compile Include="Xml\XmlSchemaValidatorExtensions.cs" />

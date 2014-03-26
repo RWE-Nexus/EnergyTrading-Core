@@ -15,10 +15,9 @@
     using EnergyTrading.Xml;
     using EnergyTrading.Xml.Linq;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [DeploymentItem("Mapping\\Trade.xml", "Mapping")]
-    [TestClass]
+    [TestFixture]
     public class XmlLinqExtensionsFixture
     {
         private static readonly ILogger Logger = LoggerFactory.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -30,7 +29,7 @@
                                         <Bob>b</Bob>
                                      </Fred>";
 
-        [TestMethod]
+        [Test]
         public void XDocumentNamespaceFile()
         {
             string xml;
@@ -44,7 +43,7 @@
             this.TimeIt(document.Namespaces().ToList);
         }
 
-        [TestMethod]
+        [Test]
         public void XDocumentNamespaceXml()
         {
             var document = XDocument.Parse(Xml);
@@ -52,7 +51,7 @@
             this.TimeIt(document.Namespaces().ToList);
         }
 
-        [TestMethod]
+        [Test]
         public void XPathDocumentNamespaceFile()
         {
             var document = new XPathDocument(XmlPath);
@@ -60,7 +59,7 @@
             this.TimeIt(document.Namespaces().ToList);
         }
 
-        [TestMethod]
+        [Test]
         public void XPathDocumentNamespaceXml()
         {
             var document = new XPathDocument(new StringReader(Xml));
@@ -68,7 +67,7 @@
             this.TimeIt(document.Namespaces().ToList);
         }
 
-        [TestMethod]
+        [Test]
         public void XPathDocumenNamespace2File()
         {
             var document = new XPathDocument(XmlPath);
@@ -76,7 +75,7 @@
             this.TimeIt(document.Namespaces2().ToList);
         }
 
-        [TestMethod]
+        [Test]
         public void XPathDocumenNamespace2Xml()
         {
             var document = new XPathDocument(new StringReader(Xml));
@@ -100,7 +99,7 @@
             Logger.InfoFormat("Found {0} in {1} ms", d.Count, w.ElapsedMilliseconds);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldNormalizeWithoutSchema()
         {
             var input = XDocument.Parse(@"<Root xmlns='http://www.northwind.com'>
@@ -112,7 +111,7 @@
             Assert.IsNotNull(afterNormalize);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldNotChangeTheContentOfNormalizeXml()
         {
             var input = XDocument.Parse(@"<Root xmlns='http://www.northwind.com'>
@@ -125,7 +124,7 @@
             Assert.IsTrue(afterNormalize.DeepEqualsWithNormalization(input, null));
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnTrueForTwoSemanticallyEquivalentOrIsometricXmls()
         {
             var doc1 = XDocument.Parse(@"<Root xmlns='http://www.northwind.com'>
@@ -139,7 +138,7 @@
             Assert.IsTrue(doc1.DeepEqualsWithNormalization(doc2, null));
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnTrueIfTwoSemanticallyEquivalentOrIsometricXmlsHasDifferentOrderOfAttributes()
         {
             var doc1 = XDocument.Parse(@"<Root xmlns='http://www.northwind.com'>
@@ -153,7 +152,7 @@
             Assert.IsTrue(doc1.DeepEqualsWithNormalization(doc2, null));
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldNormalizeWithSchema()
         {
             var doc = XDocument.Parse(@"<Root xmlns:n='http://www.northwind.com'>
@@ -165,7 +164,7 @@
             Assert.IsNotNull(afterNormaize);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnTrueForTwoSemanticallyEquivalentOrIsometricXmlsWithSchemaValidation()
         {
             var doc1 = XDocument.Parse(@"<Root xmlns='http://www.northwind.com'>
@@ -182,7 +181,7 @@
             Assert.IsTrue(doc1.DeepEqualsWithNormalization(doc2, this.SchemaSet));
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementBool()
         {
             var value = true;
@@ -192,7 +191,7 @@
             Assert.AreEqual("true", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementBoolDefaultValue()
         {
             var value = false;
@@ -202,7 +201,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementBoolOutputDefaultValue()
         {
             var value = false;
@@ -212,7 +211,7 @@
             Assert.AreEqual("false", candidate.Value); 
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementInt()
         {
             var value = 1;
@@ -222,7 +221,7 @@
             Assert.AreEqual("1", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementIntDefaultValue()
         {
             var value = 0;
@@ -232,7 +231,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementIntOutputDefaultValue()
         {
             var value = 3;
@@ -242,7 +241,7 @@
             Assert.AreEqual("3", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementDecimal()
         {
             decimal value = 1;
@@ -252,7 +251,7 @@
             Assert.AreEqual("1", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementDecimaltDefaultValue()
         {
             decimal value = 0;
@@ -262,7 +261,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementDecimalOutputDefaultValue()
         {
             decimal value = 3;
@@ -272,7 +271,7 @@
             Assert.AreEqual("3", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementDateTime()
         {
             var value = new DateTime(2012, 5, 13, 23, 14, 34);
@@ -281,7 +280,7 @@
             Assert.AreEqual("2012-05-13T23:14:34Z", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXElementDateTimeWithFormat()
         {
             var value = new DateTime(2012, 5, 13, 23, 14, 34);
@@ -290,7 +289,7 @@
             Assert.AreEqual("2012-05-13", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeBool()
         {
             var value = true;
@@ -300,7 +299,7 @@
             Assert.AreEqual("true", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeBoolDefaultValue()
         {
             var value = false;
@@ -310,7 +309,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeBoolOutputDefaultValue()
         {
             var value = false;
@@ -320,7 +319,7 @@
             Assert.AreEqual("false", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeInt()
         {
             var value = 1;
@@ -330,7 +329,7 @@
             Assert.AreEqual("1", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeIntDefaultValue()
         {
             var value = 0;
@@ -340,7 +339,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeIntOutputDefaultValue()
         {
             var value = 3;
@@ -350,7 +349,7 @@
             Assert.AreEqual("3", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeDecimal()
         {
             decimal value = 1;
@@ -360,7 +359,7 @@
             Assert.AreEqual("1", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeDecimaltDefaultValue()
         {
             decimal value = 0;
@@ -370,7 +369,7 @@
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeDecimalOutputDefaultValue()
         {
             decimal value = 3;
@@ -380,7 +379,7 @@
             Assert.AreEqual("3", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeDateTime()
         {
             var value = new DateTime(2012, 5, 13, 23, 14, 34);
@@ -389,7 +388,7 @@
             Assert.AreEqual("2012-05-13T23:14:34Z", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ToXAttributeDateTimeWithFormat()
         {
             var value = new DateTime(2012, 5, 13, 23, 14, 34);
@@ -398,21 +397,21 @@
             Assert.AreEqual("2012-05-13", candidate.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void GetChildElementValueReturnsNullForNullElement()
         {
             var candidate = XmlLinqExtensions.GetChildElementValue(null, "test");
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetChildElementValueReturnsNullIfNoChildElements()
         {
             var candidate = new XElement("element").GetChildElementValue("test");
             Assert.IsNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void GetChildElementValueReturnsValueIfPresent()
         {
             var candidate = new XElement("element", new XElement("test", "value")).GetChildElementValue("test");

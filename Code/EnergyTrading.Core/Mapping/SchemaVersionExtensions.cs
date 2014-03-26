@@ -108,18 +108,6 @@
         }
 
         /// <summary>
-        /// Convert a version object into a ASM version.
-        /// </summary>
-        /// <param name="version">Version to convert</param>
-        /// <param name="schema">Optional schema prefix for version</param>
-        /// <returns></returns>
-        [Obsolete("Use ToAsmVersion")]
-        public static string ToAsmVersionString(this Version version, string schema = null)
-        {
-            return version.ToAsmVersion(schema);
-        }
-
-        /// <summary>
         /// Convert a version string to a <see cref="Version" /> object.
         /// </summary>
         /// <param name="value">String to use</param>

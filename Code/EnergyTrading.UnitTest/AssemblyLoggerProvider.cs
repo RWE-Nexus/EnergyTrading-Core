@@ -1,22 +1,30 @@
 ﻿namespace EnergyTrading.UnitTest
 {
-    using EnergyTrading.Logging;
+    using System;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using EnergyTrading.Logging;
 
     using Moq;
 
-    [TestClass]
     public class AssemblyLoggerProvider
     {
+        private static Func<ILoggerFactory> provider;
+
         public static Mock<ILogger> MockLogger { get; private set; }
 
-        [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext context)
+        public static void InitializeLogger()
         {
             MockLogger = new Mock<ILogger>();
+
+            provider = LoggerFactory.GetProvider();
             var lm = new SimpleLoggerFactory(MockLogger.Object);
+            
             LoggerFactory.SetProvider(() => lm);
+        }
+
+        public static void RestoreLogger()
+        {
+            LoggerFactory.SetProvider(provider);
         }
     }
 }

@@ -4,11 +4,11 @@
 
     using EnergyTrading.Data;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Data.EntityFramework;
 
-    [TestClass]
+    [TestFixture]
     public abstract class DbSetRepositoryFixture<T> : RepositoryFixture<T>
         where T : class, IIdentifiable, new()
     {

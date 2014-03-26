@@ -4,16 +4,16 @@
 
     using EnergyTrading;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DateRangeFixture
     {
         private readonly DateTime date1900 = new DateTime(1900, 1, 1);
         private readonly DateTime date2000 = new DateTime(2000, 1, 1);
         private readonly DateTime date1950 = new DateTime(1950, 6, 20);
 
-        [TestMethod]
+        [Test]
         public void ContainsDate()
         {
             var range = new DateRange(this.date1900, this.date2000);
@@ -25,7 +25,7 @@
             Assert.IsTrue(range.Contains(this.date2000), "2000");
         }
 
-        [TestMethod]
+        [Test]
         public void Equals()
         {
             var first = new DateRange(this.date1900, this.date2000);
@@ -35,7 +35,7 @@
             Assert.IsTrue(first.Equals(second), "Method equality");
         }
 
-        [TestMethod]
+        [Test]
         public void NotEquals()
         {
             var first = new DateRange(this.date1900, this.date2000);
@@ -45,7 +45,7 @@
             Assert.IsFalse(first.Equals(second), "Method inequality");
         }
 
-        [TestMethod]
+        [Test]
         public void ChangeStart()
         {
             var first = new DateRange(this.date1900, this.date2000);
@@ -54,7 +54,7 @@
             Assert.AreEqual(new DateRange(this.date1900.AddDays(-1), this.date2000), first.ChangeStart(new TimeSpan(-1, 0, 0, 0)), "ChangeStart TimeSpan");
         }
 
-        [TestMethod]
+        [Test]
         public void ChangeFinish()
         {
             var first = new DateRange(this.date1900, this.date2000);
@@ -63,7 +63,7 @@
             Assert.AreEqual(new DateRange(this.date1900, this.date2000.AddDays(-1)), first.ChangeFinish(new TimeSpan(-1, 0, 0, 0)), "ChangeFinish TimeSpan");
         }
 
-        [TestMethod]
+        [Test]
         public void ContainsRange()
         {
             var first = new DateRange(this.date1900, this.date2000);
@@ -72,7 +72,7 @@
             Assert.IsTrue(first.Contains(second));
         }
 
-        [TestMethod]
+        [Test]
         public void Union()
         {
             var first = new DateRange(this.date1900, this.date1950);
@@ -81,7 +81,7 @@
             Assert.AreEqual(new DateRange(this.date1900, this.date2000), first.Union(second));
         }
 
-        [TestMethod]
+        [Test]
         public void NotContainsRange()
         {
             var first = new DateRange(this.date1900, this.date2000);
@@ -90,7 +90,7 @@
             Assert.IsFalse(first.Contains(second));
         }
 
-        [TestMethod]
+        [Test]
         public void Disjoint()
         {
             var first = new DateRange(this.date1900, this.date1950.AddSeconds(-1));
@@ -99,7 +99,7 @@
             Assert.IsTrue(first.Disjoint(second));
         }
 
-        [TestMethod]
+        [Test]
         public void NotDisjoint()
         {
             var first = new DateRange(this.date1900, this.date1950.AddSeconds(1));
@@ -108,7 +108,7 @@
             Assert.IsFalse(first.Disjoint(second));
         }
 
-        [TestMethod]
+        [Test]
         public void UnspecifiedToUtcSKeepsTime()
         {
             var start = new DateTime(2009, 6, 1, 12, 0, 0);
@@ -118,7 +118,7 @@
             Assert.AreEqual(12, dr.Start.Hour, "Hour differs");
         }
 
-        [TestMethod]
+        [Test]
         public void UnspecifiedToLocalKeepsTime()
         {
             var start = new DateTime(2009, 6, 1, 12, 0, 0);
@@ -128,7 +128,7 @@
             Assert.AreEqual(12, dr.Start.Hour, "Hour differs");
         }
 
-        [TestMethod]
+        [Test]
         public void DateRangeStateComparisons()
         {
             var start = new DateTime(2009, 6, 1, 12, 0, 0);
@@ -141,7 +141,7 @@
             Assert.AreEqual(DateRangeState.Future, dr.DetermineState(finish.AddDays(1)), "Future check");
         }
 
-        [TestMethod]
+        [Test]
         public void DateRangeNotExceedingMinMax()
         {
             var oldMin = DateUtility.MinDate;
@@ -158,7 +158,7 @@
             DateUtility.SetMaxDate(oldMax);
         }
 
-        [TestMethod]
+        [Test]
         public void ValueNotEqualToNull()
         {
             var start = new DateTime(2011, 1, 1);

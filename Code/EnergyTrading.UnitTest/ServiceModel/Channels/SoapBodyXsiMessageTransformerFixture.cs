@@ -5,12 +5,12 @@
     using EnergyTrading.ServiceModel.Channels;
     using EnergyTrading.Test.Xml;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class SoapBodyXsiMessageTransformerFixture : XmlFixture
     {
-        [TestMethod]
+        [Test]
         public void JustRemoveSoapBodyXsi()
         {
             var value = @"<s:Envelope xmlns:s='http://schemas.xmlsoap.org/soap/envelope/'>

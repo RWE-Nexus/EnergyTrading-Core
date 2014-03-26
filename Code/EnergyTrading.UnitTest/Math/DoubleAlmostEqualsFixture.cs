@@ -2,12 +2,12 @@
 {
     using EnergyTrading.Math;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DoubleAlmostEqualsFixture
     {
-        [TestMethod]
+        [Test]
         public void NanNan()
         {
             var expected = double.NaN;
@@ -17,7 +17,7 @@
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void NanZero()
         {
             var expected = double.NaN;
@@ -27,7 +27,7 @@
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ZeroNan()
         {
             var expected = 0d;
@@ -37,7 +37,7 @@
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void PositiveInfinityZero()
         {
             var expected = double.PositiveInfinity;
@@ -47,7 +47,7 @@
             Assert.IsFalse(result);    
         }
 
-        [TestMethod]
+        [Test]
         public void ZeroPositiveInfinity()
         {
             var expected = 0d;
@@ -57,7 +57,7 @@
             Assert.IsFalse(result);    
         }
 
-        [TestMethod]
+        [Test]
         public void NegativeInfinityZero()
         {
             var expected = double.NegativeInfinity;
@@ -67,7 +67,7 @@
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ZeroNegativeInfinity()
         {
             var expected = 0d;
@@ -77,7 +77,7 @@
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ZeroZero()
         {
             var expected = -0d;
@@ -87,7 +87,7 @@
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [Test]
         public void VaryInPosition11()
         {
             var expected = 1632.4587642911599d;

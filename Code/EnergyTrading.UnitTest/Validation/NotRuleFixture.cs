@@ -2,14 +2,14 @@
 {
     using EnergyTrading.Validation;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class NotRuleFixture
     {
-        [TestMethod]
+        [Test]
         public void DefaultMessageIsEmpty()
         {
             var innerRule = new Mock<IRule<string>>();
@@ -17,7 +17,7 @@
             Assert.IsTrue(string.IsNullOrEmpty(rule.Message));
         }
 
-        [TestMethod]
+        [Test]
         public void MessagePassedToConstructorIsReturned()
         {
             const string Msg = "msg";
@@ -26,7 +26,7 @@
             Assert.AreEqual(Msg, rule.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void ResultIsNegationOfInnerRuleResult()
         {
             var innerRule = new Mock<IRule<string>>();

@@ -6,7 +6,7 @@
     /// <summary>
     /// Handles files by passing off to appropriate <see cref="IFileHandlingStrategy" /> instances.
     /// </summary>
-    public class StrategyFileEventHandler : IFileProcessResultHandler, IMoveFiles
+    public class StrategyFileEventHandler : IFileProcessResultHandler
     {
         private readonly IFileHandlingStrategy successStrategy;
         private readonly IFileHandlingStrategy cancelledStrategy;
@@ -36,24 +36,6 @@
             this.successStrategy = successStrategy;
             this.cancelledStrategy = cancelledStrategy;
             this.failureStrategy = failureStrategy;
-        }
-
-        [Obsolete("Use Handle")]
-        public void FileErrored(ProcessingFile processingFile)
-        {
-            this.Handle(FileProcessResult.Error, processingFile);
-        }
-
-        [Obsolete("Use Handle")]
-        public void FileCancelled(ProcessingFile processingFile)
-        {
-            this.Handle(FileProcessResult.Cancelled, processingFile);
-        }
-
-        [Obsolete("Use Handle")]
-        public void FileProcessed(ProcessingFile processingFile)
-        {
-            this.Handle(FileProcessResult.Processed, processingFile);
         }
 
         /// <copydocfrom cref="IFileProcessResultHandler.Handle" />

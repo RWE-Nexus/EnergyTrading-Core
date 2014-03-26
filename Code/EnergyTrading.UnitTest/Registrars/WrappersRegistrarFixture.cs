@@ -3,21 +3,21 @@
     using EnergyTrading.Wrappers;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Registrars;
 
-    [TestClass]
+    [TestFixture]
     public class WrappersRegistrarFixture
     {
-        [TestMethod]
+        [Test]
         public void CanResolve()
         {
             var container = new UnityContainer();
             new WrappersRegistrar().Register(container);
-            Assert.IsInstanceOfType(container.Resolve<IDirectory>(), typeof(DirectoryWrapper));
-            Assert.IsInstanceOfType(container.Resolve<IFile>(), typeof(FileWrapper));
-            Assert.IsInstanceOfType(container.Resolve<IDateTime>(), typeof(DateTimeWrapper));
+            Assert.IsInstanceOf<DirectoryWrapper>(container.Resolve<IDirectory>());
+            Assert.IsInstanceOf<FileWrapper>(container.Resolve<IFile>());
+            Assert.IsInstanceOf<DateTimeWrapper>(container.Resolve<IDateTime>());
         }         
     }
 }

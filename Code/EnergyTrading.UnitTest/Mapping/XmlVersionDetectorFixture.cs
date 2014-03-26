@@ -5,16 +5,16 @@
 
     using EnergyTrading.Mapping;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class XmlVersionDetectorFixture : Fixture
     {
         private string sampleXml = "<hello></hello>";
 
-        [TestMethod]
+        [Test]
         public void ChildDetectorDetectsSchema()
         {
             // Arrange
@@ -31,7 +31,7 @@
             Assert.AreEqual("test", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void InvalidXmlRaisesException()
         {
             // Arrange
@@ -51,7 +51,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void DetectorReturnsChildEmpty()
         {
             // Arrange
@@ -66,7 +66,7 @@
             Assert.AreEqual(string.Empty, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DetectorTranslatesDetectorSchemaUnknown()
         {
             // Arrange
@@ -83,7 +83,7 @@
             Assert.AreEqual(string.Empty, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void FirstRespondingDetectorDetectsSchema()
         {
             // Arrange
@@ -101,7 +101,7 @@
             Assert.AreEqual("test", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void IgnoreDetectorException()
         {
             // Arrange
@@ -120,7 +120,7 @@
             Assert.AreEqual("test", candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DetectorResponseToNull()
         {
             // Arrange
@@ -137,7 +137,7 @@
             Assert.AreEqual(string.Empty, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DetectorResponseToEmptyString()
         {
             // Arrange
@@ -151,7 +151,7 @@
             Assert.AreEqual(string.Empty, candidate);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(NotSupportedException))]
         public void DetectorResponseToInvalidXml()
         {
@@ -166,7 +166,7 @@
             Assert.AreEqual(string.Empty, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DetectorResponseToStringEmpty()
         {
             // Arrange
@@ -183,7 +183,7 @@
             Assert.AreEqual(string.Empty, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DetectorResponseToUnknown()
         {
             // Arrange
@@ -200,7 +200,7 @@
             Assert.AreEqual(string.Empty, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DetectorResponseToSchemaUnknown()
         {
             // Arrange
@@ -217,7 +217,7 @@
             Assert.AreEqual(string.Empty, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void DetectorResponseToVersion()
         {
             // Arrange

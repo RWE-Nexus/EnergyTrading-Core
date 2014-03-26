@@ -2,14 +2,14 @@
 {
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.Container.Unity;
 
-    [TestClass]
+    [TestFixture]
     public class ContainerFixture
     {
-        [TestMethod]
+        [Test]
         public void ContainerResolvesSelf()
         {
             var container = new UnityContainer();
@@ -18,7 +18,7 @@
             Assert.AreSame(container, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ContainerResolveSelfAfterStandardConfiguration()
         {
             var container = new UnityContainer();
@@ -28,7 +28,7 @@
             Assert.AreSame(container, candidate); 
         }
 
-        [TestMethod]
+        [Test]
         public void ContainerResolvesServiceLocator()
         {
             var container = new UnityContainer();
@@ -38,7 +38,7 @@
             var candidate = container.Resolve<IServiceLocator>();
         }
 
-        [TestMethod]
+        [Test]
         public void ContainerResolvesServiceLocatorAfterStandardConfiguration()
         {
             var container = new UnityContainer();
@@ -47,7 +47,7 @@
             var candidate = container.Resolve<IServiceLocator>();
         }
 
-        [TestMethod]
+        [Test]
         public void ContainerResolvesServiceLocatorAfterStandardConfigurationAndInstallCoreExtensions()
         {
             var container = new UnityContainer();

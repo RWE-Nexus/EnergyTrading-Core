@@ -4,12 +4,12 @@
 
     using EnergyTrading.Threading;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class CancellationTokenOwnerFixture
     {
-        [TestMethod]
+        [Test]
         public void NewOwnerIsNotCancelled()
         {
             var owner = new CancellationTokenOwner();
@@ -19,7 +19,7 @@
             Assert.IsFalse(token.IsCancellationRequested, "Token not cancelled");
         }
 
-        [TestMethod]
+        [Test]
         public void CancelSetsIsCancellationRequested()
         {
             var owner = new CancellationTokenOwner();
@@ -31,7 +31,7 @@
             Assert.IsTrue(token.IsCancellationRequested, "Token not cancelled");
         }
 
-        [TestMethod]
+        [Test]
         public void ResetClearsIsCancellationRequested()
         {
             var owner = new CancellationTokenOwner();
@@ -45,7 +45,7 @@
             Assert.IsFalse(token.IsCancellationRequested, "Token not cancelled");         
         }
 
-        [TestMethod]
+        [Test]
         public void MustCancelBeforeReset()
         {
             var owner = new CancellationTokenOwner();

@@ -2,12 +2,12 @@
 {
     using EnergyTrading.FileProcessing;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DefaultFileFilterFixture
     {
-        [TestMethod]
+        [Test]
         public void TestDefaultFilterAlwaysReturnsTrue()
         {
             this.TestDefaultFilter(null);

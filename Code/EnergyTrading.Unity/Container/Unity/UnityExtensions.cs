@@ -204,21 +204,6 @@
         /// <summary>
         /// Tries to resolve the type, returning the passed in defaultValue if not found.
         /// </summary>
-        /// <typeparam name="T">The type to try and resolve</typeparam>
-        /// <param name="container">The unity container.</param>
-        /// <param name="name">The name associated with the type.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <returns>An object of type <see typeparamref="T"/> if found, or the <see paramref="defaultValue"/> if not.</returns>
-        /// <remarks>Needs the <see cref="TypeTrackingExtension"/> installed.</remarks>     
-        [Obsolete("Use the TryResolve(container, T, string) overload")]     
-        public static T TryResolve<T>(this IUnityContainer container, string name, T defaultValue)
-        {
-            return container.CheckConfigure<TypeTrackingExtension>().TryResolve<T>(defaultValue, name);
-        }
-
-        /// <summary>
-        /// Tries to resolve the type, returning the passed in defaultValue if not found.
-        /// </summary>
         /// <param name="type">The type to try and resolve</param>
         /// <param name="container">The unity container.</param>
         /// <param name="name">The name associated with the type.</param>

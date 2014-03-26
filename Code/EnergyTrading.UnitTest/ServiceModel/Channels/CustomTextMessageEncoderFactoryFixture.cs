@@ -1,8 +1,8 @@
 ﻿namespace EnergyTrading.UnitTest.ServiceModel.Channels
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class CustomTextMessageEncoderFactoryFixture
     {
     }

@@ -29,25 +29,25 @@
         /// </summary>
         public Checker()
         {
-            this.properties = new List<PropertyCheck>();
-            this.parentType = typeof(T).BaseType;
-            if (this.parentType != typeof(object) && this.parentType != typeof(ValueType))
+            properties = new List<PropertyCheck>();
+            parentType = typeof(T).BaseType;
+            if (parentType != typeof(object) && parentType != typeof(ValueType))
             {
                 // Get a checker for the parent
-                this.parentChecker = CheckParentClassMi.MakeGenericMethod(this.parentType);
+                parentChecker = CheckParentClassMi.MakeGenericMethod(parentType);
             }
         }
 
         /// <copydocfrom cref="ICheckerCompare.Properties" />
         protected IList<PropertyCheck> Properties
         {
-            get { return this.properties; }
+            get { return properties; }
         }
 
         /// <copydocfrom cref="ICheckerCompare.Properties" />
         ICollection<PropertyCheck> ICheckerCompare.Properties
         {
-            get { return this.Properties; }
+            get { return Properties; }
         }
 
         /// <summary>
@@ -71,9 +71,9 @@
                 objectName = typeof(T).Name;
             }
 
-            if (!this.CheckDescendants(expected, candidate, objectName))
+            if (!CheckDescendants(expected, candidate, objectName))
             {
-                this.CheckBase(expected, candidate, objectName);
+                CheckBase(expected, candidate, objectName);
             }
         }
 
@@ -91,16 +91,16 @@
             }
 
             // First check the parent
-            this.CheckParent(expected, candidate, objectName);
+            CheckParent(expected, candidate, objectName);
 
             // Now our explicit ones.
-            this.CheckComparisons(expected, candidate, objectName);
+            CheckComparisons(expected, candidate, objectName);
         }
 
         /// <copydocfrom cref="IChecker.Check" />
         void IChecker.Check(object expected, object candidate, string objectName)
         {
-            this.Check((T)expected, (T)candidate, objectName);
+            Check((T)expected, (T)candidate, objectName);
         }
 
         /// <summary>
@@ -144,21 +144,12 @@
         /// <param name="objectName">Name to use, displayed in error messages to disambiguate</param>
         protected virtual void CheckParent(T expected, T candidate, string objectName)
         {
-            if (this.parentChecker == null)
+            if (parentChecker == null)
             {
                 return;
             }
 
-            this.parentChecker.Invoke(null, new object[] { expected, candidate, objectName });
-        }
-
-        /// <summary>
-        /// Initializes the set of comparisons
-        /// </summary>
-        [Obsolete("Use Initialize")]
-        protected void AutoCompare()
-        {
-            this.Initialize();
+            parentChecker.Invoke(null, new object[] { expected, candidate, objectName });
         }
 
         /// <summary>
@@ -178,7 +169,7 @@
         /// <returns>true if we are a descendant, false otherwise</returns>
         protected virtual bool CheckDescendants(object expected, object candidate, string objectName)
         {
-            return this.Descendants
+            return Descendants
                         .Select(type => CheckClassMi.MakeGenericMethod(type))
                         .Any(castMethod => (bool)castMethod.Invoke(null, new[] { expected, candidate, objectName }));
         }
@@ -191,7 +182,7 @@
         /// <param name="objectName">Name to use, displayed in error messages to disambiguate</param>
         protected virtual void CheckComparisons(T expected, T candidate, string objectName)
         {
-            foreach (var prop in this.Properties)
+            foreach (var prop in Properties)
             {
                 prop.Check(CheckerFactory, expected, candidate, objectName);
             }
@@ -204,13 +195,13 @@
         /// <returns></returns>
         protected PropertyCheckExpression Compare(Expression<Func<T, object>> propertyExpression)
         {
-            return this.Compare(ReflectionExtension.GetPropertyInfo(propertyExpression));
+            return Compare(ReflectionExtension.GetPropertyInfo(propertyExpression));
         }
 
         /// <copydocfrom cref="ICheckerCompare.Compare" />
         PropertyCheckExpression ICheckerCompare.Compare(PropertyInfo propertyInfo)
         {
-            return this.Compare(propertyInfo);
+            return Compare(propertyInfo);
         }
 
         /// <copydocfrom cref="ICheckerCompare.Compare" />
@@ -220,7 +211,7 @@
             {
                 throw new NotSupportedException("No ITypeCompareTargeter assigned to PropertyCheck");
             }
-            return this.Compare(propertyInfo, PropertyCheck.Targeter.DetermineCompareTarget(propertyInfo.PropertyType));
+            return Compare(propertyInfo, PropertyCheck.Targeter.DetermineCompareTarget(propertyInfo.PropertyType));
         }
 
         /// <summary>
@@ -231,12 +222,12 @@
         /// <returns>A new <see cref="PropertyCheckExpression" /> created from the <see cref="PropertyInfo" /></returns>
         protected PropertyCheckExpression Compare(PropertyInfo propertyInfo, CompareTarget compareTarget)
         {
-            var pc = this.Find(propertyInfo);
+            var pc = Find(propertyInfo);
             if (pc == null)
             {
                 // Add the new check
                 pc = new PropertyCheck(propertyInfo, compareTarget);
-                this.Properties.Add(pc);
+                Properties.Add(pc);
             }
             else
             {
@@ -253,28 +244,28 @@
         /// <param name="propertyExpression"></param>
         protected void Exclude(Expression<Func<T, object>> propertyExpression)
         {
-            this.Exclude(ReflectionExtension.GetPropertyInfo(propertyExpression));
+            Exclude(ReflectionExtension.GetPropertyInfo(propertyExpression));
         }
 
         /// <copydocfrom cref="ICheckerCompare.Exclude" />
         void ICheckerCompare.Exclude(PropertyInfo propertyInfo)
         {
-            this.Exclude(propertyInfo);
+            Exclude(propertyInfo);
         }
 
         /// <copydocfrom cref="ICheckerCompare.Exclude" />
         protected void Exclude(PropertyInfo propertyInfo)
         {
-            var pc = this.Find(propertyInfo);
+            var pc = Find(propertyInfo);
             if (pc != null)
             {
-                this.Properties.Remove(pc);
+                Properties.Remove(pc);
             }
         }
 
         private PropertyCheck Find(PropertyInfo propertyInfo)
         {
-            return this.Properties.FirstOrDefault(x => x.Info.Name == propertyInfo.Name);
+            return Properties.FirstOrDefault(x => x.Info.Name == propertyInfo.Name);
         }
     }
 }

@@ -4,14 +4,14 @@
     using EnergyTrading.UnitTest.Mapping.Examples;
 
     using Microsoft.Practices.ServiceLocation;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Moq;
 
-    [TestClass]
+    [TestFixture]
     public class SimpleMappingEngineFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void RegisteredMapperIsReturned()
         {
             var locator = new Mock<IServiceLocator>(MockBehavior.Strict);
@@ -24,7 +24,7 @@
             Assert.IsNotNull(candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void LocatorCalledMultipleWhenNoCache()
         {
             var locator = new Mock<IServiceLocator>(MockBehavior.Strict);
@@ -41,7 +41,7 @@
             locator.Verify(x => x.GetInstance(type), Times.Exactly(2)); 
         }
 
-        [TestMethod]
+        [Test]
         public void LocatorCalledOnceWhenCaching()
         {
             var locator = new Mock<IServiceLocator>(MockBehavior.Strict);
@@ -58,7 +58,7 @@
             locator.Verify(x => x.GetInstance(type), Times.Once());
         }
 
-        [TestMethod]
+        [Test]
         public void MapCreatesDestination()
         {
             var locator = new Mock<IServiceLocator>(MockBehavior.Strict);
@@ -74,7 +74,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void MapWithCreatedDestination()
         {
             var locator = new Mock<IServiceLocator>(MockBehavior.Strict);

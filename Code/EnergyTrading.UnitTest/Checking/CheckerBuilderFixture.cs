@@ -4,9 +4,9 @@
     using EnergyTrading.Test.Checking;
     using EnergyTrading.Test.Data;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class CheckerBuilderFixture : Fixture
     {
         protected override ICheckerFactory CreateCheckerFactory()
@@ -14,7 +14,7 @@
             return new CheckerFactory();
         }
 
-        [TestMethod]
+        [Test]
         public void BuildSimplePropertyChecker()
         {
             var builder = new CheckerBuilder(this.CheckerFactory);
@@ -24,7 +24,7 @@
             Assert.AreEqual(1, checker.Properties.Count, "Property count differs");
         }
 
-        [TestMethod]
+        [Test]
         public void BuildDescendantPropertyChecker()
         {
             var builder = new CheckerBuilder(this.CheckerFactory);

@@ -4,72 +4,72 @@
 
     using EnergyTrading.Xml.Linq;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class ParseXmlBoolFixture
     {       
-        [TestMethod]
+        [Test]
         public void ParseTrue()
         {
             this.Parse("True", true);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseTrueLower()
         {
             this.Parse("true", true);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseYes()
         {
             this.Parse("Yes", true);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseYesLower()
         {
             this.Parse("yes", true);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseOne()
         {
             this.Parse("1", true);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseFalse()
         {
             this.Parse("False", false);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseFalseLower()
         {
             this.Parse("false", false);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseNo()
         {
             this.Parse("No", false);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseNoLower()
         {
             this.Parse("no", false);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseZero()
         {
             this.Parse("0", false);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(FormatException))]
         public void ParseBool()
         {

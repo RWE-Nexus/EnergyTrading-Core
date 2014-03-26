@@ -4,14 +4,14 @@
     using EnergyTrading.Services;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using EnergyTrading.FileProcessing.Registrars;
 
-    [TestClass]
+    [TestFixture]
     public class FileProcessorHostRegistrarFixture
     {
-        [TestMethod]
+        [Test]
         public void CanResolve()
         {
             var container = new UnityContainer();
@@ -21,7 +21,7 @@
             container.Resolve<IFileProcessorHost>();
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldResolveSambaStyleProcessor()
         {
             var container = new UnityContainer();

@@ -7,14 +7,14 @@
     using EnergyTrading.Test;
     using EnergyTrading.Test.Checking;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Fixture = EnergyTrading.UnitTest.Fixture;
 
-    [TestClass]
+    [TestFixture]
     public class CheckingFixture : Fixture
     {
-        [TestMethod]
+        [Test]
         public void ValidateAllComparedPropertiesAreSame()
         {
             var expected = new Simple { Id = 1, Name = "A" };
@@ -23,7 +23,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateDifferentIntPropertyMessage()
         {
             var expected = new Simple { Id = 1, Name = "A" };
@@ -32,7 +32,7 @@
             this.CheckFault(expected, candidate, "Simple.Id", 1, 2);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateDifferentStringPropertyMessage()
         {
             var expected = new Simple { Id = 1, Name = "A" };
@@ -41,7 +41,7 @@
             this.CheckFault(expected, candidate, "Simple.Name", "A", "B");
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateCompareById()
         {
             var p1 = new Parent { Id = 1, Name = "A" };
@@ -55,7 +55,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateCompareByIdMessage()
         {
             var p1 = new Parent { Id = 1, Name = "A" };
@@ -69,7 +69,7 @@
             this.CheckFault(expected, candidate, "Child.Parent.Id", 1, 2);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateExcludeProperty()
         {
             var expected = new Parent { Id = 1, Name = "A", Another = 1 };
@@ -78,7 +78,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidatePropertyMessageInChildEntity()
         {
             var expected = new Parent { Id = 1, Name = "A" };
@@ -92,7 +92,7 @@
             this.CheckFault(expected, candidate, "Parent.Favourite.Id", 1, 2);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateCollection()
         {
             var c1 = new Child();
@@ -105,7 +105,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateNullIIdentifiable()
         {
             var expected = new Child { Id = 1, Name = "Child" };
@@ -114,7 +114,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateWhenBothCollectionPropertyAreNull()
         {
             var expected = new Parent { Id = 1, Name = "A" };
@@ -123,7 +123,7 @@
             this.Check(expected, candidate);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateMessageWhenCandidateCollectionPropertyIsNull()
         {
             var expected = new Parent { Id = 1, Name = "A", Children = new List<Child>() };
@@ -132,7 +132,7 @@
             this.CheckFault(expected, candidate, "Parent.Children", "not null", "null");
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateMessageWhenExpectedCollectionPropertyIsNull()
         {
             var expected = new Parent { Id = 1, Name = "A" };
@@ -141,7 +141,7 @@
             this.CheckFault(expected, candidate, "Parent.Children", "null", "not null");
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateMessageWhenCandidateCollectionCountIsDifferent()
         {
             var c1 = new Child();
@@ -153,7 +153,7 @@
             this.CheckFault(expected, candidate, "Parent.Children.Count", 1, 0);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateMessageWhenExpectedCollectionCountIsDifferent()
         {
             var c1 = new Child();
@@ -165,7 +165,7 @@
             this.CheckFault(expected, candidate, "Parent.Children.Count", 0, 1);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateMessageCollectionElementIsDifferent()
         {
             var expected = new Parent { Id = 1, Name = "A", Children = new List<Child>() };
@@ -179,7 +179,7 @@
             this.CheckFault(expected, candidate, "Parent.Children[0].Id", 1, 2);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateUniquePropertyInfoChecked()
         {
             PropertyCheck.Targeter = new TypeCompareTargeter();

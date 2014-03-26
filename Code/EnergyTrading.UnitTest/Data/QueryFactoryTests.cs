@@ -7,12 +7,12 @@ namespace EnergyTrading.UnitTest.Data
 
     using EnergyTrading.Contracts.Search;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class query_factory_tests 
     {
-        [TestMethod]
+        [Test]
         public void no_criteria_passed()
         {
             var search = new Search();
@@ -21,7 +21,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual(string.Empty, result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_equality()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -32,7 +32,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Name = \"TestParty\")", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_not_equality()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -43,7 +43,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Name != \"TestParty\")", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_equality_with_combinator()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -55,7 +55,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Name = \"TestParty\" Or Name = \"TestParty2\")", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_numeric_equality()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -66,7 +66,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Balance = 120)", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_lessthan()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -77,7 +77,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Balance < 120)", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_lessthanequal()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -88,7 +88,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Balance <= 120)", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_greaterthan()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -99,7 +99,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Balance > 120)", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_greaterthanequal()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -110,7 +110,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Balance >= 120)", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_equality_isnumeric()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -121,7 +121,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Balance = 120)", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_by_name_or_other_name()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -133,7 +133,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Name = \"TestParty\" Or Name = \"TestParty2\")", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_party_by_name_and_faxnumber()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -145,7 +145,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Name = \"TestParty\" And FaxNumber = \"01302555555\")", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_party_by_two_wildcards_anded()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.And);
@@ -157,7 +157,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Name.Contains(\"Test\") And Name.Contains(\"Party\"))", result);
         }
 
-        [TestMethod]
+        [Test]
         public void find_party_with_two_search_criteria()
         {
             var search = SearchBuilder.CreateSearch(SearchCombinator.Or);
@@ -172,7 +172,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Name = \"Test\" And FaxNumber.Contains(\"01302\")) Or (Name = \"Bob\" And FaxNumber.Contains(\"01942\"))", result);
         }
 
-        [TestMethod]
+        [Test]
         public void case_insensitive_mapping()
         {
             var search = new Search();
@@ -187,7 +187,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(MappingValue.ToUpper().Contains(\"TEST\"))", result);
         }
 
-        [TestMethod]
+        [Test]
         public void case_sensitive_mapping()
         {
             var search = new Search();
@@ -202,7 +202,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(MappingValue.Contains(\"Test\"))", result);
         }
 
-        [TestMethod]
+        [Test]
         public void case_insensitive_entity()
         {
             var search = new Search();
@@ -217,7 +217,7 @@ namespace EnergyTrading.UnitTest.Data
             Assert.AreEqual("(Name.Contains(\"Test\"))", result);
         }
 
-        [TestMethod]
+        [Test]
         public void case_sensitive_entity()
         {
             var search = new Search();

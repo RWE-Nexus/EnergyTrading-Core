@@ -6,9 +6,9 @@
     using EnergyTrading.UnitTest.Mapping.Examples;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class XmlMapperFixture : XmlFixture
     {
         public const string AppNamespace = "http://www.sample.com/app";
@@ -41,7 +41,7 @@
                     </Pets>
                 </Owner>";
         
-        [TestMethod]
+        [Test]
         public void MapPolymorphicList()
         {
             var processor = this.CreateProcessor();
@@ -63,7 +63,7 @@
             this.Check(expectedAnimal, candidateAnimal, "Animal");
         }
 
-        [TestMethod]
+        [Test]
         public void RoundTripMappingWithPolymorphicList()
         {
             var processor = this.CreateProcessor();
@@ -75,7 +75,7 @@
             this.CheckXml(this.xml, candidateXml);
         }
 
-        [TestMethod]
+        [Test]
         public void ReadEmptyNodesAsEmptyStringMissingNodesAsNull()
         {
             var entityXml = @"
@@ -88,7 +88,7 @@
             this.ReadXml(entityXml, expected);
         }
 
-        [TestMethod]
+        [Test]
         public void ReadEmptyNodesAsEmptyString()
         {
             var entityXml = @"
@@ -103,7 +103,7 @@
             this.ReadXml(entityXml, expected);
         }
 
-        [TestMethod]
+        [Test]
         public void EmitCorrectDefaultsForNull()
         {
             var entityXml = @"
@@ -116,7 +116,7 @@
             this.EmitXml(expected, entityXml);
         }
   
-        [TestMethod]
+        [Test]
         public void EmitCorrectDefaultsForEmptyString()
         {
             var entityXml = @"
@@ -131,7 +131,7 @@
             this.EmitXml(expected, entityXml);
         }
       
-        [TestMethod]
+        [Test]
         public void RoundTripNullValues()
         {
             var entityXml = @"
