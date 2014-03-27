@@ -6,10 +6,10 @@
         <description>EnergyTrading helpers and extensions for Entity Framework.</description>
         <version>$version$</version>
         <releaseNotes>none</releaseNotes>
-        <copyright>Copyright RWE 2012</copyright>
+        <copyright>Copyright RWE 2014</copyright>
         <authors>RWE</authors>
         <owners>Integration Architecture</owners>
-        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.EntityFramework</projectUrl>
+        <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
         <tags>EnergyTrading EntityFramework .net40</tags>
         <dependencies>
             <dependency id="EnergyTrading.Core" version="" />

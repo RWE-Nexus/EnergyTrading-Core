@@ -6,10 +6,10 @@
         <description>Log4Net implementation of the EnergyTrading logging library</description>
         <version>$version$</version>
         <releaseNotes>none</releaseNotes>
-        <copyright>Copyright RWE 2012</copyright>
+        <copyright>Copyright RWE 2014</copyright>
         <authors>RWE</authors>
         <owners>Integration Architecture</owners>
-        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.Logging.Log4Net</projectUrl>
+        <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
         <tags>EnergyTrading logging log4net .net40</tags>
         <dependencies>
             <dependency id="log4net" version="[1.2.10]" />

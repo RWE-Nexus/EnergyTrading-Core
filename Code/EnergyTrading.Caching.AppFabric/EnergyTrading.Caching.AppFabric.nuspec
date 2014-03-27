@@ -9,7 +9,7 @@
         <copyright>Copyright RWE 2013</copyright>
         <authors>RWE</authors>
         <owners>Integration Architecture</owners>
-        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.Caching.AppFabric</projectUrl>
+        <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
         <tags>EnergyTrading AppFabric Cache .net40</tags>
         <dependencies>
             <dependency id="ServerAppFabric.Client" version="" />

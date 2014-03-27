@@ -6,10 +6,10 @@
         <description>Enterprises Library implementations of EnergyTrading interfaces</description>
         <version>$version$</version>
         <releaseNotes>Newly created</releaseNotes>
-        <copyright>Copyright RWE 2012</copyright>
+        <copyright>Copyright RWE 2014</copyright>
         <authors>RWE</authors>
         <owners>Integration Architecture</owners>
-        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.EnterpriseLibrary</projectUrl>
+        <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
         <tags>EnergyTrading EnterpriseLibrary logging .net40</tags>
         <dependencies>
             <dependency id="CommonServiceLocator" version="" />

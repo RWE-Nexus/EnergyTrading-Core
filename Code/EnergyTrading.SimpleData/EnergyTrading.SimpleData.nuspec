@@ -6,10 +6,10 @@
         <description>Common functionality for use with SimpleData</description>
         <version>$version$</version>
         <releaseNotes>none</releaseNotes>
-        <copyright>Copyright RWE 2012</copyright>
+        <copyright>Copyright RWE 2014</copyright>
         <owners>RWEST</owners>
         <authors>RWEST Architecture Team</authors>
-        <projectUrl>http://confluence.rwe.com:8081/display/NEXINTEG/EnergyTrading.SimpleData</projectUrl>
+        <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
         <tags>EnergyTrading logging data SimpleData .net40</tags>
         <dependencies>
             <group>
