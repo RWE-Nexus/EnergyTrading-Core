@@ -1,5 +1,6 @@
 ﻿namespace EnergyTrading.UnitTest.Verification
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
 
@@ -71,6 +72,11 @@
             public string RemoveAllNonOriginatingIds(string source)
             {
                 return this.RemoveAllNonOriginatingSystemIds(source);
+            }
+
+            public bool CheckReceviedResults(IDictionary<Guid, VerificationResult> resultSet, Guid testId)
+            {
+                return this.VerifyReceviedResults(resultSet, testId);
             }
         }
 
@@ -172,6 +178,19 @@
             var stream = new MemoryStream(candidate);
             var actual = new StreamReader(stream).ReadToEnd();
             Assert.AreEqual("hello world", actual);
+        }
+
+        [Test]
+        public void CanVerifyReceviedResults()
+        {
+            var guid = Guid.NewGuid();
+            var testResult = new VerificationResult() { TestId = guid };
+
+            var resultSet = new Dictionary<Guid, VerificationResult>();
+            resultSet.Add(guid, testResult);
+            var isResultExist = new VerificationSpecsBaseDerived().CheckReceviedResults(resultSet, guid);
+
+            Assert.IsTrue(isResultExist);
         }
     }
 }

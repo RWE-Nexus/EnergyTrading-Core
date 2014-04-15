@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
+    using System.Threading;
 
     using EnergyTrading.Test.Mapping;
 
@@ -62,6 +63,23 @@
             stream.Seek(0, SeekOrigin.Begin);
             stream.Read(byteArray, 0, Convert.ToInt32(stream.Length));
             return byteArray;
+        }
+
+        protected bool VerifyReceviedResults(IDictionary<Guid, VerificationResult> resultSet, Guid testId)
+        {
+            var counter = 0;
+            var receivedResult = false;
+            while (!receivedResult)
+            {
+                if (counter == 240)
+                {
+                    return false;
+                }
+                receivedResult = resultSet.ContainsKey(testId);
+                Thread.Sleep(500);
+                ++counter;
+            }
+            return true;
         }
 
         protected abstract string RemoveDynamicValues(string source);
