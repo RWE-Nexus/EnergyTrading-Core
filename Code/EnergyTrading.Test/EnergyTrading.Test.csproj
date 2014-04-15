@@ -118,6 +118,7 @@
     <Compile Include="Validation\FileWatcherVerifier.cs" />
     <Compile Include="Validation\IVerifier.cs" />
     <Compile Include="Verification\FileDropService.cs" />
+    <Compile Include="Verification\VerificationResult.cs" />
     <Compile Include="Verification\VerificationXmlExtensions.cs" />
     <Compile Include="Verification\VerificiationSpecsBase.cs" />
     <Compile Include="Xml\XmlFixture.cs" />
