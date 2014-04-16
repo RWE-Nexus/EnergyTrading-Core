@@ -4,11 +4,8 @@
 
     using EnergyTrading.Data;
 
-    using NUnit.Framework;
-
     using EnergyTrading.Data.EntityFramework;
 
-    [TestFixture]
     public abstract class DbSetRepositoryFixture<T> : RepositoryFixture<T>
         where T : class, IIdentifiable, new()
     {
@@ -17,19 +14,18 @@
 
         protected IDbContextProvider ContextProvider
         {
-            get { return this.contextProvider ?? (this.contextProvider = new DbContextProvider(this.CreateDbContext)); }
+            get { return contextProvider ?? (contextProvider = new DbContextProvider(CreateDbContext)); }
         }
 
         protected DbContext Context
         {
-            get { return this.ContextProvider.CurrentContext(); }
-            //set { this.context = value; }
+            get { return ContextProvider.CurrentContext(); }
         }
 
         protected override IRepository Repository
         {
-            get { return this.repository ?? (this.repository = new DbSetRepository(this.ContextProvider)); }
-            set { this.repository = value; }
+            get { return repository ?? (repository = new DbSetRepository(ContextProvider)); }
+            set { repository = value; }
         }
 
         protected abstract DbContext CreateDbContext();
