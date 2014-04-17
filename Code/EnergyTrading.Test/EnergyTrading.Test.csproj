@@ -35,10 +35,6 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\EntityFramework.4.1.10715.0\lib\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -57,11 +53,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -90,8 +84,6 @@
     <Compile Include="Checking\PropertyCheckException.cs" />
     <Compile Include="Checking\PropertyCheckExpression.cs" />
     <Compile Include="Checking\TypeCompareTargeter.cs" />
-    <Compile Include="Data\EF\DbSetRepositoryFixture.cs" />
-    <Compile Include="Data\EF\RepositoryFixture.cs" />
     <Compile Include="Data\IdentifiableChecker.cs" />
     <Compile Include="Data\Zapper.cs" />
     <Compile Include="Fixture.cs" />
@@ -132,10 +124,6 @@
     <ProjectReference Include="..\EnergyTrading.Core\EnergyTrading.Core.csproj">
       <Project>{D673760C-F22F-44FF-A4A3-1F697C4997C1}</Project>
       <Name>EnergyTrading.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EnergyTrading.EntityFramework\EnergyTrading.EntityFramework.csproj">
-      <Project>{7F75E531-8A3D-498B-A672-ABB5D85DC861}</Project>
-      <Name>EnergyTrading.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\EnergyTrading.Unity\EnergyTrading.Unity.csproj">
       <Project>{D3AF9B04-0B0E-474A-B9C0-C07D751D49BF}</Project>

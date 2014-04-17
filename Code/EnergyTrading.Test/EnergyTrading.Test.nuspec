@@ -17,8 +17,8 @@
             <dependency id="EnergyTrading.Contracts" version="" />
             <dependency id="EnergyTrading.Core" version="" />
             <dependency id="EnergyTrading.Unity" version="" />
-            <dependency id="EnergyTrading.EntityFramework" version="" />
             <dependency id="XmlDiffPatch" version="" />
+          <depencency id="NUnit" version="" />
         </dependencies>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
     </metadata>
