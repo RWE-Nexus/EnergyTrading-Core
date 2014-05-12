@@ -74,7 +74,12 @@
                 return this.RemoveAllNonOriginatingSystemIds(source);
             }
 
-            public bool CheckReceviedResults(IDictionary<Guid, VerificationResult> resultSet, Guid testId)
+            public bool CheckReceviedResults(IDictionary<Guid, VerificationResult<Guid>> resultSet, Guid testId)
+            {
+                return this.VerifyReceviedResults(resultSet, testId);
+            }
+
+            public bool CheckReceviedResults(IDictionary<string, VerificationResult<string>> resultSet, string testId)
             {
                 return this.VerifyReceviedResults(resultSet, testId);
             }
@@ -181,14 +186,25 @@
         }
 
         [Test]
-        public void CanVerifyReceviedResults()
+        public void CanVerifyReceviedResultsGuid()
         {
             var guid = Guid.NewGuid();
-            var testResult = new VerificationResult() { TestId = guid };
+            var testResult = new VerificationResult<Guid>() { TestId = guid };
 
-            var resultSet = new Dictionary<Guid, VerificationResult>();
-            resultSet.Add(guid, testResult);
+            var resultSet = new Dictionary<Guid, VerificationResult<Guid>> { { guid, testResult } };
             var isResultExist = new VerificationSpecsBaseDerived().CheckReceviedResults(resultSet, guid);
+
+            Assert.IsTrue(isResultExist);
+        }
+
+        [Test]
+        public void CanVerifyReceviedResultsString()
+        {
+            var id = "testid";
+            var testResult = new VerificationResult<string>() { TestId = id };
+
+            var resultSet = new Dictionary<string, VerificationResult<string>> { { id, testResult } };
+            var isResultExist = new VerificationSpecsBaseDerived().CheckReceviedResults(resultSet, id);
 
             Assert.IsTrue(isResultExist);
         }

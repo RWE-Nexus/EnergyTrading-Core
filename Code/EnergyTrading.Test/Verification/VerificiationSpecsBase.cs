@@ -65,7 +65,7 @@
             return byteArray;
         }
 
-        protected bool VerifyReceviedResults(IDictionary<Guid, VerificationResult> resultSet, Guid testId)
+        protected bool VerifyReceviedResults<T>(IDictionary<T, VerificationResult<T>> resultSet, T testId)
         {
             var counter = 0;
             var receivedResult = false;

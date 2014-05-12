@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class VerificationResult
+    public class VerificationResult<T>
     {
         public string Code { get; set; }
 
-        public Guid TestId { get; set; }
+        public T TestId { get; set; }
 
         public string MessageResult { get; set; }
     }

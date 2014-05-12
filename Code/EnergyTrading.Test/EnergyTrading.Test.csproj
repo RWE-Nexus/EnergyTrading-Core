@@ -131,7 +131,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="EnergyTrading.Test.nuspec" />
+    <None Include="EnergyTrading.Test.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
