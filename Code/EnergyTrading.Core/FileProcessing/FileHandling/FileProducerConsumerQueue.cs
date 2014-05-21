@@ -31,8 +31,20 @@ namespace EnergyTrading.FileProcessing.FileHandling
             var fileProcessorFullPath = this.fileProcessor as IFileHandlerFullPath;
             Task task;
             task = fileProcessorFullPath != null ? 
-                this.EnqueueWork(() => fileProcessorFullPath.HandleWithFullPath(new FileInfo(processingFile.CurrentFilePath), processingFile.FullPathOfOriginalFile)) : 
-                this.EnqueueWork(() => this.fileProcessor.Handle(new FileInfo(processingFile.CurrentFilePath), processingFile.OriginalFilePath));
+                this.EnqueueWork(() =>
+                    { 
+                        if (!fileProcessorFullPath.HandleWithFullPath(new FileInfo(processingFile.CurrentFilePath), processingFile.FullPathOfOriginalFile))
+                        {
+                            throw new InvalidOperationException("File was not handled HandleWithFullPath returned False.");
+                        }
+                    }) : 
+                this.EnqueueWork(() =>
+                    {
+                        if (this.fileProcessor.Handle(new FileInfo(processingFile.CurrentFilePath), processingFile.OriginalFilePath))
+                        {
+                            throw new InvalidOperationException("File was not handled Handle returned False.");
+                        }
+                    });
             task.ContinueWith(x => this.FileProcessed(processingFile), TaskContinuationOptions.OnlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously);
             task.ContinueWith(x => this.FileCancelled(processingFile), TaskContinuationOptions.OnlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously);
             task.ContinueWith(x => this.FileErrored(processingFile, x.Exception), TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
