@@ -24,6 +24,7 @@
                 InProgressPath = "e",
                 ScavengeInterval = 100,
                 RecoveryInterval = 100,
+                PollingInterval = 130
             };
 
             var expected = new FileProcessorEndpoint
@@ -39,7 +40,8 @@
                 RecoveryInterval = new TimeSpan(0, 0, 100),
                 ProcessorConfigurator = "EnergyTrading.FileProcessing.Registrars.EventBasedProcessorDefaultRegistrar, EnergyTrading.Unity",
                 AdditionalFilter = typeof(DefaultFileFilter),
-                PollingRestartInterval = new TimeSpan(0, 0, 60)
+                PollingRestartInterval = new TimeSpan(0, 0, 60),
+                PollingInterval = 130000
             };
 
             var candidate = element.ToEndpoint();
@@ -75,7 +77,8 @@
                 RecoveryInterval = new TimeSpan(0, 0, 100),
                 ProcessorConfigurator = FileProcessorEndpoint.EventBasedConfiguratorType,
                 AdditionalFilter = typeof(DefaultFileFilter),
-                PollingRestartInterval = new TimeSpan(0, 0, 60)
+                PollingRestartInterval = new TimeSpan(0, 0, 60),
+                PollingInterval = 120000
             };
 
             var candidate = element.ToEndpoint();
@@ -111,7 +114,8 @@
                 RecoveryInterval = new TimeSpan(0, 0, 100),
                 ProcessorConfigurator = FileProcessorEndpoint.PollingBasedConfiguratorType,
                 AdditionalFilter = typeof(DefaultFileFilter),
-                PollingRestartInterval = new TimeSpan(0, 0, 60)
+                PollingRestartInterval = new TimeSpan(0, 0, 60),
+                PollingInterval = 120000
             };
 
             var candidate = element.ToEndpoint();
@@ -149,7 +153,8 @@
                 ProcessorConfigurator = "EnergyTrading.UnitTest.FileProcessing.Configuration.ConfigurationExtensionsFixture+CustomFileProcessor, EnergyTrading.UnitTest",
                 Handler = typeof(FileHandler),
                 AdditionalFilter = typeof(DefaultFileFilter),
-                PollingRestartInterval = new TimeSpan(0, 0, 60)
+                PollingRestartInterval = new TimeSpan(0, 0, 60),
+                PollingInterval = 120000
             };
 
             var candidate = element.ToEndpoint();
@@ -190,7 +195,8 @@
                 Handler = typeof(FileHandler),
                 PollingRestartInterval = new TimeSpan(0, 0, 100),
                 AdditionalFilter = typeof(DefaultFileFilter),
-                PostProcessor = typeof(CustomPostProcessor)
+                PostProcessor = typeof(CustomPostProcessor),
+                PollingInterval = 120000
             };
 
             var candidate = element.ToEndpoint();
@@ -232,7 +238,8 @@
                 Handler = typeof(FileHandler),
                 PollingRestartInterval = new TimeSpan(0, 0, 100),
                 AdditionalFilter = typeof(CustomFileFilter),
-                PostProcessor = typeof(CustomPostProcessor)
+                PostProcessor = typeof(CustomPostProcessor),
+                PollingInterval = 120000
             };
 
             var candidate = element.ToEndpoint();
