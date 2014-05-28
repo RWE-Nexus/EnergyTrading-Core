@@ -31,7 +31,7 @@
         protected override void StartCheckingForNewFiles()
         {
             // run a poll immediately to pick up any waiting files and then start the timer 
-            this.TimerElapsed(this, new ElapsedEventArgs());
+            this.Poll();
             this.pollingTimer.Start();
             Logger.DebugFormat(
                "Now watching for any new files dropped at {0}{1} with filter {2}",
@@ -48,9 +48,14 @@
 
         protected void TimerElapsed(object sender, ElapsedEventArgs args)
         {
+            this.Poll();
+        }
+
+        private void Poll()
+        {
             if (this.currentTask == null || this.currentTask.Status != TaskStatus.Running)
             {
-                currentTask = Task.Factory.StartNew(this.PollingTask);
+                this.currentTask = Task.Factory.StartNew(this.PollingTask);
             }
         }
 
