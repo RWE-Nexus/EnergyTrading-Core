@@ -63,6 +63,8 @@
 
         public Type AdditionalFilter { get; set; }
 
+        public int PollingInterval { get; set; }
+
         /// <summary>
         /// Helper function 
         /// </summary>

@@ -31,7 +31,8 @@
                 ProcessorConfigurator = DetermineProcessorType(element),
                 Handler = element.Handler.ToType(),
                 PostProcessor = element.PostProcessor.ToType(),
-                AdditionalFilter = element.AdditionalFilter.ToType() ?? typeof(DefaultFileFilter)
+                AdditionalFilter = element.AdditionalFilter.ToType() ?? typeof(DefaultFileFilter),
+                PollingInterval = element.PollingInterval * 1000
             };
             return endpoint;
         }

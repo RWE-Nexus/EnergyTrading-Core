@@ -4,6 +4,7 @@
     using System.Collections.Concurrent;
     using System.Globalization;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Threading;
@@ -144,6 +145,12 @@
         protected void AddFileToQueue(string completeFilePath)
         {
             Logger.Debug("Enqueing: " + completeFilePath);
+            // Don't add a file to the queue if it already exists (it will get dealt with eventually)
+            if (pendingFiles.Contains(completeFilePath))
+            {
+                return;
+            }
+
             this.pendingFiles.Enqueue(completeFilePath);
             this.eventHandle.Set();
         }

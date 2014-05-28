@@ -24,7 +24,7 @@
         public PollingBasedv2FileProcessor(FileProcessorEndpoint endpoint, IFileHandler handler, IFilePostProcessor postProcessor, IFileFilter additionalFilter)
             : base(endpoint, handler, postProcessor, additionalFilter)
         {
-            this.pollingTimer = new Timer(500) { AutoReset = true };
+            this.pollingTimer = new Timer(Endpoint.PollingInterval) { AutoReset = true };
             this.pollingTimer.Elapsed += this.TimerElapsed;
         }
 

@@ -164,5 +164,18 @@
                 this["additionalFilter"] = value;
             }
         }
+
+        [ConfigurationProperty("pollingInterval", DefaultValue = 120)]
+        public virtual int PollingInterval 
+        {
+            get
+            {
+                return (int)this["pollingInterval"];
+            }
+            set
+            {
+                this["pollingInterval"] = value;
+            }
+        }
     }
 }
