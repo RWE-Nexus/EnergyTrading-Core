@@ -31,10 +31,16 @@
         protected override void StartCheckingForNewFiles()
         {
             this.pollingTimer.Start();
+            Logger.DebugFormat(
+               "Now watching for any new files dropped at {0}{1} with filter {2}",
+               this.Endpoint.GetDropPath(),
+               this.Endpoint.MonitorSubdirectories ? " and subdirectories" : string.Empty,
+               this.Endpoint.GetDropFilter());
         }
 
         protected override void StopCheckingForNewFiles()
         {
+            Logger.Debug("Stopping File Polling Timer");
             this.pollingTimer.Stop();
         }
 

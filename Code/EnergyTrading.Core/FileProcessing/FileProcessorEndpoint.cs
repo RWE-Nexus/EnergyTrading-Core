@@ -10,7 +10,7 @@
     {
         public const string PollingBasedConfiguratorType = "EnergyTrading.FileProcessing.Registrars.PollingBasedProcessorDefaultRegistrar, EnergyTrading.Unity";
         public const string EventBasedConfiguratorType = "EnergyTrading.FileProcessing.Registrars.EventBasedProcessorDefaultRegistrar, EnergyTrading.Unity";
-        public const string PollingBasedv2ConfiguratorType = "EnergyTrdaing.FileProcessing.Registrars.PollingBasedv2ProcessorDefaultRegistrar, EnergyTrading.Unity";
+        public const string PollingBasedv2ConfiguratorType = "EnergyTrading.FileProcessing.Registrars.PollingBasedv2ProcessorDefaultRegistrar, EnergyTrading.Unity";
 
         public string Name { get; set; }
 
