@@ -125,6 +125,9 @@
     <Compile Include="FileProcessing\FileProcessor.cs" />
     <Compile Include="FileProcessing\FileProcessorEndpoint.cs" />
     <Compile Include="FileProcessing\FileProcessorHost.cs" />
+    <Compile Include="FileProcessing\FileProcessors\FileProcessorBase.cs" />
+    <Compile Include="FileProcessing\FileProcessors\FileScavenger.cs" />
+    <Compile Include="FileProcessing\FileProcessors\PollingBasedv2FileProcessor.cs" />
     <Compile Include="FileProcessing\FileWatcherFileChangeDetector.cs" />
     <Compile Include="FileProcessing\IFileChangeDetector.cs" />
     <Compile Include="FileProcessing\IFileFilter.cs" />

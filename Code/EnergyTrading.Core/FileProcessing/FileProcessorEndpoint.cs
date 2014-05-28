@@ -1,6 +1,7 @@
 ﻿namespace EnergyTrading.FileProcessing
 {
     using System;
+    using System.Configuration;
 
     /// <summary>
     /// Endpoint definition for a file processor.
@@ -9,6 +10,7 @@
     {
         public const string PollingBasedConfiguratorType = "EnergyTrading.FileProcessing.Registrars.PollingBasedProcessorDefaultRegistrar, EnergyTrading.Unity";
         public const string EventBasedConfiguratorType = "EnergyTrading.FileProcessing.Registrars.EventBasedProcessorDefaultRegistrar, EnergyTrading.Unity";
+        public const string PollingBasedv2ConfiguratorType = "EnergyTrdaing.FileProcessing.Registrars.PollingBasedv2ProcessorDefaultRegistrar, EnergyTrading.Unity";
 
         public string Name { get; set; }
 
@@ -61,6 +63,21 @@
 
         public Type AdditionalFilter { get; set; }
 
+        /// <summary>
+        /// Helper function 
+        /// </summary>
+        /// <param name="accessor">accessor for a string property</param>
+        /// <param name="propertyName">the name of the property to be accessed</param>
+        /// <returns>The trimmed value if not null or empty</returns>
+        public static string GetStringPropertyOrThrow(Func<string> accessor, string propertyName)
+        {
+            if (string.IsNullOrEmpty(accessor()))
+            {
+                throw new ConfigurationErrorsException(string.Format("The {0} has not been configured", propertyName));
+            }
+
+            return accessor().Trim();
+        }
         /// <summary>
         /// Check we are valid to create an endpoint
         /// </summary>

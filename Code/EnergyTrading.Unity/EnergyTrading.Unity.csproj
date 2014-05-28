@@ -96,8 +96,10 @@
     <Compile Include="FileProcessing\Registrars\ContainerExtensions.cs" />
     <Compile Include="FileProcessing\Registrars\EventBasedProcessorDefaultRegistrar.cs" />
     <Compile Include="FileProcessing\Registrars\FileProcessorHostRegistrar.cs" />
+    <Compile Include="FileProcessing\Registrars\FileProcessorRegistrarBase.cs" />
     <Compile Include="FileProcessing\Registrars\IFileProcessorRegistrar.cs" />
     <Compile Include="FileProcessing\Registrars\PollingBasedProcessorDefaultRegistrar.cs" />
+    <Compile Include="FileProcessing\Registrars\PollingBasedv2ProcessorDefaultRegistrar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrars\ConfigurationManagerRegistrar.cs" />
     <Compile Include="Registrars\MappingEngineRegistrar.cs" />

@@ -115,12 +115,14 @@ namespace EnergyTrading.FileProcessing.FileProcessors
 
                 var originalFilename = sourceFile.Name;
                 var inprogressFilePath = Path.Combine(this.fileProcessorEndpoint.InProgressPath, string.Format("{0}.{1}", originalFilename, DateTime.UtcNow.Ticks));
+                // save this here because it changes when we call FileInfo.MoveTo in TryTakePossessionOfFile and we need the original path to be passed correctly when we notify
+                var originalFullPathToFile = sourceFile.FullName;
 
                 try
                 {
                     if (this.TryTakePossessionOfFile(sourceFile, inprogressFilePath))
                     {
-                        this.fileHandler.Notify(new ProcessingFile(inprogressFilePath, originalFilename, sourceFile.FullName));
+                        this.fileHandler.Notify(new ProcessingFile(inprogressFilePath, originalFilename, originalFullPathToFile));
                     }
                 }
                 catch (Exception ex)

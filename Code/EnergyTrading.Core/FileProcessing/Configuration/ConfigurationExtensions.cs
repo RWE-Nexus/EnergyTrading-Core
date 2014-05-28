@@ -45,9 +45,31 @@
                     return FileProcessorEndpoint.EventBasedConfiguratorType;
                 case "PollingBased":
                     return FileProcessorEndpoint.PollingBasedConfiguratorType;
+                case "PollingBasedv2":
+                    return FileProcessorEndpoint.PollingBasedv2ConfiguratorType;
                 default:
                     return element.ProcessorConfiguratorType;
             }
+        }
+
+        public static string GetDropPath(this FileProcessorEndpoint endpoint)
+        {
+            return FileProcessorEndpoint.GetStringPropertyOrThrow(() => endpoint.DropPath, "File Drop Path");
+        }
+
+        public static string GetDropFilter(this FileProcessorEndpoint endpoint)
+        {
+            return FileProcessorEndpoint.GetStringPropertyOrThrow(() => endpoint.Filter, "File Drop Filter");
+        }
+
+        public static string GetSuccessPath(this FileProcessorEndpoint endpoint)
+        {
+            return FileProcessorEndpoint.GetStringPropertyOrThrow(() => endpoint.SuccessPath, "File Success Path");
+        }
+
+        public static string GetFailurePath(this FileProcessorEndpoint endpoint)
+        {
+            return FileProcessorEndpoint.GetStringPropertyOrThrow(() => endpoint.FailurePath, "File Failure Path");
         }
     }
 }
