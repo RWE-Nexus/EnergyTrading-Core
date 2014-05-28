@@ -126,7 +126,9 @@
                 Thread.Sleep(100);
             }
 
-            if (this.sufferedNetworkError || movedCount == fileCount)
+            // if there was a network error or if we moved all of the files that we found then it indicates that the underlying item has stopped watching the folder and we 
+            // fire the event to trigger a restart
+            if (this.sufferedNetworkError || (fileCount > 0 && movedCount == fileCount))
             {
                 this.FireRestartEvent();
             }
