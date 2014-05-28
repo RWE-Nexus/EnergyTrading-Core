@@ -197,7 +197,15 @@
             Logger.Debug("Acquiring: " + Path.GetFileName(sourcePath));
 
             processPath = String.Empty;
+            // default inprogress location is in the same directory
             var inprogressFile = Path.ChangeExtension(sourcePath, "." + this.InstanceId + InProgress);
+
+            // use the inProgressPath if it has been specified
+            if (!string.IsNullOrWhiteSpace(this.Endpoint.InProgressPath) && Directory.Exists(Endpoint.InProgressPath))
+            {
+                var fileName = Path.GetFileName(inprogressFile);
+                inprogressFile = Path.Combine(this.Endpoint.InProgressPath, fileName);
+            }
             var filelocked = true;
             var canProcessFile = false;
 
