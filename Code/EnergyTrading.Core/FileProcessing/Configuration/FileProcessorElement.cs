@@ -165,7 +165,10 @@
             }
         }
 
-        [ConfigurationProperty("pollingInterval", DefaultValue = 120)]
+        /// <summary>
+        /// Sets the polling Interval for PollingBasedv2 processors in seconds (default 60)
+        /// </summary>
+        [ConfigurationProperty("pollingInterval", DefaultValue = 60)]
         public virtual int PollingInterval 
         {
             get
