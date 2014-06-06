@@ -88,6 +88,7 @@
 
         private void RestartNewFileChecking()
         {
+            Logger.Warn("Restarting the underlying process that checks for new files.");
             this.StopCheckingForNewFiles();
             this.StartCheckingForNewFiles();
         }
