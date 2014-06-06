@@ -25,13 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Deployment", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.SimpleData", "EnergyTrading.SimpleData\EnergyTrading.SimpleData.csproj", "{F90852F0-2F4E-48CD-AA8F-ED4FF5A49DC4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BB94DDAF-80FE-4B94-80C7-5AFE1D34520D}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.SimpleData.Oracle", "EnergyTrading.SimpleData.Oracle\EnergyTrading.SimpleData.Oracle.csproj", "{B16BA408-ACB6-407F-8D36-B2A45FDDA82D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Caching.AppFabric", "EnergyTrading.Caching.AppFabric\EnergyTrading.Caching.AppFabric.csproj", "{E44BAF17-BB7A-423B-B44A-6C14F3690800}"
