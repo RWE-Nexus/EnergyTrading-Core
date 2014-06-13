@@ -71,6 +71,27 @@
                     </Pets>
                 </Owner>";
 
+        private string xmlUnexpectedType = @"
+                        <app:Animal xmlns:app='http://www.sample.com/app' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='app:UnknownCroc'>
+                            <app:Id>4</app:Id>
+                            <app:Name>Harry</app:Name>
+                            <app:Fed>false</app:Fed>
+                        </app:Animal>";
+
+
+        [Test]
+        public void MapUnknownPolymorphicType()
+        {
+            var processor = this.CreateProcessor();
+            processor.Initialize(this.xmlUnexpectedType);
+
+            var candidate = this.Engine.Map<XPathProcessor, Animal>(processor);
+
+            var expectedAnimal2 = new Animal { Id = 4, Name = "Harry" };
+
+            this.Check(expectedAnimal2, candidate, "Animal");
+        }
+
         [Test]
         public void MapPolymorphicList()
         {
