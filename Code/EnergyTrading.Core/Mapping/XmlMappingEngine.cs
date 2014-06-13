@@ -121,7 +121,7 @@
         /// <copydocfrom cref="IXmlMappingEngine.Map{T, D}(T, string, string, string, string, int)" />
         public TDestination Map<TSource, TDestination>(TSource source, string nodeName, string xmlNamespace = null, string xmlType = "", string xmlPrefix = "", int index = -1)
         {
-            return (TDestination) Mapper<TSource, TDestination>(xmlNamespace, xmlType).Map(source, nodeName, xmlNamespace, xmlPrefix, index);
+            return (TDestination) Mapper<TSource, TDestination>(xmlNamespace, xmlType).Map(source, nodeName, xmlNamespace, xmlPrefix, index, !string.IsNullOrEmpty(xmlType));
         }
 
         /// <copydocfrom cref="IXmlMappingEngine.MapList{T, D}(T, string, string, bool)" />
@@ -214,20 +214,15 @@
         /// <returns>A <see cref="IXmlMapper{T, D}" /></returns>
         protected IXmlMapper<TSource> Mapper<TSource, TDestination>(string xmlNamespace, string xmlType)
         {
-            if (string.IsNullOrEmpty(xmlType))
-            {
-                var mapper = Mapper<TSource, TDestination>();
-                return (IXmlMapper<TSource>)mapper;
-            }
+            var mapper = (IXmlMapper<TSource>)this.Mapper<TSource, TDestination>();
 
-            var key = new Tuple<string, string>(xmlNamespace, xmlType);
             Type type;
-            if (xmlTypes.TryGetValue(key, out type))
+            if (!string.IsNullOrEmpty(xmlType) && xmlTypes.TryGetValue(new Tuple<string, string>(xmlNamespace, xmlType), out type))
             {
-                return (IXmlMapper<TSource>)Mapper(typeof(TSource), type);
+                mapper = (IXmlMapper<TSource>)this.Mapper(typeof(TSource), type);
             }
 
-            throw new MappingException(string.Format("Cannot handle xml type: '{0}/{1}'", xmlNamespace, xmlType));
+            return mapper;
         }
 
         /// <summary>

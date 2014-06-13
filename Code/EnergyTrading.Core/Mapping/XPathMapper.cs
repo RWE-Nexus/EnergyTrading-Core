@@ -154,9 +154,9 @@
         }
 
         /// NOTE: No defaults as we can't enforce implementation - caller determines passed values - C# standard
-        object IXmlMapper<XPathProcessor>.Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index)
+        object IXmlMapper<XPathProcessor>.Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index, bool mapperFoundOnXmlType = false)
         {
-            return Map(source, nodeName, xmlNamespace, xmlPrefix, index);
+            return Map(source, nodeName, xmlNamespace, xmlPrefix, index, mapperFoundOnXmlType);
         }
 
         public List<TDestination> MapList(XPathProcessor source, string collectionNode, bool outputDefault = false)
@@ -282,7 +282,7 @@
             return new XmlPropertyMapExpression(map);
         }
 
-        protected TDestination Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index)
+        protected TDestination Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index, bool ommitXmlTypeChecking = false)
         {
             RegisterNamespace(source, NamespacePrefix, Namespace);
 
@@ -295,8 +295,12 @@
                     return null;
                 }
 
-                RegisterNamespace(source, XsiPrefix, XsiNamespace);
-                var xmlType = source.ToString("type", XsiPrefix, isAttribute: true);
+                var xmlType = string.Empty;
+                if (!ommitXmlTypeChecking)
+                {
+                    RegisterNamespace(source, XsiPrefix, XsiNamespace);
+                    xmlType = source.ToString("type", XsiPrefix, isAttribute: true);
+                }
 
                 TDestination destination;
 
