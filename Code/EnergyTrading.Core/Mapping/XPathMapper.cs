@@ -304,8 +304,8 @@
 
                 TDestination destination;
 
-                // This mapper can handle it if there's no type specified or it's our type
-                if (string.IsNullOrEmpty(xmlType) || string.IsNullOrEmpty(XmlType))
+                // This mapper can handle it if there's no type specified or it's our type or if it is the base mapper for an unknown type
+                if (string.IsNullOrEmpty(xmlType) || string.IsNullOrEmpty(XmlType) || ommitXmlTypeChecking)
                 {
                     destination = CreateAndMap(source);
                 }
