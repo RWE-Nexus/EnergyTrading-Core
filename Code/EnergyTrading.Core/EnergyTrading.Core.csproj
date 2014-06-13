@@ -165,6 +165,7 @@
     <Compile Include="Mapping\XmlEngineResolutionErrorCode.cs" />
     <Compile Include="Mapping\XmlEngineResolutionException.cs" />
     <Compile Include="Mapping\XmlSchemaRegistry.cs" />
+    <Compile Include="Mapping\XmlTypeMappingException.cs" />
     <Compile Include="Math\DoubleExtensions.cs" />
     <Compile Include="Math\FloatExtensions.cs" />
     <Compile Include="ProducerConsumer\Disposable.cs" />

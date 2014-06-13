@@ -6,6 +6,6 @@
     /// <typeparam name="TSource"></typeparam>
     public interface IXmlMapper<in TSource>
     {
-        object Map(TSource source, string nodeName, string xmlNamespace = null, string xmlPrefix = "", int index = -1, bool mapperFoundOnXmlType = false);
+        object Map(TSource source, string nodeName, string xmlNamespace = null, string xmlPrefix = "", int index = -1);
     }
 }

@@ -140,7 +140,15 @@
                             nodeName = string.Format("{0}:{1}", NamespacePrefix, nodeName);
                         }
 
-                        destination = Engine.Map<XPathProcessor, TDestination>(source, nodeName, t.Item1, t.Item2);
+                        try
+                        {
+                            destination = Engine.Map<XPathProcessor, TDestination>(source, nodeName, t.Item1, t.Item2);
+                        }
+                        catch (XmlTypeMappingException)
+                        {
+                            // try to map with our base engine
+                            destination = this.CreateAndMap(source);
+                        }
                     }
                 }
 
@@ -154,9 +162,9 @@
         }
 
         /// NOTE: No defaults as we can't enforce implementation - caller determines passed values - C# standard
-        object IXmlMapper<XPathProcessor>.Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index, bool mapperFoundOnXmlType = false)
+        object IXmlMapper<XPathProcessor>.Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index)
         {
-            return Map(source, nodeName, xmlNamespace, xmlPrefix, index, mapperFoundOnXmlType);
+            return Map(source, nodeName, xmlNamespace, xmlPrefix, index);
         }
 
         public List<TDestination> MapList(XPathProcessor source, string collectionNode, bool outputDefault = false)
@@ -282,7 +290,7 @@
             return new XmlPropertyMapExpression(map);
         }
 
-        protected TDestination Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index, bool ommitXmlTypeChecking = false)
+        protected TDestination Map(XPathProcessor source, string nodeName, string xmlNamespace, string xmlPrefix, int index)
         {
             RegisterNamespace(source, NamespacePrefix, Namespace);
 
@@ -296,16 +304,13 @@
                 }
 
                 var xmlType = string.Empty;
-                if (!ommitXmlTypeChecking)
-                {
-                    RegisterNamespace(source, XsiPrefix, XsiNamespace);
-                    xmlType = source.ToString("type", XsiPrefix, isAttribute: true);
-                }
+                RegisterNamespace(source, XsiPrefix, XsiNamespace);
+                xmlType = source.ToString("type", XsiPrefix, isAttribute: true);
 
                 TDestination destination;
 
                 // This mapper can handle it if there's no type specified or it's our type or if it is the base mapper for an unknown type
-                if (string.IsNullOrEmpty(xmlType) || string.IsNullOrEmpty(XmlType) || ommitXmlTypeChecking)
+                if (string.IsNullOrEmpty(xmlType) || string.IsNullOrEmpty(XmlType))
                 {
                     destination = CreateAndMap(source);
                 }
@@ -320,7 +325,15 @@
                     else
                     {
                         // Need a mapper for this xsi:type
-                        destination = XsiMapper(source, nodeName, t.Item1, t.Item2, index);
+                        try
+                        {
+                            destination = XsiMapper(source, nodeName, t.Item1, t.Item2, index);
+                        }
+                        catch (XmlTypeMappingException)
+                        {
+                            // if we don't get one try with this base one
+                            destination = this.CreateAndMap(source);
+                        }
                     }
                 }
 
