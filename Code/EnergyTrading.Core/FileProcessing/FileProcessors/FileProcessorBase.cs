@@ -304,7 +304,7 @@
                 dir = outputPath.Replace("%filepath%", Path.GetDirectoryName(originalFilePath));
                 dirpath = Path.GetFileName(originalFilePath);
             }
-            var errorFileName = dirpath + ".suc_" + DateTime.Now.Ticks;
+            var errorFileName = dirpath + "." + initialsuffix + DateTime.Now.Ticks;
             return Path.Combine(dir, errorFileName);
         }
 
