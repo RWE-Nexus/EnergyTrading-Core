@@ -12,7 +12,7 @@
         <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
         <tags>EnergyTrading logging log4net .net40</tags>
         <dependencies>
-            <dependency id="log4net" version="[1.2.10]" />
+            <dependency id="log4net" />
         </dependencies>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
     </metadata>
