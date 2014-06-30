@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="AutoMockingContainerExtension.cs" />
     <Compile Include="Checker.Generic.cs" />
+    <Compile Include="CheckerBuilder.cs" />
     <Compile Include="CheckerFactory.cs" />
     <Compile Include="Data\IdentifiableChecker.cs" />
     <Compile Include="Data\Zapper.cs" />
