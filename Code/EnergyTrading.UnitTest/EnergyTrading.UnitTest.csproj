@@ -72,11 +72,13 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="NCheck">
-      <HintPath>..\packages\NCheck.1.1.0\lib\net35\NCheck.dll</HintPath>
+    <Reference Include="NCheck, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NCheck.1.2.0\lib\net35\NCheck.dll</HintPath>
     </Reference>
-    <Reference Include="NCheck.Test">
-      <HintPath>..\packages\NCheck.1.1.0\lib\net35\NCheck.Test.dll</HintPath>
+    <Reference Include="NCheck.Test, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NCheck.1.2.0\lib\net35\NCheck.Test.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
