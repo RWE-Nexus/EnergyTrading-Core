@@ -5,12 +5,12 @@
     using System.Diagnostics;
 
     using EnergyTrading.Container;
+    using EnergyTrading.Container.Unity;
 
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
-    using NUnit.Framework;
 
-    using EnergyTrading.Container.Unity;
+    using NUnit.Framework;
 
     /// <summary>
     /// Base test fixture that sets up a UnityContainer and checker/builder factories
@@ -145,7 +145,6 @@
 
             // Need to do this as the standard configuration doesn't assign the global locator.
             var locator = x.Resolve<IServiceLocator>();
-            //Microsoft.Practices.ServiceLocation.ServiceLocator.SetLocatorProvider(() => locator);
 
             return x;
         }

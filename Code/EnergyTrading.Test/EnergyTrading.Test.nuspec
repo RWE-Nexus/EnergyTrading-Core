@@ -18,6 +18,7 @@
             <dependency id="EnergyTrading.Core" version="" />
             <dependency id="EnergyTrading.Unity" version="" />
             <dependency id="XmlDiffPatch" version="" />
+            <dependency id="NCheck" version="" />            
           <dependency id="NUnit" version="" />
         </dependencies>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>

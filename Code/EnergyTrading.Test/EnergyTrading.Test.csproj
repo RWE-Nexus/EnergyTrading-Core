@@ -47,6 +47,12 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="NCheck">
+      <HintPath>..\packages\NCheck.1.1.0\lib\net35\NCheck.dll</HintPath>
+    </Reference>
+    <Reference Include="NCheck.Test">
+      <HintPath>..\packages\NCheck.1.1.0\lib\net35\NCheck.Test.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -72,34 +78,21 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="AutoMockingContainerExtension.cs" />
-    <Compile Include="Checker.cs" />
     <Compile Include="Checker.Generic.cs" />
-    <Compile Include="CheckerBuilder.cs" />
-    <Compile Include="CheckerExtensions.cs" />
     <Compile Include="CheckerFactory.cs" />
-    <Compile Include="Checking\CompareTarget.cs" />
-    <Compile Include="Checking\IIdentityChecker.cs" />
-    <Compile Include="Checking\ITypeCompareTargeter.cs" />
-    <Compile Include="Checking\PropertyCheck.cs" />
-    <Compile Include="Checking\PropertyCheckException.cs" />
-    <Compile Include="Checking\PropertyCheckExpression.cs" />
-    <Compile Include="Checking\TypeCompareTargeter.cs" />
     <Compile Include="Data\IdentifiableChecker.cs" />
     <Compile Include="Data\Zapper.cs" />
     <Compile Include="Fixture.cs" />
     <Compile Include="IBuilderFactory.cs" />
-    <Compile Include="IChecker.cs" />
-    <Compile Include="IChecker.Generic.cs" />
-    <Compile Include="ICheckerCompare.cs" />
-    <Compile Include="ICheckerFactory.cs" />
-    <Compile Include="ICheckerBuilder.cs" />
+    <Compile Include="ICheckerFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Mapping\MappingEngineExtensions.cs" />
     <Compile Include="Mapping\MappingFixture.cs" />
     <Compile Include="Mapping\XmlDiffFactory.cs" />
     <Compile Include="MoqExtensions.cs" />
     <Compile Include="MoqSpecific\MockCounter.cs" />
     <Compile Include="MoqSpecific\SynchronizedMockLogger.cs" />
-    <Compile Include="NullCheckerBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecBase.AutoMocking.cs" />
     <Compile Include="SpecBase.cs" />

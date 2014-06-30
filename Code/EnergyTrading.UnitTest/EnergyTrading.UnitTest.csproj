@@ -72,6 +72,12 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="NCheck">
+      <HintPath>..\packages\NCheck.1.1.0\lib\net35\NCheck.dll</HintPath>
+    </Reference>
+    <Reference Include="NCheck.Test">
+      <HintPath>..\packages\NCheck.1.1.0\lib\net35\NCheck.Test.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -115,15 +121,6 @@
     <Compile Include="AssemblyLoggerProvider.cs" />
     <Compile Include="Caching\AbsoluteCacheItemPolicyFactoryFixture.cs" />
     <Compile Include="CheckerFactory.cs" />
-    <Compile Include="Checking\CheckerBuilderFixture.cs" />
-    <Compile Include="Checking\CheckerFixture.cs" />
-    <Compile Include="Checking\Child.cs" />
-    <Compile Include="Checking\ChildChecker.cs" />
-    <Compile Include="Checking\NullPropertyBagChecker.cs" />
-    <Compile Include="Checking\Parent.cs" />
-    <Compile Include="Checking\ParentChecker.cs" />
-    <Compile Include="Checking\Simple.cs" />
-    <Compile Include="Checking\SimpleChecker.cs" />
     <Compile Include="Concurrency\VectorClockFixture.cs" />
     <Compile Include="Configuration\ChildCollection.cs" />
     <Compile Include="Configuration\ChildElement.cs" />

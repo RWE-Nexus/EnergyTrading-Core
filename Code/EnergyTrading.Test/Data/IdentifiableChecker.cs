@@ -3,7 +3,8 @@
     using System;
 
     using EnergyTrading.Data;
-    using EnergyTrading.Test.Checking;
+
+    using NCheck.Checking;
 
     /// <summary>
     /// Implements an identity checker for <see cref="IIdentifiable" />.
