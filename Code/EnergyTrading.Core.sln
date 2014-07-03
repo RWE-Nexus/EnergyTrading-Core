@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Contracts", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Contracts.Tests", "EnergyTrading.Contracts.Tests\EnergyTrading.Contracts.Tests.csproj", "{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyTrading.Caching.InMemory", "EnergyTrading.Caching.InMemory\EnergyTrading.Caching.InMemory.csproj", "{2C9C5B84-6DA6-4F06-9378-D1A8FB49FCA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1714F8A-6606-467A-A427-E4FF6DF5D5BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C9C5B84-6DA6-4F06-9378-D1A8FB49FCA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C9C5B84-6DA6-4F06-9378-D1A8FB49FCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C9C5B84-6DA6-4F06-9378-D1A8FB49FCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C9C5B84-6DA6-4F06-9378-D1A8FB49FCA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
