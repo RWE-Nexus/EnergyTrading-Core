@@ -122,9 +122,12 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="AppFabric\AppFabricCachingFixture.cs" />
     <Compile Include="AppFabric\RegionedAppFabricSearchCacheTests.cs" />
     <Compile Include="AssemblyLoggerProvider.cs" />
     <Compile Include="Caching\AbsoluteCacheItemPolicyFactoryFixture.cs" />
+    <Compile Include="Caching\DefaultCacheServiceCachingFixture.cs" />
+    <Compile Include="AppFabric\TestAppFabricClass.cs" />
     <Compile Include="CheckerFactory.cs" />
     <Compile Include="Concurrency\VectorClockFixture.cs" />
     <Compile Include="Configuration\ChildCollection.cs" />
@@ -333,6 +336,10 @@
     <ProjectReference Include="..\EnergyTrading.Caching.AppFabric\EnergyTrading.Caching.AppFabric.csproj">
       <Project>{E44BAF17-BB7A-423B-B44A-6C14F3690800}</Project>
       <Name>EnergyTrading.Caching.AppFabric</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.Caching.InMemory\EnergyTrading.Caching.InMemory.csproj">
+      <Project>{2c9c5b84-6da6-4f06-9378-d1a8fb49fca5}</Project>
+      <Name>EnergyTrading.Caching.InMemory</Name>
     </ProjectReference>
     <ProjectReference Include="..\EnergyTrading.Contracts\EnergyTrading.Contracts.csproj">
       <Project>{053bf090-4e5c-4a22-b834-7772ccc63cda}</Project>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>EnergyTrading.Caching.InMemory</id>
+        <title>EnergyTrading.Caching.InMemory</title>        
+        <description>Provides in memrory cache feature</description>
+        <version>$version$</version>
+        <releaseNotes>none</releaseNotes>
+        <copyright>Copyright RWE 2014</copyright>
+        <authors>RWE</authors>
+        <owners>Integration Architecture</owners>
+        <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
+        <tags>EnergyTrading Inmemory Cache .net40</tags>
+        <dependencies>
+            <dependency id="EnergyTrading.Unity" version="" />
+            <dependency id="EnergyTrading.Core" version="" />
+        </dependencies>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    </metadata>
+    <files>
+        <file src="Code\EnergyTrading.Caching.InMemory\bin\Release\EnergyTrading.Caching.InMemory.*" target="lib\net40" />
+    </files>
+</package>

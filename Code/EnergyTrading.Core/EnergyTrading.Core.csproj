@@ -66,6 +66,8 @@
     <Compile Include="Caching\AbsoluteCacheItemPolicyFactory.cs" />
     <Compile Include="Caching\CacheItemPolicyFactory.cs" />
     <Compile Include="Caching\ICacheItemPolicyFactory.cs" />
+    <Compile Include="Caching\ICacheRepository.cs" />
+    <Compile Include="Caching\ICacheService.cs" />
     <Compile Include="Concurrency\ConcurrencyComparison.cs" />
     <Compile Include="Concurrency\VectorClock.cs" />
     <Compile Include="Concurrency\VectorClock.Generic.cs" />

@@ -40,7 +40,19 @@
       <Private>True</Private>
       <HintPath>..\packages\ServerAppFabric.Client.1.1.2106\lib\Microsoft.ApplicationServer.Caching.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
@@ -50,7 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\AppFabricCacheRepository.cs" />
+    <Compile Include="Cache\AppFabricCacheService.cs" />
+    <Compile Include="Cache\AppFabricDataCache.cs" />
+    <Compile Include="Cache\IDataCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registrar\AppFabricCacheRegistrar.cs" />
     <Compile Include="Search\RegionedAppFabricSearchCache.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -64,6 +81,10 @@
     <ProjectReference Include="..\EnergyTrading.Core\EnergyTrading.Core.csproj">
       <Project>{D673760C-F22F-44FF-A4A3-1F697C4997C1}</Project>
       <Name>EnergyTrading.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnergyTrading.Unity\EnergyTrading.Unity.csproj">
+      <Project>{d3af9b04-0b0e-474a-b9c0-c07d751d49bf}</Project>
+      <Name>EnergyTrading.Unity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

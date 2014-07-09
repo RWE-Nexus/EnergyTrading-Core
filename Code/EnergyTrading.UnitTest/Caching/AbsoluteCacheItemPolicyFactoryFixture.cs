@@ -27,11 +27,11 @@
             configManager.Setup(x => x.AppSettings).Returns(appSettings);
 
             ICacheItemPolicyFactory policyFactory = new AbsoluteCacheItemPolicyFactory(PolicyKey, configManager.Object);
-            var policyItem = policyFactory.CreatePolicy();
-
+            
             var marketName = "ABC market";
             var marketKey = "Market-1";
             var cache = new MemoryCache("MDM.Market");
+            var policyItem = policyFactory.CreatePolicy();
             cache.Add(marketKey, marketName, policyItem);
 
             // Should get cache item 
