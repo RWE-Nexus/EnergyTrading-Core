@@ -6,7 +6,7 @@
         <description>EnergyTrading distributed cache support classes specifically for AppFabric</description>
         <version>$version$</version>
         <releaseNotes>none</releaseNotes>
-        <copyright>Copyright RWE 2013</copyright>
+        <copyright>Copyright RWE 2014</copyright>
         <authors>RWE</authors>
         <owners>Integration Architecture</owners>
         <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
