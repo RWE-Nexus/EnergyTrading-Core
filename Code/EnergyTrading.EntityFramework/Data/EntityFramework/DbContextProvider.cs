@@ -19,7 +19,7 @@
         public DbContextProvider(Func<DbContext> func)
         {
             this.func = func;
-            this.syncLock = new object();
+            syncLock = new object();
         }
 
         /// <copydocfrom cref="IDbContextProvider.CurrentContext" />
@@ -36,6 +36,10 @@
         {
             lock (syncLock)
             {
+                if (context != null)
+                {
+                    context.Dispose();
+                }
                 context = null;
             }
         }

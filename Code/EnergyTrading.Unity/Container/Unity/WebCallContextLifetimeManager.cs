@@ -20,19 +20,25 @@
         /// <copydocfrom cref="LifetimeManager.GetValue" />
         public override object GetValue()
         {
-            return HttpContext.Current.Items[key];
+            return WebCallContextHttpModule.GetValue(key);
         }
 
         /// <copydocfrom cref="LifetimeManager.SetValue" />
         public override void SetValue(object newValue)
         {
-            HttpContext.Current.Items[key] = newValue;
+            WebCallContextHttpModule.SetValue(key, newValue);
         }
 
         /// <copydocfrom cref="LifetimeManager.RemoveValue" />
         public override void RemoveValue()
         {
-            HttpContext.Current.Items[key] = null;
+            var disposable = GetValue() as IDisposable;
+            if (disposable != null)
+            {
+                disposable.Dispose();
+            }
+
+            WebCallContextHttpModule.SetValue(key, null);
         }
     }
 }

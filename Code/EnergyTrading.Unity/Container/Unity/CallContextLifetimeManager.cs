@@ -30,6 +30,12 @@
         /// <copydocfrom cref="LifetimeManager.GetValue" />
         public override void RemoveValue()
         {
+            var value = GetValue() as IDisposable;
+            if (value != null)
+            {
+                value.Dispose();
+            }
+
             CallContext.FreeNamedDataSlot(key); 
         } 
     }
