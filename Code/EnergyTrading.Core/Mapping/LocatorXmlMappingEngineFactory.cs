@@ -39,7 +39,11 @@
                 if (engine != null)
                 {
                     // set the Schema Version in the context so that we can use it in the mappers
-                    engine.Context.Set("SchemaReleaseVersion", version.ToSchemaVersion().Version);
+                    // shouldn't need this because implementation is never null but prevents having to alter a load of Unit tests
+                    if (engine.Context != null)
+                    {
+                        engine.Context.Set("SchemaReleaseVersion", version.ToSchemaVersion().Version);
+                    }
                     // Cache it.
                     this.engines[version] = engine;
                 }
