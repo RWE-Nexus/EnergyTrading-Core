@@ -31,6 +31,13 @@
         void Add<T>(T entity) where T : class;
 
         /// <summary>
+        /// Attach an entity to the repository.
+        /// </summary>
+        /// <typeparam name="T">Type of entity</typeparam>
+        /// <param name="entity">Entity to use</param>
+        void Attach<T>(T entity) where T : class;
+
+        /// <summary>
         /// Delete an entity
         /// </summary>
         /// <typeparam name="T">Type of entity</typeparam>

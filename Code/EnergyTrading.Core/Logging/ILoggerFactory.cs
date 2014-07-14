@@ -13,7 +13,7 @@
     /// <c>
     /// public class Sample
     /// {
-    ///     private static readonly ILogger loggerlogger = LoggerFactory.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    ///     private static readonly ILogger logger = LoggerFactory.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     /// }
     /// </c>
     /// </example>
