@@ -8,7 +8,7 @@
     /// <summary>
     /// Contextual lifetime manager for use by ASP.NET.
     /// <para>
-    /// Differs from CallContextLifetimeManager as we use HttpContext.Current to hold object references.
+    /// Differs from <see cref="CallContextLifetimeManager" /> as we use <see cref="HttpContext.Current" /> to hold object references.
     /// This is required as ASP.NET can use multiple threads for a single request under heavy load and
     /// so CallContext is not adequate.
     /// </para>
@@ -17,19 +17,28 @@
     {
         private readonly string key = string.Format("WebCallContextLifeTimeManager_{0}", Guid.NewGuid());
 
+        /// <copydocfrom cref="LifetimeManager.GetValue" />
         public override object GetValue()
         {
-            return HttpContext.Current.Items[key];
+            return WebCallContextHttpModule.GetValue(key);
         }
 
+        /// <copydocfrom cref="LifetimeManager.SetValue" />
         public override void SetValue(object newValue)
         {
-            HttpContext.Current.Items[key] = newValue;
+            WebCallContextHttpModule.SetValue(key, newValue);
         }
 
+        /// <copydocfrom cref="LifetimeManager.RemoveValue" />
         public override void RemoveValue()
         {
-            HttpContext.Current.Items[key] = null;
+            var disposable = GetValue() as IDisposable;
+            if (disposable != null)
+            {
+                disposable.Dispose();
+            }
+
+            WebCallContextHttpModule.SetValue(key, null);
         }
     }
 }

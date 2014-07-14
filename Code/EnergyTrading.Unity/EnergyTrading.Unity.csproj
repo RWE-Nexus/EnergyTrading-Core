@@ -91,6 +91,7 @@
     <Compile Include="Container\Unity\UnityServiceBehavior.cs" />
     <Compile Include="Container\Unity\UnityServiceHost.cs" />
     <Compile Include="Container\Unity\UnityServiceHostFactory.cs" />
+    <Compile Include="Container\Unity\WebCallContextHttpModule.cs" />
     <Compile Include="Container\Unity\WebCallContextLifetimeManager.cs" />
     <Compile Include="FileProcessing\Configuration\FileProcessorConfigurator.cs" />
     <Compile Include="FileProcessing\Registrars\ContainerExtensions.cs" />
