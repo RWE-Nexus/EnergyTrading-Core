@@ -17,12 +17,15 @@
         public void FindSuccessful()
         {
             var expected = new Mock<IXmlMappingEngine>();
+            var context = new Context();
             this.Container.RegisterInstance(typeof(IXmlMappingEngine), "Css.V1", expected.Object, new ContainerControlledLifetimeManager());
+            expected.Setup(x => x.Context).Returns(context);
 
             var factory = new LocatorXmlMappingEngineFactory(this.Container.Resolve<IServiceLocator>());
             var candidate = factory.Find("Css.V1");
 
             Assert.AreSame(expected.Object, candidate);
+            Assert.That(new Version(1, 0).Major, Is.EqualTo(context.Value<Version>("SchemaReleaseVersion").Major));
         }
 
         [Test]
@@ -46,6 +49,7 @@
         {
             var expected = new Mock<IXmlMappingEngine>();
             this.Container.RegisterInstance(typeof(IXmlMappingEngine), "Css.V1", expected.Object, new ContainerControlledLifetimeManager());
+            expected.Setup(x => x.Context).Returns(new Context());
 
             var factory = new LocatorXmlMappingEngineFactory(this.Container.Resolve<IServiceLocator>());
             IXmlMappingEngine candidate;

@@ -38,6 +38,8 @@
                 engine = this.Get(version);
                 if (engine != null)
                 {
+                    // set the Schema Version in the context so that we can use it in the mappers
+                    engine.Context.Set("SchemaReleaseVersion", version.ToSchemaVersion().Version);
                     // Cache it.
                     this.engines[version] = engine;
                 }
