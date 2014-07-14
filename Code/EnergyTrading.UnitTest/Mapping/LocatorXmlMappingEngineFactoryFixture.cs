@@ -49,6 +49,7 @@
         {
             var expected = new Mock<IXmlMappingEngine>();
             this.Container.RegisterInstance(typeof(IXmlMappingEngine), "Css.V1", expected.Object, new ContainerControlledLifetimeManager());
+            expected.Setup(x => x.Context).Returns(new Context());
 
             var factory = new LocatorXmlMappingEngineFactory(this.Container.Resolve<IServiceLocator>());
             IXmlMappingEngine candidate;
