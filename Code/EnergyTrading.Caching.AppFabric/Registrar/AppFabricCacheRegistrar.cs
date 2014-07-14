@@ -17,8 +17,20 @@ namespace EnergyTrading.Caching.AppFabric.Registrar
            var appFabricCacheName = configuration.AppSettings["AppFabricCacheName"];
            Validate("AppFabricCacheName", appFabricCacheName);
            var appFabricUri = configuration.AppSettings["AppFabricUri"];
-            Validate("AppFabricUri", appFabricUri);
-            container.RegisterType<ICacheRepository, AppFabricCacheRepository>(new ContainerControlledLifetimeManager(),new InjectionConstructor(appFabricCacheName, new Uri(appFabricUri)));
+
+           if (!string.IsNullOrEmpty(appFabricUri))
+           {
+               container.RegisterType<ICacheRepository, AppFabricCacheRepository>(
+                   new ContainerControlledLifetimeManager(),
+                   new InjectionConstructor(appFabricCacheName,
+                       appFabricUri.Split(',').Select(a => new Uri(a)).ToArray()));
+           }
+           else
+           {
+               container.RegisterType<ICacheRepository, AppFabricCacheRepository>(
+                   new ContainerControlledLifetimeManager(),
+                   new InjectionConstructor(appFabricCacheName));
+           }
        }
 
        private static void Validate(string name, string value)
