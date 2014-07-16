@@ -20,7 +20,6 @@
         private static readonly ILogger logger = LoggerFactory.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly IExceptionFactory ExceptionFactory = new EntityFrameworkExceptionFactory();
         private readonly IDbContextProvider provider;
-        private readonly Dictionary<Type, object> sets;
 
         /// <summary>
         /// Creates a new instance of the <see cref="DbSetRepository"/> class.
@@ -50,7 +49,6 @@
         public DbSetRepository(IDbContextProvider provider, IList<Action<IDbSetRepository>> actions, IList<Action<IDao>> globalActions)
         {
             this.provider = provider;
-            sets = new Dictionary<Type, object>();
             Actions = actions;
             GlobalActions = globalActions;
         }
@@ -250,7 +248,6 @@
         {
             try
             {
-                sets.Clear();
                 provider.Close();
             }
             catch (Exception ex)
@@ -262,14 +259,7 @@
         public IDbSet<T> DbSet<T>()
             where T : class
         {
-            var type = typeof(T);
-            object set;
-            if (!sets.TryGetValue(type, out set))
-            {
-                sets[type] = set = Context.Set<T>();
-            }
-
-            return (IDbSet<T>)set;
+            return Context.Set<T>();
         }
     }
 }
