@@ -11,28 +11,49 @@ namespace EnergyTrading.Caching.AppFabric.Cache
     public class AppFabricCacheRepository : ICacheRepository
     {
         private readonly string appFabricCacheName;
-        private readonly Uri appFabricUri;
+        private readonly IList<Uri> appFabricUris = new List<Uri>();
+        private Lazy<IDataCache> dataCache;
 
-        public AppFabricCacheRepository(string appFabricCacheName, Uri appFabricUri)
+        public AppFabricCacheRepository(string appFabricCacheName, Uri[] appFabricUris)
         {
-            this.appFabricCacheName =Validate("Appfabric cache name", appFabricCacheName,(a)=>!string.IsNullOrEmpty(a));
-            this.appFabricUri = Validate("Appfabric Uri",appFabricUri,(a)=>a!=null);
+            this.appFabricCacheName = Validate("Appfabric cache name", appFabricCacheName, (a) => !string.IsNullOrEmpty(a));
+            this.appFabricUris = appFabricUris??new Uri[0];
+            dataCache = new Lazy<IDataCache>(() => GetCache(appFabricCacheName));
         }
 
-        private IDataCache GetCache(string cacheName, Uri appfabricCacheUri)
+        public AppFabricCacheRepository(string appFabricCacheName)
+            : this(appFabricCacheName, null)
         {
-            var servers = new[] { new DataCacheServerEndpoint(appfabricCacheUri.Host, appfabricCacheUri.Port) };
-            var factoryConfig = new DataCacheFactoryConfiguration
+        }
+
+        private IList<DataCacheServerEndpoint> GetEndPoints()
+        {
+            return (appFabricUris.Count > 0) ? appFabricUris.Select(a => new DataCacheServerEndpoint(a.Host, a.Port)).ToList() : new List<DataCacheServerEndpoint>();
+        }
+
+        private IDataCache GetCache(string cacheName)
+        {
+            var servers = GetEndPoints();
+            DataCacheFactory cachefactory;
+            if (servers.Count > 0)
             {
-                Servers = servers,
-                DataCacheServiceAccountType = DataCacheServiceAccountType.DomainAccount
-            };
-            return new AppFabricDataCache(new DataCacheFactory(factoryConfig).GetCache(cacheName));
+                var factoryConfig = new DataCacheFactoryConfiguration
+                                    {
+                                        Servers = servers,
+                                        DataCacheServiceAccountType = DataCacheServiceAccountType.DomainAccount
+                                    };
+                cachefactory = new DataCacheFactory(factoryConfig);
+            }
+            else
+            {
+                cachefactory = new DataCacheFactory();
+            }
+            return new AppFabricDataCache(cachefactory.GetCache(cacheName));
         }
 
         public ICacheService GetNamedCache(string regionName)
         {
-            return new AppFabricCacheService(appFabricCacheName, regionName, GetCache(appFabricCacheName, appFabricUri));
+            return new AppFabricCacheService(appFabricCacheName, regionName, dataCache.Value);
         }
 
         public bool RemoveNamedCache(string regionName)
@@ -41,7 +62,7 @@ namespace EnergyTrading.Caching.AppFabric.Cache
             return true;
         }
 
-        private static T Validate<T>(string name, T value, Func<T,bool> validator)
+        private static T Validate<T>(string name, T value, Func<T, bool> validator)
         {
             if (!validator(value))
             {

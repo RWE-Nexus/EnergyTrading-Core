@@ -44,7 +44,6 @@ namespace EnergyTrading.UnitTest.AppFabric
 
         [Test]
         [TestCase("", "net.tcp://localhost:22233",ExpectedException = typeof(ConfigurationErrorsException))]
-        [TestCase("Test", "", ExpectedException = typeof(ConfigurationErrorsException))]
         [TestCase("", "", ExpectedException = typeof(ConfigurationErrorsException))]
         public void ShouldThrowErrorIfAppFabricSettingsAreMissing(string cacheName,string uri)
         {
