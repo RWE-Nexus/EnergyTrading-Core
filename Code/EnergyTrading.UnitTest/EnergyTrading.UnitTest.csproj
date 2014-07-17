@@ -237,6 +237,7 @@
     <Compile Include="Mapping\Examples\IdentifierXmlMapperFixture.cs" />
     <Compile Include="Mapping\Examples\Id.cs" />
     <Compile Include="Mapping\Examples\IdXmlMapper.cs" />
+    <Compile Include="Mapping\Extensions\ContextExtensionsFixture.cs" />
     <Compile Include="Mapping\LinqListXmlMapperFixture.cs" />
     <Compile Include="Mapping\LinqPrefixXmlListMapperFixture.cs" />
     <Compile Include="Mapping\ListXmlMapperFixture.cs" />

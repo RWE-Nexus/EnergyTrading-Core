@@ -156,6 +156,7 @@
     <Compile Include="Mapping\CachingXmlMapperFactory.cs" />
     <Compile Include="Mapping\CompatibleXmlMappingEngineFactory.cs" />
     <Compile Include="Mapping\Context.cs" />
+    <Compile Include="Mapping\Extensions\ContextExtensions.cs" />
     <Compile Include="Mapping\IXmlMapperFactory.cs" />
     <Compile Include="Mapping\IXmlSchemaRegistry.cs" />
     <Compile Include="Mapping\LinqExtensions.cs" />
