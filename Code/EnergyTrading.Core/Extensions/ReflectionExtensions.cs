@@ -10,6 +10,42 @@
     public static class ReflectionExtension
     {
         /// <summary>
+        /// if the value of the property is equal to the default then assigns the value obtained from the retriever
+        /// If the current value or the new value cannot be determined the value is left at the original value
+        /// uses object.Equals(a, b) function to determine equality
+        /// </summary>
+        /// <typeparam name="TParent">The type of the parent object</typeparam>
+        /// <typeparam name="TChild">The type of the child property</typeparam>
+        /// <param name="parent">An instance of the parent</param>
+        /// <param name="accessor">Expression to obtain the property from the Parent (e.g. parent => parent.Property)</param>
+        /// <param name="retriever">Action to retrieve the new value to assign </param>
+        /// <param name="overrideDefaultValue">optional Action that can be supplied to override the default value used for comparison</param>
+        /// <returns>void</returns>
+        public static void IfDefaultAssign<TParent, TChild>(this TParent parent, Expression<Func<TParent, TChild>> accessor, Func<TChild> retriever, Func<TChild> overrideDefaultValue = null)
+        {
+            if ((!(parent is ValueType) && parent == null) || accessor == null)
+            {
+                return;
+            }
+
+            var value = accessor.Compile().Invoke(parent);
+            var defaultValue = overrideDefaultValue == null ? default(TChild) : overrideDefaultValue();
+            if (!Equals(value, defaultValue))
+            {
+                return;
+            }
+            var propertyInfo = GetPropertyInfo(accessor);
+            if (propertyInfo != null)
+            {
+                if (retriever != null)
+                {
+                    var setMethod = propertyInfo.GetSetMethod();
+                    setMethod.Invoke(parent, new object[] { retriever() });
+                }
+            }
+        }
+
+        /// <summary>
         /// Creates an instance and sets the property value if it is null 
         /// Returns the property value
         /// </summary>
