@@ -9,6 +9,28 @@
     /// </summary>
     public static class MappingExtensions
     {
+        /// <summary>
+        /// If the item can be mapped (i.e. source is not null) then the destination is retrieved and Engine.Map is called
+        /// allows for the source == null check before retrieving the destination (in case you don't want to retrieve it if the source is not available)
+        /// </summary>
+        /// <typeparam name="TSource">mapping source type</typeparam>
+        /// <typeparam name="TDestination">mapping destination type</typeparam>
+        /// <param name="engine">instance of IMappingEngine</param>
+        /// <param name="source">instance of source</param>
+        /// <param name="retriever">func to retrieve instance of destination</param>
+        /// <returns>the retrieved instance of TDestination after mapping process</returns>
+        public static TDestination RetrieveAndMap<TSource, TDestination>(this IMappingEngine engine, TSource source, Func<TDestination> retriever)
+        {
+            if (engine == null || (!(source is ValueType) && source == null) || retriever == null)
+            {
+                return default(TDestination);
+            }
+
+            var destination = retriever();
+            engine.Map(source, destination);
+            return destination;
+        }
+
         public static XElement Map<TSource>(this IXmlMappingEngine engine, TSource source)
         {
             return engine.Map<TSource, XElement>(source);
