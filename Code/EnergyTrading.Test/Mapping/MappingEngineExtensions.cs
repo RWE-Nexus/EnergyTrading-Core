@@ -100,5 +100,39 @@
             var mapper = engine.Mapper<TSource, TDestination>();            
             Assert.AreSame(mapper.GetType(), implementation, string.Format("{0} vs {1}", implementation.FullName, mapper.GetType().FullName));
         }
+
+        /// <summary>
+        /// If the item can be mapped (i.e. source is not null) then the destination is retrieved and Engine.Map is called
+        /// </summary>
+        /// <typeparam name="TSource">mapping source type</typeparam>
+        /// <typeparam name="TDestination">mapping destination type</typeparam>
+        /// <param name="engine">instance of IMappingEngine</param>
+        /// <param name="source">instance of source</param>
+        /// <param name="retriever">func to retrieve instance of destination</param>
+        /// <returns>the retrieved instance of TDestination after mapping process</returns>
+        public static TDestination RetrieveAndMap<TSource, TDestination>(this IMappingEngine engine, TSource source, Func<TDestination> retriever)
+        {
+            if (engine == null || (!(source is ValueType) && source == null) || retriever == null)
+            {
+                return default(TDestination);
+            }
+            var destination = retriever();
+            engine.Map(source, destination);
+            return destination;
+        }
+
+        /// <summary>
+        /// If the item can be mapped (i.e. source is not null) then the destination is created using new TDestination() and Engine.Map is called
+        /// </summary>
+        /// <typeparam name="TSource">mapping source type</typeparam>
+        /// <typeparam name="TDestination">mapping destination type</typeparam>
+        /// <param name="engine">instance of IMappingEngine</param>
+        /// <param name="source">instance of source</param>
+        /// <returns>newly created instance of TDestination</returns>
+        public static TDestination CreateAndMap<TSource, TDestination>(this IMappingEngine engine, TSource source) where TDestination : class, new()
+        {
+            return engine.RetrieveAndMap(source, () => new TDestination());
+        }
+
     }
 }
