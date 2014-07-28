@@ -56,6 +56,7 @@
         private string schema;
         private string version;
         private string targetFile;
+        private string targetNamespace;
 
         /// <summary>
         /// Gets whether the test is resource rather than file based.
@@ -63,10 +64,7 @@
         /// Note that if resource based, both the source and target must be resources
         /// </para>
         /// </summary>
-        protected bool IsResourceBased
-        {
-            get { return !string.IsNullOrEmpty(ResourceNamespace); }
-        }
+        protected bool IsResourceBased { get; set; }
 
         /// <summary>
         /// Whether to generate the HTML difference file.
@@ -92,6 +90,11 @@
         /// Whether to clear output file directory
         /// </summary>
         protected bool ClearOutputPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the namespace, prefix to the files/resources.
+        /// </summary>
+        protected string Namespace { get; set; }
 
         /// <summary>
         /// Gets or sets the source schema.
@@ -128,17 +131,12 @@
         protected bool ValidateOutput { get; set; }
 
         /// <summary>
-        /// Gets or sets the resource namespace, the prefix to the resource files.
-        /// </summary>
-        protected string ResourceNamespace { get; set; }
-
-        /// <summary>
         /// Get or set the source file excluding schema/version.
         /// </summary>
         protected string SourceFile { get; set; }
 
         /// <summary>
-        /// Get or set the source file excluding schema/version.
+        /// Get or set the target file excluding schema/version.
         /// <para>
         /// If empty, defaults to <see cref="SourceFile" />
         /// </para>
@@ -154,6 +152,22 @@
                 }
                 targetFile = value;
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the target namespace, prefix to the target files/resources.
+        /// </summary>
+        protected virtual string TargetNamespace
+        {
+            get { return string.IsNullOrEmpty(targetNamespace) ? Namespace : targetNamespace; }
+            set
+            {
+                if (value == Namespace)
+                {
+                    value = null;
+                }
+                targetNamespace = value;
+            } 
         }
 
         /// <summary>
@@ -197,7 +211,7 @@
                 Assert.Fail("No TargetVersion specified");
             }
 
-            var targetXml = GetXml(TargetFile, TargetSchema, TargetVersion);
+            var targetXml = GetXml(TargetNamespace, TargetFile, TargetSchema, TargetVersion);
             if (GenerateDiffFile)
             {
                 if (!DiffFilePath.EndsWith("\\"))
@@ -241,7 +255,7 @@
                 Assert.Fail("No Version specified");
             }
 
-            return GetXml(SourceFile, Schema, Version);
+            return GetXml(Namespace, SourceFile, Schema, Version);
         }
 
         /// <summary>
@@ -302,27 +316,29 @@
         /// <summary>
         /// Get XML from a file or embedded resource.
         /// </summary>
+        /// <param name="ns">Namespace of the file/resource.</param>
         /// <param name="fileName">Filename to use</param>
         /// <param name="schema">Schema to use.</param>
         /// <param name="version">Version to use.</param>
         /// <returns>Contents of the file</returns>
-        protected string GetXml(string fileName, string schema, string version)
+        protected string GetXml(string ns, string fileName, string schema, string version)
         {
             return IsResourceBased 
-                ? GetEmbeddedResource(fileName, schema, version) 
-                : GetFileResource(fileName, schema, version);
+                ? GetEmbeddedResource(ns, fileName, schema, version) 
+                : GetFileResource(ns, fileName, schema, version);
         }
 
         /// <summary>
         /// Get XML from an embedded resource.
         /// </summary>
+        /// <param name="ns">Namespace of the resource.</param>
         /// <param name="fileName">Filename to use</param>
         /// <param name="schema">Schema to use.</param>
         /// <param name="version">Version to use.</param>
         /// <returns>Contents of the file</returns>
-        protected string GetEmbeddedResource(string fileName, string schema, string version)
+        protected string GetEmbeddedResource(string ns, string fileName, string schema, string version)
         {
-            var resourceName = string.Format("{0}.{1}.V{2}.{3}", ResourceNamespace, schema, version, fileName);
+            var resourceName = string.Format("{0}.{1}.V{2}.{3}", ns, schema, version, fileName);
             using (var stream = GetType().Assembly.GetManifestResourceStream(resourceName))
             {
                 if (stream == null)
@@ -340,13 +356,14 @@
         /// <summary>
         /// Get XML from a file.
         /// </summary>
+        /// <param name="ns">Namespace of the file.</param>
         /// <param name="fileName">Filename to use</param>
         /// <param name="schema">Schema to use.</param>
         /// <param name="version">Version to use.</param>
         /// <returns>Contents of the file</returns>
-        protected string GetFileResource(string fileName, string schema, string version)
+        protected string GetFileResource(string ns, string fileName, string schema, string version)
         {
-            var resourceName = string.Format(@"Data\{0}\V{1}\{2}", schema, version, fileName);
+            var resourceName = string.Format(@"{0}\{1}\V{2}\{3}", ns, schema, version, fileName);
 
             return LoadXmlFromFile(resourceName);
         }

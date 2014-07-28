@@ -9,18 +9,10 @@
 
     using Microsoft.Practices.Unity;
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class UnityServiceBehavior : IServiceBehavior
     {
         public UnityServiceBehavior(IUnityContainer container)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
-
             this.Container = container;
         }
 
@@ -55,8 +47,7 @@
                 for (var endpointIndex = 0; endpointIndex < channelDispatcher.Endpoints.Count; endpointIndex++)
                 {
                     var endpointDispatcher = channelDispatcher.Endpoints[endpointIndex];
-                    endpointDispatcher.DispatchRuntime.InstanceProvider = 
-                        new UnityInstanceProvider(this.Container, serviceDescription.ServiceType);
+                    endpointDispatcher.DispatchRuntime.InstanceProvider = new UnityInstanceProvider(Container, serviceDescription.ServiceType);
                 }
             } 
         }

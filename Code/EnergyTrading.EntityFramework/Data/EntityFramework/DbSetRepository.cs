@@ -68,6 +68,13 @@
         /// </summary>
         public IList<Action<IDao>> GlobalActions { get; set; }
 
+        /// <copydoc cref="IDbSetRepository.DbSet{T}" />
+        public IDbSet<T> DbSet<T>()
+            where T : class
+        {
+            return Context.Set<T>();
+        }
+
         /// <summary>
         /// Gets the active connection.
         /// </summary>
@@ -254,12 +261,6 @@
             {
                 logger.Error(ex.Message);
             }
-        }
-
-        public IDbSet<T> DbSet<T>()
-            where T : class
-        {
-            return Context.Set<T>();
         }
     }
 }
