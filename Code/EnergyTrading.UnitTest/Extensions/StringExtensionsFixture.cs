@@ -93,5 +93,30 @@
 
             Assert.AreEqual(expected, candidate);
         }
+
+        [Test]
+        [TestCase("code", false, null, TestName = "null array")]
+        [TestCase("code", false, new string[] {}, TestName = "empty array")]
+        [TestCase("code", false, new[] { "codes" }, TestName = "ExactMatchIsWholeValue")]
+        [TestCase("code", true, new[] { "code" }, TestName = "ExactMatch")]
+        [TestCase("code", true, new[] { "CODE" }, TestName = "ExactMatchCaseIsInsensitive")]
+        [TestCase("codeIsPrefix", true, new[] { "CODE*" }, TestName = "StartsWith")]
+        [TestCase("codeIsPrefix", true, new[] { "CODE.*" }, TestName = "StartsWithRegexNotation")]
+        [TestCase("SuffixIsCode", true, new[] { "*CODE" }, TestName = "EndsWith")]
+        [TestCase("SuffixIsCode", true, new[] { "*.CODE" }, TestName = "EndsWithRegexNotation")]
+        [TestCase("Prefix.Code.Suffix", true, new[] { "*CODE*" }, TestName = "Contains")]
+        [TestCase("Prefix.Code.Suffix", true, new[] { "*.CODE.*" }, TestName = "ContainsRegexNotationIsh")]
+        [TestCase("Prefix.Code.Suffix", true, new[] { "*CODE.*" }, TestName = "ContainsMixedNotation1")]
+        [TestCase("Prefix.Code.Suffix", true, new[] { "*.CODE*" }, TestName = "ContainsMixedNotation2")]
+        [TestCase("Prefix.Code.Suffix", true, new[] { "falseValue", "*CODE*" }, TestName = "ChecksThroughArrayForMatch")]
+        [TestCase("Prefix.Code.Suffix", false, new[] { "falseValue", "*CODE" }, TestName = "NoMatchInArray")]
+        [TestCase(null, false, new[] { "falseValue", "*CODE" }, TestName = "FalseForNullCode")]
+        [TestCase("", false, new[] { "falseValue", "*CODE" }, TestName = "FalseForEmptyCode")]
+        [TestCase("   ", false, new[] { "falseValue", "*CODE" }, TestName = "FalseForWhitespaceCode")]
+        [TestCase("Nexus.Counterparty.VerificationTest.Result", true, new[] { "Nexus.Counterparty.Error.*", "Nexus.Counterparty.VerificationTest.Result" }, TestName = "CounterPartyExample")]
+        public void ShouldHandleCases(string code, bool expectedResult, string[] handlerCodes)
+        {
+            Assert.That(handlerCodes.Matches(code), Is.EqualTo(expectedResult));
+        }
     }
 }
