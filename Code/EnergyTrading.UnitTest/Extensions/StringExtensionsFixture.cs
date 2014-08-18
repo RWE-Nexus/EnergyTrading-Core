@@ -114,6 +114,8 @@
         [TestCase("", false, new[] { "falseValue", "*CODE" }, TestName = "FalseForEmptyCode")]
         [TestCase("   ", false, new[] { "falseValue", "*CODE" }, TestName = "FalseForWhitespaceCode")]
         [TestCase("Nexus.Counterparty.VerificationTest.Result", true, new[] { "Nexus.Counterparty.Error.*", "Nexus.Counterparty.VerificationTest.Result" }, TestName = "CounterPartyExample")]
+        [TestCase("F1PQ12345", false, new[] { "F1PY*" }, TestName = "TradeBugFixFalse")]
+        [TestCase("F1PQ12345", true, new[] { "F1PQ*" }, TestName = "TradeBugFixTrue")]
         public void ShouldHandleCases(string code, bool expectedResult, string[] handlerCodes)
         {
             Assert.That(handlerCodes.Matches(code), Is.EqualTo(expectedResult));

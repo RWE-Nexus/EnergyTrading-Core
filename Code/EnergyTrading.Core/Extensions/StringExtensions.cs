@@ -91,7 +91,7 @@
                 {
                     return true;
                 }
-                if (rightTrim > 0 && lowerCode.StartsWith(lowerHandledCode.Substring(0, lowerHandledCode.Length - 2)))
+                if (rightTrim > 0 && lowerCode.StartsWith(lowerHandledCode.Substring(0, lowerHandledCode.Length - rightTrim)))
                 {
                     return true;
                 }
