@@ -6,6 +6,9 @@
 
     using Moq;
 
+    using NUnit.Framework;
+
+    [SetUpFixture]
     public class AssemblyLoggerProvider
     {
         private static Func<ILoggerFactory> provider;
@@ -25,6 +28,18 @@
         public static void RestoreLogger()
         {
             LoggerFactory.SetProvider(provider);
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            InitializeLogger();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            RestoreLogger();
         }
     }
 }

@@ -171,6 +171,16 @@
     <Compile Include="Mapping\XmlTypeMappingException.cs" />
     <Compile Include="Math\DoubleExtensions.cs" />
     <Compile Include="Math\FloatExtensions.cs" />
+    <Compile Include="Polling\Configuration\PollingConfigurationExtensions.cs" />
+    <Compile Include="Polling\Configuration\PollingHostSection.cs" />
+    <Compile Include="Polling\Configuration\PollProcessorCollection.cs" />
+    <Compile Include="Polling\Configuration\PollProcessorElement.cs" />
+    <Compile Include="Polling\IPoller.cs" />
+    <Compile Include="Polling\IPollingHost.cs" />
+    <Compile Include="Polling\IPollProcessor.cs" />
+    <Compile Include="Polling\PollingHost.cs" />
+    <Compile Include="Polling\PollProcessor.cs" />
+    <Compile Include="Polling\PollProcessorEndpoint.cs" />
     <Compile Include="ProducerConsumer\Disposable.cs" />
     <Compile Include="ProducerConsumer\ProducerConsumerQueueBase.cs" />
     <Compile Include="ProducerConsumer\WorkItem.cs" />

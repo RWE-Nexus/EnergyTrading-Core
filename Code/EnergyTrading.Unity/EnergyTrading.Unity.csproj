@@ -101,6 +101,9 @@
     <Compile Include="FileProcessing\Registrars\IFileProcessorRegistrar.cs" />
     <Compile Include="FileProcessing\Registrars\PollingBasedProcessorDefaultRegistrar.cs" />
     <Compile Include="FileProcessing\Registrars\PollingBasedv2ProcessorDefaultRegistrar.cs" />
+    <Compile Include="Polling\Configuration\PollingHostConfigurator.cs" />
+    <Compile Include="Polling\Registrars\PollingContainerExtensions.cs" />
+    <Compile Include="Polling\Registrars\PollingHostRegistrar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrars\ConfigurationManagerRegistrar.cs" />
     <Compile Include="Registrars\MappingEngineRegistrar.cs" />
