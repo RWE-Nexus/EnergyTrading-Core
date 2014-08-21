@@ -8,7 +8,7 @@ namespace EnergyTrading.Caching
 {
     public interface ICacheService
     {
-        void Remove(string key);
+        bool Remove(string key);
         void Add<T>(string key, T value, CacheItemPolicy policy=null);
         T Get<T>(string key);
     }

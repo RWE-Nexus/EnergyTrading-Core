@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Caching;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EnergyTrading.Caching.InMemory
 {
-    public class InMemoryCacheService : ICacheService
+    public class InMemoryCacheService : ICacheService, IDisposable
     {
         private readonly MemoryCache cache;
 
@@ -19,9 +20,15 @@ namespace EnergyTrading.Caching.InMemory
             this.cache = new MemoryCache(cacheName);
         }
 
-        public void Remove(string key)
+        public void ClearCache()
         {
-            cache.Remove(key);
+            Parallel.ForEach(this.cache.Select(a => a.Key), key => cache.Remove(key));
+        }
+
+
+        public bool Remove(string key)
+        {
+            return  cache.Remove(key)!=null;
         }
 
         public void Add<T>(string key, T value, CacheItemPolicy policy)
@@ -33,5 +40,11 @@ namespace EnergyTrading.Caching.InMemory
         {
             return (T)cache.Get(key);
         }
+
+        public void Dispose()
+        {
+            cache.Dispose();
+        }
+
     }
 }

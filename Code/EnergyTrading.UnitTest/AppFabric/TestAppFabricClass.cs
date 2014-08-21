@@ -34,6 +34,11 @@ namespace EnergyTrading.UnitTest.AppFabric
             return Remove(key);
         }
 
+        public void ClearCache()
+        {
+            cache = new MemoryCache("Test");
+        }
+
         public TR Put<T, TR>(string key, T value, TimeSpan timeout, string region) where TR : class
         {
             var abs = new AbsoluteCacheItemPolicyFactory(timeout.Seconds);

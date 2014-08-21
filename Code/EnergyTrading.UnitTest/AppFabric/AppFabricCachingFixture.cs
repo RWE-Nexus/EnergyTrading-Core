@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
@@ -32,20 +33,28 @@ namespace EnergyTrading.UnitTest.AppFabric
         public override void Setup()
         {
             container = new UnityContainer();
-            mockDataCache=new Mock<IDataCache>();
+            mockDataCache = new Mock<IDataCache>();
             var inmemorycache = new InMemoryCacheService("xyz");
-            var mockRepository =new Mock<ICacheRepository>();
+            var mockRepository = new Mock<ICacheRepository>();
             container.RegisterInstance(mockRepository.Object);
-            var testAppfabricCache= new TestAppFabricClass();
 
-            mockRepository.Setup(a => a.GetNamedCache(It.IsAny<string>())).Returns<string>(regionName => new AppFabricCacheService("Test", regionName, testAppfabricCache));
+            var testAppfabricCacheCollection = new ConcurrentDictionary<string, TestAppFabricClass>();
+            
+            mockRepository.Setup(a => a.GetNamedCache(It.IsAny<string>())).Returns<string>(regionName =>
+                      new AppFabricCacheService("Test", regionName, testAppfabricCacheCollection.GetOrAdd(regionName, (a) => new TestAppFabricClass())));
+            mockRepository.Setup(a => a.ClearNamedCache(It.IsAny<string>())).Returns<string>(regionName =>
+                                                                                             {
+                                                                                                 testAppfabricCacheCollection[regionName].ClearCache();
+                                                                                                 return true;
+                                                                                             });
+
             mockDataCache.Setup(a => a.Get<string>(It.IsAny<string>())).Returns<string>(inmemorycache.Get<string>);
         }
 
         [Test]
-        [TestCase("", "net.tcp://localhost:22233",ExpectedException = typeof(ConfigurationErrorsException))]
+        [TestCase("", "net.tcp://localhost:22233", ExpectedException = typeof(ConfigurationErrorsException))]
         [TestCase("", "", ExpectedException = typeof(ConfigurationErrorsException))]
-        public void ShouldThrowErrorIfAppFabricSettingsAreMissing(string cacheName,string uri)
+        public void ShouldThrowErrorIfAppFabricSettingsAreMissing(string cacheName, string uri)
         {
             container = new UnityContainer();
             var appSettings = new NameValueCollection();
@@ -69,10 +78,10 @@ namespace EnergyTrading.UnitTest.AppFabric
             container.Resolve<ICacheRepository>();
         }
 
-       [Ignore]
+        [Ignore]
         public override void ShouldReturnSameCacheInstanceForSameCacheNames()
         {
-            
+
         }
 
     }

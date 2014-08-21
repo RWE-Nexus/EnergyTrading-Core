@@ -9,5 +9,6 @@ namespace EnergyTrading.Caching
     {
        ICacheService GetNamedCache(string cacheName);
        bool RemoveNamedCache(string cacheName);
+       bool ClearNamedCache(string cacheName);
     }
 }

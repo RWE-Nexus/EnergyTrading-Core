@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Caching;
 using System.Text;
 using EnergyTrading.Configuration;
+using EnergyTrading.Logging;
 using Microsoft.ApplicationServer.Caching;
 
 namespace EnergyTrading.Caching.AppFabric.Cache
@@ -13,12 +14,13 @@ namespace EnergyTrading.Caching.AppFabric.Cache
         private readonly string cacheName;
         private readonly IDataCache appFabricCache;
         private readonly string regionName;
+        private static readonly ILogger Logger = LoggerFactory.GetLogger<AppFabricCacheService>();
 
         public AppFabricCacheService(string cacheName, string regionName, IDataCache dataCache)
         {
             this.cacheName = cacheName;
             this.regionName = regionName;
-            this.appFabricCache = dataCache;
+            appFabricCache = dataCache;
         }
 
         private static TimeSpan DetermineTimeOut(CacheItemPolicy policy)
@@ -41,10 +43,10 @@ namespace EnergyTrading.Caching.AppFabric.Cache
         {
             return string.Format("{0}-{1}", regionName, key);
         }
-
-        public virtual void Remove(string key)
+        
+        public virtual bool Remove(string key)
         {
-            appFabricCache.Remove(GetFormatedKey(key));
+            return Remove(GetFormatedKey(key),null);
         }
 
         public virtual void Add<T>(string key, T value, CacheItemPolicy policy = null)
@@ -54,7 +56,7 @@ namespace EnergyTrading.Caching.AppFabric.Cache
 
         public virtual T Get<T>(string key)
         {
-            return (T)Get<T>(GetFormatedKey(key), null);
+            return Get<T>(GetFormatedKey(key),null);
         }
 
         protected T Get<T>(string key, string region)
@@ -69,16 +71,14 @@ namespace EnergyTrading.Caching.AppFabric.Cache
             return appFabricCache.Get<T>(key, region);
         }
 
-        protected void Remove(string key, string region)
+        protected bool Remove(string key, string region)
         {
             if (string.IsNullOrEmpty(region))
             {
-                appFabricCache.Remove(key);
+               return appFabricCache.Remove(key);
             }
-            else
-            {
-                appFabricCache.Remove(key, region);
-            }
+
+            return appFabricCache.Remove(key, region);
         }
 
         protected void Add<T>(string key, T value, CacheItemPolicy policy, string region)
@@ -105,7 +105,7 @@ namespace EnergyTrading.Caching.AppFabric.Cache
                 }
                 else
                 {
-                    appFabricCache.Put<T,DataCacheItemVersion>(key, value, region);
+                    appFabricCache.Put<T, DataCacheItemVersion>(key, value, region);
                 }
             }
         }

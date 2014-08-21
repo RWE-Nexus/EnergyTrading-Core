@@ -17,6 +17,7 @@ namespace EnergyTrading.Caching.AppFabric.Cache
        bool CreateRegion(string region);
        T Get<T>(string key, string region);
        bool Remove(string key, string region);
+       void ClearCache();
        TReturn Put<T, TReturn>(string key, T value, TimeSpan timeout, string region) where TReturn : class;
        TReturn Put<T, TReturn>(string key, T value, TimeSpan timeout) where TReturn : class;
        TReturn Put<T, TReturn>(string key, T value) where TReturn : class;

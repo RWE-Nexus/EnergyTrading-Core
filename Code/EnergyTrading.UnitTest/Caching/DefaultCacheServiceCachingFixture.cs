@@ -66,5 +66,24 @@ namespace EnergyTrading.UnitTest.Caching
             var cache2= cacheRepo.GetNamedCache("a");
             Assert.AreNotEqual(cache1, cache2);
         }
+
+        [Test]
+        public void ShouldClearItemsOnCallingClearApi()
+        {
+            var cacheRepo = container.Resolve<ICacheRepository>();
+            var cache1 = cacheRepo.GetNamedCache("a");
+            var cache2 = cacheRepo.GetNamedCache("b");
+            
+            cache1.Add("a_key1","a");
+            cache2.Add("b_key1", "b");
+
+            cacheRepo.ClearNamedCache("b");
+
+            var b_key1= cache2.Get<string>("b_key1");
+            var a_key1 = cache1.Get<string>("a_key1");
+
+            Assert.NotNull(a_key1);
+            Assert.Null(b_key1);
+        }
     }
 }

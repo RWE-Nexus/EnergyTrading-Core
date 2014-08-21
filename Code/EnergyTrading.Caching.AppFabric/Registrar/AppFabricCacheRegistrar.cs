@@ -23,13 +23,13 @@ namespace EnergyTrading.Caching.AppFabric.Registrar
                container.RegisterType<ICacheRepository, AppFabricCacheRepository>(
                    new ContainerControlledLifetimeManager(),
                    new InjectionConstructor(appFabricCacheName,
-                       appFabricUri.Split(',').Select(a => new Uri(a)).ToArray()));
+                       appFabricUri.Split(',').Select(a => new Uri(a)).ToArray(), configuration));
            }
            else
            {
                container.RegisterType<ICacheRepository, AppFabricCacheRepository>(
                    new ContainerControlledLifetimeManager(),
-                   new InjectionConstructor(appFabricCacheName));
+                   new InjectionConstructor(appFabricCacheName, configuration));
            }
        }
 

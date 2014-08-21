@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -6,23 +7,26 @@ using System.Text;
 using EnergyTrading.Configuration;
 using Microsoft.ApplicationServer.Caching;
 
+
 namespace EnergyTrading.Caching.AppFabric.Cache
 {
     public class AppFabricCacheRepository : ICacheRepository
     {
-        private readonly string appFabricCacheName;
+        private readonly string defaultAppFabricCacheName;
         private readonly IList<Uri> appFabricUris = new List<Uri>();
-        private Lazy<IDataCache> dataCache;
+        private readonly ConcurrentDictionary<string, IDataCache> cacheServiceCollection;
+        private readonly IConfigurationManager configuration;
 
-        public AppFabricCacheRepository(string appFabricCacheName, Uri[] appFabricUris)
+        public AppFabricCacheRepository(string appFabricCacheName, Uri[] appFabricUris, IConfigurationManager configuration)
         {
-            this.appFabricCacheName = Validate("Appfabric cache name", appFabricCacheName, (a) => !string.IsNullOrEmpty(a));
-            this.appFabricUris = appFabricUris??new Uri[0];
-            dataCache = new Lazy<IDataCache>(() => GetCache(appFabricCacheName));
+            this.defaultAppFabricCacheName = Validate("Appfabric cache name", appFabricCacheName, (a) => !string.IsNullOrEmpty(a));
+            this.appFabricUris = appFabricUris ?? new Uri[0];
+            this.configuration = configuration;
+            cacheServiceCollection = new ConcurrentDictionary<string, IDataCache>(StringComparer.InvariantCultureIgnoreCase);
         }
 
-        public AppFabricCacheRepository(string appFabricCacheName)
-            : this(appFabricCacheName, null)
+        public AppFabricCacheRepository(string appFabricCacheName, IConfigurationManager configuration)
+            : this(appFabricCacheName, null, configuration)
         {
         }
 
@@ -31,32 +35,52 @@ namespace EnergyTrading.Caching.AppFabric.Cache
             return (appFabricUris.Count > 0) ? appFabricUris.Select(a => new DataCacheServerEndpoint(a.Host, a.Port)).ToList() : new List<DataCacheServerEndpoint>();
         }
 
-        private IDataCache GetCache(string cacheName)
+        private DataCacheFactory GetDataCacheFactory()
         {
             var servers = GetEndPoints();
             DataCacheFactory cachefactory;
             if (servers.Count > 0)
             {
                 var factoryConfig = new DataCacheFactoryConfiguration
-                                    {
-                                        Servers = servers,
-                                        DataCacheServiceAccountType = DataCacheServiceAccountType.DomainAccount
-                                    };
+                {
+                    Servers = servers,
+                    DataCacheServiceAccountType = DataCacheServiceAccountType.DomainAccount
+                };
                 cachefactory = new DataCacheFactory(factoryConfig);
             }
             else
             {
                 cachefactory = new DataCacheFactory();
             }
-            return new AppFabricDataCache(cachefactory.GetCache(cacheName));
+
+            return cachefactory;
         }
 
-        public ICacheService GetNamedCache(string regionName)
+        private IDataCache GetCache(string cacheName)
         {
-            return new AppFabricCacheService(appFabricCacheName, regionName, dataCache.Value);
+            return cacheServiceCollection.GetOrAdd(cacheName, (a) =>new AppFabricDataCache(()=>GetDataCacheFactory().GetCache(a)));
+            //new AppFabricDataCache(() => cacheServiceCollection.GetOrAdd(cacheName, (a) => GetDataCacheFactory().GetCache(a)));
         }
 
-        public bool RemoveNamedCache(string regionName)
+        private IDataCache ResolveAppfabricCacheFromNamedCache(string namedCache)
+        {
+            var nonDefaultCacheName = configuration.AppSettings[string.Format("NamedCache.{0}.AppFabricCacheName", namedCache)];
+            return GetCache(!string.IsNullOrWhiteSpace(nonDefaultCacheName) ? nonDefaultCacheName : defaultAppFabricCacheName);
+        }
+
+        /// <summary>
+        /// By default items cached using the region name would be stored in named cache configured in "AppFabricCacheName".
+        /// If items stored using specific region name should be stored in different named cache then it can be configured
+        /// as NamedCache.{namedCache}.AppFabricCacheName.
+        /// </summary>
+        /// <param name="namedCache"></param>
+        /// <returns></returns>
+        public ICacheService GetNamedCache(string namedCache)
+        {
+            return new AppFabricCacheService(defaultAppFabricCacheName, namedCache, ResolveAppfabricCacheFromNamedCache(namedCache));
+        }
+
+        public bool RemoveNamedCache(string namedCache)
         {
             //Since Appfabric internally manages cache items based on expiration policy
             return true;
@@ -70,5 +94,15 @@ namespace EnergyTrading.Caching.AppFabric.Cache
             }
             return value;
         }
+
+        public bool ClearNamedCache(string namedCacheName)
+        {
+            if (string.IsNullOrWhiteSpace(namedCacheName)) return false;
+
+            ResolveAppfabricCacheFromNamedCache(namedCacheName).ClearCache();
+
+            return true;
+        }
+
     }
 }
