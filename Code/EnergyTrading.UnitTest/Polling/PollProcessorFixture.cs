@@ -94,7 +94,7 @@
             }, poller);
 
             processor.Start();
-            Thread.Sleep(3000);
+            Thread.Sleep(2500);
             processor.Stop();
 
             Assert.AreEqual(1, poller.Count);
