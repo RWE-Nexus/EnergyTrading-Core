@@ -82,19 +82,19 @@
         [Test]
         public void WhenPollingInProgressThenPollingShouldNotBeCalledAgain()
         {
-            var poller = new PollerImplWithDelay(1200);
+            var poller = new PollerImplWithDelay(1500);
 
             var processor = new PollProcessor(new PollProcessorEndpoint
             {
                 Name = "Test",
                 Handler = typeof(PollerImplWithDelay),
-                IntervalSecs = 1,
+                IntervalSecs =1,
                 SinglePolling = true,
                 Workers = 1
             }, poller);
 
             processor.Start();
-            Thread.Sleep(2500);
+            Thread.Sleep(2400);
             processor.Stop();
 
             Assert.AreEqual(1, poller.Count);
