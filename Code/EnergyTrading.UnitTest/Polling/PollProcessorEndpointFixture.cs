@@ -47,7 +47,15 @@
         [Test]
         public void ValidateValidEndpoint()
         {
-            new PollProcessorEndpoint { Name = "test", IntervalSecs = 1, Handler = typeof(PollerImpl) }.Validate();
+            new PollProcessorEndpoint { Name = "test", IntervalSecs = 1, Handler = typeof(PollerImpl), Workers = 1 }.Validate();
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ValidateNegativeWorkers()
+        {
+            new PollProcessorEndpoint() {Name = "test", IntervalSecs = 1, Handler = typeof (PollerImpl), Workers = -1}
+                .Validate();
         }
     }
 }

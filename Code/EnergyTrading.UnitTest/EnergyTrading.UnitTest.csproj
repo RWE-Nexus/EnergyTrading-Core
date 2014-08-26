@@ -255,6 +255,7 @@
     <Compile Include="Polling\Configuration\PollingHostConfiguratorFixture.cs" />
     <Compile Include="Polling\Configuration\PollingHostSectionFixture.cs" />
     <Compile Include="Polling\PollerImpl.cs" />
+    <Compile Include="Polling\PollerImplWithDelay.cs" />
     <Compile Include="Polling\PollingHostFixture.cs" />
     <Compile Include="Polling\PollProcessorEndpointFixture.cs" />
     <Compile Include="Polling\PollProcessorFixture.cs" />

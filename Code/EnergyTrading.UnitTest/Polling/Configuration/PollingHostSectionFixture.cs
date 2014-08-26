@@ -33,5 +33,6 @@
             Assert.IsNotNull(section);
             Assert.AreEqual(2, section.PollProcessors.Count);
         }
+
     }
 }

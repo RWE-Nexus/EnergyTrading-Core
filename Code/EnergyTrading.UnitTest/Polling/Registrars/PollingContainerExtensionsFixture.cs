@@ -25,7 +25,7 @@
         {
             var container = new UnityContainer();
             container.RegisterPollProcessor(
-                new PollProcessorEndpoint { Handler = typeof(PollerImpl), IntervalSecs = 1, Name = "Test Poller" });
+                new PollProcessorEndpoint { Handler = typeof(PollerImpl), IntervalSecs = 1, Name = "Test Poller", Workers = 1, SinglePolling = true });
             container.Resolve<IPollProcessor>("Test Poller");
             container.Resolve<PollProcessorEndpoint>("Test Poller");
             container.Resolve<IPoller>("Test Poller");

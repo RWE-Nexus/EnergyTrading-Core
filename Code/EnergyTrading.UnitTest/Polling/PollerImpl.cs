@@ -25,6 +25,7 @@
         {
             Logger.Info("PollerImpl.Poll was called");
             ++this.Count;
+            ++PollCount;
             if (this.ThrowsInPoll)
             {
                 throw new InvalidOperationException();
@@ -32,6 +33,8 @@
         }
 
         public int Count { get; private set; }
+
+        public static int PollCount { get; set; }
 
         private bool ThrowsInPoll { get; set; }
 

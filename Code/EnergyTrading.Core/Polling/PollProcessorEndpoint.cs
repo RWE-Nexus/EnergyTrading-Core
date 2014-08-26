@@ -10,6 +10,10 @@
 
         public Type Handler { get; set; }
 
+        public bool SinglePolling { get; set; }
+
+        public int Workers { get; set; }
+
         public bool Validate()
         {
             if (string.IsNullOrEmpty(this.Name))
@@ -25,6 +29,11 @@
             if (this.IntervalSecs <= 0)
             {
                 throw new NotSupportedException("IntervalSecs must be greater than 0");
+            }
+
+            if (this.Workers <= 0)
+            {
+                throw new NotSupportedException("Workers must be greater than 0");
             }
 
             return true;

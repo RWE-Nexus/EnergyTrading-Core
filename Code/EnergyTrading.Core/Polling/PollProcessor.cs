@@ -41,11 +41,14 @@
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            // prevent timer event from running if there is one already going
-            var sync = Interlocked.CompareExchange(ref this.syncPoint, 1, 0);
-            if (sync != 0)
+            if (this.Endpoint.SinglePolling)
             {
-                return;
+                // prevent timer event from running if there is one already going
+                var sync = Interlocked.CompareExchange(ref this.syncPoint, 1, 0);
+                if (sync != 0)
+                {
+                    return;
+                }
             }
 
             try

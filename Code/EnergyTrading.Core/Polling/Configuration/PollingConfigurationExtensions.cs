@@ -19,6 +19,8 @@
                 Name = element.Name,
                 IntervalSecs = element.IntervalSecs,
                 Handler = element.Handler.ToType(),
+                SinglePolling = element.SinglePolling,
+                Workers = element.Workers
             };
 
             return endpoint;
