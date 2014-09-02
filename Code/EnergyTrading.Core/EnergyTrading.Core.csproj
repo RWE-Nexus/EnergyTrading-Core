@@ -184,6 +184,7 @@
     <Compile Include="ProducerConsumer\Disposable.cs" />
     <Compile Include="ProducerConsumer\ProducerConsumerQueueBase.cs" />
     <Compile Include="ProducerConsumer\WorkItem.cs" />
+    <Compile Include="Search\SearchExtensions.cs" />
     <Compile Include="ServiceModel\Channels\ChannelsExtensions.cs" />
     <Compile Include="ServiceModel\Channels\ClientMessageLogger.cs" />
     <Compile Include="ServiceModel\Channels\ClientMessageLoggerBehavior.cs" />
