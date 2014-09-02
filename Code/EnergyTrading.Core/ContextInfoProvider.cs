@@ -10,6 +10,15 @@
     {
          public static string GetUserName()
          {
+             // Web context
+             var httpContext = HttpContext.Current;
+
+             //reading from custom header incase of anonymous user
+             if (httpContext != null && !string.IsNullOrEmpty(httpContext.Request.Headers[CoreConstants.UserNameHeader]))
+             {
+                 return httpContext.Request.Headers[CoreConstants.UserNameHeader];
+             }
+
              // Service context
              var operationContext = OperationContext.Current;
              if (operationContext != null && operationContext.ServiceSecurityContext != null &&
@@ -18,12 +27,11 @@
                  return operationContext.ServiceSecurityContext.WindowsIdentity.Name;
              }
 
-            // Web context
-            var httpContext = HttpContext.Current;
-            if (httpContext != null && httpContext.User != null && !string.IsNullOrWhiteSpace(httpContext.User.Identity.Name))
-            {
-                return httpContext.User.Identity.Name;
-            }
+
+             if (httpContext != null && httpContext.User != null && !string.IsNullOrWhiteSpace(httpContext.User.Identity.Name))
+             {
+                 return httpContext.User.Identity.Name;
+             }
 
             // If not, window's context user
             var windowsIdentity = WindowsIdentity.GetCurrent();

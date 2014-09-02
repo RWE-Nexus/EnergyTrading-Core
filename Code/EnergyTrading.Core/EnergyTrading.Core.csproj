@@ -88,6 +88,7 @@
     <Compile Include="Console\ConsoleUtils.cs" />
     <Compile Include="Container\IServiceLocatorOwner.cs" />
     <Compile Include="Container\ServiceLocatorExtensions.cs" />
+    <Compile Include="CoreConstants.cs" />
     <Compile Include="Crypto\CryptoStringExtensions.cs" />
     <Compile Include="Data\InvalidColumnException.cs" />
     <Compile Include="Data\Linq\DynamicLibrary.cs" />
