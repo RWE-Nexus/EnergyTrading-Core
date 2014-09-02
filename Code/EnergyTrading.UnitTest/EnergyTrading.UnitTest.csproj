@@ -100,6 +100,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -276,6 +277,7 @@
     <Compile Include="Registrars\XmlMappingEngineFactoryRegistrarFixture.cs" />
     <Compile Include="Registrars\XmlSchemaRegistryRegistrarFixture.cs" />
     <Compile Include="Registrars\XmlVersionDetectorRegistrarFixture.cs" />
+    <Compile Include="Search\SearchExtensionsFixture.cs" />
     <Compile Include="ServiceModel\Channels\CustomTextMessageEncoderFactoryFixture.cs" />
     <Compile Include="ServiceModel\Channels\RemoveMustUnderstandMessageTransformerFixture.cs" />
     <Compile Include="ServiceModel\Channels\SoapBodyXsiMessageTransformerFixture.cs" />
