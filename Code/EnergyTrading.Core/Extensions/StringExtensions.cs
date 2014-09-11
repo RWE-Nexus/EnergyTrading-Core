@@ -67,13 +67,13 @@
         {
             if (string.IsNullOrWhiteSpace(itemToMatch) || validValues == null || validValues.Length == 0)
             {
-                noOfMatchedCharacters = 0;
+                noOfMatchedCharacters = -1;
                 return false;
             }
 
             if (validValues.Contains("*") || validValues.Contains("*.*"))
             {
-                noOfMatchedCharacters = itemToMatch.Length;
+                noOfMatchedCharacters = 0;
                 return true;
             }
 
@@ -133,7 +133,7 @@
                     }
                 }
             }
-            noOfMatchedCharacters = 0;
+            noOfMatchedCharacters = -1;
             return false;
         }
     }
