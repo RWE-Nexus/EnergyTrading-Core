@@ -46,13 +46,34 @@
         /// <returns>true if the string matches an item in the list. False if the sting is not matched, the array null is empty or the supplied string is null or white space</returns>
         public static bool Matches(this string[] validValues, string itemToMatch)
         {
+            int matchedCharacters;
+            return Matches(validValues, itemToMatch, out matchedCharacters);
+        }
+
+        /// <summary>
+        /// checks to see if a supplied string matches with any item in the list
+        /// allows for the following simple logic all currently case-insensitive
+        /// * or *.* => match all items
+        /// *xxx or *.xxx => EndsWith("xxx")
+        /// xxx* or xxx.* => StartsWith("xxx")
+        /// *xxx* or *.xxx.* => Contains("xxx")
+        /// xxx => string.Compare() == 0
+        /// </summary>
+        /// <param name="validValues">the list of expressions to match against</param>
+        /// <param name="itemToMatch">the string to match</param>
+        /// <param name="noOfMatchedCharacters">out parameter that returns the number of characters that was actually matched</param>
+        /// <returns>true if the string matches an item in the list. False if the sting is not matched, the array null is empty or the supplied string is null or white space</returns>
+        public static bool Matches(this string[] validValues, string itemToMatch, out int noOfMatchedCharacters)
+        {
             if (string.IsNullOrWhiteSpace(itemToMatch) || validValues == null || validValues.Length == 0)
             {
+                noOfMatchedCharacters = 0;
                 return false;
             }
 
             if (validValues.Contains("*") || validValues.Contains("*.*"))
             {
+                noOfMatchedCharacters = itemToMatch.Length;
                 return true;
             }
 
@@ -62,6 +83,7 @@
                 var lowerHandledCode = handledCode.ToLowerInvariant();
                 if (string.Compare(handledCode, itemToMatch, StringComparison.InvariantCultureIgnoreCase) == 0)
                 {
+                    noOfMatchedCharacters = itemToMatch.Length;
                     return true;
                 }
                 var leftTrim = 0;
@@ -83,19 +105,35 @@
                 {
                     rightTrim = 1;
                 }
-                if (leftTrim > 0 && rightTrim > 0 && lowerCode.Contains(lowerHandledCode.Substring(leftTrim, lowerHandledCode.Length - (leftTrim + rightTrim))))
+                if (leftTrim > 0 && rightTrim > 0)
                 {
-                    return true;
+                    var testString = lowerHandledCode.Substring(leftTrim, lowerHandledCode.Length - (leftTrim + rightTrim));
+                    if (lowerCode.Contains(testString))
+                    {
+                        noOfMatchedCharacters = testString.Length;
+                        return true;
+                    }
                 }
-                if (leftTrim > 0 && lowerCode.EndsWith(lowerHandledCode.Substring(leftTrim)))
+                if (leftTrim > 0)
                 {
-                    return true;
+                    var testString = lowerHandledCode.Substring(leftTrim);
+                    if (lowerCode.EndsWith(testString))
+                    {
+                        noOfMatchedCharacters = testString.Length;
+                        return true;
+                    }
                 }
-                if (rightTrim > 0 && lowerCode.StartsWith(lowerHandledCode.Substring(0, lowerHandledCode.Length - rightTrim)))
+                if (rightTrim > 0)
                 {
-                    return true;
+                    var testString = lowerHandledCode.Substring(0, lowerHandledCode.Length - rightTrim);
+                    if (lowerCode.StartsWith(testString))
+                    {
+                        noOfMatchedCharacters = testString.Length;
+                        return true;
+                    }
                 }
             }
+            noOfMatchedCharacters = 0;
             return false;
         }
     }

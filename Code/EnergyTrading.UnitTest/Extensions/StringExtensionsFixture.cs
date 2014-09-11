@@ -120,5 +120,34 @@
         {
             Assert.That(handlerCodes.Matches(code), Is.EqualTo(expectedResult));
         }
+
+        [Test]
+        [TestCase("code", false, 0, null, TestName = "null array")]
+        [TestCase("code", false, 0, new string[] { }, TestName = "empty array")]
+        [TestCase("code", false, 0, new[] { "codes" }, TestName = "ExactMatchIsWholeValue")]
+        [TestCase("code", true, 4, new[] { "code" }, TestName = "ExactMatch")]
+        [TestCase("code", true, 4, new[] { "CODE" }, TestName = "ExactMatchCaseIsInsensitive")]
+        [TestCase("codeIsPrefix", true, 4, new[] { "CODE*" }, TestName = "StartsWith")]
+        [TestCase("codeIsPrefix", true, 4, new[] { "CODE.*" }, TestName = "StartsWithRegexNotation")]
+        [TestCase("SuffixIsCode", true, 4, new[] { "*CODE" }, TestName = "EndsWith")]
+        [TestCase("SuffixIsCode", true, 4, new[] { "*.CODE" }, TestName = "EndsWithRegexNotation")]
+        [TestCase("Prefix.Code.Suffix", true, 4, new[] { "*CODE*" }, TestName = "Contains")]
+        [TestCase("Prefix.Code.Suffix", true, 4, new[] { "*.CODE.*" }, TestName = "ContainsRegexNotationIsh")]
+        [TestCase("Prefix.Code.Suffix", true, 4, new[] { "*CODE.*" }, TestName = "ContainsMixedNotation1")]
+        [TestCase("Prefix.Code.Suffix", true, 4, new[] { "*.CODE*" }, TestName = "ContainsMixedNotation2")]
+        [TestCase("Prefix.Code.Suffix", true, 4, new[] { "falseValue", "*CODE*" }, TestName = "ChecksThroughArrayForMatch")]
+        [TestCase("Prefix.Code.Suffix", false, 0, new[] { "falseValue", "*CODE" }, TestName = "NoMatchInArray")]
+        [TestCase(null, false, 0, new[] { "falseValue", "*CODE" }, TestName = "FalseForNullCode")]
+        [TestCase("", false, 0, new[] { "falseValue", "*CODE" }, TestName = "FalseForEmptyCode")]
+        [TestCase("   ", false, 0, new[] { "falseValue", "*CODE" }, TestName = "FalseForWhitespaceCode")]
+        [TestCase("Nexus.Counterparty.VerificationTest.Result", true, 42, new[] { "Nexus.Counterparty.Error.*", "Nexus.Counterparty.VerificationTest.Result" }, TestName = "CounterPartyExample")]
+        [TestCase("F1PQ12345", false, 0, new[] { "F1PY*" }, TestName = "TradeBugFixFalse")]
+        [TestCase("F1PQ12345", true, 4, new[] { "F1PQ*" }, TestName = "TradeBugFixTrue")]
+        public void ShouldHandleCasesWithOutputParameter(string code, bool expectedResult, int expectedMatchingCharacters, string[] handlerCodes)
+        {
+            int matchedChars;
+            Assert.That(handlerCodes.Matches(code, out matchedChars), Is.EqualTo(expectedResult));
+            Assert.That(matchedChars, Is.EqualTo(expectedMatchingCharacters));
+        }
     }
 }
