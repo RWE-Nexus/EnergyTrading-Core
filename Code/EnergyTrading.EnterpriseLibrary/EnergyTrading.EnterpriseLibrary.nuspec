@@ -1,27 +1,25 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-    <metadata>
-        <id>EnergyTrading.EnterpriseLibrary</id>
-        <title>EnergyTrading.EnterpriseLibrary</title>
-        <description>Enterprises Library implementations of EnergyTrading interfaces</description>
-        <version>$version$</version>
-        <releaseNotes>Newly created</releaseNotes>
-        <copyright>Copyright RWE 2014</copyright>
-        <authors>RWE</authors>
-        <owners>Integration Architecture</owners>
-        <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
-        <tags>EnergyTrading EnterpriseLibrary logging .net40</tags>
-        <dependencies>
-            <dependency id="CommonServiceLocator" version="" />
-            <dependency id="Unity" version="[2.1, 3.0)" />
-            <dependency id="Unity.Interception" version="[2.1, 3.0)" />
-            <dependency id="EnterpriseLibrary.Common" version="[5.0, 6.0)" />
-            <dependency id="EnterpriseLibrary.Logging" version="[5.0, 6.0)" />
-            <dependency id="EnergyTrading.Core" version="" />
-        </dependencies>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    </metadata>
-    <files>
-        <file src="Code\EnergyTrading.EnterpriseLibrary\bin\Release\EnergyTrading.EnterpriseLibrary.*" target="lib\net40" />
-    </files>
+  <metadata>
+    <id>EnergyTrading.EnterpriseLibrary</id>
+    <title>EnergyTrading.EnterpriseLibrary</title>
+    <description>Enterprises Library implementations of EnergyTrading interfaces</description>
+    <version>$version$</version>
+    <releaseNotes>Newly created</releaseNotes>
+    <copyright>Copyright RWE 2014</copyright>
+    <authors>RWE</authors>
+    <owners>Integration Architecture</owners>
+    <projectUrl>https://github.com/RWE-Nexus/EnergyTrading-Core</projectUrl>
+    <tags>EnergyTrading EnterpriseLibrary logging .net40</tags>
+    <dependencies>
+      <dependency id="CommonServiceLocator" version="" />
+      <dependency id="EnterpriseLibrary.Common" version="" />
+      <dependency id="EnterpriseLibrary.Logging" version="" />
+      <dependency id="EnergyTrading.Core" version="" />
+    </dependencies>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+  </metadata>
+  <files>
+    <file src="Code\EnergyTrading.EnterpriseLibrary\bin\Release\EnergyTrading.EnterpriseLibrary.*" target="lib\net40" />
+  </files>
 </package>
