@@ -11,15 +11,15 @@ namespace EnergyTrading.Caching.AppFabric.Cache
 {
     public class AppFabricCacheService : ICacheService
     {
-        private readonly string cacheName;
+        private readonly string appFabricCacheName;
         private readonly IDataCache appFabricCache;
-        private readonly string regionName;
+        private readonly string namedCache;
         private static readonly ILogger Logger = LoggerFactory.GetLogger<AppFabricCacheService>();
 
-        public AppFabricCacheService(string cacheName, string regionName, IDataCache dataCache)
+        public AppFabricCacheService(string appFabricCacheName, string namedCache, IDataCache dataCache)
         {
-            this.cacheName = cacheName;
-            this.regionName = regionName;
+            this.appFabricCacheName = appFabricCacheName;
+            this.namedCache = namedCache;
             appFabricCache = dataCache;
         }
 
@@ -34,14 +34,14 @@ namespace EnergyTrading.Caching.AppFabric.Cache
         }
 
         /// <summary>
-        /// Using {regionName}-{key} to overcome creation of region in Appfabric. 
+        /// Using {namedCache}-{key} to overcome creation of region in Appfabric. 
         /// Region: Items stored in a region are kept together and hence may overload a perticular node.
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
         private string GetFormatedKey(string key)
         {
-            return string.Format("{0}-{1}", regionName, key);
+            return string.Format("{0}-{1}", namedCache, key);
         }
         
         public virtual bool Remove(string key)

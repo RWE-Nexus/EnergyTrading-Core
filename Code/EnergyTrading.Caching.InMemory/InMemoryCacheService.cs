@@ -9,7 +9,7 @@ namespace EnergyTrading.Caching.InMemory
 {
     public class InMemoryCacheService : ICacheService, IDisposable
     {
-        private readonly MemoryCache cache;
+        protected readonly MemoryCache cache;
 
         /// <summary>
         /// 
@@ -26,17 +26,17 @@ namespace EnergyTrading.Caching.InMemory
         }
 
 
-        public bool Remove(string key)
+        public virtual bool Remove(string key)
         {
             return  cache.Remove(key)!=null;
         }
 
-        public void Add<T>(string key, T value, CacheItemPolicy policy)
+        public virtual void Add<T>(string key, T value, CacheItemPolicy policy)
         {
             cache.Add(key, value, policy);
         }
 
-        public T Get<T>(string key)
+        public virtual T Get<T>(string key)
         {
             return (T)cache.Get(key);
         }
