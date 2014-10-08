@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Net.Mail;
     using System.Runtime.Caching;
     using System.Threading;
 
@@ -105,6 +106,55 @@
             var subjectWriter = new StringWriter(CultureInfo.InvariantCulture);
             this.SubjectLayout.Format(subjectWriter, loggingEvent);
             this.Subject = subjectWriter.ToString();
+        }
+
+        public bool IsBodyHtml { get; set; }
+
+        protected override void SendEmail(string messageBody)
+        {
+            using (var smtpClient = new SmtpClient())
+            {
+                if (!String.IsNullOrEmpty(SmtpHost))
+                {
+                    smtpClient.Host = SmtpHost;
+                }
+                smtpClient.Port = Port;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = EnableSsl;
+
+                if (Authentication == SmtpAuthentication.Basic)
+                {
+                    smtpClient.Credentials = new System.Net.NetworkCredential(Username, Password);
+                }
+                else if (Authentication == SmtpAuthentication.Ntlm)
+                {
+                    smtpClient.Credentials = System.Net.CredentialCache.DefaultNetworkCredentials;
+                }
+
+                using (var mailMessage = new MailMessage())
+                {
+                    mailMessage.IsBodyHtml = IsBodyHtml;
+                    mailMessage.Body = messageBody;
+                    mailMessage.From = new MailAddress(From);
+                    mailMessage.To.Add(To);
+                    if (!String.IsNullOrEmpty(Cc))
+                    {
+                        mailMessage.CC.Add(Cc);
+                    }
+                    if (!String.IsNullOrEmpty(Bcc))
+                    {
+                        mailMessage.Bcc.Add(Bcc);
+                    }
+                    if (!String.IsNullOrEmpty(ReplyTo))
+                    {
+                        mailMessage.ReplyToList.Add(new MailAddress(ReplyTo));
+                    }
+                    mailMessage.Subject = Subject;
+                    mailMessage.Priority = Priority;
+
+                    smtpClient.Send(mailMessage);
+                }
+            }
         }
     }
 }
