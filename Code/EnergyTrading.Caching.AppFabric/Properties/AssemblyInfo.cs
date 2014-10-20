@@ -5,5 +5,5 @@
 // associated with an assembly.
 [assembly: AssemblyTitle("EnergyTrading.Caching.AppFabric")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyVersion("105")]
-[assembly: AssemblyFileVersion("105")]
+[assembly: AssemblyVersion("106")]
+[assembly: AssemblyFileVersion("106")]
