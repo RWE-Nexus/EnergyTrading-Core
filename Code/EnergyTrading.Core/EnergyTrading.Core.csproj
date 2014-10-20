@@ -151,6 +151,15 @@
     <Compile Include="FileProcessing\FileHandling\ProcessingFile.cs" />
     <Compile Include="FileProcessing\PollingFileChangeDetector.cs" />
     <Compile Include="FileProcessing\Verification\FileInfoExtensions.cs" />
+    <Compile Include="Filtering\Configuration\FilterValueCollection.cs" />
+    <Compile Include="Filtering\Configuration\FilterValueElement.cs" />
+    <Compile Include="Filtering\Configuration\FilterElement.cs" />
+    <Compile Include="Filtering\Configuration\FilterSection.cs" />
+    <Compile Include="Filtering\FilterExtensions.cs" />
+    <Compile Include="Filtering\FilterRepository.cs" />
+    <Compile Include="Filtering\ItemFilter.cs" />
+    <Compile Include="Filtering\IFilter.cs" />
+    <Compile Include="Filtering\IFilterRepository.cs" />
     <Compile Include="Infrastructure\IChain.cs" />
     <Compile Include="IO\FileExtensions.cs" />
     <Compile Include="IO\StreamExtensions.cs" />

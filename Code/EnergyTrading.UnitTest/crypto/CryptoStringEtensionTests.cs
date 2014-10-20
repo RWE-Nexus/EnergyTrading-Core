@@ -22,6 +22,7 @@
         [Test]
         public void StringIsReversedProperly()
         {
+            var decrypted = "t0SB6d3NCBGFiaGG69v4vrX9uDDgJs7R9iynWIyon40=".DecryptString();
             const string Start = "testdata";
             var end = Start.EncryptString().DecryptString();
             Assert.AreEqual(Start, end);

@@ -186,6 +186,8 @@
     <Compile Include="FileProcessing\LoopBased\PollingBasedFileProcessorTests.cs" />
     <Compile Include="FileProcessing\Registrars\FileProcessorHostConfiguratorFixture.cs" />
     <Compile Include="FileProcessing\Verification\FileInfoExtensionsFixture.cs" />
+    <Compile Include="Filtering\FilterExtensionsFixture.cs" />
+    <Compile Include="Filtering\FilterFixture.cs" />
     <Compile Include="IO\FileExtensionsTests.cs" />
     <Compile Include="Logging\Log4NetLoggerFixture.cs" />
     <Compile Include="Mapping\CachingXmlMapperFactoryFixture.cs" />
