@@ -5,5 +5,5 @@
 // associated with an assembly.
 [assembly: AssemblyTitle("EnergyTrading.Logging.EnterpriseLibrary")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyVersion("107")]
-[assembly: AssemblyFileVersion("107")]
+[assembly: AssemblyVersion("108")]
+[assembly: AssemblyFileVersion("108")]
