@@ -5,5 +5,5 @@ using System.Reflection;
 // associated with an assembly.
 [assembly: AssemblyTitle("EnergyTrading.SimpleData")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyVersion("106")]
-[assembly: AssemblyFileVersion("106")]
+[assembly: AssemblyVersion("107")]
+[assembly: AssemblyFileVersion("107")]
